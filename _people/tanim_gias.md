@@ -68,3 +68,22 @@ education:
 {:.table .highlight-first-column .no-heading}
 
 ---
+
+
+
+# Sidebar Configuration
+sidebar:
+  - title: "Profile"
+    text: |
+      {% include people-profile.html %}
+  - title: "Quick Actions"
+    text: |
+      - [Send Email](mailto:tm-rayhan.gias@uibk.ac.at)
+      - [View ORCID](https://orcid.org/0009-0006-3083-3259)
+      - [Download CV](/files/cv_tmrg.pdf)
+  - title: "Related Links"
+    text: |
+      - [Security and Privacy Lab](https://informationsecurity.uibk.ac.at/)
+      - [University of Innsbruck](http://informatik.uibk.ac.at)
+      - [Research Gate Profile](#)
+

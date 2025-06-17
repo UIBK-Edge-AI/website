@@ -1,0 +1,211 @@
+{% include base_path %}
+
+<div itemscope itemtype="http://schema.org/Person" class="people-profile">
+
+  <!-- Profile Image -->
+  {% if page.img %}
+    <div class="people-profile__avatar">
+      <img src="{{ page.img | prepend: "/images/" | prepend: base_path }}" 
+           class="people-profile__avatar-img" 
+           alt="{{ page.title }}"
+           itemprop="image">
+    </div>
+  {% endif %}
+
+  <!-- Basic Information -->
+  <div class="people-profile__content">
+    <h3 class="people-profile__name" itemprop="name">{{ page.title }}</h3>
+    
+    {% if page.position %}
+      <p class="people-profile__position" itemprop="jobTitle">{{ page.position }}</p>
+    {% endif %}
+    
+    {% if page.office %}
+      <p class="people-profile__office"><i class="fas fa-map-marker-alt"></i> {{ page.office }}</p>
+    {% endif %}
+  </div>
+
+  <!-- Contact Information -->
+  <div class="people-profile__contact">
+    <h4>Contact</h4>
+    
+    {% if page.email %}
+      <p><i class="fas fa-envelope"></i> <a href="mailto:{{ page.email }}" itemprop="email">{{ page.email }}</a></p>
+    {% endif %}
+    
+    {% if page.address %}
+      <p><i class="fas fa-map-marker-alt"></i> {{ page.address }}</p>
+    {% endif %}
+    
+    {% if page.ORCID %}
+      <p><i class="ai ai-orcid"></i> <a href="https://orcid.org/{{ page.ORCID }}" target="_blank">{{ page.ORCID }}</a></p>
+    {% endif %}
+  </div>
+
+  <!-- Research Interests -->
+  {% if page.interests %}
+    <div class="people-profile__interests">
+      <h4>Research Interests</h4>
+      <ul>
+        {% for interest in page.interests %}
+          <li>{{ interest }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+
+  <!-- Current Positions -->
+  {% if page.positions %}
+    <div class="people-profile__positions">
+      <h4>Positions</h4>
+      {% for position in page.positions %}
+        <div class="position-item">
+          <strong>{{ position.title }}</strong>
+          {% if position.dep %}
+            <br><small>{{ position.dep }}</small>
+          {% endif %}
+          {% if position.inst %}
+            <br><small>{{ position.inst }}</small>
+          {% endif %}
+          {% if position.from %}
+            <br><small>{{ position.from }}{% if position.to %} - {{ position.to }}{% else %} - Present{% endif %}</small>
+          {% endif %}
+        </div>
+        {% unless forloop.last %}<hr class="position-divider">{% endunless %}
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <!-- Education -->
+  {% if page.education %}
+    <div class="people-profile__education">
+      <h4>Education</h4>
+      {% for edu in page.education %}
+        <div class="education-item">
+          <strong>{{ edu.title }}</strong>
+          {% if edu.inst %}
+            <br><small>{{ edu.inst }}</small>
+          {% endif %}
+          {% if edu.from %}
+            <br><small>{{ edu.from }}{% if edu.to %} - {{ edu.to }}{% endif %}</small>
+          {% endif %}
+        </div>
+        {% unless forloop.last %}<hr class="education-divider">{% endunless %}
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <!-- Quick Links -->
+  <div class="people-profile__links">
+    <h4>Quick Links</h4>
+    {% if page.cv_ready %}
+      <p><a href="{{ base_path }}/files/cv_{{ page.identifier | default: page.title | slugify }}.pdf" class="btn btn--small">Download CV</a></p>
+    {% endif %}
+    
+    {% if page.permalink %}
+      <p><a href="{{ page.permalink }}" class="btn btn--small">Full Profile</a></p>
+    {% endif %}
+  </div>
+
+</div>
+
+<style>
+.people-profile {
+  background: #f8f9fa;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.people-profile__avatar {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.people-profile__avatar-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.people-profile__name {
+  margin: 0 0 0.5rem 0;
+  color: #2c3e50;
+}
+
+.people-profile__position {
+  color: #7f8c8d;
+  font-style: italic;
+  margin: 0 0 0.5rem 0;
+}
+
+.people-profile__office {
+  color: #95a5a6;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.people-profile__contact h4,
+.people-profile__interests h4,
+.people-profile__positions h4,
+.people-profile__education h4,
+.people-profile__links h4 {
+  color: #2c3e50;
+  font-size: 1rem;
+  margin: 1rem 0 0.5rem 0;
+  border-bottom: 1px solid #ecf0f1;
+  padding-bottom: 0.25rem;
+}
+
+.people-profile__contact p,
+.people-profile__interests li {
+  margin: 0.25rem 0;
+  font-size: 0.9rem;
+}
+
+.people-profile__interests ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.people-profile__interests li {
+  padding: 0.25rem 0;
+  border-left: 3px solid #3498db;
+  padding-left: 0.75rem;
+  margin-bottom: 0.25rem;
+  background: #fff;
+  border-radius: 0 4px 4px 0;
+}
+
+.position-item,
+.education-item {
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  background: #fff;
+  border-radius: 4px;
+  border-left: 3px solid #e74c3c;
+}
+
+.position-divider,
+.education-divider {
+  margin: 0.5rem 0;
+  border: none;
+  border-top: 1px solid #ecf0f1;
+}
+
+.people-profile__links .btn {
+  display: inline-block;
+  margin: 0.25rem 0;
+  font-size: 0.8rem;
+}
+
+.people-profile i {
+  width: 1.2rem;
+  margin-right: 0.5rem;
+  color: #3498db;
+}
+</style>

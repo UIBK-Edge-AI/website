@@ -33,11 +33,13 @@ education:
     to: 2023
     title: Ph.D. in Computer Science
     inst: ETH Zurich
+    inst_uri: https://ethz.ch
     where: Zurich, Switzerland
   - from: 2016
     to: 2018
     title: M.Sc. in Computer Science
     inst: Technical University of Munich
+    inst_uri: https://www.tum.de
     where: Munich, Germany
 
 ---

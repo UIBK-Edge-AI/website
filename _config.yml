@@ -23,11 +23,11 @@ repository               : "academicpages/academicpages.github.io"
 author:
   # Biographic information
   avatar           : "profile.png"
-  name             : "Your Sidebar Name"
+  name             : "Edge AI"
   pronouns         : # example: "she/her"  
   bio              : "Short biography for the left-hand sidebar"
-  location         : "Earth"
-  employer         : "Universität Innsbruck"
+  location         : "Technikerstraße 21a, Innsbruck"
+  employer         : "Universität Innsbruck, Austria"
   uri              : # URL
   email            : "edge-ai@informatik.uibk.ac.at" 
 

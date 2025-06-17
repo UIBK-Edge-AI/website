@@ -48,37 +48,12 @@ author_profile: true
                     {{ person.title }}
                   </h3>
                   
-                  {% if person.position %}
-                    <div class="person-card__position">
-                      {% case person.position %}
-                        {% when "sysad" %}
-                          System Administrator
-                        {% when "postdoc" %}
-                          Post-doctoral Researcher
-                        {% when "professor" %}
-                          Professor
-                        {% when "ra" %}
-                          Research Assistant
-                        {% when "sa" %}
-                          Student Assistant
-                        {% else %}
-                          {{ person.position }}
-                      {% endcase %}
-                    </div>
-                  {% endif %}
-                  
-                  {% if person.excerpt %}
-                    <div class="person-card__details">
-                      {{ person.excerpt | markdownify }}
-                    </div>
-                  {% endif %}
-                  
                   {% if person.interests %}
                     <div class="person-card__interests">
-                      <div class="person-card__interests-title">Research Interests</div>
+                      <div style="text-align:center;" class="person-card__interests-title">Research Interests</div>
                       <div class="person-card__interests-list">
                         {% for interest in person.interests limit:3 %}
-                          <span class="interest-tag">{{ interest }}</span>
+                          <span style="text-align:center;" class="interest-tag">{{ interest }}</span>
                         {% endfor %}
                       </div>
                     </div>
