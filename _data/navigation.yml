@@ -9,28 +9,18 @@
 
 main:
 
-  - title: "People"
-    url: /people/  
+  - title: "Team"
+    url: /team/  
+
+  - title: "Projects"
+    url: /project/
     
+  - title: "Teaching"
+    url: /teaching/
+    
+  - title: "Publications"
+    url: /publications/
+
   - title: "Theses"
     url: /theses/
-
- 
-
-  # - title: "Teaching"
-  #   url: /teaching/
-    
-  # - title: "Portfolio"
-  #   url: /portfolio/
-        
-  # - title: "Blog Posts"
-  #   url: /blog/
-    
-  # - title: "CV"
-  #   url: /cv/
-    
-  # - title: "CV"
-  #   url: /cv-json/
-    
-  # - title: "Guide"
-  #   url: /guide/
+      

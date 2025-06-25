@@ -22,7 +22,7 @@ repository               : "academicpages/academicpages.github.io"
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar           : "profile.png"
+  avatar           : "edgeAI_logo.jpg"
   name             : "Edge AI"
   pronouns         : # example: "she/her"  
   bio              : "Short biography for the left-hand sidebar"
@@ -220,10 +220,10 @@ collections:
   theses:
     output: true
     permalink: /:collection/:path/
-  portfolio:
+  projects:
     output: true
     permalink: /:collection/:path/
-  people:
+  team:
     output: true
     permalink: /:collection/:path/
 
@@ -278,9 +278,9 @@ defaults:
   # _talks
   - scope:
       path: ""
-      type: people
+      type: team
     values:
-      layout: people
+      layout: team
       author_profile: true
       share: true
 

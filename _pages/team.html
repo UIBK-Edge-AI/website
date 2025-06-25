@@ -1,7 +1,7 @@
 ---
-layout: people
-title: "People"
-permalink: /people/
+layout: team
+title: "Team"
+permalink: /team/
 author_profile: true
 ---
 
@@ -10,10 +10,10 @@ author_profile: true
   If people have categories, group them. Otherwise, show all people together.
 {% endcomment %}
 
-{% assign all_people = site.people %}
+{% assign team_members = site.team %}
 {% assign has_categories = false %}
 
-{% for person in all_people %}
+{% for person in team_members %}
   {% if person.category %}
     {% assign has_categories = true %}
     {% break %}
@@ -24,7 +24,7 @@ author_profile: true
   {% assign groups = "Professors|Post-docs|System Engineers|Research Assistants|Student Assistants" | split: "|" %}
   
   {% for group in groups %}
-    {% assign members = site.people | where: "category", group %}
+    {% assign members = site.team | where: "category", group %}
     {% if members.size > 0 %}
       <div class="group-section">
         <h2 class="group-title">{{ group }}</h2>
@@ -91,7 +91,7 @@ author_profile: true
   {% endfor %}
 {% else %}
   {% comment %}
-    If no categories are defined, show all people in one grid
+    If no categories are defined, show all team members in one grid
   {% endcomment %}
   <div class="people-container">
     {% for person in all_people %}

@@ -4,7 +4,7 @@ cv_ready: true
 kind: person
 title: Jane Doe
 identifier: jdoe
-permalink: /people/jane_doe
+permalink: /team/jane_doe
 img: /assets/img/P_Jane_Doe.jpg
 position: postdoc
 category: Post-docs

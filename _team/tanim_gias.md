@@ -4,7 +4,7 @@ cv_ready: true
 kind: person
 title: Tanim M. Rayhan Gias
 identifier: tmrg
-permalink: /people/tanim_gias
+permalink: /team/tanim_gias
 img: /assets/img/P_Tanim_Gias.jpg
 position: sysad
 category: System Engineers
