@@ -127,8 +127,8 @@ html[data-theme="dark"] .person-header {
 }
 
 .person-image {
-  width: 120px;
-  height: 120px;
+  width: 220px;
+  height: 220px;
   border-radius: 50%;
   object-fit: cover;
   object-position: center top;
@@ -145,8 +145,8 @@ html[data-theme="dark"] .person-image {
 }
 
 .person-image-placeholder {
-  width: 120px;
-  height: 120px;
+  width: 220px;
+  height: 220px;
   border-radius: 50%;
   background: var(--global-base-color);
   display: flex;
@@ -202,7 +202,23 @@ html[data-theme="dark"] .person-image-placeholder {
   display: flex;
   align-items: center;
   font-size: 0.85rem;
-  color: var(--global-text-color-light);
+  color: var(--global-text-color);
+}
+
+.position-item {
+    margin: 0.5rem 0;
+    padding: 0.5rem;
+    background: #ffffff;
+    border-radius: 4px;
+    border-left: 3px solid #e74c3c;
+}
+
+html[data-theme="dark"] .position-item {
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  background: #474747;
+  border-radius: 4px;
+  border-left: 3px solid #e74c3c;
 }
 
 .contact-item span:first-child {
@@ -212,9 +228,13 @@ html[data-theme="dark"] .person-image-placeholder {
 }
 
 .contact-item a {
-  color: var(--global-base-color);
+  color: var(--global-text-color);
   text-decoration: none;
   font-weight: 500;
+}
+
+html[data-theme="dark"] .contact-item a {
+  background: #474747;
 }
 
 .contact-item a:hover {
@@ -275,13 +295,17 @@ html[data-theme="dark"] .section-title {
 }
 
 .interest-tag {
-  background: var(--global-base-color);
-  color: white;
+  background:  #f0f4f8;
+  color: var(--global-text-color);
   padding: 0.3rem 0.8rem;
   border-radius: 15px;
   font-size: 0.8rem;
   font-weight: 500;
   transition: all 0.3s ease;
+}
+html[data-theme="dark"] .interest-tag {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #e0e0e0;
 }
 
 .interest-tag:hover {

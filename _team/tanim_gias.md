@@ -6,8 +6,9 @@ title: Tanim M. Rayhan Gias
 identifier: tmrg
 permalink: /team/tanim_gias
 img: /assets/img/P_Tanim_Gias.jpg
+phone: +43 512 507-53253
 position: sysad
-category: System Engineers
+category: SYSTEMS ENGINEER
 office: ICT 3W05
 ORCID: 0009-0006-3083-3259
 email: tm-rayhan.gias@uibk.ac.at
@@ -21,8 +22,8 @@ interests:
 
 positions:
   - from: 2025
-    title: System Administrator
-    dep: Security and Privacy Lab
+    title: Systems Engineer
+    dep: Edge AI
     dep_uri: https://informationsecurity.uibk.ac.at/
     inst: University of Innsbruck
     inst_uri: http://informatik.uibk.ac.at
@@ -37,15 +38,16 @@ positions:
     where: Emden, Germany
   - from: 2019
     to: 2020
-    title: Research Intern & Master Thesis Student
+    title: Research Intern & Master Thesis
     inst: Robert Bosch GmbH
-    where: Renningen, Stuttgart, Germany
+    inst_uri: https://www.bosch.de
+    where: Stuttgart, Germany
   - from: 2018
     to: 2019
     title: Student Assistant
-    dep: Department for Communication Networks
+    dep: Department of Communication Networks
     inst: Technische Universität Chemnitz
-    inst_uri: https://www.tu-chemnitz.de
+    inst_uri: https://www.tu-chemnitz.de/etit/kn/professur/index.php.en
     where: Chemnitz, Germany
 
 education:
@@ -53,11 +55,13 @@ education:
     to: 2021
     title: M.Sc. in Information and Communication Systems
     inst: Technische Universität Chemnitz
+    inst_uri: https://www.tu-chemnitz.de/etit/studium/stugang/index.php.en?page=m_is
     where: Chemnitz, Germany
   - from: 2011
     to: 2015
     title: B.Sc. in Electrical and Electronic Engineering
     inst: Ahsanullah University of Science and Technology
+    inst_uri: https://aust.edu/
     where: Dhaka, Bangladesh
 
 ---
@@ -68,22 +72,4 @@ education:
 {:.table .highlight-first-column .no-heading}
 
 ---
-
-
-
-# Sidebar Configuration
-sidebar:
-  - title: "Profile"
-    text: |
-      {% include people-profile.html %}
-  - title: "Quick Actions"
-    text: |
-      - [Send Email](mailto:tm-rayhan.gias@uibk.ac.at)
-      - [View ORCID](https://orcid.org/0009-0006-3083-3259)
-      - [Download CV](/files/cv_tmrg.pdf)
-  - title: "Related Links"
-    text: |
-      - [Security and Privacy Lab](https://informationsecurity.uibk.ac.at/)
-      - [University of Innsbruck](http://informatik.uibk.ac.at)
-      - [Research Gate Profile](#)
 

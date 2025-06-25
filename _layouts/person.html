@@ -4,10 +4,9 @@ layout: default
 
 {% include base_path %}
 <!-- Link to external CSS file -->
-<link rel="stylesheet" href="{{ '/assets/css/team-profiles.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/css/person-profiles.css' | relative_url }}">
 
 <div id="main" role="main">
-  
 
   <article class="page person-page" itemscope itemtype="http://schema.org/Person">
     <div class="page__inner-wrap">
@@ -32,7 +31,7 @@ layout: default
             <div class="person-position" itemprop="jobTitle">
               {% case page.position %}
                 {% when "sysad" %}
-                  System Administrator
+                  Systems Engineer
                 {% when "postdoc" %}
                   Post-doctoral Researcher
                 {% when "professor" %}
@@ -51,7 +50,7 @@ layout: default
             {% if page.email %}
               <div class="contact-item">
                 <span>📧</span>
-                <a href="mailto:{{ page.email }}" itemprop="email">{{ page.email }}</a>
+                <a href="mailto:{{ page.email }}" itemprop="email">{{ page.email }}<br /></a>
               </div>
             {% endif %}
             
@@ -146,9 +145,9 @@ layout: default
         </section>
       {% endif %}
 
-      <section class="page__content" itemprop="text">
+      <!-- <section class="page__content" itemprop="text">
         {{ content }}
-      </section>
+      </section> -->
 
     </div>
   </article>

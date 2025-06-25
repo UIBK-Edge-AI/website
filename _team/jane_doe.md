@@ -7,7 +7,7 @@ identifier: jdoe
 permalink: /team/jane_doe
 img: /assets/img/P_Jane_Doe.jpg
 position: postdoc
-category: Post-docs
+category: POST-DOC
 office: ICT 2W10
 ORCID: 0000-0000-0000-0001
 email: jane.doe@university.edu
