@@ -8,6 +8,18 @@ $(document).ready(function () {
     ? 'dark'
     : 'light';
 
+  // Function to update logo with fade effect
+  function updateLogo(isDark) {
+    const logo = document.getElementById("site-logo");
+    if (logo && logo.dataset.light && logo.dataset.dark) {
+      logo.classList.add("fade-out");
+      setTimeout(() => {
+        logo.src = isDark ? logo.dataset.dark : logo.dataset.light;
+        logo.classList.remove("fade-out");
+      }, 150);
+    }
+  }
+
   // Set the theme on page load or when explicitly called
   var setTheme = function (theme) {
     const use_theme =
@@ -19,9 +31,11 @@ $(document).ready(function () {
     if (use_theme === "dark") {
       $("html").attr("data-theme", "dark");
       $("#theme-icon").removeClass("fa-sun").addClass("fa-moon");
+      updateLogo(true);
     } else if (use_theme === "light") {
       $("html").removeAttr("data-theme");
       $("#theme-icon").removeClass("fa-moon").addClass("fa-sun");
+      updateLogo(false);
     }
   };
 
@@ -90,8 +104,6 @@ $(document).ready(function () {
   }); 
 
   // add lightbox class to all image links
-  // Add "image-popup" to links ending in image extensions,
-  // but skip any <a> that already contains an <img>
   $("a[href$='.jpg'],\
   a[href$='.jpeg'],\
   a[href$='.JPG'],\
@@ -101,16 +113,15 @@ $(document).ready(function () {
       .not(':has(img)')
       .addClass("image-popup");
 
-  // 1) Wrap every <p><img> (except emoji images) in an <a> pointing at the image, and give it the lightbox class
+  // Wrap images in lightbox links
   $('p > img').not('.emoji').each(function() {
     var $img = $(this);
-    // skip if it’s already wrapped in an <a.image-popup>
     if ( ! $img.parent().is('a.image-popup') ) {
       $('<a>')
         .addClass('image-popup')
         .attr('href', $img.attr('src'))
-        .insertBefore($img)   // place the <a> right before the <img>
-        .append($img);        // move the <img> into the <a>
+        .insertBefore($img)
+        .append($img);
     }
   });
 
@@ -121,23 +132,20 @@ $(document).ready(function () {
     gallery: {
       enabled: true,
       navigateByImgClick: true,
-      preload: [0, 1] // Will preload 0 - before current, and 1 after the current image
+      preload: [0, 1]
     },
     image: {
       tError: '<a href="%url%">Image #%curr%</a> could not be loaded.',
     },
-    removalDelay: 500, // Delay in milliseconds before popup is removed
-    // Class that is added to body when popup is open.
-    // make it unique to apply your CSS animations just to this exact popup
+    removalDelay: 500,
     mainClass: 'mfp-zoom-in',
     callbacks: {
-      beforeOpen: function () {
-        // just a hack that adds mfp-anim class to markup
+      beforeOpen: function() {
         this.st.image.markup = this.st.image.markup.replace('mfp-figure', 'mfp-figure mfp-with-anim');
       }
     },
     closeOnContentClick: true,
-    midClick: true // allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source.
+    midClick: true
   });
 
 });
