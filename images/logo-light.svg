@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   id="svg2"
+   width="246.17334"
+   height="64"
+   viewBox="0 0 246.17334 63.999999"
+   sodipodi:docname="logo-normal.svg"
+   inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)">
+  <metadata
+     id="metadata23">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs6" />
+  <sodipodi:namedview
+     id="namedview4"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="9.5952354"
+     inkscape:cx="15.605712"
+     inkscape:cy="-45.56169"
+     inkscape:window-width="3752"
+     inkscape:window-height="2096"
+     inkscape:window-x="88"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g8"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <g
+     inkscape:groupmode="layer"
+     inkscape:label="Image"
+     id="g8"
+     transform="translate(-0.6448171,53.26278)">
+    <g
+       id="g1534"
+       transform="matrix(5.9619047,0,0,5.9619047,-4.7372619,41.623367)">
+      <rect
+         style="fill:#f39200;fill-opacity:1;stroke:none;stroke-width:0.21863861;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="rect15274-7"
+         width="5.0753613"
+         height="5.0753613"
+         x="0.90274489"
+         y="-10.255945" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.40867376px;line-height:6.94565773px;font-family:Frutiger;-inkscape-font-specification:Frutiger;letter-spacing:0px;word-spacing:0px;fill:#003361;fill-opacity:1;stroke:none;stroke-width:0.47151142"
+         x="8.3765602"
+         y="-5.2629051"
+         id="text1841-7"><tspan
+           sodipodi:role="line"
+           id="tspan1839-4"
+           x="8.3765602"
+           y="-5.2629051"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.86008787px;font-family:'Frutiger LT Std';-inkscape-font-specification:'Frutiger LT Std';fill:#003361;fill-opacity:1;stroke-width:0.47151142">innsbruck</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.40867376px;line-height:6.94565773px;font-family:Frutiger;-inkscape-font-specification:Frutiger;letter-spacing:0px;word-spacing:0px;fill:#003361;fill-opacity:1;stroke:none;stroke-width:0.47151142"
+         x="8.4696531"
+         y="-10.907544"
+         id="text1841-7-3"><tspan
+           sodipodi:role="line"
+           id="tspan1839-4-1"
+           x="8.4696531"
+           y="-10.907544"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.86008787px;font-family:'Frutiger LT Std';-inkscape-font-specification:'Frutiger LT Std';fill:#003361;fill-opacity:1;stroke-width:0.47151142">universität</tspan></text>
+      <rect
+         style="fill:#003361;fill-opacity:1;stroke:none;stroke-width:0.21863861;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="rect15274-7-6"
+         width="5.0753613"
+         height="5.0753613"
+         x="0.90274489"
+         y="-15.900584" />
+    </g>
+  </g>
+</svg>

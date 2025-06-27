@@ -193,19 +193,21 @@ html[data-theme="dark"] .person-image-placeholder {
 
 /* Contact Information */
 .person-contact {
-  display: flex;
+  display: block;
   flex-wrap: wrap;
   gap: 0.8rem;
 }
 
 .contact-item {
-  display: flex;
+  display: block;
+  margin-bottom: 0.5em;
   align-items: center;
   font-size: 0.85rem;
   color: var(--global-text-color);
 }
 
 .position-item {
+    display: flex;
     margin: 0.5rem 0;
     padding: 0.5rem;
     background: #ffffff;

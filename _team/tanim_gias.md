@@ -23,8 +23,6 @@ interests:
 positions:
   - from: 2025
     title: Systems Engineer
-    dep: Edge AI
-    dep_uri: https://informationsecurity.uibk.ac.at/
     inst: University of Innsbruck
     inst_uri: http://informatik.uibk.ac.at
     where: Austria

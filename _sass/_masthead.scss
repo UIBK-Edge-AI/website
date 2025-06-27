@@ -1,0 +1,63 @@
+/* Site Logo Container */
+.masthead__menu-item--lg a {
+  position: relative; /* Create positioning context */
+  display: inline-block; /* Ensure proper sizing */
+  height: 40px; /* Match logo height */
+  width: auto; /* Allow width to adjust to logo */
+}
+
+/* Site Logo Styles */
+.site-logo {
+  height: 40px;
+  width: auto;
+  max-width: 200px;
+  transition: all 0.3s ease;
+  position: absolute; /* Position both logos in the same place */
+  top: 0;
+  left: 0;
+}
+
+/* Light theme: show first logo, hide second */
+.site-logo:first-of-type {
+  display: block;
+}
+
+.site-logo:last-of-type {
+  display: none;
+}
+
+/* Dark theme: hide first logo, show second */
+html[data-theme="dark"] .site-logo:first-of-type {
+  display: none;
+}
+
+html[data-theme="dark"] .site-logo:last-of-type {
+  display: block;
+}
+
+/* Hover effects */
+.site-logo:hover {
+  opacity: 0.8;
+  transform: scale(1.05);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .site-logo {
+    height: 30px;
+    max-width: 150px;
+  }
+  
+  .masthead__menu-item--lg a {
+    height: 30px; /* Match smaller logo height */
+  }
+}
+
+/* Ensure proper spacing and prevent layout shift */
+.masthead__menu-item--lg a::after {
+  content: '';
+  display: block;
+  width: 200px; /* Reserve space for logo */
+  height: 0;
+  visibility: hidden;
+}

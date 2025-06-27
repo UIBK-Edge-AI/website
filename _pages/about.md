@@ -1,6 +1,6 @@
 ---
 permalink: /
-title: "Development and practical use of Artificial Intelligence in the Edge of the user"
+title: "Development and practical use of Artificial Intelligence in the edge of the network"
 author_profile: true
 redirect_from: 
   - /about/

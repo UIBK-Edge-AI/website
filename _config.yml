@@ -9,7 +9,7 @@
 # Basic Site Settings
 locale                   : "en-US"
 site_theme               : "default"
-title                    : "Edge AI"
+title                    : "universitaet-innsbruck-logo-rgb-farbe.png"
 title_separator          : "-"
 name                     : &name "Your Name"
 description              : &description "personal description"
@@ -224,6 +224,9 @@ collections:
     output: true
     permalink: /:collection/:path/
   team:
+    output: true
+    permalink: /:collection/:path/
+  person:
     output: true
     permalink: /:collection/:path/
 
