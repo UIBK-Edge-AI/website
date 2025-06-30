@@ -81,10 +81,12 @@ layout: default
       {% if page.interests %}
         <section class="person-section">
           <h2>Research Interests</h2>
-          <div class="interests-list">
-            {% for interest in page.interests %}
-              <span class="interest-tag">{{ interest }}</span>
-            {% endfor %}
+          <div class="research-interests">
+            <ul>
+              {% for interest in page.interests %}
+                <li>{{ interest }}</li>
+              {% endfor %}
+            </ul>
           </div>
         </section>
       {% endif %}
@@ -93,27 +95,28 @@ layout: default
         <section class="person-section">
           <h2>Positions</h2>
           {% for position in page.positions %}
-            <div class="position-item">
-              <div class="position-dates">
+            <div class="position-entry">
+              <div class="year-range">
                 {{ position.from }}{% if position.to %} - {{ position.to }}{% else %} - Present{% endif %}
               </div>
-              <div class="position-title">{{ position.title }}</div>
               <div class="position-details">
+                <span class="position-title">{{ position.title }}</span>
                 {% if position.dep %}
-                  {% if position.dep_uri %}
-                    <a href="{{ position.dep_uri }}" target="_blank">{{ position.dep }}</a>
+                  , {% if position.dep_uri %}
+                    <span class="organization"><a href="{{ position.dep_uri }}" target="_blank">{{ position.dep }}</a></span>
                   {% else %}
-                    {{ position.dep }}
+                    <span class="organization">{{ position.dep }}</span>
                   {% endif %}
-                  <br>
                 {% endif %}
                 {% if position.inst %}
-                  {% if position.inst_uri %}
-                    <a href="{{ position.inst_uri }}" target="_blank">{{ position.inst }}</a>
+                  , {% if position.inst_uri %}
+                    <span class="organization"><a href="{{ position.inst_uri }}" target="_blank">{{ position.inst }}</a></span>
                   {% else %}
-                    {{ position.inst }}
+                    <span class="organization">{{ position.inst }}</span>
                   {% endif %}
-                  {% if position.where %}, {{ position.where }}{% endif %}
+                {% endif %}
+                {% if position.where %}
+                  <span class="location">, {{ position.where }}</span>
                 {% endif %}
               </div>
             </div>
@@ -125,19 +128,21 @@ layout: default
         <section class="person-section">
           <h2>Education</h2>
           {% for edu in page.education %}
-            <div class="position-item">
-              <div class="position-dates">
+            <div class="education-entry">
+              <div class="year-range">
                 {{ edu.from }}{% if edu.to %} - {{ edu.to }}{% endif %}
               </div>
-              <div class="position-title">{{ edu.title }}</div>
-              <div class="position-details">
+              <div class="education-details">
+                <span class="degree-title">{{ edu.title }}</span>
                 {% if edu.inst %}
-                  {% if edu.inst_uri %}
-                    <a href="{{ edu.inst_uri }}" target="_blank">{{ edu.inst }}</a>
+                  , {% if edu.inst_uri %}
+                    <span class="organization"><a href="{{ edu.inst_uri }}" target="_blank">{{ edu.inst }}</a></span>
                   {% else %}
-                    {{ edu.inst }}
+                    <span class="organization">{{ edu.inst }}</span>
                   {% endif %}
-                  {% if edu.where %}, {{ edu.where }}{% endif %}
+                {% endif %}
+                {% if edu.where %}
+                  <span class="location">, {{ edu.where }}</span>
                 {% endif %}
               </div>
             </div>

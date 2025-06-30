@@ -66,8 +66,7 @@ education:
 
 ---
 ### Publications
-(-(RDGB2025-CCNC, AWGK2021Demo-ACMICN, AWGK2021-ACMICN, PGIHB2019-IEEEGLOBECOM))
-{:.table .highlight-first-column .no-heading}
+(-(RDGB2025-CCNC, AWGK2021Demo-ACMICN, AWGK2021-ACMICN, PGIHB2019-IEEEGLOBECOM, Alice2023example))
 
 ---
 
