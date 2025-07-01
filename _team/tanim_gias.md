@@ -62,11 +62,10 @@ education:
     inst_uri: https://aust.edu/
     where: Dhaka, Bangladesh
 
----
+publications:
+  - RDGB2025-CCNC
+  - AWGK2021-ACMICN
+  - KAWG2021-ACMICN
+  - PGIHTB2019-IEEEGLOBECOM
 
 ---
-### Publications
-(-(RDGB2025-CCNC, AWGK2021Demo-ACMICN, AWGK2021-ACMICN, PGIHB2019-IEEEGLOBECOM, Alice2023example))
-
----
-

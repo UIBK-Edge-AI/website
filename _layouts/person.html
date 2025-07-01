@@ -3,11 +3,9 @@ layout: default
 ---
 
 {% include base_path %}
-<!-- Link to external CSS file -->
 <link rel="stylesheet" href="{{ '/assets/css/person-profiles.css' | relative_url }}">
 
 <div id="main" role="main">
-
   <article class="page person-page" itemscope itemtype="http://schema.org/Person">
     <div class="page__inner-wrap">
       
@@ -109,14 +107,14 @@ layout: default
                   {% endif %}
                 {% endif %}
                 {% if position.inst %}
-                  , {% if position.inst_uri %}
-                    <span class="organization"><a href="{{ position.inst_uri }}" target="_blank">{{ position.inst }}</a></span>
+                  <br>{% if position.inst_uri %}
+                    <span class="institution"><a href="{{ position.inst_uri }}" target="_blank">{{ position.inst }}</a></span>
                   {% else %}
-                    <span class="organization">{{ position.inst }}</span>
+                    <span class="institution">{{ position.inst }}</span>
                   {% endif %}
                 {% endif %}
                 {% if position.where %}
-                  <span class="location">, {{ position.where }}</span>
+                  , <span class="location">{{ position.where }}</span>
                 {% endif %}
               </div>
             </div>
@@ -135,14 +133,14 @@ layout: default
               <div class="education-details">
                 <span class="degree-title">{{ edu.title }}</span>
                 {% if edu.inst %}
-                  , {% if edu.inst_uri %}
-                    <span class="organization"><a href="{{ edu.inst_uri }}" target="_blank">{{ edu.inst }}</a></span>
+                  <br>{% if edu.inst_uri %}
+                    <span class="institution"><a href="{{ edu.inst_uri }}" target="_blank">{{ edu.inst }}</a></span>
                   {% else %}
-                    <span class="organization">{{ edu.inst }}</span>
+                    <span class="institution">{{ edu.inst }}</span>
                   {% endif %}
                 {% endif %}
                 {% if edu.where %}
-                  <span class="location">, {{ edu.where }}</span>
+                  , <span class="location">{{ edu.where }}</span>
                 {% endif %}
               </div>
             </div>
@@ -150,10 +148,40 @@ layout: default
         </section>
       {% endif %}
 
-      <!-- <section class="page__content" itemprop="text">
-        {{ content }}
-      </section> -->
+      <!-- PUBLICATIONS FROM BIBTEX PLUGIN -->
+      {% if page.publications %}
+        <section class="person-section">
+          <h2>Publications</h2>
+          
+          <div class="publications-list">
+            {% for pub_key in page.publications %}
+              {% assign pub = site.data.bibtex[pub_key] %}
+              {% if pub %}
+                <div class="publication-item">
+                  • {{ pub.author }}. {{ pub.title }}. 
+                  <em>{{ pub.venue }}</em>. 
+                  {{ pub.publisher }}{% if pub.address %}, {{ pub.address }}{% endif %}, 
+                  {{ pub.year }}{% if pub.pages %}, pp. {{ pub.pages }}{% endif %}. 
+                  {% if pub.publisherurl %}
+                    [<a href="{{ pub.publisherurl }}" target="_blank">Publisher</a>]
+                  {% elsif pub.url %}
+                    [<a href="{{ pub.url }}" target="_blank">Link</a>]
+                  {% endif %}
+                </div>
+              {% else %}
+                <div class="publication-item error">
+                  Publication not found: {{ pub_key }}
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </section>
+      {% endif %}
 
+      <!-- Custom content -->
+      <section class="page__content" itemprop="text">
+        {{ content }}
+      </section>
     </div>
   </article>
 </div>
