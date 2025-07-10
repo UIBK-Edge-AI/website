@@ -1,0 +1,169 @@
+---
+layout: team
+title: "Team"
+permalink: /team/
+author_profile: true
+---
+
+
+{% comment %}
+  If people have categories, group them. Otherwise, show all people together.
+{% endcomment %}
+
+{% assign team_members = site.team %}
+{% assign has_categories = false %}
+
+{% for person in team_members %}
+  {% if person.category %}
+    {% assign has_categories = true %}
+    {% break %}
+  {% endif %}
+{% endfor %}
+
+{% if has_categories %}
+  {% assign groups = "PROFESSOR|POST-DOC|SYSTEMS ENGINEER|RESEARCH-ASSISTANTS|STUDENT RESEARCH-ASSISTANTS" | split: "|" %}
+  
+  {% for group in groups %}
+    {% assign members = site.team | where: "category", group %}
+    {% if members.size > 0 %}
+      <div class="group-section">
+        <h2 class="group-title">{{ group }}</h2>
+        <div class="people-container">
+          {% for person in members %}
+            <a href="{{ person.url | relative_url }}" class="person-card-link">
+              <div class="person-card">
+                <div class="person-card__image-container">
+                  {% if person.image or person.img %}
+                    {% assign person_image = person.image | default: person.img %}
+                    <img class="person-card__image" 
+                         src="{{ person_image | relative_url }}" 
+                         alt="{{ person.title }}">
+                  {% else %}
+                    <div class="person-card__image-placeholder">👤</div>
+                  {% endif %}
+                </div>
+                
+                <div class="person-card__content">
+                  <h3 class="person-card__name">
+                    {{ person.title }}
+                  </h3>
+                  
+                  <div class="person-card__contact">
+                    {% if person.email %}
+                      <div class="contact-item">
+                        <span>E-mail</span>
+                        <span>{{person.email}}</span>
+                      </div>
+                    {% endif %}
+
+
+                    {% if person.phone %}
+                      <div class="contact-item">
+                        <span>☎</span>
+                        <span>{{person.phone}}</span>
+                      </div>
+                    {% endif %}
+                    
+                    {% if person.office %}
+                      <div class="contact-item">
+                        <span>📍</span>
+                        <span>{{ person.office }}</span>
+                      </div>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+  {% endfor %}
+{% else %}
+  {% comment %}
+    If no categories are defined, show all team members in one grid
+  {% endcomment %}
+  <div class="people-container">
+    {% for person in all_people %}
+      <a href="{{ person.url | relative_url }}" class="person-card-link">
+        <div class="person-card">
+          <div class="person-card__image-container">
+            {% if person.image or person.img %}
+              {% assign person_image = person.image | default: person.img %}
+              <img class="person-card__image" 
+                   src="{{ person_image | relative_url }}" 
+                   alt="{{ person.title }}">
+            {% else %}
+              <div class="person-card__image-placeholder">👤</div>
+            {% endif %}
+          </div>
+          
+          <div class="person-card__content">
+            <h3 class="person-card__name">
+              {{ person.title }}
+            </h3>
+            
+            {% if person.position %}
+              <div class="person-card__position">
+                {% case person.position %}
+                  {% when "sysad" %}
+                    System Administrator
+                  {% when "postdoc" %}
+                    Post-doctoral Researcher
+                  {% when "professor" %}
+                    Professor
+                  {% when "ra" %}
+                    Research Assistant
+                  {% when "sa" %}
+                    Student Assistant
+                  {% else %}
+                    {{ person.position }}
+                {% endcase %}
+              </div>
+            {% endif %}
+            
+            {% if person.excerpt %}
+              <div class="person-card__details">
+                {{ person.excerpt | markdownify }}
+              </div>
+            {% endif %}
+            
+            {% if person.interests %}
+              <div class="person-card__interests">
+                <div class="person-card__interests-title">Research Interests</div>
+                <div class="person-card__interests-list">
+                  {% for interest in person.interests limit:3 %}
+                    <span class="interest-tag">{{ interest }}</span>
+                  {% endfor %}
+                </div>
+              </div>
+            {% endif %}
+            
+            <div class="person-card__contact">
+              {% if person.email %}
+                <div class="contact-item">
+                  <span>📧</span>
+                  <span>Email</span>
+                </div>
+              {% endif %}
+              
+              {% if person.office %}
+                <div class="contact-item">
+                  <span>📍</span>
+                  <span>{{ person.office }}</span>
+                </div>
+              {% endif %}
+              
+              {% if person.ORCID %}
+                <div class="contact-item">
+                  <span>🔗</span>
+                  <span>ORCID</span>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </a>
+    {% endfor %}
+  </div>
+{% endif %}

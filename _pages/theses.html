@@ -1,0 +1,31 @@
+---
+layout: archive
+title: "Theses"
+permalink: /theses/
+author_profile: true
+---
+
+{% include base_path %}
+<link rel="stylesheet" href="{{ '/assets/css/theses.css' | relative_url }}">
+
+<table class="theses-table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Student</th>
+      <th>Supervisor</th>
+      <th>Degree</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% assign theses = site.theses | sort: 'date' | reverse %}
+    {% for thesis in theses %}
+    <tr>
+      <td><a href="{{ base_path }}{{ thesis.url }}">{{ thesis.title }}</a></td>
+      <td>{{ thesis.authors }}</td>
+      <td>{{ thesis.supervisor }}</td>
+      <td>{{ thesis.degree }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>

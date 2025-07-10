@@ -1,0 +1,187 @@
+---
+layout: default
+---
+
+{% include base_path %}
+<link rel="stylesheet" href="{{ '/assets/css/person-profiles.css' | relative_url }}">
+
+<div id="main" role="main">
+  <article class="page person-page" itemscope itemtype="http://schema.org/Person">
+    <div class="page__inner-wrap">
+      
+      <div class="person-header">
+        <div class="person-image-container">
+          {% if page.img or page.image %}
+            {% assign person_image = page.image | default: page.img %}
+            <img class="person-image" 
+                 src="{{ person_image | relative_url }}" 
+                 alt="{{ page.title }}"
+                 itemprop="image">
+          {% else %}
+            <div class="person-image-placeholder">👤</div>
+          {% endif %}
+        </div>
+        
+        <div class="person-info">
+          <h1 itemprop="name">{{ page.title }}</h1>
+          
+          {% if page.position %}
+            <div class="person-position" itemprop="jobTitle">
+              {% case page.position %}
+                {% when "sysad" %}
+                  Systems Engineer
+                {% when "postdoc" %}
+                  Post-doctoral Researcher
+                {% when "professor" %}
+                  Professor
+                {% when "ra" %}
+                  Research Assistant
+                {% when "sa" %}
+                  Student Assistant
+                {% else %}
+                  {{ page.position }}
+              {% endcase %}
+            </div>
+          {% endif %}
+          
+          <div class="person-contact">
+            {% if page.email %}
+              <div class="contact-item">
+                <span>📧</span>
+                <a href="mailto:{{ page.email }}" itemprop="email">{{ page.email }}</a>
+              </div>
+            {% endif %}
+            
+            {% if page.office %}
+              <div class="contact-item">
+                <span>📍</span>
+                <span itemprop="workLocation">{{ page.office }}</span>
+              </div>
+            {% endif %}
+            
+            {% if page.address %}
+              <div class="contact-item">
+                <span>🏢</span>
+                <span itemprop="address">{{ page.address }}</span>
+              </div>
+            {% endif %}
+            
+            {% if page.ORCID %}
+              <div class="contact-item">
+                <span>🔗</span>
+                <a href="https://orcid.org/{{ page.ORCID }}" target="_blank">ORCID: {{ page.ORCID }}</a>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+      {% if page.interests %}
+        <section class="person-section">
+          <h2>Research Interests</h2>
+          <div class="research-interests">
+            <ul>
+              {% for interest in page.interests %}
+                <li>{{ interest }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        </section>
+      {% endif %}
+
+      {% if page.positions %}
+        <section class="person-section">
+          <h2>Positions</h2>
+          {% for position in page.positions %}
+            <div class="position-entry">
+              <div class="year-range">
+                {{ position.from }}{% if position.to %} - {{ position.to }}{% else %} - Present{% endif %}
+              </div>
+              <div class="position-details">
+                <span class="position-title">{{ position.title }}</span>
+                {% if position.dep %}
+                  , {% if position.dep_uri %}
+                    <span class="organization"><a href="{{ position.dep_uri }}" target="_blank">{{ position.dep }}</a></span>
+                  {% else %}
+                    <span class="organization">{{ position.dep }}</span>
+                  {% endif %}
+                {% endif %}
+                {% if position.inst %}
+                  <br>{% if position.inst_uri %}
+                    <span class="institution"><a href="{{ position.inst_uri }}" target="_blank">{{ position.inst }}</a></span>
+                  {% else %}
+                    <span class="institution">{{ position.inst }}</span>
+                  {% endif %}
+                {% endif %}
+                {% if position.where %}
+                  , <span class="location">{{ position.where }}</span>
+                {% endif %}
+              </div>
+            </div>
+          {% endfor %}
+        </section>
+      {% endif %}
+
+      {% if page.education %}
+        <section class="person-section">
+          <h2>Education</h2>
+          {% for edu in page.education %}
+            <div class="education-entry">
+              <div class="year-range">
+                {{ edu.from }}{% if edu.to %} - {{ edu.to }}{% endif %}
+              </div>
+              <div class="education-details">
+                <span class="degree-title">{{ edu.title }}</span>
+                {% if edu.inst %}
+                  <br>{% if edu.inst_uri %}
+                    <span class="institution"><a href="{{ edu.inst_uri }}" target="_blank">{{ edu.inst }}</a></span>
+                  {% else %}
+                    <span class="institution">{{ edu.inst }}</span>
+                  {% endif %}
+                {% endif %}
+                {% if edu.where %}
+                  , <span class="location">{{ edu.where }}</span>
+                {% endif %}
+              </div>
+            </div>
+          {% endfor %}
+        </section>
+      {% endif %}
+
+      <!-- PUBLICATIONS FROM BIBTEX PLUGIN -->
+      {% if page.publications %}
+        <section class="person-section">
+          <h2>Publications</h2>
+          
+          <div class="publications-list">
+            {% for pub_key in page.publications %}
+              {% assign pub = site.data.bibtex[pub_key] %}
+              {% if pub %}
+                <div class="publication-item">
+                  • {{ pub.author }}. {{ pub.title }}. 
+                  <em>{{ pub.venue }}</em>. 
+                  {{ pub.publisher }}{% if pub.address %}, {{ pub.address }}{% endif %}, 
+                  {{ pub.year }}{% if pub.pages %}, pp. {{ pub.pages }}{% endif %}. 
+                  {% if pub.publisherurl %}
+                    [<a href="{{ pub.publisherurl }}" target="_blank">Publisher</a>]
+                  {% elsif pub.url %}
+                    [<a href="{{ pub.url }}" target="_blank">Link</a>]
+                  {% endif %}
+                </div>
+              {% else %}
+                <div class="publication-item error">
+                  Publication not found: {{ pub_key }}
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </section>
+      {% endif %}
+
+      <!-- Custom content -->
+      <section class="page__content" itemprop="text">
+        {{ content }}
+      </section>
+    </div>
+  </article>
+</div>
