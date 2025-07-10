@@ -13,7 +13,7 @@ title                    : "universitaet-innsbruck-logo-rgb-farbe.png"
 title_separator          : "-"
 name                     : &name "Your Name"
 description              : &description "personal description"
-url                      : https://uibk-edge-ai.github.io/website/
+url                      : https://uibk-edge-ai.github.io
 baseurl                  : "/edgeAI"
 repository               : "https://github.com/UIBK-Edge-AI/website"
 
