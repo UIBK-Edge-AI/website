@@ -2,46 +2,49 @@
 layout: person
 cv_ready: true
 kind: person
-title: mitra
-identifier: mitra
+title: Mitra-Yolanda Naderi
+identifier: mn
 permalink: /team/mitra
-img: /assets/img/P_Jane_Doe.jpg
-position: secretary
+img: /assets/img/P_mitra.jpg
+phone: +43 512 507-53494
+position: sect
 category: SECRETARY
-office: ICT 2W10
-ORCID: 0000-0000-0000-0001
-email: jane.doe@university.edu
+office: ICT 3S11
+email: mitra.naderi@uibk.ac.at
 address: Technikerstraße 21A, 6020 Innsbruck, Austria
+officehours:
+  monday: "08:00 — 14:00"
+  tuesday: "09:00 — 15:00"
+  wednesday: "08:00 — 14:00"
+  thursday: "08:00 — 14:00"
 
-interests:
-  - Machine Learning
-  - Computer Vision
-  - Deep Learning
-  - Privacy-Preserving AI
 
 positions:
-  - from: 2023
-    title: Post-doctoral Researcher
-    dep: Security and Privacy Lab
-    dep_uri: https://informationsecurity.uibk.ac.at/
+  - from: 08/2024
+    title: Secretary
+    dep: Edge AI
+    dep_uri:
     inst: University of Innsbruck
     inst_uri: http://informatik.uibk.ac.at
-    where: Austria
+    where: Innsbruck, Austria
+
+  - from: 2020
+    to: 2021
+    title: Customer service agent
+    inst: Smart Energy Services GmbH
+    inst_uri: https://smart-es.at
+    where: Wien, Austria
+
+  - from: 2019
+    to: 2020
+    title: Customer service agent
+    inst: Intelia GmbH
+    inst_uri: https://www.intelia.at
+    where: Wien, Austria
 
 education:
-  - from: 2018
-    to: 2023
-    title: Ph.D. in Computer Science
-    inst: ETH Zurich
-    inst_uri: https://ethz.ch
-    where: Zurich, Switzerland
-  - from: 2016
-    to: 2018
-    title: M.Sc. in Computer Science
-    inst: Technical University of Munich
-    inst_uri: https://www.tum.de
-    where: Munich, Germany
+  - from: 08/2024
+    title: Certified Administrative Assistant, AW+T
+    where: Innsbruck, Austria
 
 ---
-
-Dr. Jane Doe is a post-doctoral researcher specializing in privacy-preserving machine learning techniques. Her research focuses on developing secure and efficient algorithms for distributed learning systems.

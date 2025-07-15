@@ -16,7 +16,7 @@ main:
     url: /team/  
 
   - title: "Projects"
-    url: /project/
+    url: /projects/
     
   - title: "Teaching"
     url: /teaching/

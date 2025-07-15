@@ -21,7 +21,7 @@ author_profile: true
     {% assign researches = site.research | sort: 'date' | reverse %}
     {% for research in researches %}
     <tr>
-      <td><a href="{{ base_path }}{{ thesis.url }}">{{ research.title }}</a></td>
+      <td><a href="{{ base_path }}{{ research.url }}">{{ research.title }}</a></td>
       <td>{{ research.authors }}</td>
       <td>{{ research.supervisor }}</td>
       <td>{{ research.degree }}</td>
