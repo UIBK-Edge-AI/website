@@ -103,6 +103,151 @@ html[data-theme="dark"] .person-position {
   color: #b0b0b0;
 }
 
+/* Table-Style Office Hours */
+.office-hours {
+  margin: 1rem 0;
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+.office-hours-table {
+  display: table;
+  width: 100%;
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: var(--global-text-color, #333);
+}
+
+html[data-theme="dark"] .office-hours-table {
+  color: #e0e0e0;
+}
+
+.office-hours-row {
+  display: table-row;
+}
+
+.office-hours-label,
+.office-hours-schedule {
+  display: table-cell;
+  padding: 0.4rem 0;
+  vertical-align: top;
+}
+
+.office-hours-label {
+  font-weight: 600;
+  color: #555;
+  width: 120px;
+  padding-right: 1.5rem;
+}
+
+html[data-theme="dark"] .office-hours-label {
+  color: #bbb;
+}
+
+.office-hours-schedule {
+  color: var(--global-text-color, #333);
+}
+
+html[data-theme="dark"] .office-hours-schedule {
+  color: #e0e0e0;
+}
+
+.schedule-day-row {
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+.schedule-day-row:last-child {
+  margin-bottom: 0;
+}
+
+.day-name {
+  display: inline-block;
+  min-width: 45px;
+  font-weight: 500;
+  color: #444;
+  margin-right: 1rem;
+}
+
+html[data-theme="dark"] .day-name {
+  color: #ccc;
+}
+
+.day-time {
+  color: var(--global-text-color, #333);
+}
+
+html[data-theme="dark"] .day-time {
+  color: #e0e0e0;
+}
+
+/* Compact inline version (alternative) */
+.office-hours-inline {
+  margin: 1rem 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  font-size: 0.95rem;
+}
+
+.office-hours-inline .office-hours-label {
+  flex-shrink: 0;
+  min-width: 100px;
+  font-weight: 600;
+  color: #555;
+  padding: 0;
+}
+
+html[data-theme="dark"] .office-hours-inline .office-hours-label {
+  color: #bbb;
+}
+
+.office-hours-inline .schedule-days {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.office-hours-inline .schedule-day-row {
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .office-hours-table {
+    display: block;
+  }
+  
+  .office-hours-row {
+    display: block;
+    margin-bottom: 1rem;
+  }
+  
+  .office-hours-label,
+  .office-hours-schedule {
+    display: block;
+    padding: 0;
+    width: auto;
+  }
+  
+  .office-hours-label {
+    margin-bottom: 0.5rem;
+    padding-right: 0;
+  }
+  
+  .office-hours-inline {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .office-hours-inline .office-hours-label {
+    min-width: auto;
+  }
+}
+
 /* Contact information */
 .person-contact {
   display: flex;
@@ -693,4 +838,50 @@ html[data-theme="dark"] .publication-citation {
     padding: 0.3rem 0.6rem;
     font-size: 0.8rem;
   }
+
+  /* Additional styles for position and education notes */
+.position-notes,
+.education-notes {
+  margin-top: 0.5rem;
+  padding: 0.75rem;
+  background-color: #f8f9fa;
+  border-left: 4px solid #007bff;
+  border-radius: 0 4px 4px 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+html[data-theme="dark"] .position-notes,
+html[data-theme="dark"] .education-notes {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-left: 4px solid #4da6ff;
+  color: #e0e0e0;
+}
+
+.position-notes ul,
+.education-notes ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.position-notes li,
+.education-notes li {
+  margin-bottom: 0.25rem;
+}
+
+.position-notes h3,
+.education-notes h3 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  color: #495057;
+}
+
+html[data-theme="dark"] .position-notes h3,
+html[data-theme="dark"] .education-notes h3 {
+  color: #ffffff;
+}
+
+  
+
 }

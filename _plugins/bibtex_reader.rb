@@ -17,14 +17,14 @@ module Jekyll
       bibtex_file = possible_paths.find { |path| File.exist?(path) }
       
       if bibtex_file
-        puts "✓ Found BibTeX file: #{bibtex_file}"
+        # puts "✓ Found BibTeX file: #{bibtex_file}"
         
         begin
           content = File.read(bibtex_file, encoding: 'UTF-8')
           entries = parse_bibtex_simple(content)
           
           site.data['bibtex'] = entries
-          puts "✓ Successfully loaded #{entries.size} BibTeX entries"
+          # puts "✓ Successfully loaded #{entries.size} BibTeX entries"
           
           # Debug: print entry keys
           puts "✓ Entry keys: #{entries.keys.join(', ')}"
