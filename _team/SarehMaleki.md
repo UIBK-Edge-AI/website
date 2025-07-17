@@ -5,7 +5,7 @@ kind: person
 title: Sareh Maleki
 identifier: SaMa
 permalink: /team/sarehmaleki
-img: /assets/img/SarehMalekiPhoto.jpg
+img: /assets/img/P_Sareh_Maleki.jpg
 phone: +4367762459665
 position: ra
 category: RESEARCH ASSISTANTS
