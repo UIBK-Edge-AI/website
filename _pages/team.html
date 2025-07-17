@@ -5,7 +5,6 @@ permalink: /team/
 author_profile: true
 ---
 
-
 {% comment %}
   If people have categories, group them. Otherwise, show all people together.
 {% endcomment %}
@@ -21,7 +20,7 @@ author_profile: true
 {% endfor %}
 
 {% if has_categories %}
-  {% assign groups = "PROFESSOR|POST-DOC|SYSTEMS ENGINEER|RESEARCH-ASSISTANTS|STUDENT RESEARCH-ASSISTANTS" | split: "|" %}
+  {% assign groups = "PROFESSOR|POST-DOC|SECRETARY|SYSTEMS ENGINEER|RESEARCH-ASSISTANTS|STUDENT RESEARCH-ASSISTANTS"|split: "|" %}
   
   {% for group in groups %}
     {% assign members = site.team | where: "category", group %}
@@ -51,16 +50,15 @@ author_profile: true
                   <div class="person-card__contact">
                     {% if person.email %}
                       <div class="contact-item">
-                        <span>E-mail</span>
-                        <span>{{person.email}}</span>
+                        <span>📧</span>
+                        <span>{{ person.email }}</span>
                       </div>
                     {% endif %}
-
 
                     {% if person.phone %}
                       <div class="contact-item">
                         <span>☎</span>
-                        <span>{{person.phone}}</span>
+                        <span>{{ person.phone }}</span>
                       </div>
                     {% endif %}
                     
@@ -84,7 +82,7 @@ author_profile: true
     If no categories are defined, show all team members in one grid
   {% endcomment %}
   <div class="people-container">
-    {% for person in all_people %}
+    {% for person in team_members %}
       <a href="{{ person.url | relative_url }}" class="person-card-link">
         <div class="person-card">
           <div class="person-card__image-container">
@@ -116,6 +114,8 @@ author_profile: true
                     Research Assistant
                   {% when "sa" %}
                     Student Assistant
+                  {% when "secretary" %}
+                    Secretary
                   {% else %}
                     {{ person.position }}
                 {% endcase %}
@@ -160,10 +160,18 @@ author_profile: true
                   <span>ORCID</span>
                 </div>
               {% endif %}
+              
             </div>
           </div>
         </div>
       </a>
     {% endfor %}
+  </div>
+{% endif %}
+
+{% if team_members.size == 0 %}
+  <div style="text-align: center; padding: 2rem; color: #666;">
+    <h3>No team members found</h3>
+    <p>Add team member files to the <code>_team</code> directory to populate this page.</p>
   </div>
 {% endif %}
