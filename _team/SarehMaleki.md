@@ -1,13 +1,14 @@
+---
 layout: person
 cv_ready: true
 kind: person
 title: Sareh Maleki
 identifier: SaMa
-permalink: /team/SarehMaleki
+permalink: /team/sarehmaleki
 img: /assets/img/SarehMalekiPhoto.jpg
 phone: +4367762459665
-position: Ph.D. Student
-category: Student
+position: ra
+category: Research Assistants
 office: ICT 2M05b
 ORCID: 0009-0006-3905-9407
 email: sareh.maleki@uibk.ac.at
@@ -21,12 +22,12 @@ interests:
 
 positions:
   - from: 2025
-    title: Research Assistance
+    title: Research Assistant
     dep: Department of Computer Science
     dep_uri: https://www.uibk.ac.at/informatik/index.html.en
     inst: University of Innsbruck
     inst_uri: http://informatik.uibk.ac.at
-    where: City, Country
+    where: Austria
   - from: 2022
     to: 2024
     title: Teaching Assistant
@@ -72,3 +73,4 @@ education:
 
 publications:
   - TMSYH2025-CSICC
+---
