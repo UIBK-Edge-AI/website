@@ -8,7 +8,7 @@ permalink: /team/sarehmaleki
 img: /assets/img/SarehMalekiPhoto.jpg
 phone: +4367762459665
 position: ra
-category: Research Assistants
+category: RESEARCH ASSISTANTS
 office: ICT 2M05b
 ORCID: 0009-0006-3905-9407
 email: sareh.maleki@uibk.ac.at
@@ -16,7 +16,8 @@ address: Technikerstraße 21A, 6020 Innsbruck, Austria
 
 interests:
   - Edge Computing
-  - Machine Learning, Graph Machine Learning
+  - Machine Learning
+  - Graph Machine Learning
   - Edge-AI
   - Cyber-Physical Systems
 
@@ -34,20 +35,20 @@ positions:
     inst: Sharif University of Technology
     inst_uri: https://www.sharif.edu
     where: Tehran, Iran
-    notes: >
+    notes: |
       Assisted in multiple courses:
-        - Advanced VLSI Design (June 2024) – with Dr. Shaahin Hessabi
-        - Logic Circuits Lab (June 2023, Feb & Oct 2024) – with Dr. Shaahin Hessabi & Dr. Mohsen Ansari
-        - Real-Time Systems (Oct 2023, Aug 2024) – with Dr. Sepideh Safari
-        - Logic Design (Feb 2024) – with Dr. Shaahin Hessabi & Dr. Laleh Arshadi
+      - Advanced VLSI Design (June 2024)
+      - Logic Circuits Lab
+      - Real-Time Systems
+      - Logic Design
 
   - from: 2022
     title: Teaching Assistant
     inst: Arak University
     inst_uri: https://www.araku.ac.ir
     where: Arak, Iran
-    notes: >
-      Assisted Dr. Maryam Amiri in the Data Structures course for undergraduate students.
+    notes: |
+      - Data Structures course for undergraduate students
 
 education:
   - from: 2025

@@ -838,4 +838,50 @@ html[data-theme="dark"] .publication-citation {
     padding: 0.3rem 0.6rem;
     font-size: 0.8rem;
   }
+
+  /* Additional styles for position and education notes */
+.position-notes,
+.education-notes {
+  margin-top: 0.5rem;
+  padding: 0.75rem;
+  background-color: #f8f9fa;
+  border-left: 4px solid #007bff;
+  border-radius: 0 4px 4px 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+html[data-theme="dark"] .position-notes,
+html[data-theme="dark"] .education-notes {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-left: 4px solid #4da6ff;
+  color: #e0e0e0;
+}
+
+.position-notes ul,
+.education-notes ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.position-notes li,
+.education-notes li {
+  margin-bottom: 0.25rem;
+}
+
+.position-notes h3,
+.education-notes h3 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  color: #495057;
+}
+
+html[data-theme="dark"] .position-notes h3,
+html[data-theme="dark"] .education-notes h3 {
+  color: #ffffff;
+}
+
+  
+
 }

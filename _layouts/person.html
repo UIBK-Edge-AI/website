@@ -157,6 +157,11 @@ layout: default
                 {% if position.where %}
                   , <span class="location">{{ position.where }}</span>
                 {% endif %}
+                {% if position.notes %}
+                  <div class="position-notes">
+                    {{ position.notes | markdownify }}
+                  </div>
+                {% endif %}
               </div>
             </div>
           {% endfor %}
@@ -182,6 +187,11 @@ layout: default
                 {% endif %}
                 {% if edu.where %}
                   , <span class="location">{{ edu.where }}</span>
+                {% endif %}
+                {% if edu.notes %}
+                  <div class="education-notes">
+                    {{ edu.notes | markdownify }}
+                  </div>
                 {% endif %}
               </div>
             </div>
