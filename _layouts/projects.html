@@ -40,7 +40,7 @@ layout: default
       <!-- Contact/Links section -->
       <ul class="author__urls author__urls--desktop">
         {% if page.website %}
-          <li><a href="{{ page.website }}" target="_blank"><i class="fas fa-fw fa-link" aria-hidden="true"></i> Project Website</a></li>
+          <li><a href="{{ base_path }}{{ page.website }}" target="_blank"> <strong>Website:</strong> {{page.website}}</a></li>
         {% endif %}
         
         {% if page.github %}

@@ -6,6 +6,7 @@ status: ongoing
 sponsor: Horizon Europe (EU)
 image: /assets/img/projects/datapact.jpeg
 duration: 2025 – 2027
+website: https://datapact.eu/
 
 permalink: /projects/datapact
 ---
