@@ -83,7 +83,11 @@ author_profile: true
   {% endcomment %}
   <div class="people-container">
     {% for person in team_members %}
-      <a href="{{ person.url | relative_url }}" class="person-card-link">
+        {% if person.external_profile %}
+          <a href="{{ person.external_profile }}" target="_blank" class="person-card-link">
+        {% else %}
+          <a href="{{ person.url | relative_url }}" class="person-card-link">
+        {% endif %}
         <div class="person-card">
           <div class="person-card__image-container">
             {% if person.image or person.img %}

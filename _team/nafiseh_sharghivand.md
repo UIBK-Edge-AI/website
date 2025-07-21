@@ -2,16 +2,16 @@
 layout: person
 cv_ready: true
 kind: person
-title: Sareh Maleki
-identifier: SaMa
-permalink: /team/sarehmaleki
-img: /assets/img/P_Sareh_Maleki.jpg
-phone: +43 512 507-53251
-position: ra
-category: RESEARCH ASSISTANTS
-office: ICT 2M05b
+title: Nafiseh Sharghivand
+identifier: nash
+permalink: /team/nafiseh
+img: /assets/img/person-placeholder.svg
+phone: uibk phone number
+position: postdoc
+category: POST-DOC
+office: ICT 2M05X
 ORCID: 0009-0006-3905-9407
-email: sareh.maleki@uibk.ac.at
+email: nafiseh.sharghivand@uibk.ac.at
 address: Technikerstraße 21A, 6020 Innsbruck, Austria
 
 interests:
@@ -73,5 +73,12 @@ education:
     where: Arak, Iran
 
 publications:
-  - TMSYH2025-CSICC
+  - inproceedings{TMSYH2025-CSICC,
+    title={ARGENT Energy-Aware Scheduling in Edge Computing Using Energy Valley Optimizer},
+    author={Toghani, Mehrab and Maleki, Sareh and Younesi, Abolfazl and Safari, Sepideh and Hessabi, Shaahin},
+    booktitle={2025 29th International Computer Conference, Computer Society of Iran (CSICC)},
+    pages={1--6},
+    year={2025},
+    publisherurl={https://ieeexplore.ieee.org/abstract/document/10967461},
+    organization={IEEE}
 ---
