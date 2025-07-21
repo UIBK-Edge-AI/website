@@ -25,7 +25,7 @@ author:
   avatar           : "edgeAI_logo.jpg"
   name             : "Edge AI"
   pronouns         : # example: "she/her"  
-  bio              : "Short biography for the left-hand sidebar"
+  bio              : # URL
   location         : "Technikerstraße 21a, Innsbruck"
   employer         : "Universität Innsbruck, Austria"
   uri              : # URL
