@@ -6,7 +6,7 @@ title: Rajashekar Kolichala
 identifier: rako
 permalink: /team/rajashekar
 redirect_to: https://sites.google.com/view/kolichala-rajashekar/
-img: /assets/img/P_shekar.jpg
+img: /assets/img/team/P_shekar.jpg
 phone: +43 512 507-53247
 position: postdoc
 category: POST-DOC

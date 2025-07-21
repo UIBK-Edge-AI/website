@@ -27,7 +27,7 @@ module Jekyll
           # puts "✓ Successfully loaded #{entries.size} BibTeX entries"
           
           # Debug: print entry keys
-          puts "✓ Entry keys: #{entries.keys.join(', ')}"
+          # puts "✓ Entry keys: #{entries.keys.join(', ')}"
           
         rescue => e
           puts "✗ Error reading BibTeX file: #{e.message}"

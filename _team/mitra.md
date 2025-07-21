@@ -5,7 +5,7 @@ kind: person
 title: Mitra-Yolanda Naderi
 identifier: mn
 permalink: /team/mitra
-img: /assets/img/P_mitra.jpg
+img: /assets/img/team/P_mitra.jpg
 phone: +43 512 507-53494
 position: sect
 category: SECRETARY

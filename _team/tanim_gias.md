@@ -5,7 +5,7 @@ kind: person
 title: Tanim M. Rayhan Gias
 identifier: tmrg
 permalink: /team/tanim_gias
-img: /assets/img/P_Tanim_Gias.jpg
+img: /assets/img/team/P_Tanim_Gias.jpg
 phone: +43 512 507-53253
 position: sysad
 category: SYSTEMS ENGINEER

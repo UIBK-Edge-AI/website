@@ -5,12 +5,14 @@ kind: person
 title: Seyedehhaleh Seyeddizaji
 identifier: ShSd
 permalink: /team/seyedehhaleh
-img: /assets/img/P_haleh.jpg
+img: /assets/img/team/P_haleh.jpg
+LinkedIn: haleh-dizaji-bb08a045
 phone: uibk phone number
 position: postdoc
 category: POST-DOC
-office: ICT 2M05X
+office: ICT 2M05A
 ORCID: 0000-0002-5886-9636
+LinkedIn: sareh-maleki-8392b7212
 email: Seyedehhaleh.Seyeddizaji@aau.at
 address: Technikerstraße 21A, 6020 Innsbruck, Austria
 

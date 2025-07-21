@@ -75,6 +75,13 @@ layout: default
               </div>
             {% endif %}
 
+            {% if page.LinkedIn %}
+              <div class="contact-item">
+                <i class="fab fa-linkedin"></i>
+                <a href="https://www.linkedin.com/in/{{ page.LinkedIn }}" target="_blank">{{page.title}}</a>
+              </div>
+            {% endif %}
+
             {% if page.officehours %}
             <div class="office-hours-inline">
               <div class="office-hours-label">Office hours</div>
@@ -168,37 +175,97 @@ layout: default
         </section>
       {% endif %}
 
-      {% if page.education %}
-        <section class="person-section">
-          <h2>Education</h2>
-          {% for edu in page.education %}
-            <div class="education-entry">
-              <div class="year-range">
-                {{ edu.from }}{% if edu.to %} - {{ edu.to }}{% endif %}
-              </div>
-              <div class="education-details">
-                <span class="degree-title">{{ edu.title }}</span>
-                {% if edu.inst %}
-                  <br>{% if edu.inst_uri %}
-                    <span class="institution"><a href="{{ edu.inst_uri }}" target="_blank">{{ edu.inst }}</a></span>
+        {% if page.education %}
+          <section class="person-section">
+            <h2>Education</h2>
+            {% for edu in page.education %}
+              <div class="education-entry">
+                <div class="year-range">
+                  {% if edu.year %}
+                    {{ edu.year }}
+                  {% elsif edu.from and edu.to and edu.to != "present" %}
+                    {{ edu.from }} - {{ edu.to }}
+                  {% elsif edu.from and edu.to == "present" %}
+                    {{ edu.from }} - Present
+                  {% elsif edu.from %}
+                    {{ edu.from }} - Present
                   {% else %}
-                    <span class="institution">{{ edu.inst }}</span>
+                    No date available
                   {% endif %}
-                {% endif %}
-                {% if edu.where %}
-                  , <span class="location">{{ edu.where }}</span>
-                {% endif %}
-                {% if edu.notes %}
-                  <div class="education-notes">
-                    {{ edu.notes | markdownify }}
-                  </div>
-                {% endif %}
+                </div>
+                <div class="education-details">
+                  <span class="education-title">{{ edu.title }}</span>
+                  {% if edu.inst %}
+                    <br>{% if edu.inst_uri %}
+                      <span class="institution"><a href="{{ edu.inst_uri }}" target="_blank">{{ edu.inst }}</a></span>
+                    {% else %}
+                      <span class="institution">{{ edu.inst }}</span>
+                    {% endif %}
+                  {% endif %}
+                  {% if edu.where %}
+                    <br><span class="location">{{ edu.where }}</span>
+                  {% endif %}
+                  
+                  {% if edu.notes %}
+                    <div class="education-notes">
+                      {{ edu.notes | markdownify }}
+                    </div>
+                  {% endif %}
+                </div>
               </div>
-            </div>
-          {% endfor %}
-        </section>
-      {% endif %}
+            {% endfor %}
+          </section>
+        {% endif %}
 
+        {% if page.journal_reviews %}
+          <section class="person-section">
+            <h2>Journal Reviews</h2>
+            <div class="journal-reviews-list">
+              <ul>
+                {% for journal in page.journal_reviews %}
+                  <li class="journal-item">{{ journal }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+          </section>
+        {% endif %}
+
+        {% if page.program_committees %}
+          <section class="person-section">
+            <h2>Program Committees</h2>
+            <div class="program-committees-list">
+              <ul>
+                {% for committee in page.program_committees %}
+                  <li class="committee-item">{{ committee }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+          </section>
+        {% endif %}
+
+        {% if page.Grants_Awards_Scholarships %}
+          <section class="person-section">
+            <h2>Grants, Awards & Scholarships</h2>
+            {% for grant in page.Grants_Awards_Scholarships %}
+              <div class="grant-entry">
+                <div class="year-range">
+                  {{ grant.year }}
+                </div>
+                <div class="grant-details">
+                  <span class="grant-title">{{ grant.title }}</span>
+                  {% if grant.where %}
+                    <br><span class="grant-location">{{ grant.where }}</span>
+                  {% endif %}
+                  {% if grant.notes %}
+                    <div class="grant-notes">
+                      {{ grant.notes | markdownify }}
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+            {% endfor %}
+          </section>
+        {% endif %}
 
       {% if page.publications %}
         <section class="person-section">

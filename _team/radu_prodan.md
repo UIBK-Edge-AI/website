@@ -3,22 +3,24 @@ layout: person
 cv_ready: true
 kind: person
 title: Univ.-Prof. Dr. Radu Prodan
-identifier: rapr
+identifier: rapro
 permalink: /team/raduprodan
-img: /assets/img/P_radu_prodan.jpg
+img: /assets/img/team/P_radu_prodan.jpg
 phone: +43 512 507-53249
 position: professor
 category: PROFESSOR
 office: ICT 3M05X
 ORCID: 0000-0002-8247-5426
 email: radu.prodan@uibk.ac.at
+LinkedIn: radu-prodan-182812b1
 address: Technikerstraße 21A, 6020 Innsbruck, Austria
 
 interests:
   - Distributed and Parallel systems
   - Cloud/Edge/Fog computing
   - Social Media Networks
-  - Software tools (performance, debugging, scheduling, optimization, fault tolerance, compiler)
+  - Artificial Intelligence
+  - Federated Learning
 
 positions:
   - from: 2025
@@ -74,27 +76,16 @@ education:
 
   - from: 2022
     to: 2025
-    title: M.Sc. in Computer Engineering
-    inst: Sharif University of Technology
-    inst_uri: https://www.sharif.edu
-    where: Tehran, Iran
+    title:  Doctor of Technical Sciences
+    inst: Vienna University of Technology
+    inst_uri: https://www.tuwien.at/en/
+    where: Vienna, Austria 
 
-  - from: 2018
-    to: 2022
-    title: B.Sc. in Computer Engineering
-    inst: Arak University
-    inst_uri: https://www.araku.ac.ir
-    where: Arak, Iran
-
-publications:
-  - inproceedings{TMSYH2025-CSICC,
-    title={ARGENT Energy-Aware Scheduling in Edge Computing Using Energy Valley Optimizer},
-    author={Toghani, Mehrab and Maleki, Sareh and Younesi, Abolfazl and Safari, Sepideh and Hessabi, Shaahin},
-    booktitle={2025 29th International Computer Conference, Computer Society of Iran (CSICC)},
-    pages={1--6},
-    year={2025},
-    publisherurl={https://ieeexplore.ieee.org/abstract/document/10967461},
-    organization={IEEE}
+  - year: 1997
+    title: Diploma Engineer
+    inst: Technical University of Cluj-Napoca
+    inst_uri: https://www.utcluj.ro
+    where: Romania
 ---
-
-[See CV] (https://www.uibk.ac.at/informatik/news/artikel/images/2025/cv_prodan_english.pdf)
+For more Details:
+[Curriculum Vitae](https://www.uibk.ac.at/informatik/news/artikel/images/2025/cv_prodan_english.pdf)
