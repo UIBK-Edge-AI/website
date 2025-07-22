@@ -181,11 +181,15 @@
     display: block;
     margin: 0 1rem;
     padding: 0.5rem 0;
-    color: var(--global-masthead-link-color);
+    color: #2c5282; /* Changed to blue color */
     text-decoration: none;
+    font-weight: 500; /* Added font weight */
+    transition: all 0.3s ease; /* Added smooth transition */
 
     &:hover {
-      color: var(--global-masthead-link-color-hover);
+      color: #1a365d; /* Darker blue on hover */
+      background-color: rgba(44, 82, 130, 0.1); /* Light blue background on hover */
+      border-radius: 4px; /* Rounded corners on hover */
     }
   }
 
@@ -196,7 +200,7 @@
     padding: 0 0.5rem;
     border: 0;
     outline: none;
-    background-color: var(--global-base-color);
+    background-color: #2c5282; /* Changed button background to blue */
     color: #fff;
     cursor: pointer;
     z-index: 100;
@@ -223,6 +227,13 @@
           margin-right: 0;
         }
       }
+
+      /* Active/current page styling */
+      &.current a {
+        color: #1a365d;
+        background-color: rgba(44, 82, 130, 0.15);
+        border-radius: 4px;
+      }
     }
 
     #theme-toggle {
@@ -231,6 +242,11 @@
         display: flex;
         justify-content: center;
         cursor: pointer;
+        color: #2c5282; /* Blue color for theme toggle */
+
+        &:hover {
+          color: #1a365d;
+        }
       }
     }
 
@@ -243,7 +259,7 @@
         left: 0;
         bottom: 0;
         height: 4px;
-        background: var(--global-border-color);
+        background: #d2691e; /* Changed underline to brown/orange */
         width: 100%;
         -webkit-transition: $global-transition;
         transition: $global-transition;
@@ -275,10 +291,11 @@
       margin: 0;
       padding: 10px 20px;
       font-size: $type-size-5;
+      color: #2c5282; /* Blue color for dropdown links */
 
       &:hover {
-        color: var(--global-masthead-link-color-hover);
-        background: var(--global-border-color);
+        color: #1a365d; /* Darker blue on hover */
+        background: rgba(44, 82, 130, 0.1); /* Light blue background */
       }
     }
 
@@ -314,6 +331,54 @@
 
       &:last-child {
         border-bottom: none;
+      }
+    }
+  }
+}
+
+/* Dark theme navigation adjustments */
+html[data-theme="dark"] .greedy-nav {
+  a {
+    color: #90cdf4; /* Light blue for dark theme */
+
+    &:hover {
+      color: #bee3f8;
+      background-color: rgba(144, 205, 244, 0.1);
+    }
+  }
+
+  button {
+    background-color: #4299e1; /* Lighter blue for dark theme button */
+  }
+
+  .visible-links {
+    li.current a {
+      color: #bee3f8;
+      background-color: rgba(144, 205, 244, 0.15);
+    }
+
+    #theme-toggle a {
+      color: #90cdf4;
+
+      &:hover {
+        color: #bee3f8;
+      }
+    }
+
+    a:before {
+      background: #f6ad55; /* Lighter orange for dark theme underline */
+    }
+  }
+
+  .hidden-links {
+    background: var(--global-bg-color);
+    
+    a {
+      color: #90cdf4;
+
+      &:hover {
+        color: #bee3f8;
+        background: rgba(144, 205, 244, 0.1);
       }
     }
   }
@@ -440,5 +505,142 @@
     @include breakpoint($medium) {
       display: block;
     }
+  }
+}
+
+/* ==========================================================================
+   BROWN UNDERLINES FOR HEADINGS (Page Content)
+   ========================================================================== */
+
+/* Main content area headings with brown underlines */
+.page__content h1,
+.page__content h2,
+.page__content h3,
+.page__content h4 {
+  border-bottom: 3px solid #d2691e; /* Brown/orange underline */
+  padding-bottom: 0.5em;
+  margin-bottom: 1em;
+  margin-top: 2em;
+  position: relative;
+}
+
+/* Different thickness for different heading levels */
+.page__content h1 {
+  border-bottom-width: 4px;
+  border-bottom-color: #d2691e;
+  color: #2c5282; /* Blue heading color */
+}
+
+.page__content h2 {
+  border-bottom-width: 3px;
+  border-bottom-color: #cd853f; /* Slightly different brown */
+  color: #2d3748;
+}
+
+.page__content h3 {
+  border-bottom-width: 2px;
+  border-bottom-color: #daa520; /* Golden brown */
+  color: #2d3748;
+}
+
+.page__content h4 {
+  border-bottom-width: 2px;
+  border-bottom-color: #b8860b; /* Dark golden brown */
+  color: #4a5568;
+}
+
+/* Remove top margin from first headings */
+.page__content h1:first-child,
+.page__content h2:first-child,
+.page__content h3:first-child,
+.page__content h4:first-child {
+  margin-top: 0;
+}
+
+/* Dark theme adjustments for headings */
+html[data-theme="dark"] .page__content {
+  h1, h2, h3, h4 {
+    color: #e2e8f0;
+  }
+
+  h1 {
+    border-bottom-color: #f6ad55; /* Lighter orange for dark theme */
+  }
+
+  h2 {
+    border-bottom-color: #ed8936;
+  }
+
+  h3 {
+    border-bottom-color: #dd6b20;
+  }
+
+  h4 {
+    border-bottom-color: #c05621;
+  }
+}
+
+/* ==========================================================================
+   ADDITIONAL MAIN TITLE FIXES FOR DARK MODE
+   ========================================================================== */
+
+/* Target the main page title more specifically */
+.page__title,
+.page__content h1:first-child,
+.page__content > h1:first-of-type {
+  color: #2c5282 !important; /* Blue color for light mode */
+  font-weight: 600;
+}
+
+/* All content paragraphs in light mode */
+.page__content p,
+.page__content > p {
+  color: #4a5568 !important; /* Dark gray for light mode */
+}
+
+/* Dark mode fixes - target all possible selectors */
+html[data-theme="dark"] {
+  
+  /* Main title in all possible forms */
+  .page__title,
+  .page__content h1:first-child,
+  .page__content > h1:first-of-type,
+  .page__content h1,
+  h1 {
+    color: #90cdf4 !important; /* Light blue for dark mode */
+  }
+
+  /* All paragraph text */
+  .page__content p,
+  .page__content > p,
+  p {
+    color: #cbd5e0 !important; /* Light gray for dark mode */
+  }
+
+  /* All headings in content */
+  .page__content h1,
+  .page__content h2,
+  .page__content h3,
+  .page__content h4,
+  .page__content h5,
+  .page__content h6 {
+    color: #90cdf4 !important; /* Light blue for all headings */
+  }
+
+  /* Specific override for section headings */
+  .page__content h2 {
+    color: #90cdf4 !important; /* Light blue for section headings */
+  }
+
+  /* Body text should not be white */
+  body,
+  .page,
+  .page__inner-wrap {
+    color: #cbd5e0 !important;
+  }
+
+  /* Override any default white text */
+  * {
+    color: inherit;
   }
 }
