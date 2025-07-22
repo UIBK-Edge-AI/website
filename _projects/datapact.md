@@ -14,37 +14,9 @@ permalink: /projects/datapact
 ## DataPACT: Embedding Compliance, Ethics, and Sustainability into the Core of Data and AI Operations
 
 ### Motivation
-- Address Emerging Compliance Risks
-    Rapid advances in AI and data services have unlocked vast potential—but also introduced challenges: untested algorithms, data privacy concerns, regulatory non-compliance, and environmental impact.
+We are proud to contribute to **DataPACT**, a **Horizon Europe-funded** initiative that redefines how data and AI systems are built—embedding compliance, ethics, and sustainability from the ground up. Our team leads the design of the DataPACT architecture, which serves as the blueprint for integrating diverse tools and frameworks.
 
-- Embed Ethics and Sustainability
-    DataPACT ensures that compliance, privacy, and environmental sustainability are not afterthoughts, but core design principles for AI and data pipelines 
-
-- Enable Trustworthy Data Ecosystems
-    By embedding transparency and ethical considerations into operations, the project aims to build trust in AI systems among users, regulators, and society
+We also play a central role in enabling compliance-aware **Data/AI operations**, empowering users to interact with pipelines through intuitive, **intent-driven interfaces**. In addition, we contribute to shaping the next generation of **pipeline design tools**, leveraging **large language models to support the creation of transparent, trustworthy, and regulation-ready workflows.
 
 ### Project Goals
-- Develop a Compliance Toolbox & Framework
-
-    - Create user-friendly tools for automated compliance assessment, including privacy, fairness, and environmental impacts.
-
-    - Provide developers with frameworks to embed compliance upfront 
-
-- Deliver a Pipeline Management Toolbox
-
-    - Design a compliance-aware pipeline toolbox that supports the full lifecycle: design → simulation → deployment → monitoring → traceability
-
-    - Ensure energy monitoring and carbon footprint estimation are integrated into runtime operations 
-
-
-- Validate Through Real-World Use Cases
-
-    - Apply the tools in seven diverse sectors—healthcare, smart cities, media, law enforcement, CRM, manufacturing, public data—to ensure scalability and practical adoption 
-
-    - Support European Data Spaces & Interoperability
-
-- Promote federated, open European data spaces by ensuring interoperability, traceability, and secure data exchange 
-
-    - Accelerate Compliant AI Market Readiness
-
-    - Help organizations reduce time-to-market for AI applications, with built-in regulatory compliance and lower environmental impact
+Together with 17 other partners from across Europe, we are developing cutting-edge solutions to ensure that data-driven innovation respects privacy, complies with regulations such as the GDPR and the AI Act, and minimizes environmental impact. DataPACT’s impact spans healthcare, smart cities, public services, and beyond — making AI not just powerful, but principled.
