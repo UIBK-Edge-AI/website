@@ -513,10 +513,10 @@ html[data-theme="dark"] .greedy-nav {
    ========================================================================== */
 
 /* Main content area headings with brown underlines */
-.page__content h1,
-.page__content h2,
-.page__content h3,
-.page__content h4 {
+.page__content h1:not(.person-card__name),
+.page__content h2:not(.person-card__name),
+.page__content h3:not(.person-card__name),
+.page__content h4:not(.person-card__name) {
   border-bottom: 3px solid #d2691e; /* Brown/orange underline */
   padding-bottom: 0.5em;
   margin-bottom: 1em;
@@ -525,25 +525,25 @@ html[data-theme="dark"] .greedy-nav {
 }
 
 /* Different thickness for different heading levels */
-.page__content h1 {
+.page__content h1:not(.person-card__name) {
   border-bottom-width: 4px;
   border-bottom-color: #d2691e;
   color: #2c5282; /* Blue heading color */
 }
 
-.page__content h2 {
+.page__content h2:not(.person-card__name) {
   border-bottom-width: 3px;
   border-bottom-color: #cd853f; /* Slightly different brown */
   color: #2d3748;
 }
 
-.page__content h3 {
+.page__content h3:not(.person-card__name) {
   border-bottom-width: 2px;
   border-bottom-color: #daa520; /* Golden brown */
   color: #2d3748;
 }
 
-.page__content h4 {
+.page__content h4:not(.person-card__name) {
   border-bottom-width: 2px;
   border-bottom-color: #b8860b; /* Dark golden brown */
   color: #4a5568;

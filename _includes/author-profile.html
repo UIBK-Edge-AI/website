@@ -15,7 +15,9 @@
   </div>
 
   <div class="author__content" style="text-align: center;">
-    <h3 class="author__name" style="text-align: center; font-size: 2.5rem; font-weight: bold; margin: 2rem 0 2rem 0;">{{ author.name }}</h3>
+    <h3 class="author__name" style = "margin-bottom: 1rem;">
+      <a href="{{ base_path }}/" style="text-decoration: none; color: inherit;">{{ author.name }}</a>
+    </h3>
     {% if author.pronouns %}<p class="author__pronouns" style="text-align: center;">{{ author.pronouns }}</p>{% endif %}
     {% if author.bio %}<p class="author__bio" style="text-align: center;">{{ author.bio }}</p>{% endif %}
   </div>
