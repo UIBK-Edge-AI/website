@@ -2,63 +2,158 @@
    jQuery plugin settings and other scripts
    ========================================================================== */
 
-$(document).ready(function () {
-  // detect OS/browser preference
-  const browserPref = window.matchMedia('(prefers-color-scheme: dark)').matches
-    ? 'dark'
-    : 'light';
-
-  // Function to update logo with fade effect
-  function updateLogo(isDark) {
-    const logo = document.getElementById("site-logo");
-    if (logo && logo.dataset.light && logo.dataset.dark) {
-      logo.classList.add("fade-out");
-      setTimeout(() => {
-        logo.src = isDark ? logo.dataset.dark : logo.dataset.light;
-        logo.classList.remove("fade-out");
-      }, 150);
-    }
+// THEME TOGGLE SYSTEM - Define globally first (pure JavaScript, no jQuery)
+window.updateLogo = function(isDark) {
+  const logo = document.getElementById("site-logo");
+  console.log('updateLogo called with isDark:', isDark);
+  console.log('Logo element found:', !!logo);
+  
+  if (logo && logo.dataset && logo.dataset.light && logo.dataset.dark) {
+    console.log('Logo datasets:', {
+      light: logo.dataset.light,
+      dark: logo.dataset.dark,
+      currentSrc: logo.src
+    });
+    
+    const newSrc = isDark ? logo.dataset.dark : logo.dataset.light;
+    console.log('Switching logo to:', newSrc);
+    
+    // Add fade effect
+    logo.classList.add("fade-out");
+    setTimeout(() => {
+      logo.src = newSrc;
+      logo.classList.remove("fade-out");
+      console.log('Logo switched to:', logo.src);
+    }, 150);
+  } else {
+    console.error('Logo element or datasets missing!', {
+      logo: !!logo,
+      datasets: logo ? {
+        light: logo.dataset.light,
+        dark: logo.dataset.dark
+      } : 'Logo not found'
+    });
   }
+};
 
-  // Set the theme on page load or when explicitly called
-  var setTheme = function (theme) {
-    const use_theme =
-      theme ||
-      localStorage.getItem("theme") ||
-      $("html").attr("data-theme") ||
-      browserPref;
+window.setTheme = function(theme) {
+  const browserPref = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  const savedTheme = localStorage.getItem("theme");
+  const currentTheme = document.documentElement.getAttribute("data-theme");
+  
+  // Determine which theme to use
+  const use_theme = theme || savedTheme || currentTheme || browserPref;
+  
+  console.log('setTheme called:', {
+    requested: theme,
+    saved: savedTheme,
+    current: currentTheme,
+    browser: browserPref,
+    using: use_theme
+  });
 
-    if (use_theme === "dark") {
-      $("html").attr("data-theme", "dark");
-      $("#theme-icon").removeClass("fa-sun").addClass("fa-moon");
-      updateLogo(true);
-    } else if (use_theme === "light") {
-      $("html").removeAttr("data-theme");
-      $("#theme-icon").removeClass("fa-moon").addClass("fa-sun");
-      updateLogo(false);
+  if (use_theme === "dark") {
+    document.documentElement.setAttribute("data-theme", "dark");
+    const icon = document.getElementById("theme-icon");
+    if (icon) {
+      icon.classList.remove("fa-sun");
+      icon.classList.add("fa-moon");
     }
-  };
+    window.updateLogo(true);
+  } else {
+    document.documentElement.removeAttribute("data-theme");
+    const icon = document.getElementById("theme-icon");
+    if (icon) {
+      icon.classList.remove("fa-moon");
+      icon.classList.add("fa-sun");
+    }
+    window.updateLogo(false);
+  }
+};
 
-  setTheme();
+window.toggleTheme = function() {
+  const current_theme = document.documentElement.getAttribute("data-theme");
+  const new_theme = current_theme === "dark" ? "light" : "dark";
+  
+  console.log('toggleTheme: switching from', current_theme, 'to', new_theme);
+  
+  localStorage.setItem("theme", new_theme);
+  window.setTheme(new_theme);
+  return new_theme;
+};
 
-  // if user hasn't chosen a theme, follow OS changes
-  window
-    .matchMedia('(prefers-color-scheme: dark)')
-    .addEventListener("change", (e) => {
-      if (!localStorage.getItem("theme")) {
-        setTheme(e.matches ? "dark" : "light");
+window.testThemeToggle = function() {
+  console.log('=== Manual Theme Toggle Test ===');
+  console.log('Current theme before:', document.documentElement.getAttribute("data-theme"));
+  const result = window.toggleTheme();
+  console.log('Theme after toggle:', result);
+  return result;
+};
+
+// IMMEDIATE INITIALIZATION (pure JavaScript)
+(function() {
+  console.log('=== IMMEDIATE THEME INITIALIZATION ===');
+  
+  // Initialize theme immediately when script loads
+  setTimeout(() => {
+    window.setTheme();
+  }, 50);
+  
+  // Also initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(() => {
+        console.log('DOM ready - reinitializing theme');
+        window.setTheme();
+      }, 100);
+    });
+  }
+})();
+
+// Bind events when page loads (pure JavaScript)
+window.addEventListener('load', function() {
+  setTimeout(() => {
+    console.log('=== BINDING THEME TOGGLE EVENTS ===');
+    
+    // Get all possible theme toggle elements
+    const toggleElements = document.querySelectorAll('#theme-toggle, #theme-icon, #theme-toggle a');
+    
+    console.log('Found toggle elements:', toggleElements.length);
+    
+    // Bind click event to each element
+    toggleElements.forEach((element, index) => {
+      console.log(`Binding to element ${index + 1}:`, element.id || element.tagName);
+      element.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('Theme toggle clicked on:', this.id || this.tagName);
+        window.toggleTheme();
+      });
+    });
+    
+    // Also use event delegation as backup
+    document.addEventListener('click', function(e) {
+      if (e.target.matches('#theme-toggle, #theme-icon, #theme-toggle a')) {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('Theme toggle clicked via delegation!');
+        window.toggleTheme();
       }
     });
+    
+    console.log('Theme toggle binding complete');
+  }, 200);
+});
 
-  // Toggle the theme manually
-  var toggleTheme = function () {
-    const current_theme = $("html").attr("data-theme");
-    const new_theme = current_theme === "dark" ? "light" : "dark";
-    localStorage.setItem("theme", new_theme);
-    setTheme(new_theme);
-  };
+// OS preference change listener
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+  if (!localStorage.getItem("theme")) {
+    window.setTheme(e.matches ? 'dark' : 'light');
+  }
+});
 
-  $('#theme-toggle').on('click', toggleTheme);
+// Now start jQuery code
+$(document).ready(function () {
 
   // These should be the same as the settings in _variables.scss
   const scssLarge = 925; // pixels
@@ -82,7 +177,9 @@ $(document).ready(function () {
   }, 250);
 
   // FitVids init
-  fitvids();
+  if (typeof fitvids === 'function') {
+    fitvids();
+  }
 
   // Follow menu drop down
   $(".author__urls-wrapper button").on("click", function () {
@@ -116,7 +213,7 @@ $(document).ready(function () {
   // Wrap images in lightbox links
   $('p > img').not('.emoji').each(function() {
     var $img = $(this);
-    if ( ! $img.parent().is('a.image-popup') ) {
+    if ( ! $img.parent().is('a.image-pool') ) {
       $('<a>')
         .addClass('image-popup')
         .attr('href', $img.attr('src'))
@@ -125,27 +222,52 @@ $(document).ready(function () {
     }
   });
 
-  // Magnific-Popup options
-  $(".image-popup").magnificPopup({
-    type: 'image',
-    tLoading: 'Loading image #%curr%...',
-    gallery: {
-      enabled: true,
-      navigateByImgClick: true,
-      preload: [0, 1]
-    },
-    image: {
-      tError: '<a href="%url%">Image #%curr%</a> could not be loaded.',
-    },
-    removalDelay: 500,
-    mainClass: 'mfp-zoom-in',
-    callbacks: {
-      beforeOpen: function() {
-        this.st.image.markup = this.st.image.markup.replace('mfp-figure', 'mfp-figure mfp-with-anim');
-      }
-    },
-    closeOnContentClick: true,
-    midClick: true
-  });
+  // Magnific-Popup options (only if plugin is loaded)
+  if ($.fn.magnificPopup) {
+    $(".image-popup").magnificPopup({
+      type: 'image',
+      tLoading: 'Loading image #%curr%...',
+      gallery: {
+        enabled: true,
+        navigateByImgClick: true,
+        preload: [0, 1]
+      },
+      image: {
+        tError: '<a href="%url%">Image #%curr%</a> could not be loaded.',
+      },
+      removalDelay: 500,
+      mainClass: 'mfp-zoom-in',
+      callbacks: {
+        beforeOpen: function() {
+          this.st.image.markup = this.st.image.markup.replace('mfp-figure', 'mfp-figure mfp-with-anim');
+        }
+      },
+      closeOnContentClick: true,
+      midClick: true
+    });
+  }
+
+  // Additional jQuery binding for theme toggle (backup)
+  setTimeout(() => {
+    console.log('=== JQUERY BACKUP BINDING ===');
+    $('#theme-toggle, #theme-toggle a, #theme-icon').off('click.themeBackup').on('click.themeBackup', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      console.log('Theme toggle clicked (jQuery backup)!');
+      window.toggleTheme();
+    });
+    
+    console.log('jQuery backup binding complete');
+  }, 400);
+
+  // Debug info
+  setTimeout(() => {
+    console.log('=== THEME SYSTEM DEBUG ===');
+    console.log('Theme toggle element found:', $('#theme-toggle').length);
+    console.log('Theme icon element found:', $('#theme-icon').length);
+    console.log('Current theme:', document.documentElement.getAttribute("data-theme"));
+    console.log('Current logo src:', document.getElementById('site-logo') ? document.getElementById('site-logo').src : 'Logo not found');
+    console.log('Test with: toggleTheme() or testThemeToggle()');
+  }, 500);
 
 });
