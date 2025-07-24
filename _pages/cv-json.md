@@ -9,7 +9,7 @@ redirect_from:
 
 {% include base_path %}
 
-<link rel="stylesheet" href="{{ base_path }}/assets/css/cv-style.css">
+<link rel="stylesheet" href="{{ '/assets/css/cv-style.css' | relative_url }}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 <style>
