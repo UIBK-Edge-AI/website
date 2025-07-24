@@ -1,0 +1,101 @@
+* Dark mode root styles */
+html[data-theme="dark"] {
+  background-color: #1a202c !important;
+  color: #e2e8f0 !important;
+}
+
+html[data-theme="dark"] body {
+  background-color: #1a202c !important;
+  color: #e2e8f0 !important;
+}
+
+/* Main content areas */
+html[data-theme="dark"] .page,
+html[data-theme="dark"] .page__inner-wrap,
+html[data-theme="dark"] .page__content {
+  background-color: #1a202c !important;
+  color: #e2e8f0 !important;
+}
+
+/* MASTHEAD - Use the same dark background, NOT grey */
+html[data-theme="dark"] .masthead {
+  background-color: #1a202c !important;  /* Dark blue, not grey */
+  border-bottom: 1px solid #2d3748 !important;  /* Darker border */
+}
+
+html[data-theme="dark"] .masthead__inner-wrap {
+  background-color: #1a202c !important;
+}
+
+html[data-theme="dark"] .greedy-nav {
+  background-color: #1a202c !important;  /* Same dark background */
+}
+
+html[data-theme="dark"] .greedy-nav a {
+  color: #90cdf4 !important;
+}
+
+html[data-theme="dark"] .greedy-nav a:hover {
+  color: #bee3f8 !important;
+  background-color: rgba(144, 205, 244, 0.1) !important;
+}
+
+/* Sidebar */
+html[data-theme="dark"] .sidebar {
+  background-color: #1a202c !important;
+  color: #e2e8f0 !important;
+}
+
+html[data-theme="dark"] .author__name {
+  color: #90cdf4 !important;
+}
+
+html[data-theme="dark"] .author__bio {
+  color: #a0aec0 !important;
+}
+
+/* Headings */
+html[data-theme="dark"] h1,
+html[data-theme="dark"] h2,
+html[data-theme="dark"] h3,
+html[data-theme="dark"] h4,
+html[data-theme="dark"] h5,
+html[data-theme="dark"] h6 {
+  color: #90cdf4 !important;
+}
+
+/* Paragraphs */
+html[data-theme="dark"] p {
+  color: #e2e8f0 !important;
+}
+
+/* Links */
+html[data-theme="dark"] a {
+  color: #90cdf4 !important;
+}
+
+html[data-theme="dark"] a:hover {
+  color: #bee3f8 !important;
+}
+
+/* Footer */
+html[data-theme="dark"] .page__footer {
+  background-color: #2d3748 !important;
+  color: #a0aec0 !important;
+  border-top: 1px solid #2d3748 !important;
+}
+
+/* Hidden navigation dropdown */
+html[data-theme="dark"] .hidden-links {
+  background-color: #2d3748 !important;
+  border: 1px solid #2d3748 !important;
+}
+
+html[data-theme="dark"] .hidden-links a {
+  color: #90cdf4 !important;
+}
+
+html[data-theme="dark"] .hidden-links a:hover {
+  background-color: rgba(144, 205, 244, 0.1) !important;
+  color: #bee3f8 !important;
+}

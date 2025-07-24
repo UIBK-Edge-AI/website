@@ -1,5 +1,5 @@
 /* ==========================================================================
-   DARK THEME
+   DARK THEME - Replace your _sass/theme/_dark.scss with this
    ========================================================================== */
 
 /* Color codes used for the theme */
@@ -8,13 +8,13 @@ $dark-gray                  : mix(#000, $gray, 40%);
 $darker-gray                : mix(#000, $gray, 60%);
 $light-gray                 : mix(#fff, $gray, 50%);
 
-$background                 : #474747;
-$background-light           : mix(#fff, $background, 80%);
-$background-lighter         : mix(#fff, $background, 90%);
-$text                       : #ffffff;
-$link                       : #0ea1c5;
-$link-dark                  : mix(#000, $link, 25%);
-$link-light                 : mix(#fff, $link, 25%);
+$background                 : #1a202c;  // Changed to darker blue
+$background-light           : #2d3748;  // Lighter version
+$background-lighter         : #4a5568;  // Even lighter
+$text                       : #e2e8f0;  // Light grey text
+$link                       : #90cdf4;  // Light blue links
+$link-dark                  : #63b3ed;  // Darker blue
+$link-light                 : #bee3f8;  // Lighter blue
 
 /* Color codes used for the site */
 $danger-color               : #ee5f5b;
@@ -35,20 +35,113 @@ $sidebar-screen-min-width   : 1024px;
 
 /* Dark theme for the site */
 html[data-theme="dark"] {
-    --global-base-color                 : #{$background};
+    // CSS Variables
+    --global-base-color                 : #{$background-light};
     --global-bg-color                   : #{$background};
-    --global-footer-bg-color            : #{$background};
-    --global-border-color               : #{$light-gray};
+    --global-footer-bg-color            : #{$background-light};
+    --global-border-color               : #{$background-lighter};
     --global-dark-border-color          : #{$background-light};
-    --global-code-background-color      : #fafafa;
-    --global-code-text-color            : #{$darker-gray};
+    --global-code-background-color      : #{$background-light};
+    --global-code-text-color            : #{$text};
     --global-fig-caption-color          : #{$light-gray};
     --global-link-color                 : #{$link};
-    --global-link-color-hover           : #{$link-dark};
-    --global-link-color-visited         : #{$link-light};
-    --global-masthead-link-color        : #{$text};
-    --global-masthead-link-color-hover  : #{$background-light};
+    --global-link-color-hover           : #{$link-light};
+    --global-link-color-visited         : #{$link-dark};
+    --global-masthead-link-color        : #{$link};
+    --global-masthead-link-color-hover  : #{$link-light};
     --global-text-color                 : #{$text};
     --global-text-color-light           : #{$light-gray};
-    --global-thead-color                : #{$background-lighter};
+    --global-thead-color                : #{$background-light};
+
+    // ACTUAL STYLING RULES (this was missing!)
+    
+    // Root background
+    background-color: $background !important;
+    color: $text !important;
+    
+    // Body
+    body {
+        background-color: $background !important;
+        color: $text !important;
+    }
+    
+    // Main content areas
+    .page,
+    .page__inner-wrap,
+    .page__content {
+        background-color: $background !important;
+        color: $text !important;
+    }
+    
+    // Masthead - THIS WAS THE MISSING PIECE
+    .masthead {
+        background-color: $background !important;
+        background: $background !important;
+        border-bottom-color: $background-light !important;
+    }
+    
+    .masthead__inner-wrap {
+        background-color: $background !important;
+    }
+    
+    // Navigation
+    .greedy-nav {
+        background-color: $background !important;
+        background: $background !important;
+        
+        a {
+            color: $link !important;
+            
+            &:hover {
+                color: $link-light !important;
+                background-color: rgba(144, 205, 244, 0.1) !important;
+            }
+        }
+        
+        button {
+            background-color: $link !important;
+            color: $background !important;
+        }
+    }
+    
+    // Sidebar
+    .sidebar {
+        background-color: $background !important;
+        color: $text !important;
+    }
+    
+    // Links
+    a {
+        color: $link !important;
+        
+        &:hover {
+            color: $link-light !important;
+        }
+        
+        &:visited {
+            color: $link-dark !important;
+        }
+    }
+    
+    // Footer
+    .page__footer {
+        background-color: $background-light !important;
+        color: $light-gray !important;
+        border-top-color: $background-light !important;
+    }
+    
+    // Hidden navigation dropdown
+    .hidden-links {
+        background-color: $background-light !important;
+        border-color: $background-light !important;
+        
+        a {
+            color: $link !important;
+            
+            &:hover {
+                background-color: rgba(144, 205, 244, 0.1) !important;
+                color: $link-light !important;
+            }
+        }
+    }
 }
