@@ -1,5 +1,5 @@
 /* ==========================================================================
-   DARK THEME - Replace your _sass/theme/_dark.scss with this
+   DARK THEME
    ========================================================================== */
 
 /* Color codes used for the theme */
@@ -8,13 +8,13 @@ $dark-gray                  : mix(#000, $gray, 40%);
 $darker-gray                : mix(#000, $gray, 60%);
 $light-gray                 : mix(#fff, $gray, 50%);
 
-$background                 : #1a202c;  // Changed to darker blue
-$background-light           : #2d3748;  // Lighter version
-$background-lighter         : #4a5568;  // Even lighter
-$text                       : #e2e8f0;  // Light grey text
+$background                 : #1a202c;  // Dark blue background
+$background-light           : #2d3748;  // Lighter dark background
+$background-lighter         : #4a5568;  // Even lighter for borders
+$text                       : #e2e8f0;  // Light text
 $link                       : #90cdf4;  // Light blue links
-$link-dark                  : #63b3ed;  // Darker blue
-$link-light                 : #bee3f8;  // Lighter blue
+$link-dark                  : #63b3ed;  // Darker blue for visited
+$link-light                 : #bee3f8;  // Lighter blue for hover
 
 /* Color codes used for the site */
 $danger-color               : #ee5f5b;
@@ -35,7 +35,7 @@ $sidebar-screen-min-width   : 1024px;
 
 /* Dark theme for the site */
 html[data-theme="dark"] {
-    // CSS Variables
+    // CSS Custom Properties
     --global-base-color                 : #{$background-light};
     --global-bg-color                   : #{$background};
     --global-footer-bg-color            : #{$background-light};
@@ -53,15 +53,15 @@ html[data-theme="dark"] {
     --global-text-color-light           : #{$light-gray};
     --global-thead-color                : #{$background-light};
 
-    // ACTUAL STYLING RULES (this was missing!)
+    // ACTUAL ELEMENT STYLING (this was completely missing!)
     
-    // Root background
+    // Root and body
     background-color: $background !important;
     color: $text !important;
     
-    // Body
     body {
         background-color: $background !important;
+        background: $background !important;
         color: $text !important;
     }
     
@@ -73,15 +73,15 @@ html[data-theme="dark"] {
         color: $text !important;
     }
     
-    // Masthead - THIS WAS THE MISSING PIECE
+    // Masthead - THE KEY MISSING PIECE
     .masthead {
         background-color: $background !important;
         background: $background !important;
-        border-bottom-color: $background-light !important;
-    }
-    
-    .masthead__inner-wrap {
-        background-color: $background !important;
+        border-bottom: 1px solid $background-light !important;
+        
+        &__inner-wrap {
+            background-color: $background !important;
+        }
     }
     
     // Navigation
@@ -110,7 +110,29 @@ html[data-theme="dark"] {
         color: $text !important;
     }
     
-    // Links
+    // Footer
+    .page__footer {
+        background-color: $background-light !important;
+        color: $light-gray !important;
+        border-top: 1px solid $background-light !important;
+    }
+    
+    // Dropdown navigation
+    .hidden-links {
+        background-color: $background-light !important;
+        border: 1px solid $background-light !important;
+        
+        a {
+            color: $link !important;
+            
+            &:hover {
+                background-color: rgba(144, 205, 244, 0.1) !important;
+                color: $link-light !important;
+            }
+        }
+    }
+    
+    // General link styling
     a {
         color: $link !important;
         
@@ -120,28 +142,6 @@ html[data-theme="dark"] {
         
         &:visited {
             color: $link-dark !important;
-        }
-    }
-    
-    // Footer
-    .page__footer {
-        background-color: $background-light !important;
-        color: $light-gray !important;
-        border-top-color: $background-light !important;
-    }
-    
-    // Hidden navigation dropdown
-    .hidden-links {
-        background-color: $background-light !important;
-        border-color: $background-light !important;
-        
-        a {
-            color: $link !important;
-            
-            &:hover {
-                background-color: rgba(144, 205, 244, 0.1) !important;
-                color: $link-light !important;
-            }
         }
     }
 }

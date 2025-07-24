@@ -1,6 +1,3 @@
----
----
-
 /*
  * This file controls what is imported from /_sass
  *
@@ -13,7 +10,7 @@
 
     "themes",
     "theme/default",
-    "theme/dark",
+
 
     "include/mixins",
     "vendor/susy/susy",
@@ -40,5 +37,6 @@
     "vendor/font-awesome/solid",
     "vendor/font-awesome/brands",
     "vendor/magnific-popup/magnific-popup",
-    "pages/home"
+    "pages/home",
+    "theme/dark"
 ;
