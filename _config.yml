@@ -9,7 +9,7 @@
 # Basic Site Settings
 locale                   : "en-US"
 site_theme               : "default"
-title                    : "universitaet-innsbruck-logo-rgb-farbe.png"
+title                    : ""
 title_separator          : "-"
 site_creator             : "T M Rayhan Gias"
 site_creator_url         : "/team/tanim_gias"

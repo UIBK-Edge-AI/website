@@ -1,3 +1,83 @@
 <script src="{{ base_path }}/assets/js/main.min.js"></script>
 
+<!-- Direct theme toggle implementation -->
+<script>
+console.log('=== LOADING THEME TOGGLE SYSTEM ===');
+
+// Theme system functions
+window.updateLogo = function(isDark) {
+  const logo = document.getElementById("site-logo");
+  if (logo && logo.dataset && logo.dataset.light && logo.dataset.dark) {
+    logo.classList.add("fade-out");
+    setTimeout(() => {
+      logo.src = isDark ? logo.dataset.dark : logo.dataset.light;
+      logo.classList.remove("fade-out");
+      console.log('Logo switched to:', isDark ? 'dark' : 'light');
+    }, 150);
+  }
+};
+
+window.setTheme = function(theme) {
+  const browserPref = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  const use_theme = theme || localStorage.getItem("theme") || browserPref;
+  
+  if (use_theme === "dark") {
+    document.documentElement.setAttribute("data-theme", "dark");
+    const icon = document.getElementById("theme-icon");
+    if (icon) {
+      icon.classList.remove("fa-sun");
+      icon.classList.add("fa-moon");
+    }
+    window.updateLogo(true);
+  } else {
+    document.documentElement.removeAttribute("data-theme");
+    const icon = document.getElementById("theme-icon");
+    if (icon) {
+      icon.classList.remove("fa-moon");
+      icon.classList.add("fa-sun");
+    }
+    window.updateLogo(false);
+  }
+};
+
+window.toggleTheme = function() {
+  const current = document.documentElement.getAttribute("data-theme");
+  const newTheme = current === "dark" ? "light" : "dark";
+  localStorage.setItem("theme", newTheme);
+  window.setTheme(newTheme);
+  console.log('Theme toggled to:', newTheme);
+  return newTheme;
+};
+
+window.testThemeToggle = window.toggleTheme;
+
+// Initialize immediately
+setTimeout(() => window.setTheme(), 50);
+
+// Bind events when page loads
+window.addEventListener('load', function() {
+  setTimeout(() => {
+    const elements = document.querySelectorAll('#theme-toggle, #theme-icon, #theme-toggle a');
+    console.log('Binding to', elements.length, 'elements');
+    
+    elements.forEach(el => {
+      el.addEventListener('click', function(e) {
+        e.preventDefault();
+        console.log('Theme toggle clicked!');
+        window.toggleTheme();
+      });
+    });
+    
+    console.log('Theme toggle system ready!');
+  }, 200);
+});
+
+// OS theme listener
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+  if (!localStorage.getItem("theme")) {
+    window.setTheme(e.matches ? 'dark' : 'light');
+  }
+});
+</script>
+
 {% include analytics.html %}
