@@ -33,11 +33,15 @@ td {
   border-right: 1px solid var(--global-border-color);
 }
 
+html[data-theme="dark"] .theses-table td a {
+  color: #5bc0de;
+  text-decoration: underline !important;
+}
+
 tr, td, th {
   vertical-align: middle;
 }
 
-/* Custom style for thesis list */
 .theses-table thead {
   background-color: var(--global-bg-color);
 }
