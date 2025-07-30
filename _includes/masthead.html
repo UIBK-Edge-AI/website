@@ -127,10 +127,8 @@
       const toggle = item.querySelector('.dropdown-toggle');
       
       if (toggle) {
-        toggle.addEventListener('click', function(e) {
-          e.preventDefault();
-          e.stopPropagation();
-          
+        // Show dropdown on mouseenter
+        item.addEventListener('mouseenter', function(e) {
           // Close other dropdowns
           dropdownItems.forEach(function(otherItem) {
             if (otherItem !== item) {
@@ -138,16 +136,12 @@
             }
           });
           
-          // Toggle current dropdown
-          item.classList.toggle('open');
+          // Open current dropdown
+          item.classList.add('open');
         });
-      }
-    });
-
-    // Close dropdowns when clicking outside
-    document.addEventListener('click', function(e) {
-      if (!e.target.closest('.dropdown-item')) {
-        dropdownItems.forEach(function(item) {
+        
+        // Hide dropdown on mouseleave
+        item.addEventListener('mouseleave', function(e) {
           item.classList.remove('open');
         });
       }
