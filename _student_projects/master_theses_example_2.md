@@ -1,12 +1,11 @@
 ---
 title: "Distributed Machine Learning at the Network Edge"
-collection: student-projects
-excerpt: "Advanced distributed learning algorithms for edge computing infrastructures."
-authors: ""
+collection: student_projects
+authors: "N/A"
 supervisor: "Univ.-Prof. Radu Prodan"
 permalink: /research/master-distributed-ml/
 status: 'open'
-degree: 'Master'
+degree: 'master'
 ---
 
 ## Abstract 

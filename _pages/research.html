@@ -33,6 +33,10 @@ author_profile: true
       <span class="filter-icon">💼</span>
       Internship (Praktikum)
     </button>
+    <button class="filter-btn" data-filter="open">
+      <span class="filter-icon">🔔</span>
+      Open Topics
+    </button>
   </div>
 
   <!-- Active Filter Display -->
@@ -60,46 +64,68 @@ author_profile: true
         </tr>
       </thead>
       <tbody id="projectsTableBody">
-        <!-- Combine research and theses collections -->
-        {% assign all_projects = '' | split: ',' %}
+        {% comment %} Try to get the collection using different methods {% endcomment %}
+        {% assign all_projects = site["student_projects"] %}
         
-        <!-- Add research collection items -->
-        {% if site.student-projects %}
-          {% assign all_projects = all_projects | concat: site.student-projects %}
+        {% if all_projects and all_projects.size > 0 %}
+          {% for project in all_projects %}
+          <tr class="project-row" 
+              data-category="{{ project.degree | downcase | default: 'other' }}" 
+              data-status="{{ project.status | downcase | default: 'unknown' }}"
+              data-title="{{ project.title | downcase | default: '' }}"
+              data-student="{% if project.authors and project.authors != '' and project.authors != 'XXX XXX' %}{{ project.authors | downcase }}{% else %}available{% endif %}"
+              data-supervisor="{{ project.supervisor | downcase | default: '' }}">
+            <td class="title-cell">
+              <a href="{{ base_path }}{{ project.url }}" class="project-link">
+                {{ project.title | default: "Untitled Project" }}
+              </a>
+            </td>
+            <td class="student-cell">
+              {% if project.authors and project.authors != "" and project.authors != "XXX XXX" %}
+                {{ project.authors }}
+              {% else %}
+                <span class="no-student">Available</span>
+              {% endif %}
+            </td>
+            <td class="supervisor-cell">{{ project.supervisor | default: "TBA" }}</td>
+            <td class="type-cell">
+              {% assign degree_lower = project.degree | downcase %}
+              {% if degree_lower == 'bachelor' %}
+                <span class="degree-badge degree-bachelor">Bachelor</span>
+              {% elsif degree_lower == 'master' %}
+                <span class="degree-badge degree-master">Master</span>
+              {% elsif degree_lower == 'praktikum' %}
+                <span class="degree-badge degree-praktikum">Internship</span>
+              {% else %}
+                <span class="degree-badge degree-other">{{ project.degree | default: "Other" }}</span>
+              {% endif %}
+            </td>
+            <td class="status-cell">
+              {% assign status_lower = project.status | downcase %}
+              {% if status_lower == 'open' %}
+                <span class="status-badge status-open">Open</span>
+              {% elsif status_lower == 'ongoing' %}
+                <span class="status-badge status-ongoing">Ongoing</span>
+              {% elsif status_lower == 'completed' %}
+                <span class="status-badge status-completed">Completed</span>
+              {% else %}
+                {% if project.authors and project.authors != "" and project.authors != "XXX XXX" %}
+                  <span class="status-badge status-ongoing">Ongoing</span>
+                {% else %}
+                  <span class="status-badge status-open">Open</span>
+                {% endif %}
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        {% else %}
+          <tr>
+            <td colspan="5" style="text-align: center; padding: 40px; color: #666;">
+              <strong>No student projects found.</strong><br>
+              Please check that your <code>student-projects</code> collection is properly configured in <code>_config.yml</code> and contains project files.
+            </td>
+          </tr>
         {% endif %}
-        
-        <!-- Sort by date and display -->
-        {% assign sorted_projects = all_projects | sort: 'date' | reverse %}
-        {% for project in sorted_projects %}
-        <tr class="project-row" 
-            data-category="{{ project.degree | downcase }}" 
-            data-title="{{ project.title | downcase }}"
-            data-student="{{ project.authors | downcase }}"
-            data-supervisor="{{ project.supervisor | downcase }}">
-          <td class="title-cell">
-            <a href="{{ base_path }}{{ project.url }}" class="project-link">
-              {{ project.title }}
-            </a>
-          </td>
-          <td class="student-cell">{{ project.authors }}</td>
-          <td class="supervisor-cell">{{ project.supervisor }}</td>
-          <td class="type-cell">
-            {% assign degree_lower = project.degree | downcase %}
-            {% if degree_lower == 'bachelor' %}
-              <span class="degree-badge degree-bachelor">Bachelor Thesis</span>
-            {% elsif degree_lower == 'master' %}
-              <span class="degree-badge degree-master">Master Thesis</span>
-            {% elsif degree_lower == 'praktikum' %}
-              <span class="degree-badge degree-praktikum">Internship</span>
-            {% else %}
-              <span class="degree-badge degree-other">{{ project.degree }}</span>
-            {% endif %}
-          </td>
-          <td class="status-cell">
-            {{ project.status }}
-          </td>
-        </tr>
-        {% endfor %}
       </tbody>
     </table>
   </div>
@@ -110,13 +136,6 @@ author_profile: true
     <h3>No projects found</h3>
     <p>Try adjusting your search criteria or filter selection.</p>
   </div>
-</div>
-
-<!-- Debug Info (remove in production) -->
-<div style="display: none;">
-  <p>Research items: {{ site.research.size }}</p>
-  <p>Theses items: {{ site.theses.size }}</p>
-  <p>Total projects: {{ all_projects.size }}</p>
 </div>
 
 <script src="{{ '/assets/js/research-filter.js' | relative_url }}"></script>

@@ -230,7 +230,7 @@ collections:
   team:
     output: true
     permalink: /:collection/:path/
-  research:
+  student_projects:
     output: true
     permalink: /:collection/:path/
 
@@ -264,12 +264,12 @@ defaults:
       author_profile: true
       share: true
       comments: true
-  # _theses
+  # _student_projects
   - scope:
       path: ""
-      type: theses
+      type: student_projects
     values:
-      layout: single
+      layout: research
       author_profile: true
       share: true
       comments: true
@@ -279,15 +279,6 @@ defaults:
       type: projects
     values:
       layout: projects
-      author_profile: true
-      share: true
-      comment: true
-  # _research
-  - scope:
-      path: ""
-      type: research
-    values:
-      layout: single
       author_profile: true
       share: true
       comment: true

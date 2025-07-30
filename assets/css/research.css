@@ -168,13 +168,22 @@
   overflow: hidden;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
   border: 1px solid #f1f3f4;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .research-table {
   width: 100%;
   border-collapse: collapse;
   font-size: 15px;
+  table-layout: fixed;
 }
+
+.research-table th:nth-child(1) { width: 35%; } /* Title */
+.research-table th:nth-child(2) { width: 15%; } /* Student */
+.research-table th:nth-child(3) { width: 20%; } /* Supervisor */
+.research-table th:nth-child(4) { width: 15%; } /* Type */
+.research-table th:nth-child(5) { width: 15%; } /* Status */
 
 .research-table thead {
   background: linear-gradient(135deg, #2c5aa0, #1e3a8a);
@@ -261,7 +270,7 @@
   color: #666;
 }
 
-.status-cell {
+.date-cell {
   color: #888;
   font-size: 14px;
   white-space: nowrap;
@@ -303,6 +312,63 @@
   border: 1px solid #9c27b0;
 }
 
+/* Status Badges */
+.status-badge {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.status-open {
+  background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+  color: #1976d2;
+  border: 1px solid #2196f3;
+  animation: pulse-open 2s infinite;
+}
+
+.status-ongoing {
+  background: linear-gradient(135deg, #fff8e1, #ffecb3);
+  color: #f57c00;
+  border: 1px solid #ff9800;
+}
+
+.status-completed {
+  background: linear-gradient(135deg, #e8f5e8, #c8e6c9);
+  color: #388e3c;
+  border: 1px solid #4caf50;
+}
+
+.status-other {
+  background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
+  color: #616161;
+  border: 1px solid #9e9e9e;
+}
+
+/* No Student Indicator */
+.no-student {
+  color: #2196f3;
+  font-style: italic;
+  font-weight: 500;
+}
+
+/* Pulse animation for open topics */
+@keyframes pulse-open {
+  0% {
+    box-shadow: 0 0 0 0 rgba(33, 150, 243, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 8px rgba(33, 150, 243, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(33, 150, 243, 0);
+  }
+}
+
 /* No Results */
 .no-results {
   text-align: center;
@@ -333,10 +399,16 @@
 /* Dark Mode Support */
 html[data-theme="dark"] .research-container {
   color: #e0e0e0;
+  background: transparent;
 }
 
 html[data-theme="dark"] .page-header {
-  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+  border: 1px solid #444;
+}
+
+html[data-theme="dark"] .page-header::before {
+  background: linear-gradient(45deg, rgba(77, 166, 255, 0.08) 0%, rgba(244, 162, 97, 0.08) 100%);
 }
 
 html[data-theme="dark"] .page-title {
@@ -348,7 +420,7 @@ html[data-theme="dark"] .page-subtitle {
 }
 
 html[data-theme="dark"] .filter-btn {
-  background: #2d2d2d;
+  background: #2a2a2a;
   border-color: #444;
   color: #b0b0b0;
 }
@@ -356,15 +428,19 @@ html[data-theme="dark"] .filter-btn {
 html[data-theme="dark"] .filter-btn:hover {
   border-color: #4da6ff;
   color: #4da6ff;
+  background: #333;
 }
 
 html[data-theme="dark"] .filter-btn.active {
   background: linear-gradient(135deg, #4da6ff, #2980b9);
+  color: white;
+  border-color: #4da6ff;
 }
 
 html[data-theme="dark"] .filter-status {
-  background: rgba(77, 166, 255, 0.1);
+  background: rgba(77, 166, 255, 0.15);
   border-left-color: #4da6ff;
+  border: 1px solid rgba(77, 166, 255, 0.3);
 }
 
 html[data-theme="dark"] .filter-status span {
@@ -372,19 +448,29 @@ html[data-theme="dark"] .filter-status span {
 }
 
 html[data-theme="dark"] .search-input {
-  background: #2d2d2d;
+  background: #2a2a2a;
   border-color: #444;
   color: #e0e0e0;
 }
 
+html[data-theme="dark"] .search-input::placeholder {
+  color: #888;
+}
+
 html[data-theme="dark"] .search-input:focus {
   border-color: #4da6ff;
-  box-shadow: 0 0 0 3px rgba(77, 166, 255, 0.1);
+  box-shadow: 0 0 0 3px rgba(77, 166, 255, 0.15);
+  background: #333;
+}
+
+html[data-theme="dark"] .search-icon {
+  color: #888;
 }
 
 html[data-theme="dark"] .table-container {
-  background: #1a1a1a;
-  border-color: #333;
+  background: #2a2a2a;
+  border-color: #444;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
 }
 
 html[data-theme="dark"] .research-table thead {
@@ -392,12 +478,16 @@ html[data-theme="dark"] .research-table thead {
 }
 
 html[data-theme="dark"] .research-table td {
-  border-bottom-color: #333;
+  border-bottom-color: #444;
   color: #e0e0e0;
 }
 
+html[data-theme="dark"] .research-table th {
+  border-bottom-color: rgba(255, 255, 255, 0.2);
+}
+
 html[data-theme="dark"] .project-row:hover {
-  background-color: #2d2d2d;
+  background-color: #333;
 }
 
 html[data-theme="dark"] .project-link {
@@ -408,9 +498,63 @@ html[data-theme="dark"] .project-link:hover {
   color: #66b3ff;
 }
 
-html[data-theme="dark"] .no-results {
-  background: #1a1a1a;
+html[data-theme="dark"] .student-cell {
+  color: #e0e0e0;
+}
+
+html[data-theme="dark"] .supervisor-cell {
   color: #b0b0b0;
+}
+
+html[data-theme="dark"] .no-student {
+  color: #4da6ff;
+}
+
+html[data-theme="dark"] .no-results {
+  background: #2a2a2a;
+  color: #b0b0b0;
+  border: 1px solid #444;
+}
+
+html[data-theme="dark"] .no-results h3 {
+  color: #e0e0e0;
+}
+
+/* Dark mode badge adjustments */
+html[data-theme="dark"] .degree-bachelor {
+  background: linear-gradient(135deg, #1b5e20, #2e7d32);
+  color: #a5d6a7;
+  border-color: #4caf50;
+}
+
+html[data-theme="dark"] .degree-master {
+  background: linear-gradient(135deg, #e65100, #f57c00);
+  color: #ffcc02;
+  border-color: #ff9800;
+}
+
+html[data-theme="dark"] .degree-praktikum {
+  background: linear-gradient(135deg, #880e4f, #c2185b);
+  color: #f8bbd9;
+  border-color: #e91e63;
+}
+
+html[data-theme="dark"] .status-open {
+  background: linear-gradient(135deg, #0d47a1, #1976d2);
+  color: #90caf9;
+  border-color: #2196f3;
+}
+
+html[data-theme="dark"] .status-ongoing {
+  background: linear-gradient(135deg, #e65100, #f57c00);
+  color: #ffcc02;
+  border-color: #ff9800;
+}
+
+html[data-theme="dark"] .status-completed {
+  background: linear-gradient(135deg, #1b5e20, #388e3c);
+  color: #a5d6a7;
+  border-color: #4caf50;
 }
 
 /* Responsive Design */
@@ -498,10 +642,14 @@ html[data-theme="dark"] .no-results {
   .student-cell::before { content: "Student"; }
   .supervisor-cell::before { content: "Supervisor"; }
   .type-cell::before { content: "Type"; }
-  .date-cell::before { content: "Date"; }
+  .status-cell::before { content: "Status"; }
   
   html[data-theme="dark"] .project-row {
-    background: #2d2d2d;
+    background: #2a2a2a;
     border-color: #444;
+  }
+  
+  html[data-theme="dark"] .research-table td::before {
+    color: #888;
   }
 }

@@ -1,12 +1,12 @@
 ---
-title: "Predicting University Course Bookings Via Machine Learning Classification "
-collection: student-projects
-excerpt: ""
-authors: "Maria Makhov"
+title: "Chatbot on the Edge "
+collection: student_projects
+authors: "N/A"
 supervisor: "Univ.-Prof Radu Prodan"
 permalink:
 status: ongoing
-degree: 'bachelor'
+date: 2025-06-04
+degree: 'praktikum'
 ---
 
 ## Abstract 
@@ -16,8 +16,8 @@ degree: 'bachelor'
 
 
 <!-- The contents above will be part of a list of publications, if the user clicks the link for the publication than the contents of section will be rendered as a full page, allowing you to provide more information about the paper for the reader. When publications are displayed as a single page, the contents of the above "citation" field will automatically be included below this section in a smaller font. -->
-**Supervisor:** Univ.-Prof. Dr. Radu Prodan  
-**Author:** Maria Makhov
+**Supervisor:** XXXX XXXX
+**Author:** XXX XXXX
 
 
 [Download PDF]()

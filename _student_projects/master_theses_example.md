@@ -1,12 +1,11 @@
 ---
 title: "Federated Learning for IoT Edge Devices in Smart Cities"
-collection: student-projects
-excerpt: "Developing privacy-preserving machine learning frameworks for distributed IoT networks."
-authors: ""
+collection: student_projects
+authors: "N/A"
 supervisor: "Univ.-Prof. Radu Prodan"
 permalink: /research/master-federated-learning/
-date: 2025-04-20
-degree: 'Master'
+status: open
+degree: 'master'
 ---
 
 ## Abstract 
