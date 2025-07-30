@@ -108,14 +108,79 @@
   align-items: center !important;
 }
 
-/* Ensure dropdown arrow is visible */
+/* Fix dropdown toggle to match other nav items - COMPACT VERSION */
+.masthead__menu-item.dropdown-item .dropdown-toggle {
+  padding: 0.5rem 1rem !important;
+  margin: 0 1rem !important;
+  border-bottom: none !important;
+  background: none !important;
+  height: auto !important;
+  min-height: auto !important;
+}
+
+/* Reset any conflicting styles */
+.masthead__menu-item.dropdown-item .dropdown-toggle {
+  font-weight: normal !important;
+  color: var(--global-masthead-link-color) !important;
+}
+
+/* Ensure dropdown appears as overlay */
+.dropdown-menu {
+  position: absolute !important;
+  top: 100% !important;
+  left: 0 !important;
+  right: auto !important;
+  transform: translateY(-12px) !important;
+  z-index: 9999 !important;
+}
+
+.masthead__menu-item.dropdown-item.open .dropdown-menu {
+  transform: translateY(0) !important;
+}
+
+/* Keep Research tab highlighted when dropdown is open */
+.masthead__menu-item.dropdown-item.open .dropdown-toggle {
+  background-color: rgba(0, 123, 255, 0.1) !important;
+  color: #007bff !important;
+}
+
+.masthead__menu-item.dropdown-item.open .dropdown-arrow {
+  color: #007bff !important;
+  transform: rotate(180deg) !important;
+}
+
+/* Fix masthead height - prevent expansion */
+.masthead {
+  position: relative;
+  overflow: visible !important;
+  min-height: auto !important;
+}
+
+.masthead__inner-wrap {
+  position: relative;
+  overflow: visible !important;
+  min-height: auto !important;
+}
+
+/* Dropdown arrow positioning */
 .dropdown-arrow {
-  margin-left: 4px;
-  font-size: 10px;
+  margin-left: 6px !important;
+  font-size: 12px !important;
+}
+
+/* Force compact masthead */
+.masthead__menu {
+  min-height: auto !important;
+}
+
+.greedy-nav {
+  min-height: auto !important;
+  padding: 0 !important;
 }
 </style>
 
 <script>
+// Simple dropdown functionality that works with greedy-nav
 // Simple dropdown functionality that works with greedy-nav
 (function() {
   'use strict';
@@ -125,10 +190,15 @@
     
     dropdownItems.forEach(function(item) {
       const toggle = item.querySelector('.dropdown-toggle');
+      const dropdown = item.querySelector('.dropdown-menu');
       
-      if (toggle) {
+      if (toggle && dropdown) {
+        let hoverTimeout;
+
         // Show dropdown on mouseenter
         item.addEventListener('mouseenter', function(e) {
+          clearTimeout(hoverTimeout);
+          
           // Close other dropdowns
           dropdownItems.forEach(function(otherItem) {
             if (otherItem !== item) {
@@ -140,9 +210,23 @@
           item.classList.add('open');
         });
         
-        // Hide dropdown on mouseleave
+        // Hide dropdown on mouseleave with slight delay
         item.addEventListener('mouseleave', function(e) {
-          item.classList.remove('open');
+          hoverTimeout = setTimeout(function() {
+            item.classList.remove('open');
+          }, 100);
+        });
+
+        // Keep dropdown open when hovering over dropdown menu
+        dropdown.addEventListener('mouseenter', function(e) {
+          clearTimeout(hoverTimeout);
+          item.classList.add('open');
+        });
+
+        dropdown.addEventListener('mouseleave', function(e) {
+          hoverTimeout = setTimeout(function() {
+            item.classList.remove('open');
+          }, 100);
         });
       }
     });
@@ -171,10 +255,8 @@
 
   // Disable greedy-nav functionality to keep all tabs visible
   function disableGreedyNav() {
-    // Override the updateNav function to prevent hiding tabs
     if (window.updateNav) {
       window.updateNav = function() {
-        // Do nothing - keep all tabs visible
         var mastheadHeight = $('.masthead').height();
         $('body').css('padding-top', mastheadHeight + 'px');
         if ($(".author__urls-wrapper button").is(":visible")) {
