@@ -15,7 +15,7 @@ site_creator             : "T M Rayhan Gias"
 site_creator_url         : "/team/tanim_gias"
 description              : &description "personal description"
 url                      : https://uibk-edge-ai.github.io
-baseurl                  : "/edgeAI"
+baseurl                  : "/website"
 repository               : "https://github.com/UIBK-Edge-AI/"
 
 # Site Author - The following control what appear as part of the author content on the side bar.

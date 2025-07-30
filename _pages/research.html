@@ -1,31 +1,122 @@
 ---
 layout: archive
-title: "Internships"
+title: "Research & Student Projects"
 permalink: /research/
 author_profile: true
 ---
 
 {% include base_path %}
-<link rel="stylesheet" href="{{ '/assets/css/theses.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/css/research.css' | relative_url }}">
 
-<table class="theses-table">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Student</th>
-      <th>Supervisor</th>
-      <th>Degree</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% assign researches = site.research | sort: 'date' | reverse %}
-    {% for research in researches %}
-    <tr>
-      <td><a href="{{ base_path }}{{ research.url }}">{{ research.title }}</a></td>
-      <td>{{ research.authors }}</td>
-      <td>{{ research.supervisor }}</td>
-      <td>{{ research.degree }}</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+<div class="research-container">
+  <!-- Page Header -->
+  <div class="page-header">
+    <h1 class="page-title">Research & Student Projects</h1>
+    <p class="page-subtitle">Exploring AI at the edge of the network through innovative student research</p>
+  </div>
+
+  <!-- Filter Buttons -->
+  <div class="filter-controls">
+    <button class="filter-btn active" data-filter="all">
+      <span class="filter-icon">📊</span>
+      All Projects
+    </button>
+    <button class="filter-btn" data-filter="bachelor">
+      <span class="filter-icon">🎓</span>
+      Bachelor Thesis
+    </button>
+    <button class="filter-btn" data-filter="master">
+      <span class="filter-icon">🎯</span>
+      Master Thesis
+    </button>
+    <button class="filter-btn" data-filter="praktikum">
+      <span class="filter-icon">💼</span>
+      Internship (Praktikum)
+    </button>
+  </div>
+
+  <!-- Active Filter Display -->
+  <div class="filter-status">
+    <span id="filterStatus">Showing all research projects</span>
+    <span id="projectCount" class="project-count"></span>
+  </div>
+
+  <!-- Search Bar -->
+  <div class="search-container">
+    <input type="text" id="searchInput" placeholder="Search by title, student name, or supervisor..." class="search-input">
+    <span class="search-icon">🔍</span>
+  </div>
+
+  <!-- Research Projects Table -->
+  <div class="table-container">
+    <table class="research-table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Student</th>
+          <th>Supervisor</th>
+          <th>Type</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="projectsTableBody">
+        <!-- Combine research and theses collections -->
+        {% assign all_projects = '' | split: ',' %}
+        
+        <!-- Add research collection items -->
+        {% if site.student-projects %}
+          {% assign all_projects = all_projects | concat: site.student-projects %}
+        {% endif %}
+        
+        <!-- Sort by date and display -->
+        {% assign sorted_projects = all_projects | sort: 'date' | reverse %}
+        {% for project in sorted_projects %}
+        <tr class="project-row" 
+            data-category="{{ project.degree | downcase }}" 
+            data-title="{{ project.title | downcase }}"
+            data-student="{{ project.authors | downcase }}"
+            data-supervisor="{{ project.supervisor | downcase }}">
+          <td class="title-cell">
+            <a href="{{ base_path }}{{ project.url }}" class="project-link">
+              {{ project.title }}
+            </a>
+          </td>
+          <td class="student-cell">{{ project.authors }}</td>
+          <td class="supervisor-cell">{{ project.supervisor }}</td>
+          <td class="type-cell">
+            {% assign degree_lower = project.degree | downcase %}
+            {% if degree_lower == 'bachelor' %}
+              <span class="degree-badge degree-bachelor">Bachelor Thesis</span>
+            {% elsif degree_lower == 'master' %}
+              <span class="degree-badge degree-master">Master Thesis</span>
+            {% elsif degree_lower == 'praktikum' %}
+              <span class="degree-badge degree-praktikum">Internship</span>
+            {% else %}
+              <span class="degree-badge degree-other">{{ project.degree }}</span>
+            {% endif %}
+          </td>
+          <td class="status-cell">
+            {{ project.status }}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- No Results Message -->
+  <div id="noResults" class="no-results" style="display: none;">
+    <div class="no-results-icon">🔍</div>
+    <h3>No projects found</h3>
+    <p>Try adjusting your search criteria or filter selection.</p>
+  </div>
+</div>
+
+<!-- Debug Info (remove in production) -->
+<div style="display: none;">
+  <p>Research items: {{ site.research.size }}</p>
+  <p>Theses items: {{ site.theses.size }}</p>
+  <p>Total projects: {{ all_projects.size }}</p>
+</div>
+
+<script src="{{ '/assets/js/research-filter.js' | relative_url }}"></script>

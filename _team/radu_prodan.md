@@ -9,7 +9,7 @@ img: /assets/img/team/P_radu_prodan.jpg
 phone: +43 512 507-53249
 position: professor
 category: PROFESSOR
-office: ICT 3M05X
+office: ICT 3S06
 ORCID: 0000-0002-8247-5426
 email: radu.prodan@uibk.ac.at
 LinkedIn: radu-prodan-182812b1

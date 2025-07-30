@@ -1,0 +1,406 @@
+{% include base_path %}
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <button><div class="navicon"></div></button>
+        <ul class="visible-links">
+          <li class="masthead__menu-item masthead__menu-item--lg persist">
+            <a href="https://www.uibk.ac.at/informatik/" target="_blank" rel="noopener noreferrer">
+              <img 
+                id="site-logo"
+                src="{{ base_path }}/images/light.svg" 
+                data-light="{{ base_path }}/images/light.svg"
+                data-dark="{{ base_path }}/images/black.svg"
+                alt="university_innsbruck_logo" 
+                class="site-logo"
+              >
+            </a>
+          </li>
+          {% for link in site.data.navigation.main %}
+            {% if link.dropdown %}
+              <!-- Dropdown Navigation Item -->
+              <li class="masthead__menu-item dropdown-item{% if page.url contains link.url %} active{% endif %}" data-dropdown="{{ link.title | downcase }}">
+                <a href="{% if link.url contains 'http' %}{{ link.url }}{% else %}{{ base_path }}{{ link.url }}{% endif %}" class="dropdown-toggle">
+                  {{ link.title }}
+                  <i class="fa-solid fa-chevron-down dropdown-arrow" aria-hidden="true"></i>
+                </a>
+                <ul class="dropdown-menu">
+                  {% for dropdown_item in link.dropdown_items %}
+                    <li class="dropdown-menu-item">
+                      <a href="{% if dropdown_item.url contains 'http' %}{{ dropdown_item.url }}{% else %}{{ base_path }}{{ dropdown_item.url }}{% endif %}" 
+                         data-filter="{{ dropdown_item.filter }}"
+                         onclick="handleDropdownNavigation('{{ dropdown_item.filter }}', event)">
+                        {% if dropdown_item.icon %}
+                          <span class="dropdown-icon">{{ dropdown_item.icon }}</span>
+                        {% endif %}
+                        {{ dropdown_item.title }}
+                      </a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </li>
+            {% else %}
+              <!-- Regular Navigation Item -->
+              {% if link.url contains 'http' %}
+                {% assign domain = '' %}
+              {% else %}
+                {% assign domain = base_path %}
+              {% endif %}
+              <li class="masthead__menu-item{% if page.url == link.url %} active{% endif %}">
+                <a href="{{ domain }}{{ link.url }}">{{ link.title }}</a>
+              </li>
+            {% endif %}
+          {% endfor %}
+          <li id="theme-toggle" class="masthead__menu-item persist tail">
+            <a><i id="theme-icon" class="fa-solid fa-sun" aria-hidden="true" title="toggle theme"></i></a>
+          </li>
+        </ul>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+<style>
+/* Enhanced Masthead Dropdown Styles */
+.masthead__menu-item.dropdown-item {
+  position: relative;
+}
+
+.masthead__menu-item .dropdown-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.3s ease;
+}
+
+.masthead__menu-item .dropdown-arrow {
+  font-size: 10px;
+  transition: transform 0.3s ease;
+  margin-left: 4px;
+}
+
+.masthead__menu-item.dropdown-item.open .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: var(--background-color, #fff);
+  min-width: 220px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  border-radius: 8px;
+  border: 1px solid var(--border-color, #e9ecef);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  z-index: 9999;
+  list-style: none;
+  margin: 0;
+  padding: 8px 0;
+}
+
+.masthead__menu-item.dropdown-item.open .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-menu-item {
+  margin: 0;
+  padding: 0;
+}
+
+.dropdown-menu-item a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  text-decoration: none;
+  color: var(--text-color, #333);
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  border-radius: 4px;
+  margin: 2px 8px;
+}
+
+.dropdown-menu-item a:hover {
+  background-color: var(--hover-background, #f8f9fa);
+  color: var(--primary-color, #2c5aa0);
+  transform: translateX(4px);
+}
+
+.dropdown-icon {
+  font-size: 14px;
+  width: 16px;
+  text-align: center;
+}
+
+/* Dark mode support */
+html[data-theme="dark"] .dropdown-menu {
+  --background-color: #2d2d2d;
+  --border-color: #444;
+  --text-color: #e0e0e0;
+  --hover-background: #404040;
+  --primary-color: #4da6ff;
+}
+
+/* Light mode support */
+html[data-theme="light"] .dropdown-menu,
+html:not([data-theme]) .dropdown-menu {
+  --background-color: #fff;
+  --border-color: #e9ecef;
+  --text-color: #333;
+  --hover-background: #f8f9fa;
+  --primary-color: #2c5aa0;
+}
+
+/* Active state for navigation items */
+.masthead__menu-item.active > a {
+  color: var(--primary-color, #2c5aa0);
+  font-weight: 600;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  .dropdown-menu {
+    position: static;
+    box-shadow: none;
+    border: none;
+    background: var(--mobile-dropdown-bg, #f8f9fa);
+    margin: 0 16px;
+    border-radius: 0;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    display: none;
+  }
+
+  .masthead__menu-item.dropdown-item.open .dropdown-menu {
+    display: block;
+  }
+
+  .dropdown-menu-item a {
+    margin: 0;
+    border-radius: 0;
+    padding: 12px 16px;
+  }
+
+  html[data-theme="dark"] .dropdown-menu {
+    --mobile-dropdown-bg: #404040;
+  }
+}
+
+/* Ensure dropdown works with greedy-nav */
+.greedy-nav .dropdown-item {
+  position: relative;
+}
+
+.greedy-nav .visible-links .dropdown-menu {
+  position: absolute;
+}
+
+.greedy-nav .hidden-links .dropdown-menu {
+  position: static;
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  box-shadow: none;
+  border: none;
+  background: transparent;
+}
+
+/* Animation for smooth dropdown appearance */
+@keyframes dropdownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.masthead__menu-item.dropdown-item.open .dropdown-menu {
+  animation: dropdownFadeIn 0.3s ease forwards;
+}
+
+/* Ensure proper z-index layering */
+.masthead {
+  position: relative;
+  z-index: 1000;
+}
+
+.dropdown-menu {
+  z-index: 1001;
+}
+</style>
+
+<script>
+// Enhanced dropdown functionality for masthead navigation
+(function() {
+  'use strict';
+
+  let dropdownItems = [];
+  let activeDropdown = null;
+
+  function initializeDropdowns() {
+    dropdownItems = document.querySelectorAll('.masthead__menu-item.dropdown-item');
+    
+    dropdownItems.forEach(function(item) {
+      const toggle = item.querySelector('.dropdown-toggle');
+      const menu = item.querySelector('.dropdown-menu');
+      
+      if (toggle && menu) {
+        // Click event for dropdown toggle
+        toggle.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          toggleDropdown(item);
+        });
+
+        // Hover events for better UX on desktop
+        item.addEventListener('mouseenter', function() {
+          if (window.innerWidth > 768) {
+            openDropdown(item);
+          }
+        });
+
+        item.addEventListener('mouseleave', function() {
+          if (window.innerWidth > 768) {
+            closeDropdown(item);
+          }
+        });
+      }
+    });
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.dropdown-item')) {
+        closeAllDropdowns();
+      }
+    });
+
+    // Close dropdowns on escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeAllDropdowns();
+      }
+    });
+
+    // Handle window resize
+    window.addEventListener('resize', function() {
+      if (window.innerWidth > 768) {
+        closeAllDropdowns();
+      }
+    });
+  }
+
+  function toggleDropdown(item) {
+    if (item.classList.contains('open')) {
+      closeDropdown(item);
+    } else {
+      closeAllDropdowns();
+      openDropdown(item);
+    }
+  }
+
+  function openDropdown(item) {
+    closeAllDropdowns();
+    item.classList.add('open');
+    activeDropdown = item;
+    
+    // Add ARIA attributes for accessibility
+    const toggle = item.querySelector('.dropdown-toggle');
+    const menu = item.querySelector('.dropdown-menu');
+    if (toggle && menu) {
+      toggle.setAttribute('aria-expanded', 'true');
+      menu.setAttribute('aria-hidden', 'false');
+    }
+  }
+
+  function closeDropdown(item) {
+    item.classList.remove('open');
+    if (activeDropdown === item) {
+      activeDropdown = null;
+    }
+    
+    // Update ARIA attributes
+    const toggle = item.querySelector('.dropdown-toggle');
+    const menu = item.querySelector('.dropdown-menu');
+    if (toggle && menu) {
+      toggle.setAttribute('aria-expanded', 'false');
+      menu.setAttribute('aria-hidden', 'true');
+    }
+  }
+
+  function closeAllDropdowns() {
+    dropdownItems.forEach(closeDropdown);
+  }
+
+  // Handle dropdown navigation with filtering
+  window.handleDropdownNavigation = function(filter, event) {
+    // If we're already on the research page, just apply the filter
+    if (window.location.pathname.includes('/research/')) {
+      event.preventDefault();
+      
+      // Apply filter if the research filter system is available
+      if (window.researchFilter) {
+        window.researchFilter.filterByCategory(filter);
+      }
+      
+      // Close dropdown
+      closeAllDropdowns();
+      
+      // Update URL without page reload
+      const newUrl = `/research/${filter !== 'all' ? '?filter=' + filter : ''}`;
+      window.history.pushState({filter: filter}, '', newUrl);
+      
+      return false;
+    }
+    
+    // Otherwise, navigate to the research page with the filter parameter
+    // The filter will be applied when the page loads
+  };
+
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeDropdowns);
+  } else {
+    initializeDropdowns();
+  }
+
+  // Handle browser back/forward navigation
+  window.addEventListener('popstate', function(event) {
+    if (event.state && event.state.filter && window.researchFilter) {
+      window.researchFilter.filterByCategory(event.state.filter);
+    }
+  });
+
+  // Integrate with existing greedy-nav functionality
+  function integrateMithGreedyNav() {
+    // Check if greedy-nav is available
+    if (typeof window.greedyNav !== 'undefined') {
+      // Extend greedy-nav to handle dropdowns
+      const originalUpdate = window.greedyNav.update;
+      window.greedyNav.update = function() {
+        closeAllDropdowns();
+        if (originalUpdate) {
+          originalUpdate.call(this);
+        }
+      };
+    }
+  }
+
+  // Try to integrate with greedy-nav after a short delay
+  setTimeout(integrateMithGreedyNav, 100);
+
+})();
+</script>

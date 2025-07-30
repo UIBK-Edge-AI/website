@@ -24,8 +24,23 @@ main:
   - title: "Publications"
     url: /publications/
 
-  - title: "Theses"
-    url: /theses/
-
   - title: "Research"
     url: /research/
+    dropdown: true
+    dropdown_items:
+      - title: "All Research"
+        url: /research/
+        filter: "all"
+        icon: "📊"
+      - title: "Bachelor Thesis"
+        url: /research/?filter=bachelor
+        filter: "bachelor" 
+        icon: "🎓"
+      - title: "Master Thesis"
+        url: /research/?filter=master
+        filter: "master"
+        icon: "🎯"
+      - title: "Internships"
+        url: /research/?filter=praktikum
+        filter: "praktikum"
+        icon: "💼"
