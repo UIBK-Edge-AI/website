@@ -56,12 +56,52 @@
 
 .masthead__menu-item {
   background-color: var(--global-bg-color);
-  display: block;
+  display: block; // Keep as block - let greedy-nav handle flex
   list-style-type: none;
   white-space: nowrap;
 
   &--lg {
     padding-right: 2em;
     font-weight: 700;
+  }
+}
+
+/* Site Logo Container */
+.masthead__menu-item--lg a {
+  position: relative;
+  display: inline-block;
+  height: 40px; // Match logo height
+  width: auto;
+}
+
+/* Site Logo Styles with smooth transitions */
+.site-logo {
+  height: 40px;
+  width: auto;
+  max-width: 200px;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  will-change: opacity, transform;
+}
+
+.site-logo.fade-out {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+/* Hover effects */
+.site-logo:hover {
+  opacity: 0.8;
+  transform: scale(1.05);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .site-logo {
+    height: 30px;
+    max-width: 150px;
+  }
+  
+  .masthead__menu-item--lg a {
+    height: 30px;
   }
 }

@@ -1,179 +1,15 @@
-/* ==========================================================================
-   NAVIGATION
-   ========================================================================== */
-
-/*
-   Breadcrumb navigation links
-   ========================================================================== */
-
-.breadcrumbs {
-  @include container;
-  @include clearfix;
-  margin-top: 0;
-  margin-bottom: 0;
-  padding-left: 2em;
-  padding-right: 2em;
-  font-family: $sans-serif;
-  -webkit-animation: intro 0.3s both;
-          animation: intro 0.3s both;
-  -webkit-animation-delay: 0.30s;
-          animation-delay: 0.30s;
-
-  @include breakpoint($large) {
-    padding-left: 1em;
-    padding-right: 1em;
-  }
-
-  @include breakpoint($x-large) {
-    max-width: $x-large;
-  }
-
-  ol {
-    padding: 0;
-    list-style: none;
-    font-size: $type-size-6;
-
-    @include breakpoint($large) {
-      @include span(10 of 12 last);
-    }
-
-    @include breakpoint($x-large) {
-      @include prefix(0.5 of 12);
-    }
-  }
-
-  li {
-    display: inline;
-  }
-
-  .current {
-    font-weight: bold;
-  }
-}
-
-
-/*
-   Post pagination navigation links
-   ========================================================================== */
-
-.pagination {
-  @include full();
-  @include clearfix();
-  margin-top: 1em;
-  padding-top: 1em;
-
-  ul {
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
-    font-family: $sans-serif;
-  }
-
-  li {
-    display: block;
-    float: left;
-    margin-left: -1px;
-
-    a {
-      margin-bottom: 0.25em;
-      padding: 0.5em 1em;
-      font-family: $sans-serif;
-      font-size: 14px;
-      font-weight: bold;
-      line-height: 1.5;
-      text-align: center;
-      text-decoration: none;
-      color: var(--global-text-color-light);
-      border: 1px solid var(--global-border-color);
-      border-radius: 0;
-
-      &:hover {
-        color: var(--global-link-color-hover);
-      }
-
-      &.current {
-        color: #fff;
-        background: var(--global-base-color);
-      }
-
-      &.disabled {
-        color: var(--global-text-color-light);
-        pointer-events: none;
-        cursor: not-allowed;
-      }
-    }
-
-    &:first-child {
-      margin-left: 0;
-
-      a {
-        border-top-left-radius: $border-radius;
-        border-bottom-left-radius: $border-radius;
-      }
-    }
-
-    &:last-child {
-      a {
-        border-top-right-radius: $border-radius;
-        border-bottom-right-radius: $border-radius;
-      }
-    }
-  }
-
-  /* next/previous buttons */
-  &--pager {
-    display: block;
-    padding: 1em 2em;
-    float: left;
-    width: 50%;
-    font-family: $sans-serif;
-    font-size: $type-size-5;
-    font-weight: bold;
-    text-align: center;
-    text-decoration: none;
-    color: var(--global-text-color-light);
-    border: 1px solid var(--global-border-color);
-    border-radius: $border-radius;
-
-    &:hover {
-      color: var(--global-link-color-hover);
-    }
-
-    &:first-child {
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
-    }
-
-    &:last-child {
-      margin-left: -1px;
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
-    }
-
-    &.disabled {
-      color: var(--global-text-color-light);
-      pointer-events: none;
-      cursor: not-allowed;
-    }
-  }
-}
-
-.page__content + .pagination,
-.page__meta + .pagination,
-.page__share + .pagination,
-.page__comments + .pagination {
-  margin-top: 2em;
-  padding-top: 2em;
-  border-top: 1px solid var(--global-border-color);
-}
-
-
 /*
    Priority plus navigation
    ========================================================================== */
 
 .greedy-nav {
   position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
   min-width: 250px;
   background: var(--global-bg-color);
 
@@ -181,15 +17,11 @@
     display: block;
     margin: 0 1rem;
     padding: 0.5rem 0;
-    color: #2c5282; /* Changed to blue color */
+    color: var(--global-masthead-link-color);
     text-decoration: none;
-    font-weight: 500; /* Added font weight */
-    transition: all 0.3s ease; /* Added smooth transition */
 
     &:hover {
-      color: #1a365d; /* Darker blue on hover */
-      background-color: rgba(44, 82, 130, 0.1); /* Light blue background on hover */
-      border-radius: 4px; /* Rounded corners on hover */
+      color: var(--global-masthead-link-color-hover);
     }
   }
 
@@ -200,22 +32,40 @@
     padding: 0 0.5rem;
     border: 0;
     outline: none;
-    background-color: #2c5282; /* Changed button background to blue */
+    background-color: var(--global-base-color);
     color: #fff;
     cursor: pointer;
     z-index: 100;
+    display: none; // Hide by default for desktop navigation
   }
 
   .visible-links {
-    display: table;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    width: 100%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 
     li {
-      display: table-cell;
-      vertical-align: middle;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      margin: 0;
+      white-space: nowrap;
 
       &:first-child {
         font-weight: bold;
-        text-wrap: wrap;
 
         a {
           margin-left: 0;
@@ -227,26 +77,20 @@
           margin-right: 0;
         }
       }
-
-      /* Active/current page styling */
-      &.current a {
-        color: #1a365d;
-        background-color: rgba(44, 82, 130, 0.15);
-        border-radius: 4px;
-      }
     }
 
     #theme-toggle {
+      margin-left: auto; // Push theme toggle to the right
+      
       a {
         width: 25px;
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
         justify-content: center;
         cursor: pointer;
-        color: #2c5282; /* Blue color for theme toggle */
-
-        &:hover {
-          color: #1a365d;
-        }
       }
     }
 
@@ -259,7 +103,7 @@
         left: 0;
         bottom: 0;
         height: 4px;
-        background: #d2691e; /* Changed underline to brown/orange */
+        background: #d2691e; // Orange/brown underline
         width: 100%;
         -webkit-transition: $global-transition;
         transition: $global-transition;
@@ -291,11 +135,10 @@
       margin: 0;
       padding: 10px 20px;
       font-size: $type-size-5;
-      color: #2c5282; /* Blue color for dropdown links */
 
       &:hover {
-        color: #1a365d; /* Darker blue on hover */
-        background: rgba(44, 82, 130, 0.1); /* Light blue background */
+        color: var(--global-masthead-link-color-hover);
+        background: var(--global-border-color);
       }
     }
 
@@ -334,6 +177,89 @@
       }
     }
   }
+}
+
+/* Dropdown functionality for Research menu */
+.masthead__menu-item.dropdown-item {
+  position: relative;
+
+  .dropdown-toggle {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.3s ease;
+  }
+
+  .dropdown-arrow {
+    font-size: 10px;
+    transition: transform 0.3s ease;
+    margin-left: 4px;
+  }
+
+  &.open .dropdown-arrow {
+    transform: rotate(180deg);
+  }
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: var(--global-bg-color, #fff);
+  min-width: 220px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  border-radius: 8px;
+  border: 1px solid var(--global-border-color, #e9ecef);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  z-index: 9999;
+  list-style: none;
+  margin: 0;
+  padding: 8px 0;
+}
+
+.masthead__menu-item.dropdown-item.open .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-menu-item {
+  margin: 0;
+  padding: 0;
+
+  a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    text-decoration: none;
+    color: var(--global-text-color);
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    border-radius: 4px;
+    margin: 2px 8px;
+
+    &:hover {
+      background-color: var(--global-border-color);
+      color: var(--global-masthead-link-color-hover);
+      transform: translateX(4px);
+    }
+
+    // Remove the orange underline from dropdown items
+    &:before {
+      display: none !important;
+    }
+  }
+}
+
+.dropdown-icon {
+  font-size: 14px;
+  width: 16px;
+  text-align: center;
 }
 
 /* Dark theme navigation adjustments */
@@ -384,6 +310,52 @@ html[data-theme="dark"] .greedy-nav {
   }
 }
 
+/* Dark mode support for dropdown */
+html[data-theme="dark"] .dropdown-menu {
+  background: #2d2d2d;
+  border-color: #444;
+  
+  .dropdown-menu-item a {
+    color: #e0e0e0;
+    
+    &:hover {
+      background-color: #404040;
+      color: #4da6ff;
+    }
+  }
+}
+
+/* Mobile responsive adjustments */
+@include breakpoint($small) {
+  .greedy-nav {
+    button {
+      display: block; // Show hamburger on mobile
+    }
+  }
+
+  .dropdown-menu {
+    position: static;
+    box-shadow: none;
+    border: none;
+    background: var(--global-border-color);
+    margin: 0 16px;
+    border-radius: 0;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    display: none;
+  }
+
+  .masthead__menu-item.dropdown-item.open .dropdown-menu {
+    display: block;
+  }
+
+  .dropdown-menu-item a {
+    margin: 0;
+    border-radius: 0;
+    padding: 12px 16px;
+  }
+}
 
 /*
    Navigation list
@@ -439,7 +411,6 @@ html[data-theme="dark"] .greedy-nav {
   text-transform: uppercase;
   border-bottom: 1px solid var(--global-border-color);
 }
-
 
 /*
    Table of contents navigation
@@ -505,142 +476,5 @@ html[data-theme="dark"] .greedy-nav {
     @include breakpoint($medium) {
       display: block;
     }
-  }
-}
-
-/* ==========================================================================
-   BROWN UNDERLINES FOR HEADINGS (Page Content)
-   ========================================================================== */
-
-/* Main content area headings with brown underlines */
-.page__content h1:not(.person-card__name),
-.page__content h2:not(.person-card__name),
-.page__content h3:not(.person-card__name),
-.page__content h4:not(.person-card__name) {
-  border-bottom: 3px solid #d2691e; /* Brown/orange underline */
-  padding-bottom: 0.5em;
-  margin-bottom: 1em;
-  margin-top: 2em;
-  position: relative;
-}
-
-/* Different thickness for different heading levels */
-.page__content h1:not(.person-card__name) {
-  border-bottom-width: 4px;
-  border-bottom-color: #d2691e;
-  color: #2c5282; /* Blue heading color */
-}
-
-.page__content h2:not(.person-card__name) {
-  border-bottom-width: 3px;
-  border-bottom-color: #cd853f; /* Slightly different brown */
-  color: #2d3748;
-}
-
-.page__content h3:not(.person-card__name) {
-  border-bottom-width: 2px;
-  border-bottom-color: #daa520; /* Golden brown */
-  color: #2d3748;
-}
-
-.page__content h4:not(.person-card__name) {
-  border-bottom-width: 2px;
-  border-bottom-color: #b8860b; /* Dark golden brown */
-  color: #4a5568;
-}
-
-/* Remove top margin from first headings */
-.page__content h1:first-child,
-.page__content h2:first-child,
-.page__content h3:first-child,
-.page__content h4:first-child {
-  margin-top: 0;
-}
-
-/* Dark theme adjustments for headings */
-html[data-theme="dark"] .page__content {
-  h1, h2, h3, h4 {
-    color: #e2e8f0;
-  }
-
-  h1 {
-    border-bottom-color: #f6ad55; /* Lighter orange for dark theme */
-  }
-
-  h2 {
-    border-bottom-color: #ed8936;
-  }
-
-  h3 {
-    border-bottom-color: #dd6b20;
-  }
-
-  h4 {
-    border-bottom-color: #c05621;
-  }
-}
-
-/* ==========================================================================
-   ADDITIONAL MAIN TITLE FIXES FOR DARK MODE
-   ========================================================================== */
-
-/* Target the main page title more specifically */
-.page__title,
-.page__content h1:first-child,
-.page__content > h1:first-of-type {
-  color: #2c5282 !important; /* Blue color for light mode */
-  font-weight: 600;
-}
-
-/* All content paragraphs in light mode */
-.page__content p,
-.page__content > p {
-  color: #4a5568 !important; /* Dark gray for light mode */
-}
-
-/* Dark mode fixes - target all possible selectors */
-html[data-theme="dark"] {
-  
-  /* Main title in all possible forms */
-  .page__title,
-  .page__content h1:first-child,
-  .page__content > h1:first-of-type,
-  .page__content h1,
-  h1 {
-    color: #90cdf4 !important; /* Light blue for dark mode */
-  }
-
-  /* All paragraph text */
-  .page__content p,
-  .page__content > p,
-  p {
-    color: #cbd5e0 !important; /* Light gray for dark mode */
-  }
-
-  /* All headings in content */
-  .page__content h1,
-  .page__content h2,
-  .page__content h3,
-  .page__content h4,
-  .page__content h5,
-  .page__content h6 {
-    color: #90cdf4 !important; /* Light blue for all headings */
-  }
-
-  /* Specific override for section headings */
-  .page__content h2 {
-    color: #90cdf4 !important; /* Light blue for section headings */
-  }
-
-  /* Body text should not be white */
-  body,
-  .page,
-  .page__inner-wrap {
-    color: #cbd5e0 !important;
-  }
-
-  /* Override any default white text */
-  * {
-    color: inherit;
   }
 }

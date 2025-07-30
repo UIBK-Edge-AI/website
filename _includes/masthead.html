@@ -4,7 +4,7 @@
   <div class="masthead__inner-wrap">
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
-        <button><div class="navicon"></div></button>
+        <button class="hidden"><div class="navicon"></div></button>
         <ul class="visible-links">
           <li class="masthead__menu-item masthead__menu-item--lg persist">
             <a href="https://www.uibk.ac.at/informatik/" target="_blank" rel="noopener noreferrer">
@@ -19,12 +19,39 @@
             </a>
           </li>
           {% for link in site.data.navigation.main %}
-            {% if link.url contains 'http' %}
-              {% assign domain = '' %}
+            {% if link.dropdown %}
+              <!-- Dropdown Navigation Item -->
+              <li class="masthead__menu-item dropdown-item{% if page.url contains link.url %} active{% endif %}">
+                <a href="{% if link.url contains 'http' %}{{ link.url }}{% else %}{{ base_path }}{{ link.url }}{% endif %}" class="dropdown-toggle">
+                  {{ link.title }}
+                  <i class="fa-solid fa-chevron-down dropdown-arrow" aria-hidden="true"></i>
+                </a>
+                <ul class="dropdown-menu">
+                  {% for dropdown_item in link.dropdown_items %}
+                    <li class="dropdown-menu-item">
+                      <a href="{% if dropdown_item.url contains 'http' %}{{ dropdown_item.url }}{% else %}{{ base_path }}{{ dropdown_item.url }}{% endif %}" 
+                         data-filter="{{ dropdown_item.filter }}"
+                         onclick="handleDropdownNavigation('{{ dropdown_item.filter }}', event)">
+                        {% if dropdown_item.icon %}
+                          <span class="dropdown-icon">{{ dropdown_item.icon }}</span>
+                        {% endif %}
+                        {{ dropdown_item.title }}
+                      </a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </li>
             {% else %}
-              {% assign domain = base_path %}
+              <!-- Regular Navigation Item -->
+              {% if link.url contains 'http' %}
+                {% assign domain = '' %}
+              {% else %}
+                {% assign domain = base_path %}
+              {% endif %}
+              <li class="masthead__menu-item{% if page.url == link.url %} active{% endif %}">
+                <a href="{{ domain }}{{ link.url }}">{{ link.title }}</a>
+              </li>
             {% endif %}
-            <li class="masthead__menu-item"><a href="{{ domain }}{{ link.url }}">{{ link.title }}</a></li>
           {% endfor %}
           <li id="theme-toggle" class="masthead__menu-item persist tail">
             <a><i id="theme-icon" class="fa-solid fa-sun" aria-hidden="true" title="toggle theme"></i></a>
@@ -35,3 +62,145 @@
     </div>
   </div>
 </div>
+
+<style>
+/* Force horizontal layout and ensure theme toggle shows */
+.greedy-nav {
+  display: flex !important;
+  align-items: center !important;
+}
+
+.greedy-nav .visible-links {
+  display: flex !important;
+  align-items: center !important;
+  width: 100% !important;
+  flex-wrap: nowrap !important;
+}
+
+.greedy-nav .visible-links li {
+  display: flex !important;
+  align-items: center !important;
+  white-space: nowrap !important;
+}
+
+/* Ensure theme toggle stays visible and on the right */
+#theme-toggle {
+  margin-left: auto !important;
+  display: flex !important;
+}
+
+#theme-toggle a {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 25px !important;
+  height: 25px !important;
+}
+
+/* Hide hamburger button completely */
+.greedy-nav button {
+  display: none !important;
+}
+
+/* Force all navigation items to be visible */
+.masthead__menu-item {
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* Ensure dropdown arrow is visible */
+.dropdown-arrow {
+  margin-left: 4px;
+  font-size: 10px;
+}
+</style>
+
+<script>
+// Simple dropdown functionality that works with greedy-nav
+(function() {
+  'use strict';
+
+  function initializeDropdowns() {
+    const dropdownItems = document.querySelectorAll('.masthead__menu-item.dropdown-item');
+    
+    dropdownItems.forEach(function(item) {
+      const toggle = item.querySelector('.dropdown-toggle');
+      
+      if (toggle) {
+        toggle.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          
+          // Close other dropdowns
+          dropdownItems.forEach(function(otherItem) {
+            if (otherItem !== item) {
+              otherItem.classList.remove('open');
+            }
+          });
+          
+          // Toggle current dropdown
+          item.classList.toggle('open');
+        });
+      }
+    });
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.dropdown-item')) {
+        dropdownItems.forEach(function(item) {
+          item.classList.remove('open');
+        });
+      }
+    });
+  }
+
+  // Handle dropdown navigation with filtering
+  window.handleDropdownNavigation = function(filter, event) {
+    if (window.location.pathname.includes('/research/')) {
+      event.preventDefault();
+      
+      if (window.researchFilter) {
+        window.researchFilter.filterByCategory(filter);
+      }
+      
+      // Close dropdown
+      document.querySelectorAll('.dropdown-item').forEach(function(item) {
+        item.classList.remove('open');
+      });
+      
+      const newUrl = `/research/${filter !== 'all' ? '?filter=' + filter : ''}`;
+      window.history.pushState({filter: filter}, '', newUrl);
+      
+      return false;
+    }
+  };
+
+  // Disable greedy-nav functionality to keep all tabs visible
+  function disableGreedyNav() {
+    // Override the updateNav function to prevent hiding tabs
+    if (window.updateNav) {
+      window.updateNav = function() {
+        // Do nothing - keep all tabs visible
+        var mastheadHeight = $('.masthead').height();
+        $('body').css('padding-top', mastheadHeight + 'px');
+        if ($(".author__urls-wrapper button").is(":visible")) {
+          $(".sidebar").css("padding-top", "");
+        } else {
+          $(".sidebar").css("padding-top", mastheadHeight + "px");
+        }
+      };
+    }
+  }
+
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+      initializeDropdowns();
+      disableGreedyNav();
+    });
+  } else {
+    initializeDropdowns();
+    disableGreedyNav();
+  }
+})();
+</script>

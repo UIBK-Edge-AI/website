@@ -29,20 +29,15 @@ main:
       - title: "All Research"
         url: /research/
         filter: "all"
-        icon: "📊"
       - title: "Bachelor Thesis"
         url: /research/?filter=bachelor
         filter: "bachelor" 
-        icon: "🎓"
       - title: "Master Thesis"
         url: /research/?filter=master
         filter: "master"
-        icon: "🎯"
       - title: "Internships"
         url: /research/?filter=praktikum
         filter: "praktikum"
-        icon: "💼"
       - title: "Open Topics"
         url: /research/?filter=open
         filter: "open"
-        icon: "🔔"

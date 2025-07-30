@@ -39,6 +39,7 @@ $(document).ready(function () {
     }
   };
 
+  
   setTheme();
 
   // if user hasn't chosen a theme, follow OS changes
