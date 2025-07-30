@@ -269,7 +269,7 @@ defaults:
       path: ""
       type: student_projects
     values:
-      layout: research
+      layout: single
       author_profile: true
       share: true
       comments: true

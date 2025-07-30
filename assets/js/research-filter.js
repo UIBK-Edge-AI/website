@@ -75,7 +75,8 @@ class ResearchFilter {
       'all': 'all research projects',
       'bachelor': 'Bachelor thesis projects',
       'master': 'Master thesis projects',
-      'praktikum': 'Internship (Praktikum) projects'
+      'praktikum': 'Internship (Praktikum) projects',
+      'open': 'open topics'  // Added this line
     };
 
     const statusText = `Showing ${filterNames[this.currentFilter] || 'filtered projects'}`;
@@ -118,12 +119,22 @@ class ResearchFilter {
 
   shouldShowRow(row) {
     const category = row.getAttribute('data-category');
+    const status = row.getAttribute('data-status');  // Get status attribute
     const title = row.getAttribute('data-title') || '';
     const student = row.getAttribute('data-student') || '';
     const supervisor = row.getAttribute('data-supervisor') || '';
 
-    // Check category filter
-    const categoryMatch = this.currentFilter === 'all' || category === this.currentFilter;
+    // FIXED: Check category filter - handle both degree types AND status types
+    let categoryMatch;
+    if (this.currentFilter === 'all') {
+      categoryMatch = true;
+    } else if (this.currentFilter === 'open') {
+      // For "open" filter, check status instead of category
+      categoryMatch = status === 'open';
+    } else {
+      // For degree filters (bachelor, master, praktikum), check category
+      categoryMatch = category === this.currentFilter;
+    }
 
     // Check search filter
     const searchMatch = !this.currentSearch || 
@@ -203,14 +214,24 @@ class ResearchFilter {
       all: 0,
       bachelor: 0,
       master: 0,
-      praktikum: 0
+      praktikum: 0,
+      open: 0  // Added this line
     };
 
     this.projectRows.forEach(row => {
       const category = row.getAttribute('data-category');
+      const status = row.getAttribute('data-status');
+      
+      // Count by degree type
       if (stats.hasOwnProperty(category)) {
         stats[category]++;
       }
+      
+      // Count open projects
+      if (status === 'open') {
+        stats.open++;
+      }
+      
       stats.all++;
     });
 
@@ -235,181 +256,62 @@ class TableEnhancements {
     
     rows.forEach(row => {
       // Add smooth hover animations
-      row.addEventListener('mouseenter', function() {
-        this.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+      row.addEventListener('mouseenter', () => {
+        row.style.transform = 'translateX(4px)';
       });
-
-      // Handle click to navigate (for mobile)
-      row.addEventListener('click', function(e) {
-        // Only if not clicking on a link
-        if (!e.target.closest('a')) {
-          const link = this.querySelector('.project-link');
-          if (link) {
-            window.location.href = link.href;
-          }
-        }
+      
+      row.addEventListener('mouseleave', () => {
+        row.style.transform = 'translateX(0)';
       });
     });
   }
 
   setupKeyboardNavigation() {
-    const table = document.querySelector('.research-table');
-    if (!table) return;
-
-    // Make table rows focusable
-    const rows = table.querySelectorAll('.project-row');
-    rows.forEach((row, index) => {
-      row.setAttribute('tabindex', '0');
-      row.setAttribute('role', 'button');
-      
-      row.addEventListener('keydown', (e) => {
-        switch(e.key) {
-          case 'Enter':
-          case ' ':
-            e.preventDefault();
-            const link = row.querySelector('.project-link');
-            if (link) link.click();
-            break;
-          case 'ArrowDown':
-            e.preventDefault();
-            this.focusRow(index + 1, rows);
-            break;
-          case 'ArrowUp':
-            e.preventDefault();
-            this.focusRow(index - 1, rows);
-            break;
+    // Add keyboard navigation for filter buttons
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    
+    filterButtons.forEach((button, index) => {
+      button.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+          e.preventDefault();
+          const nextIndex = e.key === 'ArrowRight' 
+            ? (index + 1) % filterButtons.length
+            : (index - 1 + filterButtons.length) % filterButtons.length;
+          filterButtons[nextIndex].focus();
         }
       });
     });
   }
 
-  focusRow(index, rows) {
-    const visibleRows = Array.from(rows).filter(row => 
-      row.style.display !== 'none'
-    );
-    
-    if (index >= 0 && index < visibleRows.length) {
-      visibleRows[index].focus();
-    }
-  }
-
   setupAccessibility() {
     // Add ARIA labels and descriptions
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    filterButtons.forEach(button => {
+      const filter = button.getAttribute('data-filter');
+      button.setAttribute('aria-label', `Filter by ${filter}`);
+    });
+
+    // Add table accessibility
     const table = document.querySelector('.research-table');
     if (table) {
       table.setAttribute('role', 'table');
       table.setAttribute('aria-label', 'Research projects and student theses');
     }
-
-    // Add sort indicators to headers (for future sorting functionality)
-    const headers = document.querySelectorAll('.research-table th');
-    headers.forEach(header => {
-      header.setAttribute('role', 'columnheader');
-      header.setAttribute('scope', 'col');
-    });
-  }
-}
-
-// Animation utilities
-class AnimationUtils {
-  static fadeIn(element, duration = 300) {
-    element.style.opacity = '0';
-    element.style.display = 'block';
-    
-    let start = null;
-    function animate(timestamp) {
-      if (!start) start = timestamp;
-      const progress = (timestamp - start) / duration;
-      
-      if (progress < 1) {
-        element.style.opacity = progress;
-        requestAnimationFrame(animate);
-      } else {
-        element.style.opacity = '1';
-      }
-    }
-    
-    requestAnimationFrame(animate);
-  }
-
-  static slideDown(element, duration = 300) {
-    element.style.maxHeight = '0';
-    element.style.overflow = 'hidden';
-    element.style.display = 'block';
-    
-    const height = element.scrollHeight;
-    let start = null;
-    
-    function animate(timestamp) {
-      if (!start) start = timestamp;
-      const progress = (timestamp - start) / duration;
-      
-      if (progress < 1) {
-        element.style.maxHeight = (height * progress) + 'px';
-        requestAnimationFrame(animate);
-      } else {
-        element.style.maxHeight = 'none';
-        element.style.overflow = 'visible';
-      }
-    }
-    
-    requestAnimationFrame(animate);
   }
 }
 
 // Initialize when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-  // Initialize filter system
+document.addEventListener('DOMContentLoaded', () => {
+  // Initialize research filter
   window.researchFilter = new ResearchFilter();
   
   // Initialize table enhancements
-  window.tableEnhancements = new TableEnhancements();
+  new TableEnhancements();
   
-  // Add some useful global functions
-  window.filterResearch = function(category) {
-    window.researchFilter.filterByCategory(category);
-  };
-  
-  window.searchResearch = function(query) {
-    window.researchFilter.searchProjects(query);
-  };
-  
-  window.resetResearchFilters = function() {
-    window.researchFilter.resetFilters();
-  };
-  
-  // Performance optimization: Use Intersection Observer for lazy loading
-  if ('IntersectionObserver' in window) {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, {
-      threshold: 0.1,
-      rootMargin: '50px'
-    });
-    
-    // Observe project rows for animation
-    document.querySelectorAll('.project-row').forEach(row => {
-      observer.observe(row);
-    });
+  // Handle URL parameters for direct filtering
+  const urlParams = new URLSearchParams(window.location.search);
+  const filterParam = urlParams.get('filter');
+  if (filterParam && ['all', 'bachelor', 'master', 'praktikum', 'open'].includes(filterParam)) {
+    window.researchFilter.filterByCategory(filterParam);
   }
-  
-  // Add smooth scrolling to anchors
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        target.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
-      }
-    });
-  });
-  
-  console.log('Research filter system initialized successfully');
 });
