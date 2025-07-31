@@ -29,10 +29,10 @@ main:
       - title: "All Research"
         url: /research/
         filter: "all"
-      - title: "Bachelor Thesis"
+      - title: "Bachelor"
         url: /research/?filter=bachelor
         filter: "bachelor" 
-      - title: "Master Thesis"
+      - title: "Master"
         url: /research/?filter=master
         filter: "master"
       - title: "Internships"

@@ -34,10 +34,10 @@ author_profile: true
   </div>
 
   <!-- Active Filter Display -->
-  <!-- <div class="filter-status">
+  <div class="filter-status">
     <span id="filterStatus">Showing all research projects</span>
     <span id="projectCount" class="project-count"></span>
-  </div> -->
+  </div>
 
   <!-- Search Bar -->
   <div class="search-container">
@@ -58,8 +58,8 @@ author_profile: true
         </tr>
       </thead>
       <tbody id="projectsTableBody">
-        {% comment %} Try to get the collection using different methods {% endcomment %}
-        {% assign all_projects = site["student_projects"] %}
+        {% comment %} Get the student_projects collection {% endcomment %}
+        {% assign all_projects = site.student_projects %}
         
         {% if all_projects and all_projects.size > 0 %}
           {% for project in all_projects %}
@@ -67,7 +67,7 @@ author_profile: true
               data-category="{{ project.degree | downcase | default: 'other' }}" 
               data-status="{{ project.status | downcase | default: 'unknown' }}"
               data-title="{{ project.title | downcase | default: '' }}"
-              data-student="{% if project.authors and project.authors != '' and project.authors != 'XXX XXX' %}{{ project.authors | downcase }}{% else %}available{% endif %}"
+              data-student="{% if project.authors and project.authors != '' and project.authors != 'XXX XXX' and project.authors != 'N/A' %}{{ project.authors | downcase }}{% else %}available{% endif %}"
               data-supervisor="{{ project.supervisor | downcase | default: '' }}">
             <td class="title-cell">
               <a href="{{ base_path }}{{ project.url }}" class="project-link">
@@ -75,7 +75,7 @@ author_profile: true
               </a>
             </td>
             <td class="student-cell">
-              {% if project.authors and project.authors != "" and project.authors != "XXX XXX" %}
+              {% if project.authors and project.authors != "" and project.authors != "XXX XXX" and project.authors != "N/A" %}
                 {{ project.authors }}
               {% else %}
                 <span class="no-student">Available</span>
@@ -103,7 +103,7 @@ author_profile: true
               {% elsif status_lower == 'completed' %}
                 <span class="status-badge status-completed">Completed</span>
               {% else %}
-                {% if project.authors and project.authors != "" and project.authors != "XXX XXX" %}
+                {% if project.authors and project.authors != "" and project.authors != "XXX XXX" and project.authors != "N/A" %}
                   <span class="status-badge status-ongoing">Ongoing</span>
                 {% else %}
                   <span class="status-badge status-open">Open</span>
@@ -116,7 +116,7 @@ author_profile: true
           <tr>
             <td colspan="5" style="text-align: center; padding: 40px; color: #666;">
               <strong>No student projects found.</strong><br>
-              Please check that your <code>student-projects</code> collection is properly configured in <code>_config.yml</code> and contains project files.
+              Please check that your <code>student_projects</code> collection is properly configured in <code>_config.yml</code> and contains project files.
             </td>
           </tr>
         {% endif %}

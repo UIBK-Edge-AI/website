@@ -44,17 +44,19 @@ class ResearchFilter {
     });
 
     // Search input listener with debounce
-    this.searchInput.addEventListener('input', this.debounce((e) => {
-      this.currentSearch = e.target.value.toLowerCase().trim();
-      this.applyFilters();
-    }, 300));
+    if (this.searchInput) {
+      this.searchInput.addEventListener('input', this.debounce((e) => {
+        this.currentSearch = e.target.value.toLowerCase().trim();
+        this.applyFilters();
+      }, 300));
 
-    // Clear search on escape key
-    this.searchInput.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        this.clearSearch();
-      }
-    });
+      // Clear search on escape key
+      this.searchInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          this.clearSearch();
+        }
+      });
+    }
   }
 
   setActiveFilter(filter) {
@@ -74,13 +76,41 @@ class ResearchFilter {
     const filterNames = {
       'all': 'all research projects',
       'bachelor': 'Bachelor thesis projects',
-      'master': 'Master thesis projects',
+      'master': 'Master thesis projects', 
       'praktikum': 'Internship (Praktikum) projects',
-      'open': 'open topics'  // Added this line
+      'open': 'open topics'
     };
 
     const statusText = `Showing ${filterNames[this.currentFilter] || 'filtered projects'}`;
-    this.filterStatus.textContent = statusText;
+    if (this.filterStatus) {
+      this.filterStatus.textContent = statusText;
+    }
+  }
+
+  shouldShowRow(row) {
+    const category = row.getAttribute('data-category') || '';
+    const status = row.getAttribute('data-status') || '';
+    
+    // Get text content for search
+    const title = row.querySelector('.title-cell')?.textContent?.toLowerCase() || '';
+    const student = row.querySelector('.student-cell')?.textContent?.toLowerCase() || '';
+    const supervisor = row.querySelector('.supervisor-cell')?.textContent?.toLowerCase() || '';
+    const searchText = `${title} ${student} ${supervisor}`;
+
+    // Apply category filter
+    let categoryMatch = false;
+    if (this.currentFilter === 'all') {
+      categoryMatch = true;
+    } else if (this.currentFilter === 'open') {
+      categoryMatch = status === 'open';
+    } else {
+      categoryMatch = category === this.currentFilter;
+    }
+
+    // Apply search filter
+    const searchMatch = !this.currentSearch || searchText.includes(this.currentSearch);
+
+    return categoryMatch && searchMatch;
   }
 
   applyFilters() {
@@ -117,47 +147,9 @@ class ResearchFilter {
     }, 150);
   }
 
-  shouldShowRow(row) {
-    const category = row.getAttribute('data-category');
-    const status = row.getAttribute('data-status');  // Get status attribute
-    const title = row.getAttribute('data-title') || '';
-    const student = row.getAttribute('data-student') || '';
-    const supervisor = row.getAttribute('data-supervisor') || '';
-
-    // FIXED: Check category filter - handle both degree types AND status types
-    let categoryMatch;
-    if (this.currentFilter === 'all') {
-      categoryMatch = true;
-    } else if (this.currentFilter === 'open') {
-      // For "open" filter, check status instead of category
-      categoryMatch = status === 'open';
-    } else {
-      // For degree filters (bachelor, master, praktikum), check category
-      categoryMatch = category === this.currentFilter;
-    }
-
-    // Check search filter
-    const searchMatch = !this.currentSearch || 
-      title.includes(this.currentSearch) ||
-      student.includes(this.currentSearch) ||
-      supervisor.includes(this.currentSearch);
-
-    return categoryMatch && searchMatch;
-  }
-
-  updateProjectCount(count = null) {
-    if (count === null) {
-      count = Array.from(this.projectRows).filter(row => 
-        row.style.display !== 'none'
-      ).length;
-    }
-
-    if (count === 0) {
-      this.projectCount.textContent = 'No projects found';
-    } else if (count === 1) {
-      this.projectCount.textContent = '1 project';
-    } else {
-      this.projectCount.textContent = `${count} projects`;
+  updateProjectCount(count) {
+    if (this.projectCount) {
+      this.projectCount.textContent = `(${count})`;
     }
   }
 
@@ -172,10 +164,12 @@ class ResearchFilter {
   }
 
   clearSearch() {
-    this.searchInput.value = '';
-    this.currentSearch = '';
-    this.applyFilters();
-    this.searchInput.blur();
+    if (this.searchInput) {
+      this.searchInput.value = '';
+      this.currentSearch = '';
+      this.applyFilters();
+      this.searchInput.blur();
+    }
   }
 
   // Utility function for debouncing search input
@@ -198,9 +192,11 @@ class ResearchFilter {
   }
 
   searchProjects(query) {
-    this.searchInput.value = query;
-    this.currentSearch = query.toLowerCase().trim();
-    this.applyFilters();
+    if (this.searchInput) {
+      this.searchInput.value = query;
+      this.currentSearch = query.toLowerCase().trim();
+      this.applyFilters();
+    }
   }
 
   resetFilters() {
@@ -215,7 +211,7 @@ class ResearchFilter {
       bachelor: 0,
       master: 0,
       praktikum: 0,
-      open: 0  // Added this line
+      open: 0
     };
 
     this.projectRows.forEach(row => {
