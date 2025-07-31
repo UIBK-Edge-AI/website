@@ -26,9 +26,6 @@ main:
     url: /research/
     dropdown: true
     dropdown_items:
-      - title: "All Research"
-        url: /research/
-        filter: "all"
       - title: "Bachelor"
         url: /research/?filter=bachelor
         filter: "bachelor" 

@@ -200,10 +200,10 @@
 }
 
 .research-table th:nth-child(1) { width: 35%; } /* Title */
-.research-table th:nth-child(2) { width: 15%; } /* Student */
+.research-table th:nth-child(2) { width: auto; } /* Student */
 .research-table th:nth-child(3) { width: auto; } /* Supervisor */
-.research-table th:nth-child(4) { width: 15%; } /* Type */
-.research-table th:nth-child(5) { width: 15%; } /* Status */
+.research-table th:nth-child(4) { width: auto; } /* Type */
+.research-table th:nth-child(5) { width: auto; } /* Status */
 
 .research-table thead {
   background: linear-gradient(135deg, #00549f, #003f7f);
