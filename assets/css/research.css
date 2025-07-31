@@ -201,7 +201,7 @@
 
 .research-table th:nth-child(1) { width: 35%; } /* Title */
 .research-table th:nth-child(2) { width: 15%; } /* Student */
-.research-table th:nth-child(3) { width: 20%; } /* Supervisor */
+.research-table th:nth-child(3) { width: auto; } /* Supervisor */
 .research-table th:nth-child(4) { width: 15%; } /* Type */
 .research-table th:nth-child(5) { width: 15%; } /* Status */
 
@@ -212,7 +212,7 @@
 
 .research-table th {
   padding: 20px 18px;
-  text-align: left;
+  text-align: center;
   font-weight: 600;
   font-size: 14px;
   letter-spacing: 0.5px;
@@ -224,6 +224,7 @@
   padding: 18px;
   border-bottom: 1px solid #f8f9fa;
   vertical-align: top;
+  text-align: center;
 }
 
 /* Table Row Animations */
@@ -613,11 +614,13 @@ html[data-theme="dark"] .status-completed {
   
   .research-table {
     font-size: 13px;
+
   }
   
   .research-table th,
   .research-table td {
     padding: 10px 8px;
+  
   }
   
   /* Stack table on mobile */
