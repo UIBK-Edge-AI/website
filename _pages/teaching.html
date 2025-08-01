@@ -1,12 +1,129 @@
 ---
 layout: archive
-title: "Teaching"
+title: ""
 permalink: /teaching/
 author_profile: true
 ---
 
 {% include base_path %}
+<link rel="stylesheet" href="{{ '/assets/css/teaching.css' | relative_url }}">
 
-{% for post in site.teaching reversed %}
-  {% include archive-single.html %}
-{% endfor %}
+<div class="teaching-container">
+  <!-- Page Header
+  <div class="page-header">
+    <h1 class="page-title">Teaching & Student Projects</h1>
+  </div> -->
+
+  <!-- Filter Buttons -->
+  <div class="filter-controls">
+    <button class="filter-btn active" data-filter="all">
+      All
+    </button>
+    <button class="filter-btn" data-filter="bachelor">
+      Bachelor
+    </button>
+    <button class="filter-btn" data-filter="master">
+      Master
+    </button>
+  </div>
+
+  <!-- Active Filter Display
+  <div class="filter-status">
+    <span id="filterStatus">Showing all courses</span>
+    <span id="projectCount" class="course-count"></span>
+  </div> -->
+
+  <!-- Search Bar -->
+  <div class="search-container">
+    <input type="text" id="searchInput" placeholder="Search by course, instructor, degree or semester..." class="search-input">
+    <span class="search-icon">🔍</span>
+  </div>
+
+  <!-- Courses Table -->
+  <div class="table-container">
+    <table class="courses-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Instructor</th>
+          <th>Supervisor</th>
+          <th>Degree</th>
+          <th>Semester</th>
+        </tr>
+      </thead>
+      <tbody id="projectsTableBody">
+        {% comment %} Get the Courses {% endcomment %}
+        {% assign all_courses = site.teaching %}
+        
+        {% if all_courses and all_courses.size > 0 %}
+          {% for courses in all_courses %}
+          <tr class="courses-row" 
+              data-category="{{ course.degree | downcase | default: 'other' }}" 
+              data-status="{{ course.status | downcase | default: 'unknown' }}"
+              data-title="{{ course.title | downcase | default: '' }}"
+              data-student="{% if course.authors and course.authors != '' and course.authors != 'XXX XXX' and course.authors != 'N/A' %}{{ course.authors | downcase }}{% else %}available{% endif %}"
+              data-supervisor="{{ course.supervisor | downcase | default: '' }}">
+            <td class="title-cell">
+              <a href="{{ base_path }}{{ course.url }}" class="course-link">
+                {{ course.title | default: "Untitled Project" }}
+              </a>
+            </td>
+            <td class="student-cell">
+              {% if course.authors and course.authors != "" and course.authors != "XXX XXX" and course.authors != "N/A" %}
+                {{ course.authors }}
+              {% else %}
+                <span class="no-student">Available</span>
+              {% endif %}
+            </td>
+            <td class="supervisor-cell">{{ course.supervisor | default: "TBA" }}</td>
+            <td class="type-cell">
+              {% assign degree_lower = course.degree | downcase %}
+              {% if degree_lower == 'bachelor' %}
+                <span class="degree-badge degree-bachelor">Bachelor</span>
+              {% elsif degree_lower == 'master' %}
+                <span class="degree-badge degree-master">Master</span>
+              {% elsif degree_lower == 'praktikum' %}
+                <span class="degree-badge degree-praktikum">Internship</span>
+              {% else %}
+                <span class="degree-badge degree-other">{{ course.degree | default: "Other" }}</span>
+              {% endif %}
+            </td>
+            <td class="status-cell">
+              {% assign status_lower = course.status | downcase %}
+              {% if status_lower == 'open' %}
+                <span class="status-badge status-open">Open</span>
+              {% elsif status_lower == 'ongoing' %}
+                <span class="status-badge status-ongoing">Ongoing</span>
+              {% elsif status_lower == 'completed' %}
+                <span class="status-badge status-completed">Completed</span>
+              {% else %}
+                {% if course.authors and course.authors != "" and course.authors != "XXX XXX" and course.authors != "N/A" %}
+                  <span class="status-badge status-ongoing">Ongoing</span>
+                {% else %}
+                  <span class="status-badge status-open">Open</span>
+                {% endif %}
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        {% else %}
+          <tr>
+            <td colspan="5" style="text-align: center; padding: 40px; color: #666;">
+              <strong>No student projects found.</strong><br>
+              Please check that your <code>student_projects</code> collection is properly configured in <code>_config.yml</code> and contains course files.
+            </td>
+          </tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- No Results Message -->
+  <div id="noResults" class="no-results" style="display: none;">
+    <div class="no-results-icon">🔍</div>
+    <h3>No projects found</h3>
+    <p>Try adjusting your search criteria or filter selection.</p>
+  </div>
+</div>
+
+<script src="{{ '/assets/js/teaching-filter.js' | relative_url }}"></script>

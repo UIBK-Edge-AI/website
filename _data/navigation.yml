@@ -18,6 +18,15 @@ main:
     
   - title: "Teaching"
     url: /teaching/
+    dropdown: true
+    dropdown_items:
+      - title: "Bachelor"
+        url: /teaching/?filter=bachelor
+        filter: "bachelor" 
+      - title: "Master"
+        url: /teaching/?filter=master
+        filter: "master"
+
     
   - title: "Publications"
     url: /publications/
