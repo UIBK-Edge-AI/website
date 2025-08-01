@@ -58,7 +58,7 @@ author_profile: true
             </td>
             <td class="instructor-cell">{{ course.instructor | default: "TBA" }}</td>
             <td class="room-cell">{{ course.room | default: "TBA" }}</td>
-            <td class="type-cell">
+            <td class="degree-cell">
               {% assign degree_lower = course.degree | downcase %}
               {% if degree_lower == 'bachelor' %}
                 <span class="degree-badge degree-bachelor">Bachelor</span>

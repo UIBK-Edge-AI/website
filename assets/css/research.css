@@ -202,7 +202,7 @@
 .research-table th:nth-child(1) { width: 35%; } /* Title */
 .research-table th:nth-child(2) { width: auto; } /* Student */
 .research-table th:nth-child(3) { width: auto; } /* Supervisor */
-.research-table th:nth-child(4) { width: auto; } /* Type */
+.research-table th:nth-child(4) { width: auto; } /* Degree */
 .research-table th:nth-child(5) { width: auto; } /* Status */
 
 .research-table thead {
@@ -664,7 +664,7 @@ html[data-theme="dark"] .status-completed {
   .title-cell::before { content: "Title"; }
   .student-cell::before { content: "Student"; }
   .supervisor-cell::before { content: "Supervisor"; }
-  .type-cell::before { content: "Type"; }
+  .degree::before { content: "Degree"; }
   .status-cell::before { content: "Status"; }
   
   html[data-theme="dark"] .project-row {
