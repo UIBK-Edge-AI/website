@@ -1,9 +1,9 @@
 /**
  * Teaching Filter and Search Functionality
- * Handles filtering by project type and text search
+ * Handles filtering by course type and text search
  */
 
-class ResearchFilter {
+class TeachingFilter {
   constructor() {
     this.init();
   }
@@ -11,21 +11,21 @@ class ResearchFilter {
   init() {
     this.setupElements();
     this.setupEventListeners();
-    this.updateProjectCount();
+    this.updateCourseCount();
   }
 
   setupElements() {
     // Filter elements
     this.filterButtons = document.querySelectorAll('.filter-btn');
     this.filterStatus = document.getElementById('filterStatus');
-    this.projectCount = document.getElementById('projectCount');
+    this.courseCount = document.getElementById('courseCount');
     
     // Search elements
     this.searchInput = document.getElementById('searchInput');
     
     // Table elements
-    this.tableBody = document.getElementById('projectsTableBody');
-    this.projectRows = document.querySelectorAll('.project-row');
+    this.tableBody = document.getElementById('coursesTableBody');
+    this.courseRows = document.querySelectorAll('.course-row');
     this.noResults = document.getElementById('noResults');
     
     // Current state
@@ -75,11 +75,11 @@ class ResearchFilter {
   updateFilterStatus() {
     const filterNames = {
       'all': 'all courses',
-      'bachelor': 'Bachelor Degree Courses',
-      'master': 'Master Degree Courses', 
+      'bachelor': 'Bachelor courses',
+      'master': 'Master courses'
     };
 
-    const statusText = `Showing ${filterNames[this.currentFilter] || 'filtered projects'}`;
+    const statusText = `Showing ${filterNames[this.currentFilter] || 'filtered courses'}`;
     if (this.filterStatus) {
       this.filterStatus.textContent = statusText;
     }
@@ -87,20 +87,19 @@ class ResearchFilter {
 
   shouldShowRow(row) {
     const category = row.getAttribute('data-category') || '';
-    const status = row.getAttribute('data-status') || '';
+    const semester = row.getAttribute('data-semester') || '';
     
     // Get text content for search
     const title = row.querySelector('.title-cell')?.textContent?.toLowerCase() || '';
-    const student = row.querySelector('.student-cell')?.textContent?.toLowerCase() || '';
-    const supervisor = row.querySelector('.supervisor-cell')?.textContent?.toLowerCase() || '';
-    const searchText = `${title} ${student} ${supervisor}`;
+    const instructor = row.querySelector('.instructor-cell')?.textContent?.toLowerCase() || '';
+    const room = row.querySelector('.room-cell')?.textContent?.toLowerCase() || '';
+    const degree = row.querySelector('.degree-cell')?.textContent?.toLowerCase() || '';
+    const searchText = `${title} ${instructor} ${room} ${degree} ${semester}`;
 
     // Apply category filter
     let categoryMatch = false;
     if (this.currentFilter === 'all') {
       categoryMatch = true;
-    } else if (this.currentFilter === 'open') {
-      categoryMatch = status === 'open';
     } else {
       categoryMatch = category === this.currentFilter;
     }
@@ -113,7 +112,7 @@ class ResearchFilter {
 
   applyFilters() {
     let visibleCount = 0;
-    const rows = Array.from(this.projectRows);
+    const rows = Array.from(this.courseRows);
 
     // First, hide all rows with animation
     rows.forEach(row => {
@@ -140,14 +139,14 @@ class ResearchFilter {
         }
       });
 
-      this.updateProjectCount(visibleCount);
+      this.updateCourseCount(visibleCount);
       this.toggleNoResults(visibleCount === 0);
     }, 150);
   }
 
-  updateProjectCount(count) {
-    if (this.projectCount) {
-      this.projectCount.textContent = `(${count})`;
+  updateCourseCount(count) {
+    if (this.courseCount) {
+      this.courseCount.textContent = `(${count})`;
     }
   }
 
@@ -189,7 +188,7 @@ class ResearchFilter {
     this.applyFilters();
   }
 
-  searchProjects(query) {
+  searchCourses(query) {
     if (this.searchInput) {
       this.searchInput.value = query;
       this.currentSearch = query.toLowerCase().trim();
@@ -207,23 +206,15 @@ class ResearchFilter {
     const stats = {
       all: 0,
       bachelor: 0,
-      master: 0,
-      praktikum: 0,
-      open: 0
+      master: 0
     };
 
-    this.projectRows.forEach(row => {
+    this.courseRows.forEach(row => {
       const category = row.getAttribute('data-category');
-      const status = row.getAttribute('data-status');
       
       // Count by degree type
       if (stats.hasOwnProperty(category)) {
         stats[category]++;
-      }
-      
-      // Count open projects
-      if (status === 'open') {
-        stats.open++;
       }
       
       stats.all++;
@@ -246,7 +237,7 @@ class TableEnhancements {
   }
 
   setupRowHoverEffects() {
-    const rows = document.querySelectorAll('.project-row');
+    const rows = document.querySelectorAll('.course-row');
     
     rows.forEach(row => {
       // Add smooth hover animations
@@ -286,18 +277,18 @@ class TableEnhancements {
     });
 
     // Add table accessibility
-    const table = document.querySelector('.course-table');
+    const table = document.querySelector('.courses-table');
     if (table) {
       table.setAttribute('role', 'table');
-      table.setAttribute('aria-label', 'Teaching projects and student theses');
+      table.setAttribute('aria-label', 'Teaching courses');
     }
   }
 }
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-  // Initialize course filter
-  window.courseFilter = new ResearchFilter();
+  // Initialize teaching filter
+  window.teachingFilter = new TeachingFilter();
   
   // Initialize table enhancements
   new TableEnhancements();
@@ -305,7 +296,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Handle URL parameters for direct filtering
   const urlParams = new URLSearchParams(window.location.search);
   const filterParam = urlParams.get('filter');
-  if (filterParam && ['all', 'bachelor', 'master', 'praktikum', 'open'].includes(filterParam)) {
-    window.courseFilter.filterByCategory(filterParam);
+  if (filterParam && ['all', 'bachelor', 'master'].includes(filterParam)) {
+    window.teachingFilter.filterByCategory(filterParam);
   }
 });

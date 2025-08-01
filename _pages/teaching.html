@@ -9,11 +9,6 @@ author_profile: true
 <link rel="stylesheet" href="{{ '/assets/css/teaching.css' | relative_url }}">
 
 <div class="teaching-container">
-  <!-- Page Header
-  <div class="page-header">
-    <h1 class="page-title">Teaching & Student Projects</h1>
-  </div> -->
-
   <!-- Filter Buttons -->
   <div class="filter-controls">
     <button class="filter-btn active" data-filter="all">
@@ -27,12 +22,6 @@ author_profile: true
     </button>
   </div>
 
-  <!-- Active Filter Display
-  <div class="filter-status">
-    <span id="filterStatus">Showing all courses</span>
-    <span id="projectCount" class="course-count"></span>
-  </div> -->
-
   <!-- Search Bar -->
   <div class="search-container">
     <input type="text" id="searchInput" placeholder="Search by course, instructor, degree or semester..." class="search-input">
@@ -44,73 +33,51 @@ author_profile: true
     <table class="courses-table">
       <thead>
         <tr>
-          <th>Name</th>
+          <th>Course Title</th>
           <th>Instructor</th>
-          <th>Supervisor</th>
+          <th>Room</th>
           <th>Degree</th>
           <th>Semester</th>
         </tr>
       </thead>
-      <tbody id="projectsTableBody">
-        {% comment %} Get the Courses {% endcomment %}
+      <tbody id="coursesTableBody">
+        {% comment %} Get the teaching collection {% endcomment %}
         {% assign all_courses = site.teaching %}
         
         {% if all_courses and all_courses.size > 0 %}
-          {% for courses in all_courses %}
-          <tr class="courses-row" 
+          {% for course in all_courses %}
+          <tr class="course-row" 
               data-category="{{ course.degree | downcase | default: 'other' }}" 
-              data-status="{{ course.status | downcase | default: 'unknown' }}"
+              data-semester="{{ course.semester | downcase | default: 'unknown' }}"
               data-title="{{ course.title | downcase | default: '' }}"
-              data-student="{% if course.authors and course.authors != '' and course.authors != 'XXX XXX' and course.authors != 'N/A' %}{{ course.authors | downcase }}{% else %}available{% endif %}"
-              data-supervisor="{{ course.supervisor | downcase | default: '' }}">
+              data-instructor="{{ course.instructor | downcase | default: '' }}">
             <td class="title-cell">
               <a href="{{ base_path }}{{ course.url }}" class="course-link">
-                {{ course.title | default: "Untitled Project" }}
+                {{ course.title | default: "Untitled Course" }}
               </a>
             </td>
-            <td class="student-cell">
-              {% if course.authors and course.authors != "" and course.authors != "XXX XXX" and course.authors != "N/A" %}
-                {{ course.authors }}
-              {% else %}
-                <span class="no-student">Available</span>
-              {% endif %}
-            </td>
-            <td class="supervisor-cell">{{ course.supervisor | default: "TBA" }}</td>
+            <td class="instructor-cell">{{ course.instructor | default: "TBA" }}</td>
+            <td class="room-cell">{{ course.room | default: "TBA" }}</td>
             <td class="type-cell">
               {% assign degree_lower = course.degree | downcase %}
               {% if degree_lower == 'bachelor' %}
                 <span class="degree-badge degree-bachelor">Bachelor</span>
               {% elsif degree_lower == 'master' %}
                 <span class="degree-badge degree-master">Master</span>
-              {% elsif degree_lower == 'praktikum' %}
-                <span class="degree-badge degree-praktikum">Internship</span>
               {% else %}
                 <span class="degree-badge degree-other">{{ course.degree | default: "Other" }}</span>
               {% endif %}
             </td>
-            <td class="status-cell">
-              {% assign status_lower = course.status | downcase %}
-              {% if status_lower == 'open' %}
-                <span class="status-badge status-open">Open</span>
-              {% elsif status_lower == 'ongoing' %}
-                <span class="status-badge status-ongoing">Ongoing</span>
-              {% elsif status_lower == 'completed' %}
-                <span class="status-badge status-completed">Completed</span>
-              {% else %}
-                {% if course.authors and course.authors != "" and course.authors != "XXX XXX" and course.authors != "N/A" %}
-                  <span class="status-badge status-ongoing">Ongoing</span>
-                {% else %}
-                  <span class="status-badge status-open">Open</span>
-                {% endif %}
-              {% endif %}
+            <td class="semester-cell">
+              <span class="semester-badge">{{ course.semester | default: "TBA" }}</span>
             </td>
           </tr>
           {% endfor %}
         {% else %}
           <tr>
             <td colspan="5" style="text-align: center; padding: 40px; color: #666;">
-              <strong>No student projects found.</strong><br>
-              Please check that your <code>student_projects</code> collection is properly configured in <code>_config.yml</code> and contains course files.
+              <strong>No courses found.</strong><br>
+              Please check that your <code>teaching</code> collection is properly configured in <code>_config.yml</code> and contains course files.
             </td>
           </tr>
         {% endif %}
@@ -121,7 +88,7 @@ author_profile: true
   <!-- No Results Message -->
   <div id="noResults" class="no-results" style="display: none;">
     <div class="no-results-icon">🔍</div>
-    <h3>No projects found</h3>
+    <h3>No courses found</h3>
     <p>Try adjusting your search criteria or filter selection.</p>
   </div>
 </div>
