@@ -9,11 +9,6 @@ author_profile: true
 <link rel="stylesheet" href="{{ '/assets/css/research.css' | relative_url }}">
 
 <div class="research-container">
-  <!-- Page Header
-  <div class="page-header">
-    <h1 class="page-title">Research & Student Projects</h1>
-  </div> -->
-
   <!-- Filter Buttons -->
   <div class="filter-controls">
     <button class="filter-btn active" data-filter="all">
@@ -32,12 +27,6 @@ author_profile: true
       Open
     </button>
   </div>
-
-  <!-- Active Filter Display
-  <div class="filter-status">
-    <span id="filterStatus">Showing all research projects</span>
-    <span id="projectCount" class="project-count"></span>
-  </div> -->
 
   <!-- Search Bar -->
   <div class="search-container">
@@ -67,69 +56,54 @@ author_profile: true
               data-category="{{ project.degree | downcase | default: 'other' }}" 
               data-status="{{ project.status | downcase | default: 'unknown' }}"
               data-title="{{ project.title | downcase | default: '' }}"
-              data-student="{% if project.authors and project.authors != '' and project.authors != 'XXX XXX' and project.authors != 'N/A' %}{{ project.authors | downcase }}{% else %}available{% endif %}"
+              data-student="{{ project.student | downcase | default: '' }}"
               data-supervisor="{{ project.supervisor | downcase | default: '' }}">
             <td class="title-cell">
-              <a href="{{ base_path }}{{ project.url }}" class="project-link">
-                {{ project.title | default: "Untitled Project" }}
-              </a>
+              {% if project.url and project.url != "" %}
+                <a href="{{ base_path }}{{ project.url }}" class="project-link">
+                  {{ project.title | default: "Untitled Project" }}
+                </a>
+              {% else %}
+                <span class="project-title">{{ project.title | default: "Untitled Project" }}</span>
+              {% endif %}
             </td>
             <td class="student-cell">
-              {% if project.authors and project.authors != "" and project.authors != "XXX XXX" and project.authors != "N/A" %}
-                {{ project.authors }}
+              {% if project.authors and project.authors != "" %}
+                {{ project.authors | default: "TBA" }}
               {% else %}
                 <span class="no-student">Available</span>
               {% endif %}
             </td>
             <td class="supervisor-cell">{{ project.supervisor | default: "TBA" }}</td>
-            <td class="type-cell">
-              {% assign degree_lower = project.degree | downcase %}
-              {% if degree_lower == 'bachelor' %}
-                <span class="degree-badge degree-bachelor">Bachelor</span>
-              {% elsif degree_lower == 'master' %}
-                <span class="degree-badge degree-master">Master</span>
-              {% elsif degree_lower == 'praktikum' %}
-                <span class="degree-badge degree-praktikum">Internship</span>
-              {% else %}
-                <span class="degree-badge degree-other">{{ project.degree | default: "Other" }}</span>
-              {% endif %}
+            <td class="degree-cell">
+              <span class="degree-badge degree-{{ project.degree | downcase | default: 'other' }}">
+                {{ project.degree | upcase | default: "OTHER" }}
+              </span>
             </td>
             <td class="status-cell">
-              {% assign status_lower = project.status | downcase %}
-              {% if status_lower == 'open' %}
-                <span class="status-badge status-open">Open</span>
-              {% elsif status_lower == 'ongoing' %}
-                <span class="status-badge status-ongoing">Ongoing</span>
-              {% elsif status_lower == 'completed' %}
-                <span class="status-badge status-completed">Completed</span>
-              {% else %}
-                {% if project.authors and project.authors != "" and project.authors != "XXX XXX" and project.authors != "N/A" %}
-                  <span class="status-badge status-ongoing">Ongoing</span>
-                {% else %}
-                  <span class="status-badge status-open">Open</span>
-                {% endif %}
-              {% endif %}
+              <span class="status-badge status-{{ project.status | downcase | default: 'unknown' }}">
+                {{ project.status | capitalize | default: "Unknown" }}
+              </span>
             </td>
           </tr>
           {% endfor %}
         {% else %}
-          <tr>
+          <tr class="no-projects">
             <td colspan="5" style="text-align: center; padding: 40px; color: #666;">
-              <strong>No student projects found.</strong><br>
-              Please check that your <code>student_projects</code> collection is properly configured in <code>_config.yml</code> and contains project files.
+              No research projects found.
             </td>
           </tr>
         {% endif %}
       </tbody>
     </table>
   </div>
-
+  
   <!-- No Results Message -->
   <div id="noResults" class="no-results" style="display: none;">
-    <div class="no-results-icon">🔍</div>
     <h3>No projects found</h3>
-    <p>Try adjusting your search criteria or filter selection.</p>
+    <p>Try adjusting your filters or search terms.</p>
   </div>
 </div>
 
+<!-- CRITICAL: Add the JavaScript file -->
 <script src="{{ '/assets/js/research-filter.js' | relative_url }}"></script>

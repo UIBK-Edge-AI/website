@@ -3,6 +3,7 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
+  position: relative;
 }
 
 /* Page Header */
@@ -45,13 +46,15 @@
   margin: 0 auto;
 }
 
-/* Filter Controls */
+/* Filter Controls - FIXED: Higher z-index to prevent conflicts */
 .filter-controls {
   display: flex;
   justify-content: center;
   gap: 12px;
   margin-bottom: 24px;
   flex-wrap: wrap;
+  position: relative;
+  z-index: 100; /* Much higher to ensure it's above everything */
 }
 
 .filter-btn {
@@ -69,6 +72,11 @@
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  /* FIXED: Prevent any text selection issues */
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
 .filter-btn::before {
@@ -80,6 +88,7 @@
   height: 100%;
   background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
   transition: left 0.5s ease;
+  pointer-events: none; /* CRITICAL: Prevent pseudo-element interference */
 }
 
 .filter-btn:hover::before {
@@ -113,6 +122,8 @@
   background: #e3f2fd;
   border-radius: 8px;
   border-left: 4px solid #00549f;
+  position: relative;
+  z-index: 10;
 }
 
 .filter-status span {
@@ -133,6 +144,7 @@
   position: relative;
   max-width: 500px;
   margin: 0 auto 30px auto;
+  z-index: 10;
 }
 
 .search-input {
@@ -143,6 +155,7 @@
   font-size: 16px;
   transition: all 0.3s ease;
   background: white;
+  box-sizing: border-box;
 }
 
 .search-input:focus {
@@ -161,15 +174,17 @@
   pointer-events: none;
 }
 
-/* Table Container - FIXED: Added proper rounded corners */
+/* FIXED: Table Container - Simplified to prevent positioning issues */
 .table-container {
   background: white;
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   border: 1px solid #f1f3f4;
   width: 100%;
   margin: 0 auto;
+  position: relative;
+  z-index: 1; /* Lower than filter controls */
 }
 
 .research-table {
@@ -177,26 +192,8 @@
   border-collapse: collapse;
   font-size: 15px;
   table-layout: fixed;
-  border-radius: 16px;
-  overflow: hidden;
-}
-
-/* Ensure table header corners match container */
-.research-table thead th:first-child {
-  border-top-left-radius: 16px;
-}
-
-.research-table thead th:last-child {
-  border-top-right-radius: 16px;
-}
-
-/* Ensure last row corners match container */
-.research-table tbody tr:last-child td:first-child {
-  border-bottom-left-radius: 16px;
-}
-
-.research-table tbody tr:last-child td:last-child {
-  border-bottom-right-radius: 16px;
+  background: transparent;
+  position: relative;
 }
 
 .research-table th:nth-child(1) { width: 35%; } /* Title */
@@ -210,6 +207,15 @@
   color: white;
 }
 
+/* FIXED: Table header rounded corners */
+.research-table thead th:first-child {
+  border-top-left-radius: 16px;
+}
+
+.research-table thead th:last-child {
+  border-top-right-radius: 16px;
+}
+
 .research-table th {
   padding: 20px 18px;
   text-align: center;
@@ -218,25 +224,34 @@
   letter-spacing: 0.5px;
   text-transform: uppercase;
   border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+  /* FIXED: Prevent any selection issues */
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .research-table td {
   padding: 18px;
   border-bottom: 1px solid #f8f9fa;
-  vertical-align: top;
+  vertical-align: middle;
   text-align: center;
+  background: white;
+  /* FIXED: Prevent cell selection and interaction issues */
+  user-select: none;
+  -webkit-user-select: none;
+  position: relative;
 }
 
-/* Table Row Animations */
+/* FIXED: Project row hover - Removed conflicting transforms */
 .project-row {
-  transition: all 0.3s ease;
+  transition: background-color 0.2s ease;
   opacity: 1;
-  transform: translateX(0);
+  background: transparent;
+  /* REMOVED: All transform properties that were causing issues */
 }
 
 .project-row.filtering-out {
-  opacity: 0;
-  transform: translateX(-20px);
+  opacity: 0.3;
+  transition: opacity 0.15s ease;
 }
 
 .project-row.filtering-in {
@@ -254,20 +269,36 @@
   }
 }
 
+/* FIXED: Simplified hover effect without transforms */
 .project-row:hover {
-  background-color: #f8f9fa;
-  transform: translateX(4px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  background-color: #f8f9fa !important;
+}
+
+.project-row:hover td {
+  background-color: #f8f9fa !important;
 }
 
 .project-row:last-child td {
   border-bottom: none;
 }
 
+/* FIXED: Last row rounded corners */
+.research-table tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 16px;
+}
+
+.research-table tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 16px;
+}
+
 /* Table Cells */
 .title-cell {
   font-weight: 500;
   max-width: 300px;
+  text-align: left !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .project-link {
@@ -275,6 +306,9 @@
   text-decoration: none;
   font-weight: 600;
   transition: color 0.2s ease;
+  /* Allow link selection */
+  user-select: text;
+  -webkit-user-select: text;
 }
 
 .project-link:hover {
@@ -398,6 +432,8 @@
   background: white;
   border-radius: 16px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  position: relative;
+  z-index: 1;
 }
 
 .no-results-icon {
@@ -501,6 +537,7 @@ html[data-theme="dark"] .research-table thead {
 html[data-theme="dark"] .research-table td {
   border-bottom-color: #444;
   color: #e0e0e0;
+  background: #2a2a2a;
 }
 
 html[data-theme="dark"] .research-table th {
@@ -508,7 +545,11 @@ html[data-theme="dark"] .research-table th {
 }
 
 html[data-theme="dark"] .project-row:hover {
-  background-color: #333;
+  background-color: #333 !important;
+}
+
+html[data-theme="dark"] .project-row:hover td {
+  background-color: #333 !important;
 }
 
 html[data-theme="dark"] .project-link {
@@ -592,6 +633,15 @@ html[data-theme="dark"] .status-completed {
   .title-cell {
     max-width: 200px;
   }
+
+  .filter-controls {
+    gap: 8px;
+  }
+  
+  .filter-btn {
+    padding: 10px 16px;
+    font-size: 13px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -614,13 +664,11 @@ html[data-theme="dark"] .status-completed {
   
   .research-table {
     font-size: 13px;
-
   }
   
   .research-table th,
   .research-table td {
     padding: 10px 8px;
-  
   }
   
   /* Stack table on mobile */
@@ -647,9 +695,9 @@ html[data-theme="dark"] .status-completed {
   .research-table td {
     border: none;
     padding: 8px 0;
-    display: flex;
-    justify-content: space-between;
+    display: block;
     align-items: center;
+    text-align: left !important;
   }
   
   .research-table td::before {
@@ -659,12 +707,14 @@ html[data-theme="dark"] .status-completed {
     text-transform: uppercase;
     font-size: 11px;
     letter-spacing: 0.5px;
+    display: block;
+    margin-bottom: 4px;
   }
   
   .title-cell::before { content: "Title"; }
   .student-cell::before { content: "Student"; }
   .supervisor-cell::before { content: "Supervisor"; }
-  .degree::before { content: "Degree"; }
+  .degree-cell::before { content: "Degree"; }
   .status-cell::before { content: "Status"; }
   
   html[data-theme="dark"] .project-row {
