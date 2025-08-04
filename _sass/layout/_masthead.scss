@@ -106,17 +106,18 @@
       align-items: center;
       margin: 0;
       white-space: nowrap;
+      margin-left: 0;
 
-      &:first-child {
-        font-weight: bold;
-        a {
-          margin-left: 0;
-        }
-      }
+      // &:first-child {
+      //   font-weight: bold;
+      //   a {
+      //     margin-left: 0;
+      //   }
+      // }
 
-      &:last-child a {
-        margin-right: 0;
-      }
+      // &:last-child a {
+      //   margin-left: 0;
+      // }
     }
 
     #theme-toggle {
@@ -196,7 +197,7 @@
 }
 
 /* ==========================================================================
-   DROPDOWN NAVIGATION
+   DROPDOWN NAVIGATION - Enhanced with pointer-events
    ========================================================================== */
 
 .masthead__menu-item.dropdown-item {
@@ -214,6 +215,7 @@
     text-decoration: none;
     transition: all 0.3s ease;
     position: relative;
+    cursor: pointer;                      // Ensure cursor shows pointer
   }
 
   .dropdown-arrow {
@@ -221,6 +223,17 @@
     margin-left: 6px;
     color: #666;
     transition: transform 0.3s ease;
+    pointer-events: none;                 // ← KEY FIX: Allows hover to pass through arrow
+    line-height: 1;
+  }
+
+  // Make sure any icons inside the dropdown toggle don't interfere
+  .dropdown-toggle {
+    i, .fa, .fas, .far, .fab {
+      pointer-events: none;               // ← Allows hover to pass through all icons
+      font-size: 12px;
+      line-height: 1;
+    }
   }
 
   &:hover .dropdown-toggle {
@@ -257,26 +270,32 @@
 }
 
 .masthead__menu-item.dropdown-item.open .dropdown-menu {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-  pointer-events: auto;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translateY(0) !important;
+  pointer-events: auto !important;
+  display: block !important;
+}
+
+.masthead__menu-item.dropdown-item[data-dropdown-initialized="true"]:hover .dropdown-menu {
+  display: block !important;
 }
 
 .dropdown-menu-item {
   margin: 0;
   padding: 0;
+  position: relative; 
 
   a {
-    display: flex;
-    align-items: left;
+    display: block;                       // ← Changed from flex to block for consistent positioning
     padding: 12px 20px;
     text-decoration: none;
     color: #555;
     font-size: 14px;
     font-weight: 500;
     transition: all 0.2s ease;
-    position: left;
+    position: relative;
+    cursor: pointer;
 
     &:hover {
       background-color: #f8f9fa;
@@ -291,17 +310,25 @@
     &:after {
       content: '';
       position: absolute;
-      left: 0;
+      left: 0;                            // ← This ensures all bars start from the same position
       top: 0;
       bottom: 0;
-      width: 3px;
+      width: 3px;                         // ← Fixed width for consistency
       background: #f68712;
       transform: scaleY(0);
       transition: transform 0.2s ease;
+      pointer-events: none;
+      transform-origin: top;              // ← Changed from center to top for better alignment
     }
 
     &:hover:after {
       transform: scaleY(1);
+    }
+
+    // Make sure any icons in dropdown items don't interfere
+    i, .fa, .fas, .far, .fab, .dropdown-icon {
+      pointer-events: none;
+      line-height: 1;
     }
   }
 }
@@ -311,10 +338,11 @@
   width: 16px;
   text-align: center;
   margin-right: 8px;
+  pointer-events: none;                   // ← Allows clicks to pass through dropdown icons
 }
 
 /* ==========================================================================
-   DARK THEME
+   DARK THEME - Enhanced with pointer-events
    ========================================================================== */
 
 html[data-theme="dark"] {
@@ -356,6 +384,7 @@ html[data-theme="dark"] {
 
     &:after {
       background: #f68712;
+      pointer-events: none;               // ← Prevent after pseudo-element from interfering in dark mode
     }
   }
 
@@ -371,6 +400,7 @@ html[data-theme="dark"] {
     &:hover .dropdown-arrow,
     &.open .dropdown-arrow {
       color: #bee3f8;
+      pointer-events: none;               // ← Ensure arrow doesn't interfere in dark mode
     }
   }
 }
