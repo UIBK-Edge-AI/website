@@ -44,6 +44,4 @@ main:
       - title: "Internships"
         url: /research/?filter=praktikum
         filter: "praktikum"
-      - title: "Open Topics"
-        url: /research/?filter=open
-        filter: "open"
+        
