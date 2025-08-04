@@ -89,7 +89,7 @@
   }
 
   button {
-    display: none; // Hide hamburger completely
+    display: none;
   }
 
   .visible-links {
@@ -120,13 +120,56 @@
     }
 
     #theme-toggle {
-      margin-left: auto;
+      cursor: pointer;
+      padding: 12px;
+      border-radius: 12px;
+      transition: background-color 0.2s ease;
+      min-width: 24px;
+      min-height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      
+      &:hover {
+        background-color: transparent;
+      }
       
       a {
-        width: 25px;
+        width: 30px;
+        height: 30px;
+        padding: 20px;
         display: flex;
         justify-content: center;
-        cursor: pointer;
+        align-items: center;
+        cursor: pointer;                    // Makes cursor show pointer
+        border-radius: 6px;
+        transition: all 0.2s ease;
+        position: relative;                 // Keeps positioning context for pseudo-element
+        
+        &:before {
+          content: "";                      // Creates the orange underline
+          position: absolute;               // Positions relative to the <a> tag
+          left: 0;                         // Starts at left edge
+          bottom: 0;                       // Positions at bottom
+          height: 4px;                     // Height of orange bar
+          background: #d2691e;             // Orange color
+          width: 100%;                     // Full width of parent
+          transition: $global-transition;   // Smooth animation
+          transform: scaleX(0);            // Initially hidden (0 width)
+          pointer-events: none;            // ← KEY FIX: Allows clicks to pass through
+        }
+        
+        &:hover:before {
+          transform: scaleX(1);            // Shows orange bar on hover
+        }
+      }
+      
+      // Make sure the icon doesn't block clicks either
+      #theme-icon, 
+      i {
+        pointer-events: none;              // ← Allows clicks to pass through icon
+        font-size: 18px;
+        line-height: 1;
       }
     }
 

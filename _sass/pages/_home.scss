@@ -3,10 +3,12 @@
    ========================================================================== */
 
 /* Main heading blue styling */
-.page__inner-wrap h1:first-child {
-  color: #2c5282;
+.page__inner-wrap h1 {
+  color: #2c5282 !important;
   font-weight: 600;
   margin-bottom: 1.5rem;
+  border-bottom: 4px solid #f68712; /* UIBK primary orange */
+  padding-bottom: 0.75rem;
 }
 
 /* Edge AI sidebar title */
@@ -34,7 +36,7 @@
 
 /* Section headings (About, Research, Teaching, Contact) */
 .page__content h2 {
-  color: #2c5282;
+  color: #2c5282 ;
   font-weight: 600;
 }
 
@@ -45,10 +47,12 @@
 html[data-theme="dark"] {
   
   /* Main heading blue styling for dark mode */
-  .page__inner-wrap h1:first-child {
-    color: #90cdf4; /* Light blue for dark theme */
+  .page__inner-wrap h1 {
+    color: #90cdf4 !important; /* Light blue for dark theme */
     font-weight: 600;
     margin-bottom: 1.5rem;
+    border-bottom: 4px solid #f68712; /* UIBK primary orange */
+    padding-bottom: 0.75rem;
   }
 
   /* Edge AI sidebar title for dark mode */
@@ -70,20 +74,20 @@ html[data-theme="dark"] {
 
   /* Regular paragraphs for dark mode */
   .page__content p {
-    color: #cbd5e0; /* Lighter gray for regular text */
+    color: #e2e8f0; /* Lighter gray for regular text */
     line-height: 1.6;
   }
 
   /* Section headings for dark mode */
   .page__content h2 {
-    color: #90cdf4; /* Light blue for headings */
+    color: #90cdf4 !important; /* Light blue for headings */
     font-weight: 600;
   }
 
   /* Additional dark mode improvements */
   .page__content h3,
   .page__content h4 {
-    color: #a0aec0; /* Medium gray for smaller headings */
+    color: #90cdf4 !important; /* Medium gray for smaller headings */
   }
 
   /* Sidebar content adjustments */
