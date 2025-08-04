@@ -44,4 +44,8 @@ main:
       - title: "Internships"
         url: /research/?filter=praktikum
         filter: "praktikum"
-        
+  
+  - title: "News & Events"
+    url: /news-events/
+
+
