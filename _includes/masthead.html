@@ -20,8 +20,8 @@
           </li>
           {% for link in site.data.navigation.main %}
             {% if link.dropdown %}
-              <!-- Dropdown Navigation Item -->
-              <li class="masthead__menu-item dropdown-item{% if page.url contains link.url %} active{% endif %}">
+              <!-- Dropdown Navigation Item - ADD PERSIST CLASS HERE -->
+              <li class="masthead__menu-item dropdown-item persist{% if page.url contains link.url %} active{% endif %}">
                 <a href="{% if link.url contains 'http' %}{{ link.url }}{% else %}{{ base_path }}{{ link.url }}{% endif %}" class="dropdown-toggle">
                   {{ link.title }}
                   <i class="fa-solid fa-chevron-down dropdown-arrow" aria-hidden="true"></i>
@@ -63,7 +63,6 @@
   </div>
 </div>
 
-
 <script>
 // Enhanced dropdown functionality with debugging
 (function() {
@@ -86,7 +85,8 @@
       console.log(`Dropdown ${index}:`, {
         item: item,
         toggle: toggle,
-        dropdown: dropdown
+        dropdown: dropdown,
+        hasPersistClass: item.classList.contains('persist')
       });
       
       if (toggle && dropdown) {
@@ -107,16 +107,9 @@
             }
           });
           
-          // Open current dropdown with force
+          // Open current dropdown
           item.classList.add('open');
-          
-          // Force visibility for debugging
-          dropdown.style.display = 'block';
-          dropdown.style.opacity = '1';
-          dropdown.style.visibility = 'visible';
-          dropdown.style.transform = 'translateY(0)';
-          
-          console.log('Dropdown should be visible now');
+          console.log('Added open class to dropdown', index);
         });
         
         // Hide dropdown on mouseleave with slight delay
@@ -124,12 +117,8 @@
           console.log('Mouse leave on dropdown', index);
           hoverTimeout = setTimeout(function() {
             item.classList.remove('open');
-            // Reset styles to let CSS take over
-            dropdown.style.display = '';
-            dropdown.style.opacity = '';
-            dropdown.style.visibility = '';
-            dropdown.style.transform = '';
-          }, 300); // Increased delay for easier testing
+            console.log('Removed open class from dropdown', index);
+          }, 300);
         });
 
         // Keep dropdown open when hovering over dropdown menu
@@ -143,10 +132,6 @@
           console.log('Mouse leave on dropdown menu', index);
           hoverTimeout = setTimeout(function() {
             item.classList.remove('open');
-            dropdown.style.display = '';
-            dropdown.style.opacity = '';
-            dropdown.style.visibility = '';
-            dropdown.style.transform = '';
           }, 300);
         });
 
@@ -182,24 +167,6 @@
     }
   };
 
-  // Disable greedy-nav functionality to keep all tabs visible
-  function disableGreedyNav() {
-    if (window.updateNav) {
-      const originalUpdateNav = window.updateNav;
-      window.updateNav = function() {
-        console.log('UpdateNav called - maintaining dropdown visibility');
-        var mastheadHeight = $('.masthead').height();
-        $('body').css('padding-top', mastheadHeight + 'px');
-        if ($(".author__urls-wrapper button").is(":visible")) {
-          $(".sidebar").css("padding-top", "");
-        } else {
-          $(".sidebar").css("padding-top", mastheadHeight + "px");
-        }
-        // Don't call original updateNav to prevent dropdown interference
-      };
-    }
-  }
-
   // Initialize when DOM is ready
   console.log('DOM ready state:', document.readyState);
   
@@ -208,21 +175,21 @@
       console.log('DOM Content Loaded');
       setTimeout(function() {
         initializeDropdowns();
-        disableGreedyNav();
-      }, 100); // Small delay to ensure all elements are ready
+      }, 500); // Increased delay to let greedy nav settle
     });
   } else {
     console.log('DOM already ready, initializing immediately');
     setTimeout(function() {
       initializeDropdowns();
-      disableGreedyNav();
-    }, 100);
+    }, 500);
   }
 
   // Also try initializing after window load as fallback
   window.addEventListener('load', function() {
     console.log('Window loaded, re-initializing dropdowns as fallback');
-    initializeDropdowns();
+    setTimeout(function() {
+      initializeDropdowns();
+    }, 1000);
   });
 
 })();
