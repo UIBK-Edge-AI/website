@@ -37,6 +37,8 @@ class ResearchFilter {
     // Filter button listeners
     this.filterButtons.forEach(button => {
       button.addEventListener('click', (e) => {
+        e.preventDefault(); // Prevent any default behavior
+        e.stopPropagation(); // Stop event bubbling
         const filter = e.currentTarget.getAttribute('data-filter');
         this.setActiveFilter(filter);
         this.applyFilters();
@@ -113,38 +115,29 @@ class ResearchFilter {
     return categoryMatch && searchMatch;
   }
 
+  // FIXED: Removed all filtering animations to prevent cell popup
   applyFilters() {
     let visibleCount = 0;
     const rows = Array.from(this.projectRows);
 
-    // First, hide all rows with animation
+    // FIXED: Apply filters immediately without animations
     rows.forEach(row => {
-      row.classList.add('filtering-out');
+      const shouldShow = this.shouldShowRow(row);
+      
+      if (shouldShow) {
+        row.style.display = '';
+        // REMOVED: All animation classes that were causing issues
+        row.classList.remove('filtering-out', 'filtering-in');
+        visibleCount++;
+      } else {
+        row.style.display = 'none';
+        // REMOVED: All animation classes that were causing issues
+        row.classList.remove('filtering-out', 'filtering-in');
+      }
     });
 
-    setTimeout(() => {
-      rows.forEach(row => {
-        const shouldShow = this.shouldShowRow(row);
-        
-        if (shouldShow) {
-          row.style.display = '';
-          row.classList.remove('filtering-out');
-          row.classList.add('filtering-in');
-          visibleCount++;
-          
-          // Remove animation class after animation completes
-          setTimeout(() => {
-            row.classList.remove('filtering-in');
-          }, 400);
-        } else {
-          row.style.display = 'none';
-          row.classList.remove('filtering-out', 'filtering-in');
-        }
-      });
-
-      this.updateProjectCount(visibleCount);
-      this.toggleNoResults(visibleCount === 0);
-    }, 150);
+    this.updateProjectCount(visibleCount);
+    this.toggleNoResults(visibleCount === 0);
   }
 
   updateProjectCount(count) {
@@ -235,31 +228,16 @@ class ResearchFilter {
   }
 }
 
-// Enhanced table interactions
+// Enhanced table interactions WITHOUT problematic transforms
 class TableEnhancements {
   constructor() {
     this.init();
   }
 
   init() {
-    this.setupRowHoverEffects();
+    // Let CSS handle hover effects instead of JavaScript
     this.setupKeyboardNavigation();
     this.setupAccessibility();
-  }
-
-  setupRowHoverEffects() {
-    const rows = document.querySelectorAll('.project-row');
-    
-    rows.forEach(row => {
-      // Add smooth hover animations
-      row.addEventListener('mouseenter', () => {
-        row.style.transform = 'translateX(4px)';
-      });
-      
-      row.addEventListener('mouseleave', () => {
-        row.style.transform = 'translateX(0)';
-      });
-    });
   }
 
   setupKeyboardNavigation() {

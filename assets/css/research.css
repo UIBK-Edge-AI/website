@@ -249,26 +249,6 @@
   /* REMOVED: All transform properties that were causing issues */
 }
 
-.project-row.filtering-out {
-  opacity: 0.3;
-  transition: opacity 0.15s ease;
-}
-
-.project-row.filtering-in {
-  animation: slideIn 0.4s ease forwards;
-}
-
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 /* FIXED: Simplified hover effect without transforms */
 .project-row:hover {
   background-color: #f8f9fa !important;
