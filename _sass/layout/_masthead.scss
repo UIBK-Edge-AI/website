@@ -269,18 +269,18 @@
 
   a {
     display: flex;
-    align-items: center;
+    align-items: left;
     padding: 12px 20px;
     text-decoration: none;
     color: #555;
     font-size: 14px;
     font-weight: 500;
     transition: all 0.2s ease;
-    position: relative;
+    position: left;
 
     &:hover {
       background-color: #f8f9fa;
-      color: #007bff;
+      color: #f68712;
       padding-left: 24px;
     }
 
@@ -295,7 +295,7 @@
       top: 0;
       bottom: 0;
       width: 3px;
-      background: #007bff;
+      background: #f68712;
       transform: scaleY(0);
       transition: transform 0.2s ease;
     }
@@ -355,7 +355,7 @@ html[data-theme="dark"] {
     }
 
     &:after {
-      background: #4da6ff;
+      background: #f68712;
     }
   }
 
