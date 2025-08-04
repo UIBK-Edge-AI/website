@@ -65,22 +65,39 @@
 
 
 <script>
-// Simple dropdown functionality that works with greedy-nav
+// Enhanced dropdown functionality with debugging
 (function() {
   'use strict';
 
   function initializeDropdowns() {
+    console.log('Initializing dropdowns...');
     const dropdownItems = document.querySelectorAll('.masthead__menu-item.dropdown-item');
+    console.log('Found dropdown items:', dropdownItems.length);
     
-    dropdownItems.forEach(function(item) {
+    if (dropdownItems.length === 0) {
+      console.warn('No dropdown items found! Check if HTML structure is correct.');
+      return;
+    }
+    
+    dropdownItems.forEach(function(item, index) {
       const toggle = item.querySelector('.dropdown-toggle');
       const dropdown = item.querySelector('.dropdown-menu');
+      
+      console.log(`Dropdown ${index}:`, {
+        item: item,
+        toggle: toggle,
+        dropdown: dropdown
+      });
       
       if (toggle && dropdown) {
         let hoverTimeout;
 
+        // Add debugging classes
+        item.setAttribute('data-dropdown-initialized', 'true');
+
         // Show dropdown on mouseenter
         item.addEventListener('mouseenter', function(e) {
+          console.log('Mouse enter on dropdown', index);
           clearTimeout(hoverTimeout);
           
           // Close other dropdowns
@@ -90,27 +107,54 @@
             }
           });
           
-          // Open current dropdown
+          // Open current dropdown with force
           item.classList.add('open');
+          
+          // Force visibility for debugging
+          dropdown.style.display = 'block';
+          dropdown.style.opacity = '1';
+          dropdown.style.visibility = 'visible';
+          dropdown.style.transform = 'translateY(0)';
+          
+          console.log('Dropdown should be visible now');
         });
         
         // Hide dropdown on mouseleave with slight delay
         item.addEventListener('mouseleave', function(e) {
+          console.log('Mouse leave on dropdown', index);
           hoverTimeout = setTimeout(function() {
             item.classList.remove('open');
-          }, 100);
+            // Reset styles to let CSS take over
+            dropdown.style.display = '';
+            dropdown.style.opacity = '';
+            dropdown.style.visibility = '';
+            dropdown.style.transform = '';
+          }, 300); // Increased delay for easier testing
         });
 
         // Keep dropdown open when hovering over dropdown menu
         dropdown.addEventListener('mouseenter', function(e) {
+          console.log('Mouse enter on dropdown menu', index);
           clearTimeout(hoverTimeout);
           item.classList.add('open');
         });
 
         dropdown.addEventListener('mouseleave', function(e) {
+          console.log('Mouse leave on dropdown menu', index);
           hoverTimeout = setTimeout(function() {
             item.classList.remove('open');
-          }, 100);
+            dropdown.style.display = '';
+            dropdown.style.opacity = '';
+            dropdown.style.visibility = '';
+            dropdown.style.transform = '';
+          }, 300);
+        });
+
+        console.log(`Dropdown ${index} initialized successfully`);
+      } else {
+        console.warn(`Dropdown ${index} missing elements:`, {
+          hasToggle: !!toggle,
+          hasDropdown: !!dropdown
         });
       }
     });
@@ -118,6 +162,7 @@
 
   // Handle dropdown navigation with filtering
   window.handleDropdownNavigation = function(filter, event) {
+    console.log('Handling dropdown navigation:', filter);
     if (window.location.pathname.includes('/research/')) {
       event.preventDefault();
       
@@ -140,7 +185,9 @@
   // Disable greedy-nav functionality to keep all tabs visible
   function disableGreedyNav() {
     if (window.updateNav) {
+      const originalUpdateNav = window.updateNav;
       window.updateNav = function() {
+        console.log('UpdateNav called - maintaining dropdown visibility');
         var mastheadHeight = $('.masthead').height();
         $('body').css('padding-top', mastheadHeight + 'px');
         if ($(".author__urls-wrapper button").is(":visible")) {
@@ -148,19 +195,35 @@
         } else {
           $(".sidebar").css("padding-top", mastheadHeight + "px");
         }
+        // Don't call original updateNav to prevent dropdown interference
       };
     }
   }
 
   // Initialize when DOM is ready
+  console.log('DOM ready state:', document.readyState);
+  
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function() {
-      initializeDropdowns();
-      disableGreedyNav();
+      console.log('DOM Content Loaded');
+      setTimeout(function() {
+        initializeDropdowns();
+        disableGreedyNav();
+      }, 100); // Small delay to ensure all elements are ready
     });
   } else {
-    initializeDropdowns();
-    disableGreedyNav();
+    console.log('DOM already ready, initializing immediately');
+    setTimeout(function() {
+      initializeDropdowns();
+      disableGreedyNav();
+    }, 100);
   }
+
+  // Also try initializing after window load as fallback
+  window.addEventListener('load', function() {
+    console.log('Window loaded, re-initializing dropdowns as fallback');
+    initializeDropdowns();
+  });
+
 })();
 </script>
