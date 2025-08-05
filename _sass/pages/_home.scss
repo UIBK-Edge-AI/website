@@ -29,7 +29,7 @@
 }
 
 /* Regular paragraphs */
-.page__content p {
+.page__content p, li, dl {
   color: #4a5568;
   line-height: 1.6;
 }
@@ -62,6 +62,10 @@ html[data-theme="dark"] {
     font-weight: 700 !important;
     text-align: center !important;
   }
+  
+  .author__desktop {
+      color: #e2e8f0;
+  }
 
   /* Main description paragraph for dark mode */
   .page__content > p:first-of-type {
@@ -76,6 +80,10 @@ html[data-theme="dark"] {
   .page__content p {
     color: #e2e8f0; /* Lighter gray for regular text */
     line-height: 1.6;
+  }
+
+    .page__content li, dl {
+    color: #e2e8f0;
   }
 
   /* Section headings for dark mode */

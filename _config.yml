@@ -290,6 +290,15 @@ defaults:
       layout: team
       author_profile: true
       share: true
+  
+  # __publications
+  - scope:
+      path: ""
+      type: publications
+    values:
+      layout: publications
+      author_profile: true
+      share: true
 
 
 # Sass/SCSS

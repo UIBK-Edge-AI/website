@@ -1,0 +1,115 @@
+---
+layout: publications
+title: "Publications"
+permalink: /publications/
+author_profile: true
+---
+
+{% include base_path %}
+<link rel="stylesheet" href="{{ '/assets/css/publications.css' | relative_url }}">
+
+
+<div class="publications-container">
+  
+  <!-- CORS/Proxy Information -->
+  <div class="proxy-instructions">
+    <h3><i class="fas fa-info-circle"></i> Setup Required for Real API Access</h3>
+    <p>This page attempts to fetch real publication data from the UIBK database. Due to browser CORS restrictions, you have several options:</p>
+    
+    <p><strong>Option 1: Use a CORS Proxy (Recommended for Testing)</strong></p>
+    <p>Install and run a local CORS proxy:</p>
+    <code>npm install -g cors-anywhere</code><br>
+    <code>cors-anywhere</code>
+    <p>This will run a proxy server at <code>http://localhost:8080</code></p>
+    
+    <p><strong>Option 2: Server-Side Integration (Recommended for Production)</strong></p>
+    <p>Create a backend endpoint that fetches from UIBK and serves the data to your frontend.</p>
+    
+    <p><strong>Option 3: Browser Extension</strong></p>
+    <p>Use a browser extension like "CORS Unblock" for development (not recommended for production).</p>
+  </div>
+
+  <!-- Search and Filter Controls -->
+  <div class="controls-section">
+    <h2 style="margin-top: 0; color: #2c5aa0; margin-bottom: 1.5rem;">
+      <i class="fas fa-search"></i> Search Publications
+    </h2>
+    
+    <div class="search-grid">
+      <div class="form-group">
+        <label for="author-search">Author Name</label>
+        <input type="text" id="author-search" placeholder="e.g., Prodan" value="">
+      </div>
+      
+      <div class="form-group">
+        <label for="title-search">Title Keywords</label>
+        <input type="text" id="title-search" placeholder="Enter keywords...">
+      </div>
+      
+      <div class="form-group">
+        <label for="year-from">Year From</label>
+        <input type="number" id="year-from" placeholder="2020" min="2000" max="2025">
+      </div>
+      
+      <div class="form-group">
+        <label for="year-to">Year To</label>
+        <input type="number" id="year-to" placeholder="2025" min="2000" max="2025">
+      </div>
+      
+      <div class="form-group">
+        <label for="pub-type">Publication Type</label>
+        <select id="pub-type">
+          <option value="">All Types</option>
+          <option value="1">Journal Articles</option>
+          <option value="2">Conference Papers</option>
+          <option value="3">Book Chapters</option>
+          <option value="4">Books</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <button class="search-button" onclick="searchPublications()">
+          <i class="fas fa-search"></i> Search Publications
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Statistics Bar -->
+  <div class="stats-bar" id="stats-bar" style="display: none;">
+    <div class="stats-item">
+      <span class="stats-number" id="total-pubs">0</span>
+      <span class="stats-label">Total Publications</span>
+    </div>
+    <div class="stats-item">
+      <span class="stats-number" id="recent-pubs">0</span>
+      <span class="stats-label">Last 5 Years</span>
+    </div>
+    <div class="stats-item">
+      <span class="stats-number" id="journal-pubs">0</span>
+      <span class="stats-label">Journal Articles</span>
+    </div>
+    <div class="stats-item">
+      <span class="stats-number" id="conf-pubs">0</span>
+      <span class="stats-label">Conference Papers</span>
+    </div>
+  </div>
+
+  <!-- Loading Indicator -->
+  <div id="loading-indicator" style="display: none; text-align: center;">
+    <div class="loading-spinner"></div>
+    <p>Searching UIBK database...</p>
+  </div>
+
+  <!-- Status Messages -->
+  <div id="status-message" class="status-message" style="display: none;">
+    <p id="status-text"></p>
+  </div>
+
+  <!-- Publications List -->
+  <div id="publications-list" class="publications-list">
+    <!-- Publications will be inserted here -->
+  </div>
+</div>
+
+<script src="{{ './assets/js/fetch_publications.js' | relative_url }}"></script>

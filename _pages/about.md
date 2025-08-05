@@ -28,7 +28,7 @@ The Edge AI Lab is known for its interdisciplinary approach to solving critical 
 * **Human-AI interaction at the edge** - Designing user-centric AI systems for smart environments
 * **AI for smart cities and IoT ecosystems** - Enabling intelligent urban infrastructure and connected devices
 
-We actively collaborate with leading research institutions and industry partners across Europe and internationally, including partnerships established through the **DataPACT project** (Horizon Europe programme), where we work alongside:
+We actively collaborate with leading research institutions and industry partners across Europe and internationally, including partnerships established through multiple european projects, where we work alongside:
 
 **Academic Partners:**
 - University of Southampton (IT Innovation Centre)
