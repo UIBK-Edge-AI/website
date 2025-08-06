@@ -43,7 +43,7 @@
     }
 
     html[data-theme="dark"] .person-card__image-container {
-    background-color: #1a1a1a;
+    background-color: #1e293b;
     }
 
     .person-card__image {
@@ -83,6 +83,10 @@
     flex-grow: 1;
     display: inline-block;
     flex-direction: row;
+    }
+
+    html[data-theme="dark"] .person-card__content {
+    background-color: #3b3938;
     }
 
     .person-card__name {

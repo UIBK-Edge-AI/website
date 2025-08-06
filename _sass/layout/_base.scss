@@ -364,3 +364,21 @@ b, i, strong, em, blockquote, p, q, span, figure, img, h1, h2, header, input, a,
       display: none;
     }
   }
+
+  // Main content area responsive fixes
+#main {
+  @media (max-width: 767px) {
+    margin-left: 0;
+    padding: 1rem;
+  }
+  
+  @include breakpoint($large) {
+    margin-left: span(2 of 12);  // Account for fixed sidebar
+  }
+}
+
+.page {
+  @media (max-width: 767px) {
+    padding: 0;
+  }
+}

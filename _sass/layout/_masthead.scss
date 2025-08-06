@@ -1,5 +1,5 @@
 /* ==========================================================================
-   MASTHEAD
+   MASTHEAD - MOBILE RESPONSIVE FIXES
    ========================================================================== */
 
 .masthead {
@@ -29,6 +29,11 @@
     @include clearfix;
     padding: 0.5em 1em;
     font-family: $sans-serif-narrow;
+
+    // Mobile responsive padding
+    @media (max-width: 767px) {
+      padding: 0.25rem 0.5rem;
+    }
 
     @include breakpoint($x-large) {
       max-width: $x-large;
@@ -63,11 +68,17 @@
   &--lg {
     padding-right: 2em;
     font-weight: 700;
+    
+    // Mobile: Reduce padding
+    @media (max-width: 767px) {
+      padding-right: 1em;
+      font-size: 0.9rem;
+    }
   }
 }
 
 /* ==========================================================================
-   NAVIGATION
+   NAVIGATION - MOBILE RESPONSIVE FIXES
    ========================================================================== */
 
 .greedy-nav {
@@ -76,12 +87,26 @@
   min-width: 250px;
   background: var(--global-bg-color);
 
+  // Mobile: Allow wrapping and reduce min-width
+  @media (max-width: 767px) {
+    min-width: auto;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
   a {
     display: block;
     margin: 0 1rem;
     padding: 0.5rem 0;
     color: var(--global-masthead-link-color);
     text-decoration: none;
+
+    // Mobile: Reduce margin
+    @media (max-width: 767px) {
+      margin: 0 0.5rem;
+      padding: 0.4rem 0;
+      font-size: 0.9rem;
+    }
 
     &:hover {
       color: var(--global-masthead-link-color-hover);
@@ -90,6 +115,17 @@
 
   button {
     display: none;
+    
+    // Mobile: Show hamburger button if needed
+    @media (max-width: 767px) {
+      display: block;
+      background: none;
+      border: none;
+      color: var(--global-masthead-link-color);
+      font-size: 1.2rem;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
   }
 
   .visible-links {
@@ -101,6 +137,31 @@
     margin: 0;
     padding: 0;
 
+    // Mobile: Allow wrapping and center content
+    @media (max-width: 767px) {
+      flex-wrap: wrap;
+      justify-content: center;
+      width: auto;
+      
+      // Hide links on very small screens - show hamburger instead
+      @media (max-width: 480px) {
+        display: none;
+        
+        &.show-mobile-menu {
+          display: flex;
+          flex-direction: column;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          background: var(--global-bg-color);
+          border-top: 1px solid var(--global-border-color);
+          box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+          z-index: 1000;
+        }
+      }
+    }
+
     li {
       display: flex;
       align-items: center;
@@ -108,16 +169,17 @@
       white-space: nowrap;
       margin-left: 0;
 
-      // &:first-child {
-      //   font-weight: bold;
-      //   a {
-      //     margin-left: 0;
-      //   }
-      // }
-
-      // &:last-child a {
-      //   margin-left: 0;
-      // }
+      // Mobile: Stack vertically when menu is expanded
+      @media (max-width: 480px) {
+        .show-mobile-menu & {
+          width: 100%;
+          border-bottom: 1px solid var(--global-border-color);
+          
+          &:last-child {
+            border-bottom: none;
+          }
+        }
+      }
     }
 
     #theme-toggle {
@@ -131,6 +193,13 @@
       align-items: center;
       justify-content: center;
       
+      // Mobile: Reduce padding
+      @media (max-width: 767px) {
+        padding: 8px;
+        min-width: 20px;
+        min-height: 20px;
+      }
+      
       &:hover {
         background-color: transparent;
       }
@@ -142,35 +211,46 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        cursor: pointer;                    // Makes cursor show pointer
+        cursor: pointer;
         border-radius: 6px;
         transition: all 0.2s ease;
-        position: relative;                 // Keeps positioning context for pseudo-element
+        position: relative;
+        
+        // Mobile: Reduce size
+        @media (max-width: 767px) {
+          width: 24px;
+          height: 24px;
+          padding: 12px;
+        }
         
         &:before {
-          content: "";                      // Creates the orange underline
-          position: absolute;               // Positions relative to the <a> tag
-          left: 0;                         // Starts at left edge
-          bottom: 0;                       // Positions at bottom
-          height: 4px;                     // Height of orange bar
-          background: #d2691e;             // Orange color
-          width: 100%;                     // Full width of parent
-          transition: $global-transition;   // Smooth animation
-          transform: scaleX(0);            // Initially hidden (0 width)
-          pointer-events: none;            // ← KEY FIX: Allows clicks to pass through
+          content: "";
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          height: 4px;
+          background: #d2691e;
+          width: 100%;
+          transition: $global-transition;
+          transform: scaleX(0);
+          pointer-events: none;
         }
         
         &:hover:before {
-          transform: scaleX(1);            // Shows orange bar on hover
+          transform: scaleX(1);
         }
       }
       
-      // Make sure the icon doesn't block clicks either
       #theme-icon, 
       i {
-        pointer-events: none;              // ← Allows clicks to pass through icon
+        pointer-events: none;
         font-size: 18px;
         line-height: 1;
+        
+        // Mobile: Smaller icon
+        @media (max-width: 767px) {
+          font-size: 16px;
+        }
       }
     }
 
@@ -197,7 +277,7 @@
 }
 
 /* ==========================================================================
-   DROPDOWN NAVIGATION - Enhanced with pointer-events
+   DROPDOWN NAVIGATION - MOBILE RESPONSIVE FIXES
    ========================================================================== */
 
 .masthead__menu-item.dropdown-item {
@@ -215,7 +295,15 @@
     text-decoration: none;
     transition: all 0.3s ease;
     position: relative;
-    cursor: pointer;                      // Ensure cursor shows pointer
+    cursor: pointer;
+    
+    // Mobile: Reduce margin and gap
+    @media (max-width: 767px) {
+      margin: 0 0.5rem;
+      padding: 0.4rem 0;
+      gap: 4px;
+      font-size: 0.9rem;
+    }
   }
 
   .dropdown-arrow {
@@ -223,16 +311,26 @@
     margin-left: 6px;
     color: #666;
     transition: transform 0.3s ease;
-    pointer-events: none;                 // ← KEY FIX: Allows hover to pass through arrow
+    pointer-events: none;
     line-height: 1;
+    
+    // Mobile: Smaller arrow
+    @media (max-width: 767px) {
+      font-size: 10px;
+      margin-left: 4px;
+    }
   }
 
-  // Make sure any icons inside the dropdown toggle don't interfere
   .dropdown-toggle {
     i, .fa, .fas, .far, .fab {
-      pointer-events: none;               // ← Allows hover to pass through all icons
+      pointer-events: none;
       font-size: 12px;
       line-height: 1;
+      
+      // Mobile: Smaller icons
+      @media (max-width: 767px) {
+        font-size: 10px;
+      }
     }
   }
 
@@ -267,6 +365,20 @@
   list-style: none;
   margin: 0;
   padding: 8px 0;
+  
+  // Mobile: Full width dropdown
+  @media (max-width: 767px) {
+    position: fixed;
+    top: auto;
+    left: 0;
+    right: 0;
+    min-width: auto;
+    max-height: 60vh;
+    overflow-y: auto;
+    transform: translateY(0);
+    border-radius: 0;
+    margin-top: 1px;
+  }
 }
 
 .masthead__menu-item.dropdown-item.open .dropdown-menu {
@@ -279,6 +391,11 @@
 
 .masthead__menu-item.dropdown-item[data-dropdown-initialized="true"]:hover .dropdown-menu {
   display: block !important;
+  
+  // Mobile: Touch-friendly - only show on click, not hover
+  @media (max-width: 767px) {
+    display: none !important;
+  }
 }
 
 .dropdown-menu-item {
@@ -287,7 +404,7 @@
   position: relative; 
 
   a {
-    display: block;                       // ← Changed from flex to block for consistent positioning
+    display: block;
     padding: 12px 20px;
     text-decoration: none;
     color: #555;
@@ -297,10 +414,22 @@
     position: relative;
     cursor: pointer;
 
+    // Mobile: Larger touch targets
+    @media (max-width: 767px) {
+      padding: 16px 20px;
+      font-size: 16px; // Prevents zoom on iOS
+    }
+
     &:hover {
       background-color: #f8f9fa;
       color: #f68712;
       padding-left: 24px;
+      
+      // Mobile: Different hover effect
+      @media (max-width: 767px) {
+        background-color: #f0f0f0;
+        padding-left: 20px; // No indent on mobile
+      }
     }
 
     &:before {
@@ -310,22 +439,21 @@
     &:after {
       content: '';
       position: absolute;
-      left: 0;                            // ← This ensures all bars start from the same position
+      left: 0;
       top: 0;
       bottom: 0;
-      width: 3px;                         // ← Fixed width for consistency
+      width: 3px;
       background: #f68712;
       transform: scaleY(0);
       transition: transform 0.2s ease;
       pointer-events: none;
-      transform-origin: top;              // ← Changed from center to top for better alignment
+      transform-origin: top;
     }
 
     &:hover:after {
       transform: scaleY(1);
     }
 
-    // Make sure any icons in dropdown items don't interfere
     i, .fa, .fas, .far, .fab, .dropdown-icon {
       pointer-events: none;
       line-height: 1;
@@ -338,11 +466,40 @@
   width: 16px;
   text-align: center;
   margin-right: 8px;
-  pointer-events: none;                   // ← Allows clicks to pass through dropdown icons
+  pointer-events: none;
+  
+  // Mobile: Slightly larger icons
+  @media (max-width: 767px) {
+    font-size: 16px;
+    width: 18px;
+  }
 }
 
 /* ==========================================================================
-   DARK THEME - Enhanced with pointer-events
+   MOBILE HAMBURGER MENU (Optional Enhancement)
+   ========================================================================== */
+
+// Add this JavaScript-controlled class to show/hide mobile menu
+.mobile-menu-toggle {
+  display: none;
+  
+  @media (max-width: 480px) {
+    display: block;
+    background: none;
+    border: none;
+    color: var(--global-masthead-link-color);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    
+    &:hover {
+      color: var(--global-masthead-link-color-hover);
+    }
+  }
+}
+
+/* ==========================================================================
+   DARK THEME - MOBILE RESPONSIVE FIXES
    ========================================================================== */
 
 html[data-theme="dark"] {
@@ -356,6 +513,15 @@ html[data-theme="dark"] {
   }
 
   .greedy-nav .visible-links {
+    // Mobile: Dark theme dropdown background
+    @media (max-width: 480px) {
+      &.show-mobile-menu {
+        background: var(--global-bg-color);
+        border-color: #444;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+      }
+    }
+    
     #theme-toggle a {
       color: #90cdf4;
       &:hover {
@@ -372,6 +538,12 @@ html[data-theme="dark"] {
     background: #2d2d2d;
     border-color: #444;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    
+    // Mobile: Dark theme mobile dropdown
+    @media (max-width: 767px) {
+      background: var(--global-bg-color);
+      border-color: #444;
+    }
   }
 
   .dropdown-menu-item a {
@@ -380,11 +552,16 @@ html[data-theme="dark"] {
     &:hover {
       background-color: transparent;
       color: #4da6ff;
+      
+      // Mobile: Dark theme mobile hover
+      @media (max-width: 767px) {
+        background-color: rgba(255, 255, 255, 0.05);
+      }
     }
 
     &:after {
       background: #f68712;
-      pointer-events: none;               // ← Prevent after pseudo-element from interfering in dark mode
+      pointer-events: none;
     }
   }
 
@@ -400,7 +577,15 @@ html[data-theme="dark"] {
     &:hover .dropdown-arrow,
     &.open .dropdown-arrow {
       color: #bee3f8;
-      pointer-events: none;               // ← Ensure arrow doesn't interfere in dark mode
+      pointer-events: none;
+    }
+  }
+  
+  .mobile-menu-toggle {
+    color: #90cdf4;
+    
+    &:hover {
+      color: #bee3f8;
     }
   }
 }

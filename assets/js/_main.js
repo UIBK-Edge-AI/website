@@ -374,3 +374,14 @@ $(document).ready(function () {
   });
 
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+  const mobileToggle = document.querySelector('.mobile-menu-toggle');
+  const visibleLinks = document.querySelector('.visible-links');
+  
+  if (mobileToggle && visibleLinks) {
+    mobileToggle.addEventListener('click', function() {
+      visibleLinks.classList.toggle('show-mobile-menu');
+    });
+  }
+});
