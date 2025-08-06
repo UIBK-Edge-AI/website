@@ -1,5 +1,5 @@
 /* ==========================================================================
-   MASTHEAD - MOBILE RESPONSIVE FIXES
+   MASTHEAD
    ========================================================================== */
 
 .masthead {
@@ -30,7 +30,6 @@
     padding: 0.5em 1em;
     font-family: $sans-serif-narrow;
 
-    // Mobile responsive padding
     @media (max-width: 767px) {
       padding: 0.25rem 0.5rem;
     }
@@ -69,7 +68,6 @@
     padding-right: 2em;
     font-weight: 700;
     
-    // Mobile: Reduce padding
     @media (max-width: 767px) {
       padding-right: 1em;
       font-size: 0.9rem;
@@ -78,7 +76,7 @@
 }
 
 /* ==========================================================================
-   NAVIGATION - MOBILE RESPONSIVE FIXES
+   NAVIGATION
    ========================================================================== */
 
 .greedy-nav {
@@ -87,7 +85,6 @@
   min-width: 250px;
   background: var(--global-bg-color);
 
-  // Mobile: Allow wrapping and reduce min-width
   @media (max-width: 767px) {
     min-width: auto;
     flex-wrap: wrap;
@@ -101,7 +98,6 @@
     color: var(--global-masthead-link-color);
     text-decoration: none;
 
-    // Mobile: Reduce margin
     @media (max-width: 767px) {
       margin: 0 0.5rem;
       padding: 0.4rem 0;
@@ -116,15 +112,23 @@
   button {
     display: none;
     
-    // Mobile: Show hamburger button if needed
     @media (max-width: 767px) {
-      display: block;
+      display: block !important;
+      visibility: visible !important;
       background: none;
       border: none;
       color: var(--global-masthead-link-color);
       font-size: 1.2rem;
       cursor: pointer;
       padding: 0.5rem;
+      position: relative;
+      z-index: 100;
+      height: auto;
+      
+      &.hidden {
+        display: block !important;
+        visibility: visible !important;
+      }
     }
   }
 
@@ -137,28 +141,29 @@
     margin: 0;
     padding: 0;
 
-    // Mobile: Allow wrapping and center content
     @media (max-width: 767px) {
       flex-wrap: wrap;
       justify-content: center;
       width: auto;
+    }
+
+    @media (max-width: 480px) {
+      &.hidden {
+        display: none !important;
+      }
       
-      // Hide links on very small screens - show hamburger instead
-      @media (max-width: 480px) {
-        display: none;
-        
-        &.show-mobile-menu {
-          display: flex;
-          flex-direction: column;
-          position: absolute;
-          top: 100%;
-          left: 0;
-          right: 0;
-          background: var(--global-bg-color);
-          border-top: 1px solid var(--global-border-color);
-          box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-          z-index: 1000;
-        }
+      &.show-mobile-menu {
+        display: flex !important;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--global-bg-color);
+        border-top: 1px solid var(--global-border-color);
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        z-index: 1000;
+        padding: 1rem 0;
       }
     }
 
@@ -169,11 +174,11 @@
       white-space: nowrap;
       margin-left: 0;
 
-      // Mobile: Stack vertically when menu is expanded
       @media (max-width: 480px) {
         .show-mobile-menu & {
           width: 100%;
           border-bottom: 1px solid var(--global-border-color);
+          padding: 0.5rem 0;
           
           &:last-child {
             border-bottom: none;
@@ -193,7 +198,6 @@
       align-items: center;
       justify-content: center;
       
-      // Mobile: Reduce padding
       @media (max-width: 767px) {
         padding: 8px;
         min-width: 20px;
@@ -216,7 +220,6 @@
         transition: all 0.2s ease;
         position: relative;
         
-        // Mobile: Reduce size
         @media (max-width: 767px) {
           width: 24px;
           height: 24px;
@@ -247,7 +250,6 @@
         font-size: 18px;
         line-height: 1;
         
-        // Mobile: Smaller icon
         @media (max-width: 767px) {
           font-size: 16px;
         }
@@ -272,12 +274,65 @@
       &:hover:before {
         transform: scaleX(1);
       }
+
+      @media (max-width: 480px) {
+        .show-mobile-menu & {
+          margin: 0;
+          padding: 0.75rem 1rem;
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  .hidden-links {
+    @media (max-width: 767px) {
+      position: static !important;
+      background: var(--global-bg-color) !important;
+      border: none !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      width: 100% !important;
+      
+      &:not(.hidden) {
+        display: block !important;
+        visibility: visible !important;
+      }
+      
+      li {
+        display: block !important;
+        border-bottom: 1px solid var(--global-border-color);
+        margin: 0 !important;
+        
+        &:last-child {
+          border-bottom: none;
+        }
+        
+        a {
+          display: block !important;
+          margin: 0 !important;
+          padding: 1rem !important;
+          text-align: center !important;
+          font-size: 1rem !important;
+          
+          &:hover {
+            background: var(--global-border-color) !important;
+          }
+        }
+      }
+      
+      &:before,
+      &:after {
+        display: none !important;
+      }
     }
   }
 }
 
 /* ==========================================================================
-   DROPDOWN NAVIGATION - MOBILE RESPONSIVE FIXES
+   DROPDOWN NAVIGATION
    ========================================================================== */
 
 .masthead__menu-item.dropdown-item {
@@ -297,7 +352,6 @@
     position: relative;
     cursor: pointer;
     
-    // Mobile: Reduce margin and gap
     @media (max-width: 767px) {
       margin: 0 0.5rem;
       padding: 0.4rem 0;
@@ -314,7 +368,6 @@
     pointer-events: none;
     line-height: 1;
     
-    // Mobile: Smaller arrow
     @media (max-width: 767px) {
       font-size: 10px;
       margin-left: 4px;
@@ -327,7 +380,6 @@
       font-size: 12px;
       line-height: 1;
       
-      // Mobile: Smaller icons
       @media (max-width: 767px) {
         font-size: 10px;
       }
@@ -366,7 +418,6 @@
   margin: 0;
   padding: 8px 0;
   
-  // Mobile: Full width dropdown
   @media (max-width: 767px) {
     position: fixed;
     top: auto;
@@ -392,7 +443,6 @@
 .masthead__menu-item.dropdown-item[data-dropdown-initialized="true"]:hover .dropdown-menu {
   display: block !important;
   
-  // Mobile: Touch-friendly - only show on click, not hover
   @media (max-width: 767px) {
     display: none !important;
   }
@@ -414,10 +464,9 @@
     position: relative;
     cursor: pointer;
 
-    // Mobile: Larger touch targets
     @media (max-width: 767px) {
       padding: 16px 20px;
-      font-size: 16px; // Prevents zoom on iOS
+      font-size: 16px;
     }
 
     &:hover {
@@ -425,10 +474,9 @@
       color: #f68712;
       padding-left: 24px;
       
-      // Mobile: Different hover effect
       @media (max-width: 767px) {
         background-color: #f0f0f0;
-        padding-left: 20px; // No indent on mobile
+        padding-left: 20px;
       }
     }
 
@@ -468,7 +516,6 @@
   margin-right: 8px;
   pointer-events: none;
   
-  // Mobile: Slightly larger icons
   @media (max-width: 767px) {
     font-size: 16px;
     width: 18px;
@@ -476,61 +523,69 @@
 }
 
 /* ==========================================================================
-   MOBILE HAMBURGER MENU (Optional Enhancement)
+   BODY SPACING
    ========================================================================== */
 
-// Add this JavaScript-controlled class to show/hide mobile menu
-.mobile-menu-toggle {
-  display: none;
+body {
+  padding-top: 90px !important;
   
-  @media (max-width: 480px) {
-    display: block;
-    background: none;
-    border: none;
-    color: var(--global-masthead-link-color);
-    font-size: 1.2rem;
-    cursor: pointer;
-    padding: 0.5rem;
-    
-    &:hover {
-      color: var(--global-masthead-link-color-hover);
-    }
+  @media (max-width: 767px) {
+    padding-top: 75px !important;
   }
 }
 
 /* ==========================================================================
-   DARK THEME - MOBILE RESPONSIVE FIXES
+   DARK THEME
    ========================================================================== */
 
 html[data-theme="dark"] {
-  .greedy-nav a {
-    color: #90cdf4;
+  .greedy-nav {
+    background: var(--global-bg-color) !important;
+    
+    a {
+      color: #90cdf4;
 
-    &:hover {
-      color: #bee3f8;
-      background-color: rgba(144, 205, 244, 0.1);
+      &:hover {
+        color: #bee3f8;
+        background-color: rgba(144, 205, 244, 0.1);
+      }
     }
-  }
 
-  .greedy-nav .visible-links {
-    // Mobile: Dark theme dropdown background
-    @media (max-width: 480px) {
-      &.show-mobile-menu {
-        background: var(--global-bg-color);
-        border-color: #444;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    button {
+      color: #90cdf4 !important;
+      
+      &:hover {
+        color: #bee3f8 !important;
       }
     }
     
-    #theme-toggle a {
-      color: #90cdf4;
-      &:hover {
-        color: #bee3f8;
+    .visible-links {
+      background: var(--global-bg-color) !important;
+      
+      &.show-mobile-menu {
+        background: var(--global-bg-color) !important;
+        border-color: #444 !important;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.3) !important;
+      }
+      
+      #theme-toggle a {
+        color: #90cdf4;
+        &:hover {
+          color: #bee3f8;
+        }
+      }
+
+      a:before {
+        background: #f6ad55;
       }
     }
-
-    a:before {
-      background: #f6ad55;
+    
+    .hidden-links {
+      background: var(--global-bg-color) !important;
+      
+      li a:hover {
+        background: rgba(255, 255, 255, 0.05) !important;
+      }
     }
   }
 
@@ -539,7 +594,6 @@ html[data-theme="dark"] {
     border-color: #444;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
     
-    // Mobile: Dark theme mobile dropdown
     @media (max-width: 767px) {
       background: var(--global-bg-color);
       border-color: #444;
@@ -553,7 +607,6 @@ html[data-theme="dark"] {
       background-color: transparent;
       color: #4da6ff;
       
-      // Mobile: Dark theme mobile hover
       @media (max-width: 767px) {
         background-color: rgba(255, 255, 255, 0.05);
       }
@@ -578,14 +631,6 @@ html[data-theme="dark"] {
     &.open .dropdown-arrow {
       color: #bee3f8;
       pointer-events: none;
-    }
-  }
-  
-  .mobile-menu-toggle {
-    color: #90cdf4;
-    
-    &:hover {
-      color: #bee3f8;
     }
   }
 }

@@ -385,3 +385,111 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 });
+
+// Mobile Menu Toggle Fix
+// Add this to your site's JavaScript or in a <script> tag
+
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('🔧 Mobile menu fix initializing...');
+  
+  // Force show masthead elements on mobile
+  function forceMobileDisplay() {
+    const masthead = document.querySelector('.masthead');
+    const greedy_nav = document.querySelector('.greedy-nav');
+    const visible_links = document.querySelector('.visible-links');
+    const nav_button = document.querySelector('#site-nav button');
+    
+    if (window.innerWidth <= 767) {
+      // Force display critical navigation elements
+      if (masthead) {
+        masthead.style.display = 'block';
+        masthead.style.visibility = 'visible';
+      }
+      if (greedy_nav) {
+        greedy_nav.style.display = 'flex';
+        greedy_nav.style.visibility = 'visible';
+      }
+      if (visible_links) {
+        visible_links.style.display = 'flex';
+        visible_links.style.visibility = 'visible';
+      }
+      if (nav_button) {
+        nav_button.style.display = 'block';
+        nav_button.style.visibility = 'visible';
+      }
+    }
+  }
+  
+  // Handle mobile menu toggle for very small screens
+  function handleMobileMenuToggle() {
+    const nav_button = document.querySelector('#site-nav button');
+    const visible_links = document.querySelector('.visible-links');
+    const hidden_links = document.querySelector('.hidden-links');
+    
+    if (nav_button) {
+      nav_button.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        console.log('🔘 Mobile menu toggle clicked');
+        
+        if (window.innerWidth <= 480) {
+          // Toggle mobile menu on very small screens
+          if (visible_links) {
+            visible_links.classList.toggle('show-mobile-menu');
+          }
+          if (hidden_links) {
+            hidden_links.classList.toggle('hidden');
+          }
+          this.classList.toggle('close');
+        }
+      });
+    }
+  }
+  
+  // Override the greedy navigation behavior on mobile
+  function overrideGreedyNav() {
+    // Disable greedy nav on mobile
+    if (window.innerWidth <= 767) {
+      const updateNav = window.updateNav;
+      if (typeof updateNav === 'function') {
+        // Override the updateNav function to prevent hiding on mobile
+        window.updateNav = function() {
+          if (window.innerWidth > 767) {
+            // Only run original updateNav on desktop
+            updateNav.call(this);
+          } else {
+            // On mobile, ensure elements stay visible
+            forceMobileDisplay();
+          }
+        };
+      }
+    }
+  }
+  
+  // Initialize fixes
+  forceMobileDisplay();
+  handleMobileMenuToggle();
+  overrideGreedyNav();
+  
+  // Re-apply fixes on resize
+  let resizeTimer;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function() {
+      forceMobileDisplay();
+      overrideGreedyNav();
+    }, 100);
+  });
+  
+  // Re-apply fixes on orientation change
+  if (screen.orientation) {
+    screen.orientation.addEventListener('change', function() {
+      setTimeout(function() {
+        forceMobileDisplay();
+      }, 300);
+    });
+  }
+  
+  console.log('✅ Mobile menu fix initialized');
+});
