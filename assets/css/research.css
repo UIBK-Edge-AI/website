@@ -238,6 +238,8 @@
   user-select: none;
   -webkit-user-select: none;
   position: relative;
+  word-wrap: break-word;
+  white-space: normal;
 }
 
 /* Project Row - FIXED: Simplified without transforms */
