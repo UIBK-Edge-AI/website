@@ -1,4 +1,4 @@
-/* Teaching Page Styles */
+/* Teaching Page Styles - FIXED VERSION */
 .teaching-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -52,6 +52,8 @@
   gap: 12px;
   margin-bottom: 24px;
   flex-wrap: wrap;
+  position: relative;
+  z-index: 100;
 }
 
 .filter-btn {
@@ -69,6 +71,10 @@
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
 .filter-btn::before {
@@ -80,6 +86,7 @@
   height: 100%;
   background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
   transition: left 0.5s ease;
+  pointer-events: none;
 }
 
 .filter-btn:hover::before {
@@ -113,6 +120,8 @@
   background: #e3f2fd;
   border-radius: 8px;
   border-left: 4px solid #00549f;
+  position: relative;
+  z-index: 10;
 }
 
 .filter-semester span {
@@ -133,6 +142,7 @@
   position: relative;
   max-width: 500px;
   margin: 0 auto 30px auto;
+  z-index: 10;
 }
 
 .search-input {
@@ -143,6 +153,7 @@
   font-size: 16px;
   transition: all 0.3s ease;
   background: white;
+  box-sizing: border-box;
 }
 
 .search-input:focus {
@@ -161,48 +172,48 @@
   pointer-events: none;
 }
 
-/* Table Container */
+/* Table Container - FIXED: Removed white border */
 .table-container {
   background: transparent;
-  border-radius: 0;
-  overflow: visible;
-  box-shadow: none;
-  border: none;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   width: 100%;
   margin: 0 auto;
+  position: relative;
+  z-index: 1;
 }
 
+/* Courses Table - FIXED: Proper table layout with text wrapping */
 .courses-table {
-  background: transparent;
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+  table-layout: fixed;
+  background: white;
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
 }
 
-/* Ensure table header corners match container */
+/* Column widths - FIXED */
+.courses-table th:nth-child(1) { width: 30%; }  /* Title */
+.courses-table th:nth-child(2) { width: 20%; }  /* Instructor */
+.courses-table th:nth-child(3) { width: 15%; }  /* Room */
+.courses-table th:nth-child(4) { width: 15%; }  /* Degree */
+.courses-table th:nth-child(5) { width: 20%; }  /* Semester */
+
+.courses-table thead {
+  background: linear-gradient(135deg, #00549f, #003f7f);
+  color: white;
+}
+
 .courses-table thead th:first-child {
   border-top-left-radius: 16px;
 }
 
 .courses-table thead th:last-child {
   border-top-right-radius: 16px;
-}
-
-/* Ensure last row corners match container */
-.courses-table tbody tr:last-child td:first-child {
-  border-bottom-left-radius: 16px;
-}
-
-.courses-table tbody tr:last-child td:last-child {
-  border-bottom-right-radius: 16px;
-}
-
-.courses-table th:nth-child(1) { width: 35%; } /* Title */
-.courses-table th:nth-child(2) { width: auto; } /* Instructor */
-.courses-table th:nth-child(3) { width: auto; } /* Room */
-.courses-table th:nth-child(4) { width: auto; } /* Degree */
-.courses-table th:nth-child(5) { width: auto; } /* Semester */
-
-.courses-table thead {
-  background: linear-gradient(135deg, #00549f, #003f7f);
-  color: white;
 }
 
 .courses-table th {
@@ -213,55 +224,75 @@
   letter-spacing: 0.5px;
   text-transform: uppercase;
   border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .courses-table td {
-  padding: 18px;
+  padding: 12px 15px;
   border-bottom: 1px solid #f8f9fa;
-  vertical-align: top;
+  vertical-align: middle;
   text-align: center;
+  background: white;
+  user-select: none;
+  -webkit-user-select: none;
+  position: relative;
+  word-wrap: break-word;
+  white-space: normal;
+  min-height: 60px;
+  height: auto;
 }
 
-/* Table Row Animations */
+.courses-table tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 16px;
+}
+
+.courses-table tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 16px;
+}
+
+/* Course Row - FIXED: Simplified without transforms */
 .course-row {
-  background: transparent;
-  transition: all 0.3s ease;  
+  transition: background-color 0.2s ease;
   opacity: 1;
-  transform: translateX(0);
-}
-
-.course-row.filtering-out {
-  opacity: 0;
-  transform: translateX(-20px);
-}
-
-.course-row.filtering-in {
-  animation: slideIn 0.4s ease forwards;
-}
-
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  background: transparent;
 }
 
 .course-row:hover {
-  background-color: transparent;
+  background-color: #f8f9fa !important;
+}
+
+.course-row:hover td {
+  background-color: #f8f9fa !important;
 }
 
 .course-row:last-child td {
   border-bottom: none;
 }
 
-/* Table Cells */
+/* Table Cells - FIXED: Allow text wrapping */
 .title-cell {
   font-weight: 500;
-  max-width: 300px;
+  max-width: 250px;
+  text-align: center !important;
+  word-wrap: break-word;
+  white-space: normal;
+  line-height: 1.3;
+  padding: 12px 15px;
+}
+
+.instructor-cell,
+.room-cell {
+  max-width: 180px;
+  word-wrap: break-word;
+  white-space: normal;
+  line-height: 1.3;
+}
+
+.degree-cell,
+.semester-cell {
+  white-space: nowrap;
+  vertical-align: middle;
 }
 
 .course-link {
@@ -269,6 +300,8 @@
   text-decoration: none;
   font-weight: 600;
   transition: color 0.2s ease;
+  user-select: text;
+  -webkit-user-select: text;
 }
 
 .course-link:hover {
@@ -295,16 +328,19 @@
   white-space: nowrap;
 }
 
-/* Degree Badges */
+/* Degree Badges - FIXED: Smaller badges */
 .degree-badge {
   display: inline-block;
-  padding: 6px 14px;
-  border-radius: 20px;
-  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 15px;
+  font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
   white-space: nowrap;
+  line-height: 1.2;
+  min-width: 60px;
+  text-align: center;
 }
 
 .degree-bachelor {
@@ -325,15 +361,18 @@
   border: 1px solid #9e9e9e;
 }
 
-/* Semester Badges */
+/* Semester Badges - FIXED: Smaller badges */
 .semester-badge {
   display: inline-block;
-  padding: 6px 14px;
-  border-radius: 20px;
-  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 15px;
+  font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
   white-space: nowrap;
+  line-height: 1.2;
+  min-width: 60px;
+  text-align: center;
   background: linear-gradient(135deg, #e3f2fd, #bbdefb);
   color: #1976d2;
   border: 1px solid #2196f3;
@@ -347,6 +386,8 @@
   background: white;
   border-radius: 16px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  position: relative;
+  z-index: 1;
 }
 
 .no-results-icon {
@@ -439,7 +480,11 @@ html[data-theme="dark"] .search-icon {
 
 html[data-theme="dark"] .table-container {
   background: transparent;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
 
+html[data-theme="dark"] .courses-table {
+  background: #2a2a2a;
 }
 
 html[data-theme="dark"] .courses-table thead {
@@ -449,6 +494,7 @@ html[data-theme="dark"] .courses-table thead {
 html[data-theme="dark"] .courses-table td {
   border-bottom-color: #444;
   color: #e0e0e0;
+  background: #2a2a2a;
 }
 
 html[data-theme="dark"] .courses-table th {
@@ -456,7 +502,11 @@ html[data-theme="dark"] .courses-table th {
 }
 
 html[data-theme="dark"] .course-row:hover {
-  background-color: transparent;
+  background-color: #333 !important;
+}
+
+html[data-theme="dark"] .course-row:hover td {
+  background-color: #333 !important;
 }
 
 html[data-theme="dark"] .course-link {
@@ -532,6 +582,15 @@ html[data-theme="dark"] .semester-badge {
   .title-cell {
     max-width: 200px;
   }
+
+  .filter-controls {
+    gap: 8px;
+  }
+  
+  .filter-btn {
+    padding: 10px 16px;
+    font-size: 13px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -585,9 +644,8 @@ html[data-theme="dark"] .semester-badge {
   .courses-table td {
     border: none;
     padding: 8px 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: block;
+    text-align: left !important;
   }
   
   .courses-table td::before {
@@ -597,6 +655,8 @@ html[data-theme="dark"] .semester-badge {
     text-transform: uppercase;
     font-size: 11px;
     letter-spacing: 0.5px;
+    display: block;
+    margin-bottom: 4px;
   }
   
   .title-cell::before { content: "Course"; }
