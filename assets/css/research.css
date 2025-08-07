@@ -1,4 +1,4 @@
-/* Research Page Styles */
+/* Research Page Styles - FIXED VERSION */
 .research-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -46,7 +46,7 @@
   margin: 0 auto;
 }
 
-/* Filter Controls - FIXED: Higher z-index to prevent conflicts */
+/* Filter Controls */
 .filter-controls {
   display: flex;
   justify-content: center;
@@ -54,7 +54,7 @@
   margin-bottom: 24px;
   flex-wrap: wrap;
   position: relative;
-  z-index: 100; /* Much higher to ensure it's above everything */
+  z-index: 100;
 }
 
 .filter-btn {
@@ -72,7 +72,6 @@
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
-  /* FIXED: Prevent any text selection issues */
   user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -88,7 +87,7 @@
   height: 100%;
   background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
   transition: left 0.5s ease;
-  pointer-events: none; /* CRITICAL: Prevent pseudo-element interference */
+  pointer-events: none;
 }
 
 .filter-btn:hover::before {
@@ -174,40 +173,42 @@
   pointer-events: none;
 }
 
-/* FIXED: Table Container - Simplified to prevent positioning issues */
+/* Table Container - FIXED: Removed white border */
 .table-container {
-  background: white;
+  background: transparent;
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  border: 1px solid #f1f3f4;
   width: 100%;
   margin: 0 auto;
   position: relative;
-  z-index: 1; /* Lower than filter controls */
+  z-index: 1;
 }
 
+/* Research Table - FIXED: Proper table layout */
 .research-table {
-  width: 100%;
+  width: auto;
   border-collapse: collapse;
   font-size: 15px;
-  table-layout: fixed;
-  background: transparent;
+  table-layout: auto;
+  background: white;
   position: relative;
+  border-radius: 16px;
+  overflow: hidden;
 }
 
-.research-table th:nth-child(1) { width: 35%; } /* Title */
-.research-table th:nth-child(2) { width: auto; } /* Student */
-.research-table th:nth-child(3) { width: auto; } /* Supervisor */
-.research-table th:nth-child(4) { width: auto; } /* Degree */
-.research-table th:nth-child(5) { width: auto; } /* Status */
+/* Column widths - FIXED */
+.research-table th:nth-child(1) { width: 40%; }  /* Title */
+.research-table th:nth-child(2) { width: 20%; }  /* Student */
+.research-table th:nth-child(3) { width: 20%; }  /* Supervisor */
+.research-table th:nth-child(4) { width: 10%; }  /* Degree */
+.research-table th:nth-child(5) { width: 10%; }  /* Status */
 
 .research-table thead {
   background: linear-gradient(135deg, #00549f, #003f7f);
   color: white;
 }
 
-/* FIXED: Table header rounded corners */
 .research-table thead th:first-child {
   border-top-left-radius: 16px;
 }
@@ -224,7 +225,6 @@
   letter-spacing: 0.5px;
   text-transform: uppercase;
   border-bottom: 2px solid rgba(255, 255, 255, 0.1);
-  /* FIXED: Prevent any selection issues */
   user-select: none;
   -webkit-user-select: none;
 }
@@ -235,21 +235,18 @@
   vertical-align: middle;
   text-align: center;
   background: white;
-  /* FIXED: Prevent cell selection and interaction issues */
   user-select: none;
   -webkit-user-select: none;
   position: relative;
 }
 
-/* FIXED: Project row hover - Removed conflicting transforms */
+/* Project Row - FIXED: Simplified without transforms */
 .project-row {
   transition: background-color 0.2s ease;
   opacity: 1;
   background: transparent;
-  /* REMOVED: All transform properties that were causing issues */
 }
 
-/* FIXED: Simplified hover effect without transforms */
 .project-row:hover {
   background-color: #f8f9fa !important;
 }
@@ -262,7 +259,6 @@
   border-bottom: none;
 }
 
-/* FIXED: Last row rounded corners */
 .research-table tbody tr:last-child td:first-child {
   border-bottom-left-radius: 16px;
 }
@@ -275,7 +271,7 @@
 .title-cell {
   font-weight: 500;
   max-width: 300px;
-  text-align: left !important;
+  text-align: center !important;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -286,7 +282,6 @@
   text-decoration: none;
   font-weight: 600;
   transition: color 0.2s ease;
-  /* Allow link selection */
   user-select: text;
   -webkit-user-select: text;
 }
@@ -505,9 +500,12 @@ html[data-theme="dark"] .search-icon {
 }
 
 html[data-theme="dark"] .table-container {
-  background: #2a2a2a;
-  border-color: #444;
+  background: transparent;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+html[data-theme="dark"] .research-table {
+  background: #2a2a2a;
 }
 
 html[data-theme="dark"] .research-table thead {
@@ -676,7 +674,6 @@ html[data-theme="dark"] .status-completed {
     border: none;
     padding: 8px 0;
     display: block;
-    align-items: center;
     text-align: left !important;
   }
   
