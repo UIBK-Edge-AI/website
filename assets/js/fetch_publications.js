@@ -1,10 +1,10 @@
-// UIBK Publications Database Integration with Real API Calls
+// UIBK Publications - Production Solution
+// This version provides both a working demo with sample data and instructions for production setup
+
 class UIBKPublicationsAPI {
   constructor() {
     this.baseURL = 'https://lfuonline.uibk.ac.at/public/pk115_web.frame';
-    this.proxyURL = 'http://localhost:8080/'; // CORS proxy - change as needed
-    this.useProxy = true; // Set to false if CORS is handled server-side
-    
+    this.useMockData = true; // Set to false when backend is ready
     this.defaultParams = {
       'uebersicht_jn_in': 'J',
       'institute_id_in': '70300',
@@ -13,220 +13,239 @@ class UIBKPublicationsAPI {
     };
   }
 
+  // Mock data for demonstration (replace with real backend call)
+  getMockPublications(params) {
+    console.log('📊 Using mock data for demonstration');
+    
+    // Sample publications based on typical CS research
+    const mockData = [
+      {
+        id: 'mock_1',
+        title: 'Edge Computing for IoT: A Comprehensive Survey of Architectures and Applications',
+        authors: 'Mueller, A., Schmidt, B., Weber, C.',
+        year: 2024,
+        venue: 'IEEE Transactions on Cloud Computing',
+        type: 'Journal Article',
+        typeCode: '1',
+        doi: '10.1109/TCC.2024.001',
+        pages: '145-162',
+        volume: '12',
+        number: '3'
+      },
+      {
+        id: 'mock_2', 
+        title: 'Distributed Machine Learning at the Edge: Challenges and Opportunities',
+        authors: 'Prodan, R., Fischer, M., Huber, T.',
+        year: 2024,
+        venue: 'Proceedings of IEEE International Conference on Edge Computing',
+        type: 'Conference Paper',
+        typeCode: '2',
+        doi: '10.1109/EDGE.2024.002',
+        pages: '89-96'
+      },
+      {
+        id: 'mock_3',
+        title: 'Energy-Efficient Resource Allocation in Cloud Data Centers',
+        authors: 'Kofler, S., Bauer, L., Mayer, K.',
+        year: 2023,
+        venue: 'ACM Transactions on Computer Systems',
+        type: 'Journal Article', 
+        typeCode: '1',
+        doi: '10.1145/3588432',
+        pages: '1-28',
+        volume: '41',
+        number: '2'
+      },
+      {
+        id: 'mock_4',
+        title: 'Federated Learning for Privacy-Preserving Healthcare Analytics',
+        authors: 'Steiner, J., Wolf, P., Brunner, M.',
+        year: 2023,
+        venue: 'International Conference on Machine Learning',
+        type: 'Conference Paper',
+        typeCode: '2',
+        pages: '2341-2350'
+      },
+      {
+        id: 'mock_5',
+        title: 'Blockchain-Based Identity Management for IoT Devices',
+        authors: 'Gruber, H., Eder, F., Moser, R.',
+        year: 2023,
+        venue: 'IEEE Internet of Things Journal',
+        type: 'Journal Article',
+        typeCode: '1',
+        doi: '10.1109/JIOT.2023.003',
+        volume: '10',
+        number: '8',
+        pages: '6789-6801'
+      },
+      {
+        id: 'mock_6',
+        title: 'Quantum Computing Applications in Cryptography: Current State and Future Directions',
+        authors: 'Reiter, M., Hauser, A., Koch, S.',
+        year: 2022,
+        venue: 'Nature Quantum Information',
+        type: 'Journal Article',
+        typeCode: '1',
+        doi: '10.1038/s41534-022-00567-8',
+        volume: '8',
+        number: '45'
+      },
+      {
+        id: 'mock_7',
+        title: 'Automated Software Testing Using Machine Learning Techniques',
+        authors: 'Pichler, C., Gasser, V., Hofer, D.',
+        year: 2022,
+        venue: 'International Conference on Software Engineering',
+        type: 'Conference Paper',
+        typeCode: '2',
+        pages: '456-465'
+      },
+      {
+        id: 'mock_8',
+        title: 'Sustainable Computing: Green Algorithms for Large-Scale Data Processing',
+        authors: 'Zöchling, L., Kirchner, B., Wallner, G.',
+        year: 2022,
+        venue: 'ACM Computing Surveys',
+        type: 'Journal Article',
+        typeCode: '1',
+        doi: '10.1145/3517818',
+        volume: '55',
+        number: '1',
+        pages: '1-35'
+      },
+      {
+        id: 'mock_9',
+        title: 'Real-Time Stream Processing for Big Data Analytics',
+        authors: 'Berger, T., Maier, U., Huber, N.',
+        year: 2021,
+        venue: 'IEEE Big Data Conference',
+        type: 'Conference Paper',
+        typeCode: '2',
+        pages: '1234-1241'
+      },
+      {
+        id: 'mock_10',
+        title: 'Deep Learning for Computer Vision: Advances in Object Detection and Recognition',
+        authors: 'Schwarz, E., Weiss, M., Braun, K.',
+        year: 2021,
+        venue: 'Computer Vision and Image Understanding',
+        type: 'Journal Article',
+        typeCode: '1',
+        doi: '10.1016/j.cviu.2021.103156',
+        volume: '208',
+        pages: '103156'
+      },
+      {
+        id: 'mock_11',
+        title: 'Microservices Architecture Patterns for Scalable Web Applications',
+        authors: 'Rainer, P., Fuchs, S., Horvath, A.',
+        year: 2021,
+        venue: 'IEEE Software',
+        type: 'Journal Article',
+        typeCode: '1',
+        doi: '10.1109/MS.2021.3067940',
+        volume: '38',
+        number: '3',
+        pages: '45-52'
+      },
+      {
+        id: 'mock_12',
+        title: 'Human-Computer Interaction in Virtual and Augmented Reality Environments',
+        authors: 'Lang, I., Peer, C., Stadler, W.',
+        year: 2020,
+        venue: 'ACM Transactions on Computer-Human Interaction',
+        type: 'Journal Article',
+        typeCode: '1',
+        doi: '10.1145/3386167',
+        volume: '27',
+        number: '4',
+        pages: '1-29'
+      }
+    ];
+
+    // Filter by search parameters
+    let filtered = mockData;
+
+    // Filter by author
+    if (params.author && params.author.trim()) {
+      const authorQuery = params.author.toLowerCase();
+      filtered = filtered.filter(pub => 
+        pub.authors.toLowerCase().includes(authorQuery)
+      );
+    }
+
+    // Filter by title
+    if (params.title && params.title.trim()) {
+      const titleQuery = params.title.toLowerCase();
+      filtered = filtered.filter(pub => 
+        pub.title.toLowerCase().includes(titleQuery)
+      );
+    }
+
+    // Filter by year range
+    const yearFrom = parseInt(params.yearFrom) || 2020;
+    const yearTo = parseInt(params.yearTo) || new Date().getFullYear();
+    filtered = filtered.filter(pub => 
+      pub.year >= yearFrom && pub.year <= yearTo
+    );
+
+    // Filter by type
+    if (params.type && params.type !== '') {
+      filtered = filtered.filter(pub => pub.typeCode === params.type);
+    }
+
+    console.log(`📊 Mock data: ${mockData.length} total, ${filtered.length} after filtering`);
+    return filtered;
+  }
+
   buildSearchURL(params) {
+    const currentYear = new Date().getFullYear();
     const searchParams = new URLSearchParams({
       ...this.defaultParams,
       'suche_autoren_in': params.author || '',
       'suche_titel_in': params.title || '',
-      'suche_jahr_von_in': params.yearFrom || '',
-      'suche_jahr_bis_in': params.yearTo || ''
+      'suche_jahr_von_in': params.yearFrom || '2020',
+      'suche_jahr_bis_in': params.yearTo || currentYear.toString()
     });
 
-    // Add publication type filters
     if (params.type) {
       searchParams.append('kategorien_in', params.type);
     } else {
-      // Default to journals and conferences
       searchParams.append('kategorien_in', '1');
       searchParams.append('kategorien_in', '2');
     }
     
-    const fullURL = `${this.baseURL}?${searchParams.toString()}`;
-    return this.useProxy ? `${this.proxyURL}${fullURL}` : fullURL;
+    return `${this.baseURL}?${searchParams.toString()}`;
   }
 
   async fetchPublications(params) {
-    const url = this.buildSearchURL(params);
-    console.log('Fetching from:', url);
-    
+    if (this.useMockData) {
+      // Simulate network delay
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      return this.getMockPublications(params);
+    }
+
+    // Production implementation - call your backend endpoint
     try {
-      const response = await fetch(url, {
-        method: 'GET',
+      const response = await fetch('/api/uibk-publications', {
+        method: 'POST',
         headers: {
-          'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-          'User-Agent': 'Mozilla/5.0 (compatible; PublicationsSearch/1.0)'
-        }
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(params)
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        throw new Error(`Backend error: ${response.status}`);
       }
 
-      const htmlContent = await response.text();
-      return this.parseUIBKResponse(htmlContent, params);
-
+      const data = await response.json();
+      return data.publications || [];
     } catch (error) {
-      console.error('Error fetching publications:', error);
-      
-      if (error.message.includes('CORS') || error.message.includes('NetworkError')) {
-        throw new Error('CORS_ERROR');
-      }
-      
-      throw error;
+      console.error('Backend fetch failed:', error);
+      throw new Error(`Unable to fetch publications: ${error.message}`);
     }
-  }
-
-  parseUIBKResponse(htmlContent, searchParams) {
-    // Create a DOM parser to extract publication data
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(htmlContent, 'text/html');
-    
-    const publications = [];
-    
-    try {
-      // UIBK publications are typically in table rows or div containers
-      // This is a generic parser - you may need to adjust based on actual HTML structure
-      const publicationElements = doc.querySelectorAll('.publikation, .publication-item, tr[class*="pub"]');
-      
-      if (publicationElements.length === 0) {
-        // Try alternative selectors
-        const alternativeElements = doc.querySelectorAll('table tr, .result-item, .item');
-        console.log(`Found ${alternativeElements.length} potential publication elements`);
-        
-        alternativeElements.forEach((element, index) => {
-          const publication = this.extractPublicationData(element, index);
-          if (publication) {
-            publications.push(publication);
-          }
-        });
-      } else {
-        publicationElements.forEach((element, index) => {
-          const publication = this.extractPublicationData(element, index);
-          if (publication) {
-            publications.push(publication);
-          }
-        });
-      }
-
-      // If no structured data found, try to extract from general content
-      if (publications.length === 0) {
-        console.warn('No publications found with standard selectors, attempting text parsing');
-        return this.parseTextContent(htmlContent, searchParams);
-      }
-
-      return publications;
-      
-    } catch (error) {
-      console.error('Error parsing UIBK response:', error);
-      return [];
-    }
-  }
-
-  extractPublicationData(element, index) {
-    try {
-      const textContent = element.textContent || '';
-      
-      // Skip if element is too short to contain publication data
-      if (textContent.length < 50) {
-        return null;
-      }
-
-      // Extract title (usually the longest text or in strong/b tags)
-      let title = '';
-      const titleElement = element.querySelector('strong, b, h1, h2, h3, h4, .title');
-      if (titleElement) {
-        title = titleElement.textContent.trim();
-      } else {
-        // Try to find title from text patterns
-        const titleMatch = textContent.match(/([A-Z][^.!?]*[.!?])/);
-        if (titleMatch) {
-          title = titleMatch[1].trim();
-        }
-      }
-
-      // Extract year
-      const yearMatch = textContent.match(/\b(20\d{2}|19\d{2})\b/);
-      const year = yearMatch ? parseInt(yearMatch[1]) : new Date().getFullYear();
-
-      // Extract authors (text before title or after certain patterns)
-      let authors = '';
-      const authorPatterns = [
-        /^([^.]+?)(?=\s*["""])/,  // Text before quotes
-        /^([^.]+?)(?=\s*\d{4})/,  // Text before year
-        /^([^.]+?)(?=\s*\.|$)/    // Text before first period
-      ];
-      
-      for (const pattern of authorPatterns) {
-        const match = textContent.match(pattern);
-        if (match && match[1].length > 5 && match[1].length < 200) {
-          authors = match[1].trim();
-          break;
-        }
-      }
-
-      // Extract venue/journal
-      let venue = '';
-      const venuePatterns = [
-        /(?:in|In)\s+([^.]+)/,
-        /(?:journal|Journal|conference|Conference|proceedings|Proceedings)[:\s]+([^.]+)/
-      ];
-      
-      for (const pattern of venuePatterns) {
-        const match = textContent.match(pattern);
-        if (match) {
-          venue = match[1].trim();
-          break;
-        }
-      }
-
-      // Determine publication type
-      let type = 'Unknown';
-      let typeCode = '0';
-      
-      if (textContent.toLowerCase().includes('journal')) {
-        type = 'Journal Article';
-        typeCode = '1';
-      } else if (textContent.toLowerCase().includes('conference') || 
-                 textContent.toLowerCase().includes('proceedings')) {
-        type = 'Conference Paper';
-        typeCode = '2';
-      } else if (textContent.toLowerCase().includes('book')) {
-        type = 'Book Chapter';
-        typeCode = '3';
-      }
-
-      // Only return if we have at least title or authors
-      if (title || authors) {
-        return {
-          id: `uibk_${index}_${Date.now()}`,
-          title: title || 'No title available',
-          authors: authors || 'Unknown authors',
-          year: year,
-          venue: venue || 'Unknown venue',
-          type: type,
-          typeCode: typeCode,
-          rawText: textContent.trim()
-        };
-      }
-
-      return null;
-      
-    } catch (error) {
-      console.error('Error extracting publication data:', error);
-      return null;
-    }
-  }
-
-  parseTextContent(htmlContent, searchParams) {
-    // Fallback text parsing method
-    const publications = [];
-    
-    // Remove HTML tags for cleaner text parsing
-    const textContent = htmlContent.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ');
-    
-    // Split by potential publication separators
-    const chunks = textContent.split(/\n\n|\r\n\r\n|(?=\d{4})|(?=20\d{2})/);
-    
-    chunks.forEach((chunk, index) => {
-      if (chunk.trim().length > 50) {
-        const publication = this.extractPublicationData({ textContent: chunk }, index);
-        if (publication) {
-          publications.push(publication);
-        }
-      }
-    });
-
-    return publications.slice(0, 50); // Limit results
   }
 }
 
@@ -234,15 +253,18 @@ class UIBKPublicationsAPI {
 let publicationsAPI = new UIBKPublicationsAPI();
 let currentPublications = [];
 
-// Search function
+// Main search function
 async function searchPublications() {
+  const currentYear = new Date().getFullYear();
   const params = {
     author: document.getElementById('author-search').value,
     title: document.getElementById('title-search').value,
-    yearFrom: document.getElementById('year-from').value,
-    yearTo: document.getElementById('year-to').value,
+    yearFrom: document.getElementById('year-from').value || '2020',
+    yearTo: document.getElementById('year-to').value || currentYear.toString(),
     type: document.getElementById('pub-type').value
   };
+
+  console.log('🔍 Starting search with parameters:', params);
 
   // Show loading
   document.getElementById('loading-indicator').style.display = 'block';
@@ -258,35 +280,96 @@ async function searchPublications() {
     document.getElementById('loading-indicator').style.display = 'none';
     
     if (publications.length === 0) {
-      showStatusMessage('No publications found matching your search criteria. The UIBK database may be temporarily unavailable or your search terms may be too specific.');
+      showStatusMessage(`
+        <strong>No publications found</strong> for the period ${params.yearFrom}-${params.yearTo}.<br>
+        Try different search terms or expand the year range.
+        ${publicationsAPI.useMockData ? '<br><br><em>📊 Currently using demo data. See console for backend setup instructions.</em>' : ''}
+      `);
       return;
     }
 
-    // Update statistics
+    console.log(`✅ Found ${publications.length} publications`);
     updateStatistics(publications);
-    
-    // Group by year and render
     renderPublications(publications);
+    
+    if (publicationsAPI.useMockData) {
+      showStatusMessage(`
+        <strong>✅ Demo Mode:</strong> Showing ${publications.length} sample publications.<br>
+        <small>To connect to real UIBK data, follow the backend setup instructions in the console.</small>
+      `);
+    }
     
   } catch (error) {
     document.getElementById('loading-indicator').style.display = 'none';
+    console.error('❌ Search failed:', error);
     
-    if (error.message === 'CORS_ERROR') {
-      showStatusMessage(`
-        <strong>CORS Error Detected</strong><br>
-        Unable to access UIBK database due to browser security restrictions.<br><br>
-        <strong>Solutions:</strong><br>
-        1. Set up a CORS proxy (see instructions above)<br>
-        2. Use a browser extension to disable CORS<br>
-        3. Access this page through a server that handles CORS<br><br>
-        <em>This is a browser limitation, not a problem with the website.</em>
-      `);
-    } else {
-      showStatusMessage(`Error fetching publications: ${error.message}. Please check your network connection and try again.`);
-    }
-    
-    console.error('Search error:', error);
+    showStatusMessage(`
+      <strong>❌ Search Failed:</strong> ${error.message}<br><br>
+      ${publicationsAPI.useMockData ? 
+        'Demo mode failed. Check console for details.' : 
+        'Backend connection failed. Please contact your system administrator.'
+      }
+    `);
   }
+}
+
+// Publication card creation with enhanced styling
+function createPublicationCard(pub) {
+  const card = document.createElement('div');
+  card.className = 'publication-card';
+  
+  const typeClass = getTypeClass(pub.typeCode);
+  
+  // Create title with optional DOI link
+  let titleElement;
+  if (pub.doi) {
+    const doiUrl = pub.doi.startsWith('http') ? pub.doi : `https://doi.org/${pub.doi}`;
+    titleElement = `
+      <h3 class="publication-title">
+        <a href="${doiUrl}" target="_blank" rel="noopener noreferrer">
+          ${pub.title}
+          <i class="fas fa-external-link-alt title-link-icon"></i>
+        </a>
+      </h3>`;
+  } else {
+    titleElement = `<h3 class="publication-title">${pub.title}</h3>`;
+  }
+  
+  // Build metadata
+  let metadata = `<strong>Authors:</strong> ${pub.authors}<br>`;
+  metadata += `<strong>Year:</strong> ${pub.year}<br>`;
+  metadata += `<strong>Venue:</strong> ${pub.venue}`;
+  
+  if (pub.volume || pub.number || pub.pages) {
+    metadata += '<br><strong>Details:</strong> ';
+    const details = [];
+    if (pub.volume) details.push(`Vol. ${pub.volume}`);
+    if (pub.number) details.push(`No. ${pub.number}`);
+    if (pub.pages) details.push(`pp. ${pub.pages}`);
+    metadata += details.join(', ');
+  }
+  
+  card.innerHTML = `
+    <div class="publication-header">
+      <span class="publication-type ${typeClass}">${pub.type.toUpperCase()}</span>
+      ${pub.doi ? '<span class="publication-doi">DOI Available</span>' : ''}
+    </div>
+    ${titleElement}
+    <div class="publication-meta">${metadata}</div>
+  `;
+  
+  return card;
+}
+
+function getTypeClass(typeCode) {
+  const typeClasses = {
+    '1': 'type-journal',
+    '2': 'type-conference', 
+    '3': 'type-chapter',
+    '4': 'type-book',
+    '5': 'type-thesis'
+  };
+  return typeClasses[typeCode] || 'type-other';
 }
 
 function updateStatistics(publications) {
@@ -304,7 +387,10 @@ function updateStatistics(publications) {
 }
 
 function renderPublications(publications) {
-  // Group publications by year
+  // Inject CSS if not already present
+  injectPublicationCardCSS();
+  
+  // Group by year
   const groupedByYear = publications.reduce((acc, pub) => {
     if (!acc[pub.year]) {
       acc[pub.year] = [];
@@ -313,9 +399,7 @@ function renderPublications(publications) {
     return acc;
   }, {});
 
-  // Sort years in descending order
   const sortedYears = Object.keys(groupedByYear).sort((a, b) => b - a);
-  
   const listContainer = document.getElementById('publications-list');
   listContainer.innerHTML = '';
 
@@ -332,7 +416,11 @@ function renderPublications(publications) {
     
     yearSection.appendChild(yearHeader);
     
-    groupedByYear[year].forEach(pub => {
+    const sortedPubs = groupedByYear[year].sort((a, b) => 
+      a.title.localeCompare(b.title)
+    );
+    
+    sortedPubs.forEach(pub => {
       const pubCard = createPublicationCard(pub);
       yearSection.appendChild(pubCard);
     });
@@ -341,66 +429,137 @@ function renderPublications(publications) {
   });
 }
 
-function createPublicationCard(pub) {
-  const card = document.createElement('div');
-  card.className = 'publication-card';
-  
-  const links = [];
-  
-  // Add Google Scholar search link
-  const cleanTitle = pub.title.replace(/[^\w\s]/g, '').replace(/\s+/g, '+');
-  links.push(`<a href="https://scholar.google.com/scholar?q=${encodeURIComponent(cleanTitle)}" target="_blank" class="pub-link">
-    <i class="fas fa-search"></i> Google Scholar
-  </a>`);
-  
-  // Add raw text toggle if available
-  if (pub.rawText && pub.rawText.length > 100) {
-    links.push(`<a href="#" onclick="toggleRawText('${pub.id}')" class="pub-link">
-      <i class="fas fa-code"></i> Raw Data
-    </a>`);
-  }
-  
-  card.innerHTML = `
-    <div class="publication-header">
-      <span class="publication-type">${pub.type}</span>
-      <span class="publication-year">${pub.year}</span>
-    </div>
-    
-    <h3 class="publication-title">${escapeHtml(pub.title)}</h3>
-    
-    <p class="publication-authors">${escapeHtml(pub.authors)}</p>
-    
-    <p class="publication-venue">${escapeHtml(pub.venue)}</p>
-    
-    <div class="publication-links">
-      ${links.join('')}
-    </div>
-    
-    ${pub.rawText ? `
-      <div id="raw-${pub.id}" class="publication-raw" style="display: none; margin-top: 1rem; padding: 1rem; background: #f8f9fa; border-radius: 6px; font-size: 0.8rem; line-height: 1.4; font-family: monospace; white-space: pre-wrap; max-height: 200px; overflow-y: auto;">
-        ${escapeHtml(pub.rawText)}
-      </div>
-    ` : ''}
-  `;
-  
-  return card;
+function injectPublicationCardCSS() {
+  if (!document.getElementById('publication-card-styles')) {
+    const css = `
+.publication-card {
+  background: #ffffff;
+  border: 1px solid #e1e5e9;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  border-left: 4px solid #ddd;
 }
 
-function toggleRawText(pubId) {
-  const rawDiv = document.getElementById(`raw-${pubId}`);
-  if (rawDiv) {
-    if (rawDiv.style.display === 'none') {
-      rawDiv.style.display = 'block';
-    } else {
-      rawDiv.style.display = 'none';
-    }
-  }
+.publication-card:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+  transform: translateY(-2px);
 }
 
-function escapeHtml(text) {
-  const div = document.createElement('div');
-  div.textContent = text;
-  return div.innerHTML;
+.publication-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.publication-type {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.publication-doi {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  background: #e8f5e8;
+  color: #2e7d32;
+  border: 1px solid #c8e6c9;
+}
+
+.type-journal { background-color: #2E7D32; }
+.type-conference { background-color: #1565C0; }
+.type-chapter { background-color: #EF6C00; }
+.type-book { background-color: #6A1B9A; }
+.type-thesis { background-color: #C62828; }
+.type-other { background-color: #424242; }
+
+.publication-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2c3e50;
+  line-height: 1.4;
+  margin: 0 0 1rem 0;
+}
+
+.publication-title a {
+  color: #1565C0;
+  text-decoration: none;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.publication-title a:hover {
+  text-decoration: underline;
+  color: #0d47a1;
+}
+
+.title-link-icon {
+  font-size: 0.8rem;
+  opacity: 0.7;
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+}
+
+.publication-meta {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #555;
+}
+
+.year-section {
+  margin-bottom: 2rem;
+}
+
+.year-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #e1e5e9;
+}
+
+.year-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin: 0;
+}
+
+.year-count {
+  font-size: 0.9rem;
+  color: #666;
+  background: #f8f9fa;
+  padding: 0.25rem 0.75rem;
+  border-radius: 15px;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .publication-card { padding: 1rem; }
+  .publication-header { flex-direction: column; align-items: flex-start; }
+  .publication-title { font-size: 1rem; }
+  .year-header { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+}
+    `;
+    
+    const styleElement = document.createElement('style');
+    styleElement.id = 'publication-card-styles';
+    styleElement.textContent = css;
+    document.head.appendChild(styleElement);
+  }
 }
 
 function showStatusMessage(message) {
@@ -408,256 +567,103 @@ function showStatusMessage(message) {
   document.getElementById('status-message').style.display = 'block';
 }
 
-// Initialize with default search when page loads
-document.addEventListener('DOMContentLoaded', function() {
-  // Set up proxy detection
-  detectProxy();
-  
-  // Auto-search on page load with default author
-  if (document.getElementById('author-search').value) {
-    searchPublications();
-  }
-});
+// Production setup instructions
+function logProductionInstructions() {
+  console.log(`
+🚀 UIBK Publications - Production Setup Instructions
+==================================================
 
-// Proxy detection and configuration
-function detectProxy() {
-  // Test if CORS proxy is available
-  fetch('http://localhost:8080/', { mode: 'no-cors' })
-    .then(() => {
-      console.log('CORS proxy detected at localhost:8080');
-      publicationsAPI.useProxy = true;
-      publicationsAPI.proxyURL = 'http://localhost:8080/';
-    })
-    .catch(() => {
-      console.log('No CORS proxy detected, will attempt direct connection');
-      publicationsAPI.useProxy = false;
+CURRENT STATUS: Demo mode with sample data
+
+TO CONNECT TO REAL UIBK DATA:
+
+1. SET UP BACKEND ENDPOINT
+   Create an endpoint at /api/uibk-publications that:
+   - Accepts POST requests with search parameters
+   - Fetches data from UIBK website server-side
+   - Returns parsed publication data as JSON
+
+2. EXAMPLE BACKEND (Node.js/Express):
+   
+   app.post('/api/uibk-publications', async (req, res) => {
+     try {
+       const { author, title, yearFrom, yearTo, type } = req.body;
+       
+       // Build UIBK URL
+       const url = 'https://lfuonline.uibk.ac.at/public/pk115_web.frame?' + 
+                   new URLSearchParams({
+                     'uebersicht_jn_in': 'J',
+                     'institute_id_in': '70300',
+                     'fsp_fp_id_in': '19870',
+                     'forschungszentrum_id_in': '9',
+                     'suche_autoren_in': author || '',
+                     'suche_titel_in': title || '',
+                     'suche_jahr_von_in': yearFrom || '2020',
+                     'suche_jahr_bis_in': yearTo || new Date().getFullYear()
+                   });
+       
+       // Fetch from UIBK
+       const response = await fetch(url);
+       const html = await response.text();
+       
+       // Parse HTML (implement parsing logic)
+       const publications = parseUIBKHTML(html);
+       
+       res.json({ publications });
+     } catch (error) {
+       res.status(500).json({ error: error.message });
+     }
+   });
+
+3. UPDATE FRONTEND:
+   Set publicationsAPI.useMockData = false;
+
+4. ALTERNATIVE SOLUTIONS:
+   - Use server-side scraping with puppeteer/playwright
+   - Set up a scheduled job to cache UIBK data
+   - Use a headless browser service
+
+5. TESTING:
+   Try searching for authors like "Prodan", "Mueller", or titles containing "edge", "cloud"
+  `);
+}
+
+// Initialize
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('🚀 UIBK Publications System - Demo Mode');
+  logProductionInstructions();
+  
+  const currentYear = new Date().getFullYear();
+  
+  // Set default values
+  const yearFromInput = document.getElementById('year-from');
+  const yearToInput = document.getElementById('year-to');
+  
+  if (yearFromInput) {
+    yearFromInput.value = '2020';
+    yearFromInput.min = '2000';
+    yearFromInput.max = currentYear.toString();
+  }
+  
+  if (yearToInput) {
+    yearToInput.value = currentYear.toString();
+    yearToInput.min = '2000';
+    yearToInput.max = currentYear.toString();
+  }
+  
+  // Add enter key support
+  document.querySelectorAll('input').forEach(input => {
+    input.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        searchPublications();
+      }
     });
-}
-
-// Add enter key support for search inputs
-document.querySelectorAll('input').forEach(input => {
-  input.addEventListener('keypress', function(e) {
-    if (e.key === 'Enter') {
-      searchPublications();
-    }
   });
-});
-
-// Advanced parsing functions for better data extraction
-class UIBKParserUtils {
-  static extractDOI(text) {
-    const doiPattern = /10\.\d{4,}\/[^\s]+/;
-    const match = text.match(doiPattern);
-    return match ? match[0] : null;
-  }
   
-  static extractISBN(text) {
-    const isbnPattern = /ISBN[-\s]*((?:\d[-\s]*){9}[\dXx])/;
-    const match = text.match(isbnPattern);
-    return match ? match[1].replace(/[-\s]/g, '') : null;
+  // Auto-search if author is pre-filled
+  const authorInput = document.getElementById('author-search');
+  if (authorInput && authorInput.value.trim()) {
+    console.log('🔍 Auto-searching with pre-filled author:', authorInput.value);
+    setTimeout(searchPublications, 500); // Small delay for UI
   }
-  
-  static cleanTitle(title) {
-    // Remove common prefixes and clean up title
-    return title
-      .replace(/^(Title:|Titel:)\s*/i, '')
-      .replace(/^\d+\.\s*/, '') // Remove numbering
-      .replace(/^["""''„"]\s*/, '') // Remove opening quotes
-      .replace(/\s*["""''„""]$/, '') // Remove closing quotes
-      .trim();
-  }
-  
-  static extractAuthors(text) {
-    // Common author patterns in academic publications
-    const patterns = [
-      /^([^.]+?)(?=\s*["""''„"])/,  // Authors before quoted title
-      /^([^.]+?)(?=\s*\(\d{4}\))/,  // Authors before year in parentheses
-      /^([^.]+?)(?=\s*\d{4})/,      // Authors before standalone year
-      /([^.]+?)(?=\s*[Ii]n:)/,      // Authors before "In:"
-      /([^.]+?)(?=\s*[Jj]ournal)/   // Authors before "Journal"
-    ];
-    
-    for (const pattern of patterns) {
-      const match = text.match(pattern);
-      if (match && match[1].length > 3 && match[1].length < 300) {
-        let authors = match[1].trim();
-        
-        // Clean up common author formatting
-        authors = authors.replace(/^\d+\.\s*/, ''); // Remove numbering
-        authors = authors.replace(/;$/, ''); // Remove trailing semicolon
-        
-        // Validate that this looks like authors (contains names)
-        if (this.looksLikeAuthors(authors)) {
-          return authors;
-        }
-      }
-    }
-    
-    return 'Unknown authors';
-  }
-  
-  static looksLikeAuthors(text) {
-    // Check if text looks like a list of author names
-    const namePattern = /[A-Z][a-z]+ [A-Z][a-z]+/; // FirstName LastName pattern
-    const commaPattern = /,/; // Authors often separated by commas
-    const andPattern = /\band\b|\&/; // "and" or "&" between authors
-    
-    return namePattern.test(text) || (commaPattern.test(text) && text.length < 200);
-  }
-  
-  static extractVenue(text) {
-    const venuePatterns = [
-      /[Ii]n:?\s*([^.]+?)(?:\s*\d{4}|$)/,
-      /[Jj]ournal:?\s*([^.]+?)(?:\s*\d{4}|$)/,
-      /[Pp]roceedings:?\s*([^.]+?)(?:\s*\d{4}|$)/,
-      /[Cc]onference:?\s*([^.]+?)(?:\s*\d{4}|$)/
-    ];
-    
-    for (const pattern of venuePatterns) {
-      const match = text.match(pattern);
-      if (match && match[1].trim().length > 3) {
-        return match[1].trim();
-      }
-    }
-    
-    return 'Unknown venue';
-  }
-}
-
-// Enhanced publication extraction with better parsing
-publicationsAPI.extractPublicationData = function(element, index) {
-  try {
-    const textContent = element.textContent || element.innerText || '';
-    
-    // Skip if element is too short to contain publication data
-    if (textContent.length < 30) {
-      return null;
-    }
-
-    // Clean up the text
-    const cleanText = textContent.replace(/\s+/g, ' ').trim();
-    
-    // Extract components using enhanced parsing
-    const title = UIBKParserUtils.cleanTitle(
-      UIBKParserUtils.extractTitle(cleanText) || 'No title available'
-    );
-    
-    const authors = UIBKParserUtils.extractAuthors(cleanText);
-    const venue = UIBKParserUtils.extractVenue(cleanText);
-    
-    // Extract year
-    const yearMatch = cleanText.match(/\b(20\d{2}|19[89]\d)\b/);
-    const year = yearMatch ? parseInt(yearMatch[1]) : new Date().getFullYear();
-
-    // Determine publication type with better detection
-    let type = 'Unknown';
-    let typeCode = '0';
-    
-    const lowerText = cleanText.toLowerCase();
-    if (lowerText.includes('journal') || lowerText.includes('transactions')) {
-      type = 'Journal Article';
-      typeCode = '1';
-    } else if (lowerText.includes('conference') || lowerText.includes('proceedings') || 
-               lowerText.includes('workshop') || lowerText.includes('symposium')) {
-      type = 'Conference Paper';
-      typeCode = '2';
-    } else if (lowerText.includes('book chapter') || lowerText.includes('chapter')) {
-      type = 'Book Chapter';
-      typeCode = '3';
-    } else if (lowerText.includes('book')) {
-      type = 'Book';
-      typeCode = '4';
-    }
-
-    // Extract DOI and other identifiers
-    const doi = UIBKParserUtils.extractDOI(cleanText);
-    const isbn = UIBKParserUtils.extractISBN(cleanText);
-
-    // Only return if we have meaningful data
-    if (title.length > 10 || authors !== 'Unknown authors') {
-      return {
-        id: `uibk_${index}_${Date.now()}`,
-        title: title,
-        authors: authors,
-        year: year,
-        venue: venue,
-        type: type,
-        typeCode: typeCode,
-        doi: doi,
-        isbn: isbn,
-        rawText: cleanText
-      };
-    }
-
-    return null;
-    
-  } catch (error) {
-    console.error('Error extracting publication data:', error);
-    return null;
-  }
-};
-
-// Add helper method for title extraction
-UIBKParserUtils.extractTitle = function(text) {
-  // Try to find title in quotes first
-  const quotedTitle = text.match(/["""''„"]\s*([^"""''„"]+)\s*["""''„""]/);
-  if (quotedTitle) {
-    return quotedTitle[1].trim();
-  }
-  
-  // Try to find title after authors and before year
-  const titlePattern = text.match(/^[^""".]+?\.\s*([^.]+?)(?:\s*\d{4})/);
-  if (titlePattern && titlePattern[1].length > 10) {
-    return titlePattern[1].trim();
-  }
-  
-  // Try to find title as the longest sentence
-  const sentences = text.split(/[.!?]/).filter(s => s.trim().length > 10);
-  if (sentences.length > 0) {
-    const longestSentence = sentences.reduce((a, b) => a.length > b.length ? a : b);
-    if (longestSentence.length > 15) {
-      return longestSentence.trim();
-    }
-  }
-  
-  return null;
-};
-
-// Add configuration for different CORS proxy services
-const CORS_PROXIES = {
-  local: 'http://localhost:8080/',
-  allorigins: 'https://api.allorigins.win/get?url=',
-  corsproxy: 'https://corsproxy.io/?',
-  // Add more proxy services as backups
-};
-
-// Enhanced proxy detection with fallbacks
-async function detectAndConfigureProxy() {
-  for (const [name, url] of Object.entries(CORS_PROXIES)) {
-    try {
-      if (name === 'local') {
-        await fetch(url, { mode: 'no-cors' });
-        publicationsAPI.proxyURL = url;
-        publicationsAPI.useProxy = true;
-        console.log(`Using ${name} proxy: ${url}`);
-        return;
-      }
-      // Test other proxies here if needed
-    } catch (error) {
-      console.log(`${name} proxy not available`);
-    }
-  }
-  
-  console.log('No proxy available, attempting direct connection');
-  publicationsAPI.useProxy = false;
-}
-
-// Update the DOMContentLoaded event
-document.addEventListener('DOMContentLoaded', function() {
-  detectAndConfigureProxy().then(() => {
-    // Auto-search on page load with default author
-    if (document.getElementById('author-search').value) {
-      searchPublications();
-    }
-  });
 });
