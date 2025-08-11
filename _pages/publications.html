@@ -10,24 +10,6 @@ author_profile: true
 
 
 <div class="publications-container">
-  
-  <!-- CORS/Proxy Information -->
-  <div class="proxy-instructions">
-    <h3><i class="fas fa-info-circle"></i> Setup Required for Real API Access</h3>
-    <p>This page attempts to fetch real publication data from the UIBK database. Due to browser CORS restrictions, you have several options:</p>
-    
-    <p><strong>Option 1: Use a CORS Proxy (Recommended for Testing)</strong></p>
-    <p>Install and run a local CORS proxy:</p>
-    <code>npm install -g cors-anywhere</code><br>
-    <code>cors-anywhere</code>
-    <p>This will run a proxy server at <code>http://localhost:8080</code></p>
-    
-    <p><strong>Option 2: Server-Side Integration (Recommended for Production)</strong></p>
-    <p>Create a backend endpoint that fetches from UIBK and serves the data to your frontend.</p>
-    
-    <p><strong>Option 3: Browser Extension</strong></p>
-    <p>Use a browser extension like "CORS Unblock" for development (not recommended for production).</p>
-  </div>
 
   <!-- Search and Filter Controls -->
   <div class="controls-section">
@@ -38,12 +20,12 @@ author_profile: true
     <div class="search-grid">
       <div class="form-group">
         <label for="author-search">Author Name</label>
-        <input type="text" id="author-search" placeholder="Enter keywords..." value="">
+        <input type="text" id="author-search" placeholder="e.g., surname" value="">
       </div>
       
       <div class="form-group">
         <label for="title-search">Title Keywords</label>
-        <input type="text" id="title-search" placeholder="Enter keywords...">
+        <input type="text" id="title-search" placeholder="e.g., edge computing, machine learning...">
       </div>
       
       <div class="form-group">
@@ -53,7 +35,7 @@ author_profile: true
       
       <div class="form-group">
         <label for="year-to">Year To</label>
-        <input type="number" id="year-to" placeholder="2025" min="2020" max="2025">
+        <input type="number" id="year-to" placeholder="2025" min="2000" max="2025">
       </div>
       
       <div class="form-group">
@@ -64,6 +46,7 @@ author_profile: true
           <option value="2">Conference Papers</option>
           <option value="3">Book Chapters</option>
           <option value="4">Books</option>
+          <option value="5">Theses</option>
         </select>
       </div>
       
@@ -76,7 +59,7 @@ author_profile: true
   </div>
 
   <!-- Statistics Bar -->
-  <div class="stats-bar" id="stats-bar" style="display: none;">
+  <div class="stats-bar" id="stats-bar">
     <div class="stats-item">
       <span class="stats-number" id="total-pubs">0</span>
       <span class="stats-label">Total Publications</span>
@@ -98,7 +81,7 @@ author_profile: true
   <!-- Loading Indicator -->
   <div id="loading-indicator" style="display: none; text-align: center;">
     <div class="loading-spinner"></div>
-    <p>Searching UIBK database...</p>
+    <p style="color: #6c757d; margin-top: 1rem;">Loading publications from BibTeX file...</p>
   </div>
 
   <!-- Status Messages -->
@@ -108,7 +91,6 @@ author_profile: true
 
   <!-- Publications List -->
   <div id="publications-list" class="publications-list">
-    <!-- Publications will be inserted here -->
   </div>
 </div>
 

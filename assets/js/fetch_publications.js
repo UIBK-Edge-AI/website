@@ -1,171 +1,179 @@
-// UIBK Publications - Production Solution
-// This version provides both a working demo with sample data and instructions for production setup
-
-class UIBKPublicationsAPI {
+class BibTeXParser {
   constructor() {
-    this.baseURL = 'https://lfuonline.uibk.ac.at/public/pk115_web.frame';
-    this.useMockData = true; // Set to false when backend is ready
-    this.defaultParams = {
-      'uebersicht_jn_in': 'J',
-      'institute_id_in': '70300',
-      'fsp_fp_id_in': '19870',
-      'forschungszentrum_id_in': '9'
+    this.publications = [];
+  }
+
+  // Parse BibTeX content
+  parseBibTeX(bibContent) {
+    const publications = [];
+    
+    // Regular expression to match BibTeX entries
+    const entryRegex = /@(\w+)\s*\{\s*([^,]+),\s*([\s\S]*?)\n\}/g;
+    
+    let match;
+    while ((match = entryRegex.exec(bibContent)) !== null) {
+      const [, type, key, fields] = match;
+      
+      try {
+        const publication = this.parseEntry(type, key, fields);
+        if (publication) {
+          publications.push(publication);
+        }
+      } catch (error) {
+        console.warn(`Error parsing entry ${key}:`, error);
+      }
+    }
+    
+    return publications;
+  }
+
+  // Parse individual BibTeX entry
+  parseEntry(type, key, fieldsContent) {
+    const fields = {};
+    
+    // Regular expression to match field = {value} pairs
+    const fieldRegex = /(\w+)\s*=\s*\{([^}]*(?:\{[^}]*\}[^}]*)*)\}/g;
+    
+    let fieldMatch;
+    while ((fieldMatch = fieldRegex.exec(fieldsContent)) !== null) {
+      const [, fieldName, fieldValue] = fieldMatch;
+      fields[fieldName.toLowerCase()] = this.cleanFieldValue(fieldValue);
+    }
+
+    // Determine publication type
+    const pubType = this.getPublicationType(type.toLowerCase());
+    
+    // Extract venue based on publication type
+    const venue = this.getVenue(fields, type.toLowerCase());
+    
+    // Parse authors
+    const authors = this.parseAuthors(fields.author || '');
+    
+    // Create standardized publication object
+    return {
+      id: key,
+      title: fields.title || 'Untitled',
+      authors: authors,
+      year: parseInt(fields.year) || new Date().getFullYear(),
+      venue: venue,
+      type: pubType.label,
+      typeCode: pubType.code,
+      pages: fields.pages || '',
+      volume: fields.volume || '',
+      number: fields.number || '',
+      publisher: fields.publisher || '',
+      address: fields.address || '',
+      doi: fields.doi || '',
+      url: fields.publisherurl || fields.url || '',
+      booktitle: fields.booktitle || '',
+      journal: fields.journal || '',
+      note: fields.note || ''
     };
   }
 
-  // Mock data for demonstration (replace with real backend call)
-  getMockPublications(params) {
-    console.log('📊 Using mock data for demonstration');
-    
-    // Sample publications based on typical CS research
-    const mockData = [
-      {
-        id: 'mock_1',
-        title: 'Edge Computing for IoT: A Comprehensive Survey of Architectures and Applications',
-        authors: 'Mueller, A., Schmidt, B., Weber, C.',
-        year: 2024,
-        venue: 'IEEE Transactions on Cloud Computing',
-        type: 'Journal Article',
-        typeCode: '1',
-        doi: '10.1109/TCC.2024.001',
-        pages: '145-162',
-        volume: '12',
-        number: '3'
-      },
-      {
-        id: 'mock_2', 
-        title: 'Distributed Machine Learning at the Edge: Challenges and Opportunities',
-        authors: 'Prodan, R., Fischer, M., Huber, T.',
-        year: 2024,
-        venue: 'Proceedings of IEEE International Conference on Edge Computing',
-        type: 'Conference Paper',
-        typeCode: '2',
-        doi: '10.1109/EDGE.2024.002',
-        pages: '89-96'
-      },
-      {
-        id: 'mock_3',
-        title: 'Energy-Efficient Resource Allocation in Cloud Data Centers',
-        authors: 'Kofler, S., Bauer, L., Mayer, K.',
-        year: 2023,
-        venue: 'ACM Transactions on Computer Systems',
-        type: 'Journal Article', 
-        typeCode: '1',
-        doi: '10.1145/3588432',
-        pages: '1-28',
-        volume: '41',
-        number: '2'
-      },
-      {
-        id: 'mock_4',
-        title: 'Federated Learning for Privacy-Preserving Healthcare Analytics',
-        authors: 'Steiner, J., Wolf, P., Brunner, M.',
-        year: 2023,
-        venue: 'International Conference on Machine Learning',
-        type: 'Conference Paper',
-        typeCode: '2',
-        pages: '2341-2350'
-      },
-      {
-        id: 'mock_5',
-        title: 'Blockchain-Based Identity Management for IoT Devices',
-        authors: 'Gruber, H., Eder, F., Moser, R.',
-        year: 2023,
-        venue: 'IEEE Internet of Things Journal',
-        type: 'Journal Article',
-        typeCode: '1',
-        doi: '10.1109/JIOT.2023.003',
-        volume: '10',
-        number: '8',
-        pages: '6789-6801'
-      },
-      {
-        id: 'mock_6',
-        title: 'Quantum Computing Applications in Cryptography: Current State and Future Directions',
-        authors: 'Reiter, M., Hauser, A., Koch, S.',
-        year: 2022,
-        venue: 'Nature Quantum Information',
-        type: 'Journal Article',
-        typeCode: '1',
-        doi: '10.1038/s41534-022-00567-8',
-        volume: '8',
-        number: '45'
-      },
-      {
-        id: 'mock_7',
-        title: 'Automated Software Testing Using Machine Learning Techniques',
-        authors: 'Pichler, C., Gasser, V., Hofer, D.',
-        year: 2022,
-        venue: 'International Conference on Software Engineering',
-        type: 'Conference Paper',
-        typeCode: '2',
-        pages: '456-465'
-      },
-      {
-        id: 'mock_8',
-        title: 'Sustainable Computing: Green Algorithms for Large-Scale Data Processing',
-        authors: 'Zöchling, L., Kirchner, B., Wallner, G.',
-        year: 2022,
-        venue: 'ACM Computing Surveys',
-        type: 'Journal Article',
-        typeCode: '1',
-        doi: '10.1145/3517818',
-        volume: '55',
-        number: '1',
-        pages: '1-35'
-      },
-      {
-        id: 'mock_9',
-        title: 'Real-Time Stream Processing for Big Data Analytics',
-        authors: 'Berger, T., Maier, U., Huber, N.',
-        year: 2021,
-        venue: 'IEEE Big Data Conference',
-        type: 'Conference Paper',
-        typeCode: '2',
-        pages: '1234-1241'
-      },
-      {
-        id: 'mock_10',
-        title: 'Deep Learning for Computer Vision: Advances in Object Detection and Recognition',
-        authors: 'Schwarz, E., Weiss, M., Braun, K.',
-        year: 2021,
-        venue: 'Computer Vision and Image Understanding',
-        type: 'Journal Article',
-        typeCode: '1',
-        doi: '10.1016/j.cviu.2021.103156',
-        volume: '208',
-        pages: '103156'
-      },
-      {
-        id: 'mock_11',
-        title: 'Microservices Architecture Patterns for Scalable Web Applications',
-        authors: 'Rainer, P., Fuchs, S., Horvath, A.',
-        year: 2021,
-        venue: 'IEEE Software',
-        type: 'Journal Article',
-        typeCode: '1',
-        doi: '10.1109/MS.2021.3067940',
-        volume: '38',
-        number: '3',
-        pages: '45-52'
-      },
-      {
-        id: 'mock_12',
-        title: 'Human-Computer Interaction in Virtual and Augmented Reality Environments',
-        authors: 'Lang, I., Peer, C., Stadler, W.',
-        year: 2020,
-        venue: 'ACM Transactions on Computer-Human Interaction',
-        type: 'Journal Article',
-        typeCode: '1',
-        doi: '10.1145/3386167',
-        volume: '27',
-        number: '4',
-        pages: '1-29'
-      }
-    ];
+  // Clean field values (remove extra whitespace, handle special characters)
+  cleanFieldValue(value) {
+    return value
+      .replace(/\s+/g, ' ')           // Normalize whitespace
+      .replace(/\\&/g, '&')           // Fix escaped ampersands
+      .replace(/\{\}/g, '')           // Remove empty braces
+      .replace(/[{}]/g, '')           // Remove remaining braces
+      .replace(/\\"/g, '"')           // Fix escaped quotes
+      .trim();
+  }
 
-    // Filter by search parameters
-    let filtered = mockData;
+  // Parse authors string into array
+  parseAuthors(authorString) {
+    if (!authorString) return '';
+    
+    // Split by "and" but be careful about names that might contain "and"
+    const authors = authorString.split(' and ').map(author => {
+      // Handle "Last, First" format
+      if (author.includes(',')) {
+        const [last, first] = author.split(',').map(s => s.trim());
+        return `${first} ${last}`.trim();
+      }
+      return author.trim();
+    });
+    
+    return authors.join(', ');
+  }
+
+  // Determine publication type and code
+  getPublicationType(bibtexType) {
+    const typeMap = {
+      'article': { code: '1', label: 'Journal Article' },
+      'inproceedings': { code: '2', label: 'Conference Paper' },
+      'incollection': { code: '3', label: 'Book Chapter' },
+      'inbook': { code: '3', label: 'Book Chapter' },
+      'book': { code: '4', label: 'Book' },
+      'phdthesis': { code: '5', label: 'PhD Thesis' },
+      'mastersthesis': { code: '5', label: 'Master\'s Thesis' },
+      'techreport': { code: '6', label: 'Technical Report' },
+      'misc': { code: '7', label: 'Miscellaneous' }
+    };
+    
+    return typeMap[bibtexType] || { code: '7', label: 'Other' };
+  }
+
+  // Extract venue based on publication type
+  getVenue(fields, type) {
+    switch (type) {
+      case 'article':
+        return fields.journal || '';
+      case 'inproceedings':
+        return fields.booktitle || '';
+      case 'incollection':
+      case 'inbook':
+        return fields.booktitle || fields.publisher || '';
+      case 'book':
+        return fields.publisher || '';
+      default:
+        return fields.booktitle || fields.journal || fields.venue || fields.publisher || '';
+    }
+  }
+}
+
+class EdgeAIPublicationsAPI {
+  constructor() {
+    this.parser = new BibTeXParser();
+    this.publications = [];
+    
+    // Get baseurl from current location (works with your /edgeAI setup)
+    const baseurl = window.location.pathname.includes('/edgeAI') ? '/edgeAI' : '';
+    
+    // The confirmed working path for your setup
+    this.bibFilePath = `${baseurl}/files/edgeai.bib`;
+  }
+
+  // Load and parse the BibTeX file
+  async loadPublications() {
+    try {
+      console.log('📚 Loading publications from', this.bibFilePath);
+      
+      const response = await fetch(this.bibFilePath);
+      if (!response.ok) {
+        throw new Error(`Failed to load ${this.bibFilePath}: ${response.status} ${response.statusText}`);
+      }
+      
+      const bibContent = await response.text();
+      console.log('📄 BibTeX file loaded successfully, parsing entries...');
+      
+      // Parse the BibTeX content
+      this.publications = this.parser.parseBibTeX(bibContent);
+      
+      console.log(`✅ Successfully parsed ${this.publications.length} publications`);
+      return this.publications;
+      
+    } catch (error) {
+      console.error('❌ Failed to load publications:', error);
+      throw new Error(`Unable to load publications: ${error.message}`);
+    }
+  }
+
+  // Filter publications based on search parameters
+  filterPublications(params) {
+    let filtered = [...this.publications];
 
     // Filter by author
     if (params.author && params.author.trim()) {
@@ -195,62 +203,23 @@ class UIBKPublicationsAPI {
       filtered = filtered.filter(pub => pub.typeCode === params.type);
     }
 
-    console.log(`📊 Mock data: ${mockData.length} total, ${filtered.length} after filtering`);
     return filtered;
   }
 
-  buildSearchURL(params) {
-    const currentYear = new Date().getFullYear();
-    const searchParams = new URLSearchParams({
-      ...this.defaultParams,
-      'suche_autoren_in': params.author || '',
-      'suche_titel_in': params.title || '',
-      'suche_jahr_von_in': params.yearFrom || '2020',
-      'suche_jahr_bis_in': params.yearTo || currentYear.toString()
-    });
-
-    if (params.type) {
-      searchParams.append('kategorien_in', params.type);
-    } else {
-      searchParams.append('kategorien_in', '1');
-      searchParams.append('kategorien_in', '2');
-    }
-    
-    return `${this.baseURL}?${searchParams.toString()}`;
-  }
-
-  async fetchPublications(params) {
-    if (this.useMockData) {
-      // Simulate network delay
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      return this.getMockPublications(params);
+  // Search publications with parameters
+  async searchPublications(params) {
+    // Load publications if not already loaded
+    if (this.publications.length === 0) {
+      await this.loadPublications();
     }
 
-    // Production implementation - call your backend endpoint
-    try {
-      const response = await fetch('/api/uibk-publications', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(params)
-      });
-
-      if (!response.ok) {
-        throw new Error(`Backend error: ${response.status}`);
-      }
-
-      const data = await response.json();
-      return data.publications || [];
-    } catch (error) {
-      console.error('Backend fetch failed:', error);
-      throw new Error(`Unable to fetch publications: ${error.message}`);
-    }
+    // Filter and return results
+    return this.filterPublications(params);
   }
 }
 
 // Global variables
-let publicationsAPI = new UIBKPublicationsAPI();
+let publicationsAPI = new EdgeAIPublicationsAPI();
 let currentPublications = [];
 
 // Main search function
@@ -273,7 +242,7 @@ async function searchPublications() {
   document.getElementById('status-message').style.display = 'none';
 
   try {
-    const publications = await publicationsAPI.fetchPublications(params);
+    const publications = await publicationsAPI.searchPublications(params);
     currentPublications = publications;
     
     // Hide loading
@@ -281,9 +250,8 @@ async function searchPublications() {
     
     if (publications.length === 0) {
       showStatusMessage(`
-        <strong>No publications found</strong> for the period ${params.yearFrom}-${params.yearTo}.<br>
+        <strong>No publications found</strong> for the specified criteria.<br>
         Try different search terms or expand the year range.
-        ${publicationsAPI.useMockData ? '<br><br><em>📊 Currently using demo data. See console for backend setup instructions.</em>' : ''}
       `);
       return;
     }
@@ -292,41 +260,34 @@ async function searchPublications() {
     updateStatistics(publications);
     renderPublications(publications);
     
-    if (publicationsAPI.useMockData) {
-      showStatusMessage(`
-        <strong>✅ Demo Mode:</strong> Showing ${publications.length} sample publications.<br>
-        <small>To connect to real UIBK data, follow the backend setup instructions in the console.</small>
-      `);
-    }
+    showStatusMessage(`
+      <strong>✅ Search Complete:</strong> Found ${publications.length} publication${publications.length !== 1 ? 's' : ''} from the Edge AI research group.
+    `);
     
   } catch (error) {
     document.getElementById('loading-indicator').style.display = 'none';
     console.error('❌ Search failed:', error);
     
     showStatusMessage(`
-      <strong>❌ Search Failed:</strong> ${error.message}<br><br>
-      ${publicationsAPI.useMockData ? 
-        'Demo mode failed. Check console for details.' : 
-        'Backend connection failed. Please contact your system administrator.'
-      }
+      <strong>❌ Search Failed:</strong> ${error.message}
     `);
   }
 }
 
-// Publication card creation with enhanced styling
+// Publication card creation
 function createPublicationCard(pub) {
   const card = document.createElement('div');
   card.className = 'publication-card';
   
   const typeClass = getTypeClass(pub.typeCode);
   
-  // Create title with optional DOI link
+  // Create title with optional DOI/URL link
   let titleElement;
-  if (pub.doi) {
-    const doiUrl = pub.doi.startsWith('http') ? pub.doi : `https://doi.org/${pub.doi}`;
+  if (pub.url || pub.doi) {
+    const linkUrl = pub.url || (pub.doi.startsWith('http') ? pub.doi : `https://doi.org/${pub.doi}`);
     titleElement = `
       <h3 class="publication-title">
-        <a href="${doiUrl}" target="_blank" rel="noopener noreferrer">
+        <a href="${linkUrl}" target="_blank" rel="noopener noreferrer">
           ${pub.title}
           <i class="fas fa-external-link-alt title-link-icon"></i>
         </a>
@@ -340,19 +301,21 @@ function createPublicationCard(pub) {
   metadata += `<strong>Year:</strong> ${pub.year}<br>`;
   metadata += `<strong>Venue:</strong> ${pub.venue}`;
   
-  if (pub.volume || pub.number || pub.pages) {
-    metadata += '<br><strong>Details:</strong> ';
-    const details = [];
-    if (pub.volume) details.push(`Vol. ${pub.volume}`);
-    if (pub.number) details.push(`No. ${pub.number}`);
-    if (pub.pages) details.push(`pp. ${pub.pages}`);
-    metadata += details.join(', ');
+  // Add additional details if available
+  const details = [];
+  if (pub.volume) details.push(`Vol. ${pub.volume}`);
+  if (pub.number) details.push(`No. ${pub.number}`);
+  if (pub.pages) details.push(`pp. ${pub.pages}`);
+  if (pub.publisher && !pub.venue.includes(pub.publisher)) details.push(`Publisher: ${pub.publisher}`);
+  
+  if (details.length > 0) {
+    metadata += '<br><strong>Details:</strong> ' + details.join(', ');
   }
   
   card.innerHTML = `
     <div class="publication-header">
       <span class="publication-type ${typeClass}">${pub.type.toUpperCase()}</span>
-      ${pub.doi ? '<span class="publication-doi">DOI Available</span>' : ''}
+
     </div>
     ${titleElement}
     <div class="publication-meta">${metadata}</div>
@@ -367,7 +330,9 @@ function getTypeClass(typeCode) {
     '2': 'type-conference', 
     '3': 'type-chapter',
     '4': 'type-book',
-    '5': 'type-thesis'
+    '5': 'type-thesis',
+    '6': 'type-report',
+    '7': 'type-other'
   };
   return typeClasses[typeCode] || 'type-other';
 }
@@ -387,9 +352,6 @@ function updateStatistics(publications) {
 }
 
 function renderPublications(publications) {
-  // Inject CSS if not already present
-  injectPublicationCardCSS();
-  
   // Group by year
   const groupedByYear = publications.reduce((acc, pub) => {
     if (!acc[pub.year]) {
@@ -429,210 +391,28 @@ function renderPublications(publications) {
   });
 }
 
-function injectPublicationCardCSS() {
-  if (!document.getElementById('publication-card-styles')) {
-    const css = `
-.publication-card {
-  background: #ffffff;
-  border: 1px solid #e1e5e9;
-  border-radius: 12px;
-  padding: 1.5rem;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  transition: all 0.3s ease;
-  border-left: 4px solid #ddd;
-}
-
-.publication-card:hover {
-  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-  transform: translateY(-2px);
-}
-
-.publication-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.publication-type {
-  padding: 0.25rem 0.75rem;
-  border-radius: 20px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: white;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.publication-doi {
-  padding: 0.25rem 0.75rem;
-  border-radius: 20px;
-  font-size: 0.7rem;
-  font-weight: 500;
-  background: #e8f5e8;
-  color: #2e7d32;
-  border: 1px solid #c8e6c9;
-}
-
-.type-journal { background-color: #2E7D32; }
-.type-conference { background-color: #1565C0; }
-.type-chapter { background-color: #EF6C00; }
-.type-book { background-color: #6A1B9A; }
-.type-thesis { background-color: #C62828; }
-.type-other { background-color: #424242; }
-
-.publication-title {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #2c3e50;
-  line-height: 1.4;
-  margin: 0 0 1rem 0;
-}
-
-.publication-title a {
-  color: #1565C0;
-  text-decoration: none;
-  display: flex;
-  align-items: flex-start;
-  gap: 0.5rem;
-}
-
-.publication-title a:hover {
-  text-decoration: underline;
-  color: #0d47a1;
-}
-
-.title-link-icon {
-  font-size: 0.8rem;
-  opacity: 0.7;
-  flex-shrink: 0;
-  margin-top: 0.2rem;
-}
-
-.publication-meta {
-  font-size: 0.9rem;
-  line-height: 1.5;
-  color: #555;
-}
-
-.year-section {
-  margin-bottom: 2rem;
-}
-
-.year-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 2px solid #e1e5e9;
-}
-
-.year-title {
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: #2c3e50;
-  margin: 0;
-}
-
-.year-count {
-  font-size: 0.9rem;
-  color: #666;
-  background: #f8f9fa;
-  padding: 0.25rem 0.75rem;
-  border-radius: 15px;
-  font-weight: 500;
-}
-
-@media (max-width: 768px) {
-  .publication-card { padding: 1rem; }
-  .publication-header { flex-direction: column; align-items: flex-start; }
-  .publication-title { font-size: 1rem; }
-  .year-header { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
-}
-    `;
-    
-    const styleElement = document.createElement('style');
-    styleElement.id = 'publication-card-styles';
-    styleElement.textContent = css;
-    document.head.appendChild(styleElement);
-  }
-}
-
 function showStatusMessage(message) {
   document.getElementById('status-text').innerHTML = message;
   document.getElementById('status-message').style.display = 'block';
 }
 
-// Production setup instructions
-function logProductionInstructions() {
-  console.log(`
-🚀 UIBK Publications - Production Setup Instructions
-==================================================
-
-CURRENT STATUS: Demo mode with sample data
-
-TO CONNECT TO REAL UIBK DATA:
-
-1. SET UP BACKEND ENDPOINT
-   Create an endpoint at /api/uibk-publications that:
-   - Accepts POST requests with search parameters
-   - Fetches data from UIBK website server-side
-   - Returns parsed publication data as JSON
-
-2. EXAMPLE BACKEND (Node.js/Express):
-   
-   app.post('/api/uibk-publications', async (req, res) => {
-     try {
-       const { author, title, yearFrom, yearTo, type } = req.body;
-       
-       // Build UIBK URL
-       const url = 'https://lfuonline.uibk.ac.at/public/pk115_web.frame?' + 
-                   new URLSearchParams({
-                     'uebersicht_jn_in': 'J',
-                     'institute_id_in': '70300',
-                     'fsp_fp_id_in': '19870',
-                     'forschungszentrum_id_in': '9',
-                     'suche_autoren_in': author || '',
-                     'suche_titel_in': title || '',
-                     'suche_jahr_von_in': yearFrom || '2020',
-                     'suche_jahr_bis_in': yearTo || new Date().getFullYear()
-                   });
-       
-       // Fetch from UIBK
-       const response = await fetch(url);
-       const html = await response.text();
-       
-       // Parse HTML (implement parsing logic)
-       const publications = parseUIBKHTML(html);
-       
-       res.json({ publications });
-     } catch (error) {
-       res.status(500).json({ error: error.message });
-     }
-   });
-
-3. UPDATE FRONTEND:
-   Set publicationsAPI.useMockData = false;
-
-4. ALTERNATIVE SOLUTIONS:
-   - Use server-side scraping with puppeteer/playwright
-   - Set up a scheduled job to cache UIBK data
-   - Use a headless browser service
-
-5. TESTING:
-   Try searching for authors like "Prodan", "Mueller", or titles containing "edge", "cloud"
-  `);
+// Auto-load publications on page load
+async function initializePublications() {
+  try {
+    console.log('🚀 Edge AI Publications System - Loading from BibTeX file');
+    
+    // Show all publications by default
+    setTimeout(searchPublications, 500);
+  } catch (error) {
+    console.error('Failed to initialize publications:', error);
+    showStatusMessage(`
+      <strong>❌ Initialization Failed:</strong> ${error.message}
+    `);
+  }
 }
 
-// Initialize
+// Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', function() {
-  console.log('🚀 UIBK Publications System - Demo Mode');
-  logProductionInstructions();
-  
   const currentYear = new Date().getFullYear();
   
   // Set default values
@@ -641,13 +421,13 @@ document.addEventListener('DOMContentLoaded', function() {
   
   if (yearFromInput) {
     yearFromInput.value = '2020';
-    yearFromInput.min = '2000';
+    yearFromInput.min = '2020';
     yearFromInput.max = currentYear.toString();
   }
   
   if (yearToInput) {
     yearToInput.value = currentYear.toString();
-    yearToInput.min = '2000';
+    yearToInput.min = '2020';
     yearToInput.max = currentYear.toString();
   }
   
@@ -660,10 +440,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
   
-  // Auto-search if author is pre-filled
-  const authorInput = document.getElementById('author-search');
-  if (authorInput && authorInput.value.trim()) {
-    console.log('🔍 Auto-searching with pre-filled author:', authorInput.value);
-    setTimeout(searchPublications, 500); // Small delay for UI
-  }
+  // Initialize the publications system
+  initializePublications();
 });
