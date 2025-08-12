@@ -88,4 +88,4 @@ education:
     where: Romania
 ---
 For more Details:
-[Curriculum Vitae](https://www.uibk.ac.at/informatik/news/artikel/images/2025/cv_prodan_english.pdf)
+[Curriculum Vitae](https://www.uibk.ac.at/de/newsroom/dossiers/neue_gesichter/2025/radu-prodan/)

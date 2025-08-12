@@ -65,7 +65,7 @@ Contact
 ======
 
 
-|  | **[Mitra-Yolanda Naderi (secretary)]({{ site.baseurl }}/team/mitra)** | **[Univ.-Prof. Dr. Radu Prodan]({{ site.baseurl }}/team//team/raduprodan)** |
+|  | **[Mitra-Yolanda Naderi (secretary)]({{ site.baseurl }}/team/mitra)** | **[Univ.-Prof. Dr. Radu Prodan]({{ site.baseurl }}/team/raduprodan)** |
 |---|---|---|
 | **E-mail** | [edgeai-informatik@uibk.ac.at](mailto:edgeai-informatik@uibk.ac.at) | [radu.prodan@uibk.ac.at](mailto:radu.prodan@uibk.ac.at) |
 | **Phone** | [+43 512 507-53494](tel:+4351250753494) | [+43 512 507-53249](tel:+4351250753249) |

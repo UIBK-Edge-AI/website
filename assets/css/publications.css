@@ -386,7 +386,7 @@
 
 .stats-number {
   display: block;
-  font-size: 2rem;
+  font-size: 1rem;
   font-weight: 800;
   color: var(--uibk-primary);
   line-height: 1;
@@ -411,7 +411,7 @@
 
 @media (min-width: 768px) {
   .stats-label {
-    font-size: 0.9rem;
+    font-size: 0.7rem;
   }
 }
 
