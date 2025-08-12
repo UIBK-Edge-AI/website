@@ -1,8 +1,9 @@
-/* Teaching Page Styles - FIXED VERSION */
+/* Teaching Page Styles - UIBK Brand Colors with Light/Dark Mode */
 .teaching-container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
+  position: relative;
 }
 
 /* Page Header */
@@ -23,13 +24,13 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(45deg, rgba(0, 84, 159, 0.1) 0%, rgba(135, 206, 235, 0.1) 100%);
+  background: linear-gradient(45deg, rgba(44, 90, 160, 0.05) 0%, rgba(246, 135, 18, 0.05) 100%);
   z-index: 1;
 }
 
 .page-title {
   font-size: 2.5rem;
-  color: #00549f;
+  color: #2c5aa0; /* UIBK Blue */
   margin-bottom: 10px;
   font-weight: 700;
   position: relative;
@@ -38,7 +39,7 @@
 
 .page-subtitle {
   font-size: 1.1rem;
-  color: #666;
+  color: #495057; /* Readable dark gray */
   position: relative;
   z-index: 2;
   max-width: 600px;
@@ -61,9 +62,9 @@
   align-items: center;
   gap: 8px;
   padding: 12px 20px;
-  border: 2px solid #e9ecef;
+  border: 2px solid #dee2e6;
   background: white;
-  color: #666;
+  color: #495057; /* Readable text */
   border-radius: 25px;
   cursor: pointer;
   font-size: 14px;
@@ -72,40 +73,21 @@
   position: relative;
   overflow: hidden;
   user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-}
-
-.filter-btn::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-  transition: left 0.5s ease;
-  pointer-events: none;
-}
-
-.filter-btn:hover::before {
-  left: 100%;
 }
 
 .filter-btn:hover {
-  border-color: #00549f;
-  color: #00549f;
+  border-color: #2c5aa0; /* UIBK Blue */
+  color: #2c5aa0;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 84, 159, 0.15);
+  box-shadow: 0 4px 12px rgba(44, 90, 160, 0.15);
 }
 
 .filter-btn.active {
-  background: linear-gradient(135deg, #00549f, #003f7f);
+  background: linear-gradient(135deg, #2c5aa0, #1e3a8a); /* UIBK Blue gradient */
   color: white;
-  border-color: #00549f;
+  border-color: #2c5aa0;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 84, 159, 0.3);
+  box-shadow: 0 6px 20px rgba(44, 90, 160, 0.3);
 }
 
 .filter-icon {
@@ -117,24 +99,25 @@
   text-align: center;
   margin-bottom: 20px;
   padding: 12px 20px;
-  background: #e3f2fd;
+  background: rgba(246, 135, 18, 0.1); /* Light UIBK Orange */
   border-radius: 8px;
-  border-left: 4px solid #00549f;
+  border-left: 4px solid #f68712; /* UIBK Orange */
   position: relative;
   z-index: 10;
 }
 
 .filter-semester span {
-  color: #00549f;
+  color: #2c5aa0; /* UIBK Blue */
   font-weight: 500;
 }
 
 .course-count {
   margin-left: 10px;
   padding: 4px 8px;
-  background: rgba(0, 84, 159, 0.1);
+  background: rgba(44, 90, 160, 0.1);
   border-radius: 12px;
   font-size: 12px;
+  color: #2c5aa0;
 }
 
 /* Search Container */
@@ -148,18 +131,23 @@
 .search-input {
   width: 100%;
   padding: 16px 50px 16px 20px;
-  border: 2px solid #e9ecef;
+  border: 2px solid #dee2e6;
   border-radius: 25px;
   font-size: 16px;
   transition: all 0.3s ease;
   background: white;
   box-sizing: border-box;
+  color: #495057; /* Readable text */
+}
+
+.search-input::placeholder {
+  color: #6c757d;
 }
 
 .search-input:focus {
   outline: none;
-  border-color: #00549f;
-  box-shadow: 0 0 0 3px rgba(0, 84, 159, 0.1);
+  border-color: #2c5aa0; /* UIBK Blue */
+  box-shadow: 0 0 0 3px rgba(44, 90, 160, 0.1);
 }
 
 .search-icon {
@@ -167,12 +155,12 @@
   right: 20px;
   top: 50%;
   transform: translateY(-50%);
-  color: #666;
+  color: #6c757d;
   font-size: 18px;
   pointer-events: none;
 }
 
-/* Table Container - FIXED: Removed white border */
+/* Table Container */
 .table-container {
   background: transparent;
   border-radius: 16px;
@@ -184,36 +172,28 @@
   z-index: 1;
 }
 
-/* Courses Table - FIXED: Proper table layout with text wrapping */
+/* Courses Table - Fixed table structure like research table */
 .courses-table {
-  width: 100%;
+  width: auto;
   border-collapse: collapse;
   font-size: 15px;
-  table-layout: fixed;
+  table-layout: auto;
   background: white;
   position: relative;
   border-radius: 16px;
   overflow: hidden;
 }
 
-/* Column widths - FIXED */
-.courses-table th:nth-child(1) { width: 30%; }  /* Title */
+/* Column widths - Proper distribution */
+.courses-table th:nth-child(1) { width: 35%; }  /* Title */
 .courses-table th:nth-child(2) { width: 20%; }  /* Instructor */
 .courses-table th:nth-child(3) { width: 15%; }  /* Room */
 .courses-table th:nth-child(4) { width: 15%; }  /* Degree */
-.courses-table th:nth-child(5) { width: 20%; }  /* Semester */
+.courses-table th:nth-child(5) { width: 15%; }  /* Semester */
 
 .courses-table thead {
-  background: linear-gradient(135deg, #00549f, #003f7f);
+  background: linear-gradient(135deg, #2c5aa0, #1e3a8a); /* UIBK Blue */
   color: white;
-}
-
-.courses-table thead th:first-child {
-  border-top-left-radius: 16px;
-}
-
-.courses-table thead th:last-child {
-  border-top-right-radius: 16px;
 }
 
 .courses-table th {
@@ -224,123 +204,82 @@
   letter-spacing: 0.5px;
   text-transform: uppercase;
   border-bottom: 2px solid rgba(255, 255, 255, 0.1);
-  user-select: none;
-  -webkit-user-select: none;
+  color: white;
 }
 
 .courses-table td {
-  padding: 12px 15px;
+  padding: 18px;
   border-bottom: 1px solid #f8f9fa;
   vertical-align: middle;
   text-align: center;
   background: white;
-  user-select: none;
-  -webkit-user-select: none;
-  position: relative;
+  color: #495057; /* Readable text */
   word-wrap: break-word;
   white-space: normal;
-  min-height: 60px;
-  height: auto;
 }
 
-.courses-table tbody tr:last-child td:first-child {
-  border-bottom-left-radius: 16px;
-}
-
-.courses-table tbody tr:last-child td:last-child {
-  border-bottom-right-radius: 16px;
-}
-
-/* Course Row - FIXED: Simplified without transforms */
+/* Course Row */
 .course-row {
   transition: background-color 0.2s ease;
-  opacity: 1;
-  background: transparent;
 }
 
 .course-row:hover {
-  background-color: #f8f9fa !important;
+  background-color: rgba(44, 90, 160, 0.05) !important; /* Light UIBK Blue hover */
 }
 
 .course-row:hover td {
-  background-color: #f8f9fa !important;
+  background-color: rgba(44, 90, 160, 0.05) !important;
 }
 
-.course-row:last-child td {
-  border-bottom: none;
-}
-
-/* Table Cells - FIXED: Allow text wrapping */
+/* Table Cells */
 .title-cell {
   font-weight: 500;
-  max-width: 250px;
+  max-width: 300px;
   text-align: center !important;
-  word-wrap: break-word;
-  white-space: normal;
-  line-height: 1.3;
-  padding: 12px 15px;
-}
-
-.instructor-cell,
-.room-cell {
-  max-width: 180px;
-  word-wrap: break-word;
-  white-space: normal;
-  line-height: 1.3;
-}
-
-.degree-cell,
-.semester-cell {
-  white-space: nowrap;
-  vertical-align: middle;
+  color: #212529; /* Strong readable text */
 }
 
 .course-link {
-  color: #00549f;
+  color: #2c5aa0; /* UIBK Blue */
   text-decoration: none;
   font-weight: 600;
   transition: color 0.2s ease;
-  user-select: text;
-  -webkit-user-select: text;
 }
 
 .course-link:hover {
-  color: #003f7f;
+  color: #1e3a8a; /* Darker UIBK Blue */
   text-decoration: underline;
 }
 
 .instructor-cell {
-  color: #333;
+  color: #495057; /* Readable text */
   font-weight: 500;
 }
 
 .room-cell {
-  color: #666;
+  color: #6c757d; /* Slightly lighter but readable */
 }
 
 .degree-cell {
-  color: #666;
+  color: #6c757d;
 }
 
 .semester-cell {
-  color: #888;
+  color: #6c757d;
   font-size: 14px;
   white-space: nowrap;
 }
 
-/* Degree Badges - FIXED: Smaller badges */
+/* Degree Badges */
 .degree-badge {
   display: inline-block;
-  padding: 4px 10px;
-  border-radius: 15px;
-  font-size: 11px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.3px;
+  letter-spacing: 0.5px;
   white-space: nowrap;
-  line-height: 1.2;
-  min-width: 60px;
-  text-align: center;
 }
 
 .degree-bachelor {
@@ -352,37 +291,34 @@
 .degree-master {
   background: linear-gradient(135deg, #fff3e0, #ffe0b2);
   color: #ef6c00;
-  border: 1px solid #ff9800;
+  border: 1px solid #f68712; /* UIBK Orange */
 }
 
 .degree-other {
-  background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
-  color: #616161;
-  border: 1px solid #9e9e9e;
+  background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+  color: #2c5aa0; /* UIBK Blue */
+  border: 1px solid #2c5aa0;
 }
 
-/* Semester Badges - FIXED: Smaller badges */
+/* Semester Badges */
 .semester-badge {
   display: inline-block;
-  padding: 4px 10px;
-  border-radius: 15px;
-  font-size: 11px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
   font-weight: 600;
-  letter-spacing: 0.3px;
+  letter-spacing: 0.5px;
   white-space: nowrap;
-  line-height: 1.2;
-  min-width: 60px;
-  text-align: center;
   background: linear-gradient(135deg, #e3f2fd, #bbdefb);
-  color: #1976d2;
-  border: 1px solid #2196f3;
+  color: #2c5aa0; /* UIBK Blue */
+  border: 1px solid #2c5aa0;
 }
 
 /* No Results */
 .no-results {
   text-align: center;
   padding: 60px 20px;
-  color: #666;
+  color: #6c757d;
   background: white;
   border-radius: 16px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
@@ -390,92 +326,94 @@
   z-index: 1;
 }
 
-.no-results-icon {
-  font-size: 48px;
-  margin-bottom: 20px;
-  opacity: 0.5;
-}
-
 .no-results h3 {
+  color: #495057;
   margin-bottom: 10px;
-  color: #333;
 }
 
 .no-results p {
-  color: #888;
+  color: #6c757d;
   max-width: 400px;
   margin: 0 auto;
 }
 
-/* Dark Mode Support */
+/* ==========================================================================
+   DARK MODE SUPPORT WITH UIBK COLORS
+   ========================================================================== */
+
 html[data-theme="dark"] .teaching-container {
-  color: #e0e0e0;
+  color: #e2e8f0;
   background: transparent;
 }
 
 html[data-theme="dark"] .page-header {
-  background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
-  border: 1px solid #444;
+  background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+  border: 1px solid #4a5568;
 }
 
 html[data-theme="dark"] .page-header::before {
-  background: linear-gradient(45deg, rgba(135, 206, 235, 0.08) 0%, rgba(0, 84, 159, 0.08) 100%);
+  background: linear-gradient(45deg, rgba(144, 205, 244, 0.08) 0%, rgba(246, 135, 18, 0.08) 100%);
 }
 
 html[data-theme="dark"] .page-title {
-  color: #87ceeb;
+  color: #90cdf4; /* Light blue for dark theme */
 }
 
 html[data-theme="dark"] .page-subtitle {
-  color: #b0b0b0;
+  color: #cbd5e0; /* Light gray for readability */
 }
 
 html[data-theme="dark"] .filter-btn {
-  background: #2a2a2a;
-  border-color: #444;
-  color: #b0b0b0;
+  background: #2d3748;
+  border-color: #4a5568;
+  color: #cbd5e0; /* Readable light text */
 }
 
 html[data-theme="dark"] .filter-btn:hover {
-  border-color: #87ceeb;
-  color: #87ceeb;
-  background: #333;
+  border-color: #90cdf4; /* Light blue */
+  color: #90cdf4;
+  background: #374151;
 }
 
 html[data-theme="dark"] .filter-btn.active {
-  background: linear-gradient(135deg, #87ceeb, #4682b4);
-  color: white;
-  border-color: #87ceeb;
+  background: linear-gradient(135deg, #90cdf4, #4299e1); /* Light blue gradient */
+  color: #1a202c; /* Dark text for contrast */
+  border-color: #90cdf4;
 }
 
 html[data-theme="dark"] .filter-semester {
-  background: rgba(135, 206, 235, 0.15);
-  border-left-color: #87ceeb;
-  border: 1px solid rgba(135, 206, 235, 0.3);
+  background: rgba(246, 135, 18, 0.15);
+  border-left-color: #f68712; /* Keep UIBK Orange */
+  border: 1px solid rgba(246, 135, 18, 0.3);
 }
 
 html[data-theme="dark"] .filter-semester span {
-  color: #87ceeb;
+  color: #90cdf4; /* Light blue */
+}
+
+html[data-theme="dark"] .course-count {
+  background: rgba(144, 205, 244, 0.15);
+  color: #90cdf4;
 }
 
 html[data-theme="dark"] .search-input {
-  background: #2a2a2a;
-  border-color: #444;
-  color: #e0e0e0;
+  background: #2d3748;
+  border-color: #4a5568;
+  color: #e2e8f0; /* Light text */
 }
 
 html[data-theme="dark"] .search-input::placeholder {
-  color: #888;
+  color: #a0aec0; /* Visible placeholder */
 }
 
 html[data-theme="dark"] .search-input:focus {
-  border-color: #87ceeb;
-  box-shadow: 0 0 0 3px rgba(135, 206, 235, 0.15);
-  background: #333;
+  border-color: #90cdf4; /* Light blue */
+  box-shadow: 0 0 0 3px rgba(144, 205, 244, 0.15);
+  background: #374151;
 }
 
 html[data-theme="dark"] .search-icon {
-  color: #888;
+  color: #a0aec0;
 }
 
 html[data-theme="dark"] .table-container {
@@ -484,63 +422,72 @@ html[data-theme="dark"] .table-container {
 }
 
 html[data-theme="dark"] .courses-table {
-  background: #2a2a2a;
+  background: #2d3748;
 }
 
 html[data-theme="dark"] .courses-table thead {
-  background: linear-gradient(135deg, #87ceeb, #4682b4);
-}
-
-html[data-theme="dark"] .courses-table td {
-  border-bottom-color: #444;
-  color: #e0e0e0;
-  background: #2a2a2a;
+  background: linear-gradient(135deg, #90cdf4, #4299e1); /* Light blue for headers */
 }
 
 html[data-theme="dark"] .courses-table th {
-  border-bottom-color: rgba(255, 255, 255, 0.2);
+  color: #1a202c; /* Dark text for contrast on light blue */
+  border-bottom-color: rgba(26, 32, 44, 0.2);
+}
+
+html[data-theme="dark"] .courses-table td {
+  border-bottom-color: #4a5568;
+  color: #e2e8f0; /* Light readable text */
+  background: #2d3748;
 }
 
 html[data-theme="dark"] .course-row:hover {
-  background-color: #333 !important;
+  background-color: rgba(144, 205, 244, 0.1) !important; /* Light blue hover */
 }
 
 html[data-theme="dark"] .course-row:hover td {
-  background-color: #333 !important;
+  background-color: rgba(144, 205, 244, 0.1) !important;
+}
+
+html[data-theme="dark"] .title-cell {
+  color: #f7fafc; /* Bright white for titles */
 }
 
 html[data-theme="dark"] .course-link {
-  color: #87ceeb;
+  color: #90cdf4; /* Light blue */
 }
 
 html[data-theme="dark"] .course-link:hover {
-  color: #b0e0e6;
+  color: #bee3f8; /* Lighter blue on hover */
 }
 
 html[data-theme="dark"] .instructor-cell {
-  color: #e0e0e0;
+  color: #e2e8f0; /* Light readable text */
 }
 
 html[data-theme="dark"] .room-cell {
-  color: #b0b0b0;
+  color: #cbd5e0; /* Slightly dimmed but readable */
 }
 
 html[data-theme="dark"] .degree-cell {
-  color: #b0b0b0;
+  color: #cbd5e0;
 }
 
 html[data-theme="dark"] .semester-cell {
-  color: #888;
+  color: #a0aec0;
 }
 
 html[data-theme="dark"] .no-results {
-  background: #2a2a2a;
-  color: #b0b0b0;
-  border: 1px solid #444;
+  background: #2d3748;
+  color: #cbd5e0;
+  border: 1px solid #4a5568;
 }
 
 html[data-theme="dark"] .no-results h3 {
-  color: #e0e0e0;
+  color: #e2e8f0;
+}
+
+html[data-theme="dark"] .no-results p {
+  color: #a0aec0;
 }
 
 /* Dark mode badge adjustments */
@@ -553,19 +500,19 @@ html[data-theme="dark"] .degree-bachelor {
 html[data-theme="dark"] .degree-master {
   background: linear-gradient(135deg, #e65100, #f57c00);
   color: #ffcc02;
-  border-color: #ff9800;
+  border-color: #f68712; /* UIBK Orange */
 }
 
 html[data-theme="dark"] .degree-other {
-  background: linear-gradient(135deg, #424242, #616161);
-  color: #e0e0e0;
-  border-color: #757575;
+  background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+  color: #90cdf4;
+  border-color: #90cdf4;
 }
 
 html[data-theme="dark"] .semester-badge {
-  background: linear-gradient(135deg, #0d47a1, #1976d2);
-  color: #90caf9;
-  border-color: #2196f3;
+  background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+  color: #90cdf4;
+  border-color: #90cdf4;
 }
 
 /* Responsive Design */
@@ -651,7 +598,7 @@ html[data-theme="dark"] .semester-badge {
   .courses-table td::before {
     content: attr(data-label);
     font-weight: 600;
-    color: #666;
+    color: #495057; /* Readable dark text */
     text-transform: uppercase;
     font-size: 11px;
     letter-spacing: 0.5px;
@@ -666,11 +613,11 @@ html[data-theme="dark"] .semester-badge {
   .semester-cell::before { content: "Semester"; }
   
   html[data-theme="dark"] .course-row {
-    background: #2a2a2a;
-    border-color: #444;
+    background: #2d3748;
+    border-color: #4a5568;
   }
   
   html[data-theme="dark"] .courses-table td::before {
-    color: #888;
+    color: #cbd5e0; /* Light readable text */
   }
 }
