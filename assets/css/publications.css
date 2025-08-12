@@ -157,17 +157,6 @@
   position: relative;
 }
 
-.publications-container::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, var(--uibk-primary), var(--uibk-secondary), var(--uibk-accent));
-  z-index: 1;
-}
-
 @media (min-width: 768px) {
   .publications-container {
     padding: 2rem;
