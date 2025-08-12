@@ -20,7 +20,7 @@ author_profile: true
 {% endfor %}
 
 {% if has_categories %}
-  {% assign groups = "PROFESSOR|POST-DOC|SECRETARY|SYSTEMS ENGINEER|RESEARCH ASSISTANTS|STUDENT RESEARCH-ASSISTANTS | FORMER MEMBER"|split: "|" %}
+  {% assign groups = "PROFESSOR|SECRETARY|POST-DOCS|SYSTEMS ENGINEER|RESEARCH ASSISTANTS|STUDENT RESEARCH-ASSISTANTS|FORMER MEMBER"|split: "|" %}
   
   {% for group in groups %}
     {% assign members = site.team | where: "category", group %}

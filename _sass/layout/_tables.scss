@@ -8,45 +8,204 @@ table {
   font-family: $global-font-family;
   font-size: $type-size-6;
   border-collapse: collapse;
-  border: 1px solid var(--global-border-color);
+  border: none;
+  background-color: transparent;
 
   & + table {
     margin-top: 1em;
   }
 }
 
+/* Light Mode Styling */
 thead {
-  background-color: var(--global-border-color);
-  border-bottom: 1px solid var(--global-border-color);
+  background-color: transparent;
+  border-bottom: none;
 }
 
 th {
-  padding: 0.5em;
-  font-weight: bold;
-  text-align: left;
-  border-right: 1px solid var(--global-border-color);
+  padding: 0.75em 0.5em;
+  font-weight: 400;
+  text-align: center;
+  border: none;
+  color: #2c3e50;
+  background-color: transparent;
 }
 
 td {
-  padding: 0.5em;
-  border-bottom: 1px solid var(--global-border-color);
-  border-right: 1px solid var(--global-border-color);
+  padding: 0.75em 0.5em;
+  border: none;
+  text-align: center;
+  color: #495057;
+  background-color: transparent;
 }
 
-html[data-theme="dark"] .theses-table td a {
-  color: #5bc0de;
-  text-decoration: underline !important;
+/* Table hover effects for light mode */
+tbody tr:hover {
+  background-color: transparent;
 }
 
+tbody tr:hover td {
+  background-color: transparent;
+  color: #2c3e50;
+}
+
+/* Links in tables - light mode */
+td a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+td a:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+/* Dark Mode Styling */
+html[data-theme="dark"] {
+  
+  table {
+    border: none;
+    background-color: transparent;
+  }
+  
+  thead {
+    background-color: transparent;
+    border-bottom: none;
+  }
+
+  th {
+    color: #e2e8f0;
+    background-color: transparent;
+    border: none;
+  }
+
+  td {
+    color: #e2e8f0;
+    background-color: transparent;
+    border: none;
+  }
+
+  /* Table hover effects for dark mode */
+  tbody tr:hover {
+    background-color: transparent;
+  }
+
+  tbody tr:hover td {
+    background-color: transparent;
+    color: #f7fafc;
+  }
+
+  /* Links in tables - dark mode */
+  td a {
+    color: #90cdf4;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  td a:hover {
+    color: #bee3f8;
+    text-decoration: underline;
+  }
+
+  /* Specific styling for theses table in dark mode */
+  .theses-table td a {
+    color: #90cdf4;
+    text-decoration: none !important;
+  }
+
+  .theses-table td a:hover {
+    color: #bee3f8;
+    text-decoration: underline !important;
+  }
+
+  .theses-table th {
+    color: #e2e8f0;
+    background-color: transparent;
+  }
+
+  .theses-table td {
+    color: #e2e8f0;
+    background-color: transparent;
+  }
+}
+
+/* Common table settings */
 tr, td, th {
   vertical-align: middle;
 }
 
 .theses-table thead {
-  background-color: var(--global-bg-color);
+  background-color: transparent;
+}
+
+html[data-theme="dark"] .theses-table thead {
+  background-color: transparent;
 }
 
 .theses-table th,
 .theses-table td {
   text-align: center;
+}
+
+/* Contact table specific styling */
+.page__content table {
+  margin: 2rem 0;
+  box-shadow: none;
+  border-radius: 0;
+  overflow: visible;
+  background-color: transparent;
+  border: none;
+}
+
+html[data-theme="dark"] .page__content table {
+  box-shadow: none;
+  background-color: transparent;
+}
+
+/* First column styling (labels like E-mail, Phone, Address) */
+.page__content table td:first-child,
+.page__content table th:first-child {
+  font-weight: 600;
+  background-color: transparent;
+  text-align: left;
+  padding-left: 1rem;
+  color: #2c3e50;
+}
+
+html[data-theme="dark"] .page__content table td:first-child,
+html[data-theme="dark"] .page__content table th:first-child {
+  background-color: transparent;
+  color: #e2e8f0;
+}
+
+/* Header row styling for contact table */
+.page__content table thead th {
+  background-color: transparent;
+  color: #2c3e50;
+  font-weight: 700;
+  font-size: 1.1rem;
+  padding: 1rem 0.5rem;
+  border: none;
+}
+
+html[data-theme="dark"] .page__content table thead th {
+  background-color: transparent;
+  color: #e2e8f0;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  table {
+    font-size: 0.9rem;
+  }
+  
+  th, td {
+    padding: 0.5rem 0.25rem;
+  }
+  
+  .page__content table td:first-child,
+  .page__content table th:first-child {
+    padding-left: 0.5rem;
+  }
 }

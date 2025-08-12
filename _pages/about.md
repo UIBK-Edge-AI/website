@@ -1,5 +1,6 @@
 ---
 permalink: /
+
 title: "Development and practical use of Artificial Intelligence in the edge of the network"
 author_profile: true
 redirect_from: 
@@ -62,3 +63,12 @@ Students enrolled at Universität Innsbruck please visit our [Teaching]({{ site.
 
 Contact
 ======
+
+
+|  | **[Mitra-Yolanda Naderi (secretary)]({{ site.baseurl }}/team/mitra)** | **[Univ.-Prof. Dr. Radu Prodan]({{ site.baseurl }}/team//team/raduprodan)** |
+|---|---|---|
+| **E-mail** | [edgeai-informatik@uibk.ac.at](mailto:edgeai-informatik@uibk.ac.at) | [radu.prodan@uibk.ac.at](mailto:radu.prodan@uibk.ac.at) |
+| **Phone** | [+43 512 507-53494](tel:+4351250753494) | [+43 512 507-53249](tel:+4351250753249) |
+| **Address** | Universität Innsbruck<br>Edge AI Lab<br>Technikerstraße 21A<br>6020 Innsbruck<br>Austria | Univ.-Prof. Dr. Radu Prodan<br>Universität Innsbruck<br>Technikerstraße 21A<br>6020 Innsbruck<br>Austria |
+
+[For directions please click here](https://www.uibk.ac.at/de/informatik/kontakt/anfahrt/)

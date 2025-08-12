@@ -139,11 +139,19 @@ class EdgeAIPublicationsAPI {
     this.parser = new BibTeXParser();
     this.publications = [];
     
-    // Get baseurl from current location (works with your /edgeAI setup)
-    const baseurl = window.location.pathname.includes('/edgeAI') ? '/edgeAI' : '';
+    // REPLACE 'website' WITH YOUR ACTUAL BASEURL
+    // Examples:
+    // - If your site is at yourdomain.com/edgeai → use '/edgeai'
+    // - If your site is at yourdomain.com/research → use '/research'
+    // - If your site is at yourdomain.com (root) → use ''
+    // - If your site is at username.github.io/repository → use '/repository'
     
-    // The confirmed working path for your setup
+    const baseurl = '/website';  // <-- CHANGE THIS TO YOUR ACTUAL BASEURL
+    
     this.bibFilePath = `${baseurl}/files/edgeai.bib`;
+    
+    console.log('🌐 Using baseurl:', baseurl);
+    console.log('📚 BibTeX file path:', this.bibFilePath);
   }
 
   // Load and parse the BibTeX file
