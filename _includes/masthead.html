@@ -20,7 +20,7 @@
           </li>
           {% for link in site.data.navigation.main %}
             {% if link.dropdown %}
-              <!-- Dropdown Navigation Item - ADD PERSIST CLASS HERE -->
+              <!-- Main Dropdown Navigation Item -->
               <li class="masthead__menu-item dropdown-item persist{% if page.url contains link.url %} active{% endif %}">
                 <a href="{% if link.url contains 'http' %}{{ link.url }}{% else %}{{ base_path }}{{ link.url }}{% endif %}" class="dropdown-toggle">
                   {{ link.title }}
@@ -28,16 +28,46 @@
                 </a>
                 <ul class="dropdown-menu">
                   {% for dropdown_item in link.dropdown_items %}
-                    <li class="dropdown-menu-item">
-                      <a href="{% if dropdown_item.url contains 'http' %}{{ dropdown_item.url }}{% else %}{{ base_path }}{{ dropdown_item.url }}{% endif %}" 
-                         data-filter="{{ dropdown_item.filter }}"
-                         onclick="handleDropdownNavigation('{{ dropdown_item.filter }}', event)">
-                        {% if dropdown_item.icon %}
-                          <span class="dropdown-icon">{{ dropdown_item.icon }}</span>
-                        {% endif %}
-                        {{ dropdown_item.title }}
-                      </a>
-                    </li>
+                    {% if dropdown_item.dropdown %}
+                      <!-- Nested Dropdown Item -->
+                      <li class="dropdown-menu-item has-submenu">
+                        <a href="{% if dropdown_item.url contains 'http' %}{{ dropdown_item.url }}{% else %}{{ base_path }}{{ dropdown_item.url }}{% endif %}" 
+                           class="submenu-toggle">
+                          {% if dropdown_item.icon %}
+                            <span class="dropdown-icon">{{ dropdown_item.icon }}</span>
+                          {% endif %}
+                          {{ dropdown_item.title }}
+                          <i class="fa-solid fa-chevron-right submenu-arrow" aria-hidden="true"></i>
+                        </a>
+                        <!-- Sub-dropdown menu -->
+                        <ul class="submenu">
+                          {% for sub_item in dropdown_item.dropdown_items %}
+                            <li class="submenu-item">
+                              <a href="{% if sub_item.url contains 'http' %}{{ sub_item.url }}{% else %}{{ base_path }}{{ sub_item.url }}{% endif %}"
+                                 data-filter="{{ sub_item.filter }}"
+                                 onclick="handleDropdownNavigation('{{ sub_item.filter }}', event)">
+                                {% if sub_item.icon %}
+                                  <span class="submenu-icon">{{ sub_item.icon }}</span>
+                                {% endif %}
+                                {{ sub_item.title }}
+                              </a>
+                            </li>
+                          {% endfor %}
+                        </ul>
+                      </li>
+                    {% else %}
+                      <!-- Regular Dropdown Item -->
+                      <li class="dropdown-menu-item">
+                        <a href="{% if dropdown_item.url contains 'http' %}{{ dropdown_item.url }}{% else %}{{ base_path }}{{ dropdown_item.url }}{% endif %}" 
+                           data-filter="{{ dropdown_item.filter }}"
+                           onclick="handleDropdownNavigation('{{ dropdown_item.filter }}', event)">
+                          {% if dropdown_item.icon %}
+                            <span class="dropdown-icon">{{ dropdown_item.icon }}</span>
+                          {% endif %}
+                          {{ dropdown_item.title }}
+                        </a>
+                      </li>
+                    {% endif %}
                   {% endfor %}
                 </ul>
               </li>

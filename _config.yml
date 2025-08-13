@@ -221,9 +221,6 @@ collections:
   teaching:
     output: true
     permalink: /:collection/:path/
-  theses:
-    output: true
-    permalink: /:collection/:path/
   projects:
     output: true
     permalink: /:collection/:path/

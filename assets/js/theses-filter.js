@@ -1,5 +1,5 @@
 /**
- * Research Filter and Search Functionality
+ * theses Filter and Search Functionality
  * Handles filtering by project type and text search
  */
 
@@ -76,7 +76,7 @@ class ResearchFilter {
 
   updateFilterStatus() {
     const filterNames = {
-      'all': 'all research projects',
+      'all': 'all theses projects',
       'bachelor': 'Bachelor thesis projects',
       'master': 'Master thesis projects', 
       'praktikum': 'Internship (Praktikum) projects',
@@ -266,17 +266,17 @@ class TableEnhancements {
     });
 
     // Add table accessibility
-    const table = document.querySelector('.research-table');
+    const table = document.querySelector('.theses-table');
     if (table) {
       table.setAttribute('role', 'table');
-      table.setAttribute('aria-label', 'Research projects and student theses');
+      table.setAttribute('aria-label', 'theses projects and student theses');
     }
   }
 }
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-  // Initialize research filter
+  // Initialize theses filter
   window.researchFilter = new ResearchFilter();
   
   // Initialize table enhancements

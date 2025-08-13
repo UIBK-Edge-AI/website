@@ -1,10 +1,5 @@
 # Navigation Configuration for Jekyll Site
-# Updated to include Research dropdown functionality
-#
-# The following is the order of the links in the header of the website.
-# Changing the order here will adjust the order and you can also add additional
-# links. Removing a link prevents it from showing in the header, but does not
-# prevent it from being included in the site.
+# Updated to include nested dropdown functionality
 
 main:
   - title: "Home"
@@ -20,32 +15,28 @@ main:
     url: /teaching/
     dropdown: true
     dropdown_items:
-      - title: "Bachelor"
+      - title: "Bachelor Courses"
         url: /teaching/?filter=bachelor
         filter: "bachelor" 
-      - title: "Master"
+      - title: "Master Courses"
         url: /teaching/?filter=master
         filter: "master"
-
+      - title: "Theses"
+        url: /teaching/theses/
+        dropdown: true
+        dropdown_items:
+          - title: "Bachelor Theses"
+            url: /teaching/theses/?filter=bachelor
+            filter: "bachelor" 
+          - title: "Master Theses"
+            url: /teaching/theses/?filter=master
+            filter: "master"
+          - title: "Internships"
+            url: /teaching/theses/?filter=praktikum
+            filter: "praktikum"
     
   - title: "Publications"
     url: /publications/
-
-  - title: "Research"
-    url: /research/
-    dropdown: true
-    dropdown_items:
-      - title: "Bachelor"
-        url: /research/?filter=bachelor
-        filter: "bachelor" 
-      - title: "Master"
-        url: /research/?filter=master
-        filter: "master"
-      - title: "Internships"
-        url: /research/?filter=praktikum
-        filter: "praktikum"
   
   - title: "News & Events"
     url: /news-events/
-
-
