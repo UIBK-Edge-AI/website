@@ -1,17 +1,37 @@
 /**
- * theses Filter and Search Functionality
+ * Theses Filter and Search Functionality - DEBUG VERSION
  * Handles filtering by project type and text search
  */
 
-class ResearchFilter {
+class ThesesFilter {
   constructor() {
     this.init();
   }
 
   init() {
+    console.log('🔧 ThesesFilter initializing...');
     this.setupElements();
     this.setupEventListeners();
     this.updateProjectCount();
+    this.debugInfo();
+  }
+
+  debugInfo() {
+    console.log('📊 ThesesFilter Debug Info:');
+    console.log('Filter buttons found:', this.filterButtons.length);
+    console.log('Project rows found:', this.projectRows.length);
+    console.log('Search input found:', !!this.searchInput);
+    console.log('Table body found:', !!this.tableBody);
+    
+    // Debug project rows data
+    this.projectRows.forEach((row, index) => {
+      console.log(`Row ${index}:`, {
+        category: row.getAttribute('data-category'),
+        status: row.getAttribute('data-status'),
+        title: row.getAttribute('data-title'),
+        visible: row.style.display !== 'none'
+      });
+    });
   }
 
   setupElements() {
@@ -37,9 +57,10 @@ class ResearchFilter {
     // Filter button listeners
     this.filterButtons.forEach(button => {
       button.addEventListener('click', (e) => {
-        e.preventDefault(); // Prevent any default behavior
-        e.stopPropagation(); // Stop event bubbling
+        e.preventDefault();
+        e.stopPropagation();
         const filter = e.currentTarget.getAttribute('data-filter');
+        console.log('🔘 Filter button clicked:', filter);
         this.setActiveFilter(filter);
         this.applyFilters();
       });
@@ -49,6 +70,7 @@ class ResearchFilter {
     if (this.searchInput) {
       this.searchInput.addEventListener('input', this.debounce((e) => {
         this.currentSearch = e.target.value.toLowerCase().trim();
+        console.log('🔍 Search input changed:', this.currentSearch);
         this.applyFilters();
       }, 300));
 
@@ -62,6 +84,8 @@ class ResearchFilter {
   }
 
   setActiveFilter(filter) {
+    console.log('🎯 Setting active filter:', filter);
+    
     // Update button states
     this.filterButtons.forEach(btn => {
       btn.classList.remove('active');
@@ -93,6 +117,12 @@ class ResearchFilter {
     const category = row.getAttribute('data-category') || '';
     const status = row.getAttribute('data-status') || '';
     
+    console.log('🔍 Checking row:', {
+      category,
+      status,
+      currentFilter: this.currentFilter
+    });
+    
     // Get text content for search
     const title = row.querySelector('.title-cell')?.textContent?.toLowerCase() || '';
     const student = row.querySelector('.student-cell')?.textContent?.toLowerCase() || '';
@@ -112,30 +142,33 @@ class ResearchFilter {
     // Apply search filter
     const searchMatch = !this.currentSearch || searchText.includes(this.currentSearch);
 
-    return categoryMatch && searchMatch;
+    const shouldShow = categoryMatch && searchMatch;
+    console.log('👀 Should show row:', shouldShow, { categoryMatch, searchMatch });
+    
+    return shouldShow;
   }
 
-  // FIXED: Removed all filtering animations to prevent cell popup
   applyFilters() {
+    console.log('🔄 Applying filters. Current filter:', this.currentFilter);
     let visibleCount = 0;
     const rows = Array.from(this.projectRows);
 
-    // FIXED: Apply filters immediately without animations
-    rows.forEach(row => {
+    rows.forEach((row, index) => {
       const shouldShow = this.shouldShowRow(row);
       
       if (shouldShow) {
         row.style.display = '';
-        // REMOVED: All animation classes that were causing issues
         row.classList.remove('filtering-out', 'filtering-in');
         visibleCount++;
+        console.log(`✅ Showing row ${index}`);
       } else {
         row.style.display = 'none';
-        // REMOVED: All animation classes that were causing issues
         row.classList.remove('filtering-out', 'filtering-in');
+        console.log(`❌ Hiding row ${index}`);
       }
     });
 
+    console.log(`📊 Filter result: ${visibleCount} rows visible out of ${rows.length}`);
     this.updateProjectCount(visibleCount);
     this.toggleNoResults(visibleCount === 0);
   }
@@ -180,6 +213,7 @@ class ResearchFilter {
 
   // Public methods for external control
   filterByCategory(category) {
+    console.log('🎯 External filter request:', category);
     this.setActiveFilter(category);
     this.applyFilters();
   }
@@ -196,96 +230,25 @@ class ResearchFilter {
     this.setActiveFilter('all');
     this.clearSearch();
   }
-
-  // Get current filter statistics
-  getFilterStats() {
-    const stats = {
-      all: 0,
-      bachelor: 0,
-      master: 0,
-      praktikum: 0,
-      open: 0
-    };
-
-    this.projectRows.forEach(row => {
-      const category = row.getAttribute('data-category');
-      const status = row.getAttribute('data-status');
-      
-      // Count by degree type
-      if (stats.hasOwnProperty(category)) {
-        stats[category]++;
-      }
-      
-      // Count open projects
-      if (status === 'open') {
-        stats.open++;
-      }
-      
-      stats.all++;
-    });
-
-    return stats;
-  }
-}
-
-// Enhanced table interactions WITHOUT problematic transforms
-class TableEnhancements {
-  constructor() {
-    this.init();
-  }
-
-  init() {
-    // Let CSS handle hover effects instead of JavaScript
-    this.setupKeyboardNavigation();
-    this.setupAccessibility();
-  }
-
-  setupKeyboardNavigation() {
-    // Add keyboard navigation for filter buttons
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    
-    filterButtons.forEach((button, index) => {
-      button.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
-          e.preventDefault();
-          const nextIndex = e.key === 'ArrowRight' 
-            ? (index + 1) % filterButtons.length
-            : (index - 1 + filterButtons.length) % filterButtons.length;
-          filterButtons[nextIndex].focus();
-        }
-      });
-    });
-  }
-
-  setupAccessibility() {
-    // Add ARIA labels and descriptions
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    filterButtons.forEach(button => {
-      const filter = button.getAttribute('data-filter');
-      button.setAttribute('aria-label', `Filter by ${filter}`);
-    });
-
-    // Add table accessibility
-    const table = document.querySelector('.theses-table');
-    if (table) {
-      table.setAttribute('role', 'table');
-      table.setAttribute('aria-label', 'theses projects and student theses');
-    }
-  }
 }
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-  // Initialize theses filter
-  window.researchFilter = new ResearchFilter();
+  console.log('📋 DOM loaded, initializing ThesesFilter...');
   
-  // Initialize table enhancements
-  new TableEnhancements();
+  // Create the correct global variable
+  window.thesesFilter = new ThesesFilter();
+  
+  // Also create researchFilter alias for compatibility (if needed by other code)
+  window.researchFilter = window.thesesFilter;
+  
+  console.log('✅ ThesesFilter initialized');
   
   // Handle URL parameters for direct filtering
   const urlParams = new URLSearchParams(window.location.search);
   const filterParam = urlParams.get('filter');
   if (filterParam && ['all', 'bachelor', 'master', 'praktikum', 'open'].includes(filterParam)) {
-    window.researchFilter.filterByCategory(filterParam);
+    console.log('🔗 Applying URL filter:', filterParam);
+    window.thesesFilter.filterByCategory(filterParam);
   }
 });

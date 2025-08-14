@@ -113,41 +113,33 @@
     console.log('🏁 All dropdowns initialization complete!');
   }
 
-  // Enhanced dropdown navigation handler for both Teaching and Research
+
+  // Enhanced dropdown navigation handler
   window.handleDropdownNavigation = function(filter, event) {
     console.log('🔄 Handling dropdown navigation:', filter);
     const currentPath = window.location.pathname;
-    console.log('📍 Current path:', currentPath);
+    const targetUrl = event.target.href || event.target.closest('a')?.href;
     
-    // Handle Research page filtering
-    if (currentPath.includes('/research/')) {
-      console.log('🔬 Research page - applying filter');
-      event.preventDefault();
-      
-      if (window.researchFilter) {
-        window.researchFilter.filterByCategory(filter);
-      } else {
-        console.warn('⚠️ researchFilter not found, trying alternative method');
-        // Alternative: trigger filter buttons
-        const filterBtn = document.querySelector(`[data-filter="${filter}"]`);
-        if (filterBtn) {
-          filterBtn.click();
-        }
-      }
-      
-      // Close dropdown
-      document.querySelectorAll('.dropdown-item').forEach(function(item) {
-        item.classList.remove('open');
-      });
-      
-      const newUrl = `/research/${filter !== 'all' ? '?filter=' + filter : ''}`;
-      window.history.pushState({filter: filter}, '', newUrl);
-      
-      return false;
+    console.log('📍 Current path:', currentPath);
+    console.log('🎯 Target URL:', targetUrl);
+    
+    // Allow normal navigation to specific pages (courses and theses)
+    if (targetUrl && (
+      targetUrl.includes('/theses') || 
+      targetUrl.includes('theses') ||
+      targetUrl.includes('/courses') ||
+      targetUrl.includes('courses')
+    )) {
+      console.log('📚 Navigating to specific page - allowing normal navigation');
+      return true; // Allow normal navigation
     }
     
-    // Handle Teaching page filtering
-    if (currentPath.includes('/teaching/')) {
+    // Only apply filtering logic if it's actually a filter (not a page navigation)
+    if (currentPath.includes('/teaching/') && 
+        !targetUrl?.includes('/theses') && 
+        !targetUrl?.includes('/courses') &&
+        filter && 
+        ['all', 'bachelor', 'master'].includes(filter)) {
       console.log('🎓 Teaching page - applying filter');
       event.preventDefault();
       
@@ -173,8 +165,8 @@
       return false;
     }
     
-    // For other pages, just navigate normally
-    console.log('🔗 Normal navigation to:', event.target.href);
+    // For all other cases, allow normal navigation
+    console.log('🔗 Normal navigation to:', targetUrl);
     return true;
   };
 

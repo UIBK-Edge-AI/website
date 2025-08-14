@@ -1,5 +1,5 @@
 /**
- * Teaching Filter and Search Functionality
+ * Teaching Filter and Search Functionality - DEBUG VERSION
  * Handles filtering by course type and text search
  */
 
@@ -9,9 +9,29 @@ class TeachingFilter {
   }
 
   init() {
+    console.log('🔧 TeachingFilter initializing...');
     this.setupElements();
     this.setupEventListeners();
     this.updateCourseCount();
+    this.debugInfo();
+  }
+
+  debugInfo() {
+    console.log('📊 TeachingFilter Debug Info:');
+    console.log('Filter buttons found:', this.filterButtons.length);
+    console.log('Course rows found:', this.courseRows.length);
+    console.log('Search input found:', !!this.searchInput);
+    console.log('Table body found:', !!this.tableBody);
+    
+    // Debug course rows data
+    this.courseRows.forEach((row, index) => {
+      console.log(`Row ${index}:`, {
+        category: row.getAttribute('data-category'),
+        semester: row.getAttribute('data-semester'),
+        title: row.getAttribute('data-title'),
+        visible: row.style.display !== 'none'
+      });
+    });
   }
 
   setupElements() {
@@ -37,7 +57,10 @@ class TeachingFilter {
     // Filter button listeners
     this.filterButtons.forEach(button => {
       button.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         const filter = e.currentTarget.getAttribute('data-filter');
+        console.log('🔘 Filter button clicked:', filter);
         this.setActiveFilter(filter);
         this.applyFilters();
       });
@@ -47,6 +70,7 @@ class TeachingFilter {
     if (this.searchInput) {
       this.searchInput.addEventListener('input', this.debounce((e) => {
         this.currentSearch = e.target.value.toLowerCase().trim();
+        console.log('🔍 Search input changed:', this.currentSearch);
         this.applyFilters();
       }, 300));
 
@@ -60,6 +84,8 @@ class TeachingFilter {
   }
 
   setActiveFilter(filter) {
+    console.log('🎯 Setting active filter:', filter);
+    
     // Update button states
     this.filterButtons.forEach(btn => {
       btn.classList.remove('active');
@@ -89,6 +115,12 @@ class TeachingFilter {
     const category = row.getAttribute('data-category') || '';
     const semester = row.getAttribute('data-semester') || '';
     
+    console.log('🔍 Checking row:', {
+      category,
+      semester,
+      currentFilter: this.currentFilter
+    });
+    
     // Get text content for search
     const title = row.querySelector('.title-cell')?.textContent?.toLowerCase() || '';
     const instructor = row.querySelector('.instructor-cell')?.textContent?.toLowerCase() || '';
@@ -107,41 +139,39 @@ class TeachingFilter {
     // Apply search filter
     const searchMatch = !this.currentSearch || searchText.includes(this.currentSearch);
 
-    return categoryMatch && searchMatch;
+    const shouldShow = categoryMatch && searchMatch;
+    console.log('👀 Should show row:', shouldShow, { categoryMatch, searchMatch });
+    
+    return shouldShow;
   }
 
+  // FIXED: Removed all filtering animations to prevent table movement
   applyFilters() {
+    console.log('🔄 Applying filters. Current filter:', this.currentFilter);
     let visibleCount = 0;
     const rows = Array.from(this.courseRows);
 
-    // First, hide all rows with animation
-    rows.forEach(row => {
-      row.classList.add('filtering-out');
+    // FIXED: Apply filters immediately without animations
+    rows.forEach((row, index) => {
+      const shouldShow = this.shouldShowRow(row);
+      
+      if (shouldShow) {
+        row.style.display = '';
+        // REMOVED: All animation classes that were causing table movement
+        row.classList.remove('filtering-out', 'filtering-in');
+        visibleCount++;
+        console.log(`✅ Showing row ${index}`);
+      } else {
+        row.style.display = 'none';
+        // REMOVED: All animation classes that were causing table movement
+        row.classList.remove('filtering-out', 'filtering-in');
+        console.log(`❌ Hiding row ${index}`);
+      }
     });
 
-    setTimeout(() => {
-      rows.forEach(row => {
-        const shouldShow = this.shouldShowRow(row);
-        
-        if (shouldShow) {
-          row.style.display = '';
-          row.classList.remove('filtering-out');
-          row.classList.add('filtering-in');
-          visibleCount++;
-          
-          // Remove animation class after animation completes
-          setTimeout(() => {
-            row.classList.remove('filtering-in');
-          }, 400);
-        } else {
-          row.style.display = 'none';
-          row.classList.remove('filtering-out', 'filtering-in');
-        }
-      });
-
-      this.updateCourseCount(visibleCount);
-      this.toggleNoResults(visibleCount === 0);
-    }, 150);
+    console.log(`📊 Filter result: ${visibleCount} rows visible out of ${rows.length}`);
+    this.updateCourseCount(visibleCount);
+    this.toggleNoResults(visibleCount === 0);
   }
 
   updateCourseCount(count) {
@@ -184,6 +214,7 @@ class TeachingFilter {
 
   // Public methods for external control
   filterByCategory(category) {
+    console.log('🎯 External filter request:', category);
     this.setActiveFilter(category);
     this.applyFilters();
   }
@@ -224,31 +255,16 @@ class TeachingFilter {
   }
 }
 
-// Enhanced table interactions
+// Enhanced table interactions WITHOUT problematic transforms
 class TableEnhancements {
   constructor() {
     this.init();
   }
 
   init() {
-    this.setupRowHoverEffects();
+    // Let CSS handle ALL hover effects to prevent layout shifts
     this.setupKeyboardNavigation();
     this.setupAccessibility();
-  }
-
-  setupRowHoverEffects() {
-    const rows = document.querySelectorAll('.course-row');
-    
-    rows.forEach(row => {
-      // Add smooth hover animations
-      row.addEventListener('mouseenter', () => {
-        row.style.transform = 'translateX(4px)';
-      });
-      
-      row.addEventListener('mouseleave', () => {
-        row.style.transform = 'translateX(0)';
-      });
-    });
   }
 
   setupKeyboardNavigation() {
@@ -287,16 +303,21 @@ class TableEnhancements {
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
+  console.log('📋 DOM loaded, initializing TeachingFilter...');
+  
   // Initialize teaching filter
   window.teachingFilter = new TeachingFilter();
   
   // Initialize table enhancements
   new TableEnhancements();
   
+  console.log('✅ TeachingFilter initialized');
+  
   // Handle URL parameters for direct filtering
   const urlParams = new URLSearchParams(window.location.search);
   const filterParam = urlParams.get('filter');
   if (filterParam && ['all', 'bachelor', 'master'].includes(filterParam)) {
+    console.log('🔗 Applying URL filter:', filterParam);
     window.teachingFilter.filterByCategory(filterParam);
   }
 });

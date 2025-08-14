@@ -12,28 +12,14 @@ main:
     url: /projects/
     
   - title: "Teaching"
-    url: /teaching/
+    url: /teaching/courses/
     dropdown: true
     dropdown_items:
-      - title: "Bachelor Courses"
-        url: /teaching/?filter=bachelor
-        filter: "bachelor" 
-      - title: "Master Courses"
-        url: /teaching/?filter=master
-        filter: "master"
+      - title: "Courses"
+        url: /teaching/courses/
+        filter: "all"
       - title: "Theses"
         url: /teaching/theses/
-        dropdown: true
-        dropdown_items:
-          - title: "Bachelor Theses"
-            url: /teaching/theses/?filter=bachelor
-            filter: "bachelor" 
-          - title: "Master Theses"
-            url: /teaching/theses/?filter=master
-            filter: "master"
-          - title: "Internships"
-            url: /teaching/theses/?filter=praktikum
-            filter: "praktikum"
     
   - title: "Publications"
     url: /publications/
