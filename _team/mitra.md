@@ -13,10 +13,11 @@ office: ICT 3S11
 email: mitra.naderi@uibk.ac.at
 address: Technikerstraße 21A, 6020 Innsbruck, Austria
 officehours:
-  monday: "08:00 — 14:00"
-  tuesday: "09:00 — 15:00"
-  wednesday: "08:00 — 14:00"
-  thursday: "08:00 — 14:00"
+  monday: "08:00 — 16:00"
+  tuesday: "09:00 — 16:00"
+  wednesday: "08:00 — 16:00"
+  thursday: "08:00 — 16:00"
+  friday:  "08:00 — 16:00"
 
 
 positions:
