@@ -1,0 +1,31 @@
+---
+layout: archive
+title: "Internships"
+permalink: /research/
+author_profile: true
+---
+
+{% include base_path %}
+<link rel="stylesheet" href="{{ '/assets/css/theses.css' | relative_url }}">
+
+<table class="theses-table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Student</th>
+      <th>Supervisor</th>
+      <th>Degree</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% assign researches = site.research | sort: 'date' | reverse %}
+    {% for research in researches %}
+    <tr>
+      <td><a href="{{ base_path }}{{ research.url }}">{{ research.title }}</a></td>
+      <td>{{ research.authors }}</td>
+      <td>{{ research.supervisor }}</td>
+      <td>{{ research.degree }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>

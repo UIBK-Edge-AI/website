@@ -74,14 +74,6 @@ layout: default
                 <a href="https://orcid.org/{{ page.ORCID }}" target="_blank">ORCID: {{ page.ORCID }}</a>
               </div>
             {% endif %}
-
-            {% if page.LinkedIn %}
-              <div class="contact-item">
-                <i class="fab fa-linkedin"></i>
-                <a href="https://www.linkedin.com/in/{{ page.LinkedIn }}" target="_blank">{{page.title}}</a>
-              </div>
-            {% endif %}
-
             {% if page.officehours %}
             <div class="office-hours-inline">
               <div class="office-hours-label">Office hours</div>
@@ -266,7 +258,6 @@ layout: default
             {% endfor %}
           </section>
         {% endif %}
-
       {% if page.publications %}
         <section class="person-section">
           <h2>Publications</h2>
