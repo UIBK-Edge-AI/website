@@ -12,6 +12,32 @@
 
   @include clearfix();
   margin-bottom: 1em;
+  background-color: var(--global-bg-color);
+  color: var(--global-text-color);
+
+  @media (max-width: 767px) {
+    position: relative;
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  // Tablet and up: Use fixed positioning
+  @include breakpoint($large) {
+    position: fixed;
+    height: 100vh;
+    overflow-y: auto;
+    padding-top: $masthead-height;
+    @include span(2 of 12);
+    opacity: 1;
+    transition: opacity 0.2s ease-in-out;
+  }
+
+  @include breakpoint($x-large) {
+    max-width: $sidebar-link-max-width;
+    padding-right: 0;
+  }
+
 
   @media (orientation: portrait) {
     margin-top: 1em;
@@ -43,6 +69,7 @@
   h2, h3, h4, h5, h6 {
     margin-bottom: 0;
     font-family: $sans-serif-narrow;
+    color: var(--global-text-color);
   }
 
   h3, h4 {
@@ -53,10 +80,26 @@
     font-family: $sans-serif;
     font-size: $type-size-6;
     line-height: 1.5;
+    color: var(--global-text-color);
   }
 
   img {
     width: 100%;
+  }
+}
+
+// Author profile fixes for mobile
+.author__avatar {
+  @media (max-width: 767px) {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+.author__bio {
+  @media (max-width: 767px) {
+    font-size: 0.9rem;
+    margin: 1rem 0;
   }
 }
 
@@ -121,26 +164,36 @@
 
 .author__name {
   margin: 0;
+  color: var(--global-text-color);
 
   @include breakpoint($large) {
     margin-top: 10px;
     margin-bottom: 10px;
   }
 }
+
 .sidebar .author__name {
   font-family: $sans-serif;
   font-size: $type-size-5;
+  color: var(--global-text-color);
 }
 
 .sidebar .author__desktop {
   display: none;
+  color: var(--global-text-color);
+  
   @media screen and (min-width: 1024px) {
     display: block;
+  }
+
+  i {
+    color: var(--global-text-color);
   }
 }
 
 .author__pronouns {
   margin: 0;
+  color: var(--global-text-color);
 
   @include breakpoint($large) {
     margin-top: 10px;
@@ -150,6 +203,7 @@
 
 .author__bio {
   margin: 0;
+  color: var(--global-text-color);
 
   @include breakpoint($large) {
     margin-top: 10px;
@@ -178,9 +232,16 @@
 
   button {
     margin-bottom: 0;
+    background-color: var(--global-bg-color);
+    color: var(--global-text-color);
+    border: 1px solid var(--global-border-color);
 
     @include breakpoint($large) {
       display: none;
+    }
+
+    &:hover {
+      background-color: var(--global-border-color);
     }
   }
 }
@@ -196,7 +257,7 @@
   border-radius: $border-radius;
   background: var(--global-bg-color);
   z-index: -1;
-  box-shadow: 0 0 10px rgba(#000, 0.25);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
   cursor: default;
 
   @include breakpoint($large) {
@@ -235,7 +296,7 @@
     width: 0;
     border-style: solid;
     border-width: 0 10px 10px;
-    border-color: #fff transparent;
+    border-color: var(--global-bg-color) transparent;
     z-index: 1;
 
     @include breakpoint($large) {
@@ -245,6 +306,7 @@
 
   li {
     white-space: nowrap;
+    color: var(--global-text-color);
   }
 
   a {
@@ -253,12 +315,222 @@
     padding-right: 5px;
     padding-top: 2px;
     padding-bottom: 2px;
-    color: inherit;
+    color: var(--global-text-color);
     font-size: $type-size-5;
     text-decoration: none;
+    transition: color 0.3s ease;
 
     &:hover {
       text-decoration: underline;
+      color: var(--global-link-color-hover);
     }
+
+    i {
+      color: var(--global-text-color);
+      transition: color 0.3s ease;
+    }
+
+    &:hover i {
+      color: var(--global-link-color-hover);
+    }
+  }
+}
+
+/* ==========================================================================
+   DARK MODE SPECIFIC OVERRIDES
+   ========================================================================== */
+
+html[data-theme="dark"] {
+  
+  .sidebar {
+    background-color: var(--global-bg-color);
+    color: #ffffff;
+  }
+
+  /* Author profile elements */
+  .author__name {
+    color: #ffffff !important;
+  }
+
+  .author__bio {
+    color: #e2e8f0 !important; /* Light gray for bio text */
+  }
+
+  .author__pronouns {
+    color: #e2e8f0 !important;
+  }
+
+  /* Desktop-only items (location, employer) */
+  .sidebar .author__desktop {
+    color: #ffffff !important;
+    
+    i {
+      color: #ffffff !important;
+    }
+  }
+
+  /* Author URLs and social links */
+  .author__urls {
+    background: var(--global-bg-color);
+    border-color: transparent;
+    // box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
+    &:before {
+      border-color: #404040 transparent;
+    }
+
+    &:after {
+      border-color: var(--global-bg-color) transparent;
+    }
+
+    li {
+      color: #e2e8f0;
+    }
+
+    a {
+      color: #e2e8f0 !important;
+      
+      &:hover {
+        color: #90cdf4 !important; /* Light blue on hover */
+        text-decoration: underline;
+      }
+
+      i {
+        color: #e2e8f0 !important;
+      }
+
+      &:hover i {
+        color: #90cdf4 !important;
+      }
+    }
+
+    /* Specific targeting for common social links */
+    a[href^="mailto:"] {
+      color: #e2e8f0 !important;
+      
+      &:hover {
+        color: #90cdf4 !important;
+      }
+    }
+
+    a[href*="github.com"] {
+      color: #e2e8f0 !important;
+      
+      &:hover {
+        color: #90cdf4 !important;
+      }
+    }
+
+    a[href*="linkedin.com"] {
+      color: #ffffff !important;
+      
+      &:hover {
+        color: #90cdf4 !important;
+      }
+    }
+
+    a[href*="twitter.com"],
+    a[href*="x.com"] {
+      color: #ffffff !important;
+      
+      &:hover {
+        color: #90cdf4 !important;
+      }
+    }
+
+    a[href*="orcid.org"] {
+      color: #ffffff !important;
+      
+      &:hover {
+        color: #90cdf4 !important;
+      }
+    }
+
+    a[href*="scholar.google"] {
+      color: #ffffff !important;
+      
+      &:hover {
+        color: #90cdf4 !important;
+      }
+    }
+
+    /* All Font Awesome icons */
+    i.fas, i.far, i.fab, i.fa {
+      color: #ffffff !important;
+    }
+
+    a:hover i.fas, 
+    a:hover i.far, 
+    a:hover i.fab, 
+    a:hover i.fa {
+      color: #90cdf4 !important;
+    }
+  }
+
+  /* Author URLs wrapper button */
+  .author__urls-wrapper {
+    button {
+      background-color: #404040 !important;
+      color: #ffffff !important;
+      border-color: #666666 !important;
+      
+      &:hover {
+        background-color: #555555 !important;
+        color: #90cdf4 !important;
+      }
+    }
+  }
+
+  /* Sidebar headings */
+  .sidebar {
+    h2, h3, h4, h5, h6 {
+      color: #ffffff;
+    }
+
+    p, li {
+      color: #e2e8f0;
+    }
+  }
+}
+
+/* ==========================================================================
+   LIGHT MODE SPECIFIC ENHANCEMENTS
+   ========================================================================== */
+
+html:not([data-theme="dark"]) {
+  
+  .author__urls {
+    a {
+      color: #333333;
+      
+      &:hover {
+        color: #007bff;
+      }
+
+      i {
+        color: #666666;
+      }
+
+      &:hover i {
+        color: #007bff;
+      }
+    }
+  }
+
+  .sidebar .author__desktop {
+    color: #333333;
+    
+    i {
+      color: #666666;
+    }
+  }
+
+  .author__name {
+    color: #333333;
+  }
+
+  .author__bio,
+  .author__pronouns {
+    color: #666666;
   }
 }

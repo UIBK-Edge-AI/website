@@ -1,0 +1,93 @@
+---
+layout: publications
+title: "Publications"
+permalink: /publications/
+author_profile: true
+---
+
+{% include base_path %}
+<link rel="stylesheet" href="{{ '/assets/css/publications.css' | relative_url }}">
+
+
+<div class="publications-container">
+
+  <!-- Search and Filter Controls -->
+  <div class="controls-section">
+    <div class="search-grid">
+      <div class="form-group">
+        <label for="author-search">Author Name</label>
+        <input type="text" id="author-search" placeholder="e.g., surname" value="">
+      </div>
+      
+      <div class="form-group">
+        <label for="title-search">Title Keywords</label>
+        <input type="text" id="title-search" placeholder="e.g., edge computing, machine learning...">
+      </div>
+      
+      <div class="form-group">
+        <label for="year-from">From</label>
+        <input type="number" id="year-from" placeholder="2020" min="2020" max="2025">
+      </div>
+      
+      <div class="form-group">
+        <label for="year-to">To</label>
+        <input type="number" id="year-to" placeholder="2025" min="2000" max="2025">
+      </div>
+      
+      <div class="form-group">
+        <label for="pub-type">Publication Type</label>
+        <select id="pub-type">
+          <option value="">All Types</option>
+          <option value="1">Journal Articles</option>
+          <option value="2">Conference Papers</option>
+          <option value="3">Book Chapters</option>
+          <option value="4">Books</option>
+          <option value="5">Theses</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <button class="search-button" onclick="searchPublications()">
+          <i class="fas fa-search"></i> Search Publications
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Statistics Bar -->
+  <div class="stats-bar" id="stats-bar">
+    <div class="stats-item">
+      <span class="stats-number" id="total-pubs">0</span>
+      <span class="stats-label">Total Publications</span>
+    </div>
+    <div class="stats-item">
+      <span class="stats-number" id="recent-pubs">0</span>
+      <span class="stats-label">Last 5 Years</span>
+    </div>
+    <div class="stats-item">
+      <span class="stats-number" id="journal-pubs">0</span>
+      <span class="stats-label">Journal Articles</span>
+    </div>
+    <div class="stats-item">
+      <span class="stats-number" id="conf-pubs">0</span>
+      <span class="stats-label">Conference Papers</span>
+    </div>
+  </div>
+
+  <!-- Loading Indicator -->
+  <div id="loading-indicator" style="display: none; text-align: center;">
+    <div class="loading-spinner"></div>
+    <p style="color: #6c757d; margin-top: 1rem;">Loading publications from BibTeX file...</p>
+  </div>
+
+  <!-- Status Messages -->
+  <div id="status-message" class="status-message" style="display: none;">
+    <p id="status-text"></p>
+  </div>
+
+  <!-- Publications List -->
+  <div id="publications-list" class="publications-list">
+  </div>
+</div>
+
+<script src="{{ './assets/js/fetch_publications.js' | relative_url }}"></script>

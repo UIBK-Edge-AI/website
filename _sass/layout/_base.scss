@@ -9,7 +9,7 @@ html {
 
 body {
   /* Set via _themes.scss */
-  color: var(--global-text-color);
+  // color: var(--global-text-color);
   background-color: var(--global-bg-color);
 
   margin: 0;
@@ -32,6 +32,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
+  
   margin-top: 0;
   font-size: $type-size-3;
 }
@@ -363,3 +364,21 @@ b, i, strong, em, blockquote, p, q, span, figure, img, h1, h2, header, input, a,
       display: none;
     }
   }
+
+  // Main content area responsive fixes
+#main {
+  @media (max-width: 767px) {
+    margin-left: 0;
+    padding: 1rem;
+  }
+  
+  @include breakpoint($large) {
+    margin-left: span(2 of 12);  // Account for fixed sidebar
+  }
+}
+
+.page {
+  @media (max-width: 767px) {
+    padding: 0;
+  }
+}

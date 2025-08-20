@@ -1,0 +1,123 @@
+---
+layout: default
+---
+
+{% include base_path %}
+
+<div id="main" role="main">
+  
+  <!-- Custom Project Sidebar -->
+  <div class="sidebar sticky">
+    <div class="author__avatar">
+      {% if page.image %}
+        <img src="{{ page.image | relative_url }}" alt="{{ page.title }}" itemprop="image">
+      {% else %}
+        <img src="{{ 'assets/img/projects/person-placeholder.svg' | relative_url }}" alt="{{ page.title }}">
+      {% endif %}
+    </div>
+
+    <div class="author__content">
+      
+      {% if page.duration %}
+        <div class="author__bio">
+          <strong>Duration:</strong> {{ page.duration }}
+        </div>
+      {% endif %}
+      
+      {% if page.status %}
+        <div class="author__bio">
+          <strong>Status:</strong> 
+          <span class="project-status project-status--{{ page.status }}">{{ page.status | capitalize }}</span>
+        </div>
+      {% endif %}
+      
+      {% if page.participants %}
+        <div class="author__bio">
+          <strong>Participants:</strong> {{ page.participants | join: ", " }}
+        </div>
+      {% endif %}
+      
+      <!-- Contact/Links section -->
+      <ul class="author__urls author__urls--desktop">
+        {% if page.website %}
+          <li><a href="{{ base_path }}{{ page.website }}" target="_blank"> <strong>Website:</strong> {{page.website}}</a></li>
+        {% endif %}
+        
+        {% if page.github %}
+          <li><a href="{{ page.github }}" target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        {% endif %}
+        
+        {% if page.documentation %}
+          <li><a href="{{ page.documentation }}" target="_blank"><i class="fas fa-fw fa-book" aria-hidden="true"></i> Documentation</a></li>
+        {% endif %}
+        
+        {% if page.contact_email %}
+          <li><a href="mailto:{{ page.contact_email }}"><i class="fas fa-fw fa-envelope" aria-hidden="true"></i> Contact</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="page__inner-wrap">
+      <!-- <header>
+        <h1 class="page__title" itemprop="headline">{{ page.title }}</h1>
+      </header> -->
+
+      <section class="page__content" itemprop="text">
+        {{ content }}
+      </section>
+
+      <footer class="page__meta">
+        {% if page.last_modified_at %}
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="{{ page.last_modified_at | date: "%Y-%m-%d" }}">{{ page.last_modified_at | date: "%B %d, %Y" }}</time></p>
+        {% elsif page.date %}
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Published:</strong> <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %d, %Y" }}</time></p>
+        {% endif %}
+      </footer>
+
+    </div>
+  </article>
+
+</div>
+
+<style>
+.project-status {
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.8em;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.project-status--completed {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.project-status--ongoing {
+  background-color: #d1ecf1;
+  color: #0c5460;
+}
+
+.project-status--planned {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+html[data-theme="dark"] .project-status--completed {
+  background-color: rgba(21, 87, 36, 0.3);
+  color: #7bc97b;
+}
+
+html[data-theme="dark"] .project-status--ongoing {
+  background-color: rgba(12, 84, 96, 0.3);
+  color: #7bcfd8;
+}
+
+html[data-theme="dark"] .project-status--planned {
+  background-color: rgba(133, 100, 4, 0.3);
+  color: #ffc107;
+}
+</style>

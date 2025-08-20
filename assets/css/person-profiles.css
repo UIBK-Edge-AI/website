@@ -882,6 +882,151 @@ html[data-theme="dark"] .education-notes h3 {
   color: #ffffff;
 }
 
+* Additional styles for new sections */
+.journal-reviews-list ul,
+.program-committees-list ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.journal-item,
+.committee-item {
+  padding: 0.5rem 1rem;
+  margin-bottom: 0.5rem;
+  background-color: #f8f9fa;
+  border-left: 4px solid #17a2b8;
+  border-radius: 0 4px 4px 0;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+html[data-theme="dark"] .journal-item,
+html[data-theme="dark"] .committee-item {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-left: 4px solid #20c997;
+  color: #e0e0e0;
+}
+
+.grant-entry {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #e9ecef;
+}
+
+html[data-theme="dark"] .grant-entry {
+  border-bottom: 1px solid #444;
+}
+
+.grant-entry:last-child {
+  border-bottom: none;
+}
+
+.grant-title {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: #212529;
+}
+
+html[data-theme="dark"] .grant-title {
+  color: #ffffff;
+}
+
+.grant-location {
+  color: #6c757d;
+  font-size: 0.95rem;
+  font-style: italic;
+}
+
+html[data-theme="dark"] .grant-location {
+  color: #adb5bd;
+}
+
+.grant-notes {
+  margin-top: 0.5rem;
+  padding: 0.75rem;
+  background-color: #f8f9fa;
+  border-left: 4px solid #28a745;
+  border-radius: 0 4px 4px 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+html[data-theme="dark"] .grant-notes {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-left: 4px solid #20c997;
+  color: #e0e0e0;
+}
+ 
+/* Enhanced Mobile Responsive Design */
+@media (max-width: 767px) {
+  .person-page {
+    margin: 0;
+    padding: 0;
+  }
   
+  .person-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1rem;
+    gap: 1rem;
+  }
+  
+  .person-image,
+  .person-image-placeholder {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .person-info h1 {
+    font-size: 1.5rem;
+    margin: 0.5rem 0;
+  }
+  
+  .person-position {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .person-section {
+    margin: 1rem;
+    padding: 1rem;
+  }
+  
+  .person-contact {
+    gap: 0.5rem;
+  }
+  
+  .contact-item {
+    font-size: 0.9rem;
+  }
+  
+  .research-interests ul {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  
+  .skills-grid {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .person-header {
+    padding: 0.75rem;
+  }
+  
+  .person-info h1 {
+    font-size: 1.25rem;
+  }
+  
+  .person-section {
+    margin: 0.5rem;
+    padding: 0.75rem;
+  }
+}
+
 
 }

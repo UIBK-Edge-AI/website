@@ -1,0 +1,129 @@
+/* ==========================================================================
+   TABLE STYLING - LIGHT & DARK MODE
+   ========================================================================== */
+
+.theses-table {
+  width: clamp(300px, 100%, 1200px); /* Fixed: 200% was causing horizontal scroll */       
+  max-width: 100%;                   /* Fixed: 130% was causing overflow */         
+  margin: 0 auto;          
+  border-collapse: collapse;
+  font-size: 1rem;
+}
+
+/* Light Mode - Table Headers and Content - UIBK Brand Colors */
+.theses-table th,
+.theses-table td {
+  color: #2c5aa0; /* UIBK Blue for content */
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #e2e8f0;
+  text-align: center;
+}
+
+.theses-table th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+  color: #2c5aa0; /* UIBK Blue for headers */
+  border-bottom: 3px solid #f68712; /* UIBK Orange accent */
+}
+
+/* Hover effects for rows */
+.theses-table tbody tr:hover {
+  background-color: rgba(246, 135, 18, 0.05); /* Light UIBK Orange hover */
+}
+
+.theses-table tbody tr:hover td {
+  color: #1a4480; /* Darker UIBK Blue on hover */
+}
+
+/* Dark Mode - Table Headers and Content - UIBK Brand Colors */
+html[data-theme="dark"] .theses-table th,
+html[data-theme="dark"] .theses-table td {
+  color: #90cdf4; /* Light blue for dark theme (consistent with existing dark theme) */
+  border-bottom-color: #4a5568;
+}
+
+html[data-theme="dark"] .theses-table th {
+  background-color: #2d3748;
+  color: #90cdf4; /* Light blue for headers in dark theme */
+  border-bottom: 3px solid #f68712; /* UIBK Orange accent (same in both themes) */
+}
+
+html[data-theme="dark"] .theses-table {
+  background-color: #1a202c;
+}
+
+/* Dark mode hover effects */
+html[data-theme="dark"] .theses-table tbody tr:hover {
+  background-color: rgba(246, 135, 18, 0.1); /* Slightly stronger UIBK Orange hover for dark theme */
+}
+
+html[data-theme="dark"] .theses-table tbody tr:hover td {
+  color: #bee3f8; /* Lighter blue on hover in dark theme */
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .theses-table {
+    width: 100%;
+    max-width: 100%;
+    font-size: 0.9rem;
+  }
+  
+  .theses-table th,
+  .theses-table td {
+    padding: 0.5rem 0.75rem;
+  }
+  
+  /* Optional: Stack table on very small screens */
+  @media (max-width: 480px) {
+    .theses-table,
+    .theses-table thead,
+    .theses-table tbody,
+    .theses-table th,
+    .theses-table td,
+    .theses-table tr {
+      display: block;
+    }
+    
+    .theses-table thead tr {
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+    }
+    
+    .theses-table tr {
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      background: white;
+    }
+    
+    html[data-theme="dark"] .theses-table tr {
+      border-color: #4a5568;
+      background: #2d3748;
+    }
+    
+    .theses-table td {
+      border: none;
+      position: relative;
+      padding-left: 30%;
+      padding-bottom: 0.75rem;
+    }
+    
+    .theses-table td:before {
+      content: attr(data-label);
+      position: absolute;
+      left: 6px;
+      width: 25%;
+      padding-right: 10px;
+      white-space: nowrap;
+      font-weight: 600;
+      color: #f68712; /* UIBK Orange for mobile labels */
+    }
+    
+    html[data-theme="dark"] .theses-table td:before {
+      color: #f68712; /* UIBK Orange for mobile labels in both themes */
+    }
+  }
+}

@@ -54,14 +54,22 @@
     padding-bottom: 0.5em;
     border-bottom: 1px solid var(--global-border-color);
   }
+  p {
+    font-size: 1.1em;
+  }
 
-  p, li, dl {
+  li, dl {
     font-size: 1em;
   }
 
   /* paragraph indents */
   p {
     margin: 0 0 $indent-var;
+    text-align: justify;        
+    text-justify: inter-word;   
+    hyphens: auto;              
+    -webkit-hyphens: auto;      
+    -ms-hyphens: auto;          
 
     /* sibling indentation*/
     @if $paragraph-indent == true {

@@ -2,6 +2,222 @@
    jQuery plugin settings and other scripts
    ========================================================================== */
 
+
+// Complete dropdown functionality for Teaching and Research
+(function() {
+  'use strict';
+
+  function initializeDropdowns() {
+    console.log('🔧 Initializing dropdowns...');
+    const dropdownItems = document.querySelectorAll('.masthead__menu-item.dropdown-item');
+    console.log('📍 Found dropdown items:', dropdownItems.length);
+    
+    if (dropdownItems.length === 0) {
+      console.warn('⚠️ No dropdown items found!');
+      return;
+    }
+    
+    dropdownItems.forEach(function(item, index) {
+      const toggle = item.querySelector('.dropdown-toggle');
+      const dropdown = item.querySelector('.dropdown-menu');
+      const title = toggle ? toggle.textContent.trim() : 'Unknown';
+      
+      console.log(`🎯 Dropdown ${index} (${title}):`, {
+        item: item,
+        toggle: toggle,
+        dropdown: dropdown,
+        hasPersistClass: item.classList.contains('persist'),
+        isVisible: item.offsetParent !== null
+      });
+      
+      if (toggle && dropdown) {
+        let hoverTimeout;
+
+        // Add debugging attributes
+        item.setAttribute('data-dropdown-initialized', 'true');
+        item.setAttribute('data-dropdown-title', title);
+        console.log(`✅ Setting up ${title} dropdown`);
+
+        // Show dropdown on mouseenter
+        item.addEventListener('mouseenter', function(e) {
+          console.log(`🖱️ Mouse ENTER on ${title} dropdown`);
+          clearTimeout(hoverTimeout);
+          
+          // Close other dropdowns
+          dropdownItems.forEach(function(otherItem) {
+            if (otherItem !== item) {
+              otherItem.classList.remove('open');
+            }
+          });
+          
+          // Open current dropdown
+          item.classList.add('open');
+          console.log(`✨ Added OPEN class to ${title} dropdown`);
+          
+          // Force visibility (override any CSS conflicts)
+          dropdown.style.display = 'block !important';
+          dropdown.style.opacity = '1 !important';
+          dropdown.style.visibility = 'visible !important';
+          dropdown.style.transform = 'translateY(0) !important';
+          dropdown.style.pointerEvents = 'auto !important';
+          dropdown.style.zIndex = '9999 !important';
+          console.log(`🎨 Applied inline styles to ${title} dropdown`);
+        });
+        
+        // Hide dropdown on mouseleave
+        item.addEventListener('mouseleave', function(e) {
+          console.log(`🖱️ Mouse LEAVE on ${title} dropdown`);
+          hoverTimeout = setTimeout(function() {
+            item.classList.remove('open');
+            console.log(`❌ Removed OPEN class from ${title} dropdown`);
+            
+            // Reset inline styles
+            dropdown.style.display = '';
+            dropdown.style.opacity = '';
+            dropdown.style.visibility = '';
+            dropdown.style.transform = '';
+            dropdown.style.pointerEvents = '';
+            dropdown.style.zIndex = '';
+          }, 300);
+        });
+
+        // Keep dropdown open when hovering over dropdown menu
+        dropdown.addEventListener('mouseenter', function(e) {
+          console.log(`🖱️ Mouse ENTER on ${title} dropdown MENU`);
+          clearTimeout(hoverTimeout);
+          item.classList.add('open');
+        });
+
+        dropdown.addEventListener('mouseleave', function(e) {
+          console.log(`🖱️ Mouse LEAVE on ${title} dropdown MENU`);
+          hoverTimeout = setTimeout(function() {
+            item.classList.remove('open');
+            dropdown.style.display = '';
+            dropdown.style.opacity = '';
+            dropdown.style.visibility = '';
+            dropdown.style.transform = '';
+            dropdown.style.pointerEvents = '';
+            dropdown.style.zIndex = '';
+          }, 300);
+        });
+
+        console.log(`🎉 ${title} dropdown initialized successfully!`);
+      } else {
+        console.warn(`⚠️ ${title} dropdown missing elements:`, {
+          hasToggle: !!toggle,
+          hasDropdown: !!dropdown
+        });
+      }
+    });
+    
+    console.log('🏁 All dropdowns initialization complete!');
+  }
+
+
+  // Enhanced dropdown navigation handler
+  window.handleDropdownNavigation = function(filter, event) {
+    console.log('🔄 Handling dropdown navigation:', filter);
+    const currentPath = window.location.pathname;
+    const targetUrl = event.target.href || event.target.closest('a')?.href;
+    
+    console.log('📍 Current path:', currentPath);
+    console.log('🎯 Target URL:', targetUrl);
+    
+    // Allow normal navigation to specific pages (courses and theses)
+    if (targetUrl && (
+      targetUrl.includes('/theses') || 
+      targetUrl.includes('theses') ||
+      targetUrl.includes('/courses') ||
+      targetUrl.includes('courses')
+    )) {
+      console.log('📚 Navigating to specific page - allowing normal navigation');
+      return true; // Allow normal navigation
+    }
+    
+    // Only apply filtering logic if it's actually a filter (not a page navigation)
+    if (currentPath.includes('/teaching/') && 
+        !targetUrl?.includes('/theses') && 
+        !targetUrl?.includes('/courses') &&
+        filter && 
+        ['all', 'bachelor', 'master'].includes(filter)) {
+      console.log('🎓 Teaching page - applying filter');
+      event.preventDefault();
+      
+      if (window.teachingFilter) {
+        window.teachingFilter.filterByCategory(filter);
+      } else {
+        console.warn('⚠️ teachingFilter not found, trying alternative method');
+        // Alternative: trigger filter buttons
+        const filterBtn = document.querySelector(`[data-filter="${filter}"]`);
+        if (filterBtn) {
+          filterBtn.click();
+        }
+      }
+      
+      // Close dropdown
+      document.querySelectorAll('.dropdown-item').forEach(function(item) {
+        item.classList.remove('open');
+      });
+      
+      const newUrl = `/teaching/${filter !== 'all' ? '?filter=' + filter : ''}`;
+      window.history.pushState({filter: filter}, '', newUrl);
+      
+      return false;
+    }
+    
+    // For all other cases, allow normal navigation
+    console.log('🔗 Normal navigation to:', targetUrl);
+    return true;
+  };
+
+  // Initialize dropdowns with multiple fallback methods
+  console.log('🚀 Starting dropdown system...');
+  console.log('📊 DOM ready state:', document.readyState);
+  
+  // Method 1: Immediate if DOM is ready
+  if (document.readyState !== 'loading') {
+    console.log('📋 DOM ready - initializing immediately');
+    setTimeout(initializeDropdowns, 100);
+  }
+  
+  // Method 2: DOM Content Loaded
+  document.addEventListener('DOMContentLoaded', function() {
+    console.log('📋 DOM Content Loaded event');
+    setTimeout(initializeDropdowns, 200);
+  });
+
+  // Method 3: Window Load (complete fallback)
+  window.addEventListener('load', function() {
+    console.log('🔄 Window loaded event');
+    setTimeout(initializeDropdowns, 300);
+  });
+
+  // Method 4: Ultimate fallback with multiple retries
+  let retryCount = 0;
+  const maxRetries = 5;
+  
+  function retryInitialization() {
+    retryCount++;
+    console.log(`⏰ Retry attempt ${retryCount}/${maxRetries}`);
+    
+    const dropdownItems = document.querySelectorAll('.masthead__menu-item.dropdown-item');
+    if (dropdownItems.length > 0) {
+      console.log('✅ Found dropdown items, initializing...');
+      initializeDropdowns();
+    } else if (retryCount < maxRetries) {
+      console.log('⏳ No dropdown items found, retrying in 1 second...');
+      setTimeout(retryInitialization, 1000);
+    } else {
+      console.error('❌ Failed to find dropdown items after all retries');
+    }
+  }
+  
+  // Start retry sequence after 2 seconds
+  setTimeout(retryInitialization, 2000);
+
+})();
+
+
 $(document).ready(function () {
   // detect OS/browser preference
   const browserPref = window.matchMedia('(prefers-color-scheme: dark)').matches
@@ -39,6 +255,7 @@ $(document).ready(function () {
     }
   };
 
+  
   setTheme();
 
   // if user hasn't chosen a theme, follow OS changes
@@ -148,4 +365,123 @@ $(document).ready(function () {
     midClick: true
   });
 
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  const mobileToggle = document.querySelector('.mobile-menu-toggle');
+  const visibleLinks = document.querySelector('.visible-links');
+  
+  if (mobileToggle && visibleLinks) {
+    mobileToggle.addEventListener('click', function() {
+      visibleLinks.classList.toggle('show-mobile-menu');
+    });
+  }
+});
+
+// Mobile Menu Toggle Fix
+// Add this to your site's JavaScript or in a <script> tag
+
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('🔧 Mobile menu fix initializing...');
+  
+  // Force show masthead elements on mobile
+  function forceMobileDisplay() {
+    const masthead = document.querySelector('.masthead');
+    const greedy_nav = document.querySelector('.greedy-nav');
+    const visible_links = document.querySelector('.visible-links');
+    const nav_button = document.querySelector('#site-nav button');
+    
+    if (window.innerWidth <= 767) {
+      // Force display critical navigation elements
+      if (masthead) {
+        masthead.style.display = 'block';
+        masthead.style.visibility = 'visible';
+      }
+      if (greedy_nav) {
+        greedy_nav.style.display = 'flex';
+        greedy_nav.style.visibility = 'visible';
+      }
+      if (visible_links) {
+        visible_links.style.display = 'flex';
+        visible_links.style.visibility = 'visible';
+      }
+      if (nav_button) {
+        nav_button.style.display = 'block';
+        nav_button.style.visibility = 'visible';
+      }
+    }
+  }
+  
+  // Handle mobile menu toggle for very small screens
+  function handleMobileMenuToggle() {
+    const nav_button = document.querySelector('#site-nav button');
+    const visible_links = document.querySelector('.visible-links');
+    const hidden_links = document.querySelector('.hidden-links');
+    
+    if (nav_button) {
+      nav_button.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        console.log('🔘 Mobile menu toggle clicked');
+        
+        if (window.innerWidth <= 480) {
+          // Toggle mobile menu on very small screens
+          if (visible_links) {
+            visible_links.classList.toggle('show-mobile-menu');
+          }
+          if (hidden_links) {
+            hidden_links.classList.toggle('hidden');
+          }
+          this.classList.toggle('close');
+        }
+      });
+    }
+  }
+  
+  // Override the greedy navigation behavior on mobile
+  function overrideGreedyNav() {
+    // Disable greedy nav on mobile
+    if (window.innerWidth <= 767) {
+      const updateNav = window.updateNav;
+      if (typeof updateNav === 'function') {
+        // Override the updateNav function to prevent hiding on mobile
+        window.updateNav = function() {
+          if (window.innerWidth > 767) {
+            // Only run original updateNav on desktop
+            updateNav.call(this);
+          } else {
+            // On mobile, ensure elements stay visible
+            forceMobileDisplay();
+          }
+        };
+      }
+    }
+  }
+  
+  // Initialize fixes
+  forceMobileDisplay();
+  handleMobileMenuToggle();
+  overrideGreedyNav();
+  
+  // Re-apply fixes on resize
+  let resizeTimer;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function() {
+      forceMobileDisplay();
+      overrideGreedyNav();
+    }, 100);
+  });
+  
+  // Re-apply fixes on orientation change
+  if (screen.orientation) {
+    screen.orientation.addEventListener('change', function() {
+      setTimeout(function() {
+        forceMobileDisplay();
+      }, 300);
+    });
+  }
+  
+  console.log('✅ Mobile menu fix initialized');
 });

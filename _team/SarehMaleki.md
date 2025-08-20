@@ -5,11 +5,11 @@ kind: person
 title: Sareh Maleki
 identifier: SaMa
 permalink: /team/sarehmaleki
-img: /assets/img/SarehMalekiPhoto.jpg
-phone: +4367762459665
+img: /assets/img/team/P_Sareh_Maleki.jpg
+phone: +43 512 507-53251
 position: ra
 category: RESEARCH ASSISTANTS
-office: ICT 2M05b
+office: ICT 2M05B
 ORCID: 0009-0006-3905-9407
 email: sareh.maleki@uibk.ac.at
 address: Technikerstraße 21A, 6020 Innsbruck, Austria

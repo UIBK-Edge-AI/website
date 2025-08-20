@@ -9,7 +9,8 @@ name: Deploy Jekyll site to Pages
 on:
   # Runs on pushes targeting the default branch
   push:
-    branches: ["page-projects"]
+    branches: [ main, "page-publications"]
+
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -34,15 +35,63 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Python
-        uses: actions/setup-python@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          python-version: '3.9'
-      
-      - name: Install Python dependencies
+          node-version: '18'
+
+      - name: Install Node.js dependencies
+        run: npm install
+
+      - name: Verify source JavaScript files
         run: |
-          python -m pip install --upgrade pip
-          pip install jupyter pandas requests beautifulsoup4 geopy getorg
+          echo "Checking source JavaScript files..."
+          ls -la assets/js/_main.js
+          echo "Checking for theme toggle in source..."
+          grep -q "theme-toggle" assets/js/_main.js && echo "✓ Theme toggle found in source" || echo "✗ Theme toggle missing in source"
+          
+      - name: Build JavaScript assets
+        run: |
+          echo "Building JavaScript assets..."
+          npm run build:js
+          echo "Build completed. Checking output..."
+          
+      - name: Debug JavaScript build
+        run: |
+          echo "=== JavaScript Build Debug ==="
+          echo "Source file sizes:"
+          ls -la assets/js/_main.js
+          echo ""
+          echo "Dependency files check:"
+          ls -la node_modules/jquery/dist/jquery.min.js
+          ls -la node_modules/fitvids/dist/fitvids.min.js
+          ls -la node_modules/magnific-popup/dist/jquery.magnific-popup.min.js
+          ls -la node_modules/jquery-smooth-scroll/jquery.smooth-scroll.min.js
+          ls -la assets/js/plugins/jquery.greedy-navigation.js
+          echo ""
+          echo "Output file size:"
+          ls -la assets/js/main.min.js
+          echo ""
+          echo "Checking for dark mode code in output:"
+          if grep -q "theme-toggle" assets/js/main.min.js; then
+            echo "✓ Theme toggle found"
+          else
+            echo "✗ Theme toggle missing - rebuilding with verbose output"
+            echo "Running uglify command directly:"
+            npx uglifyjs --version
+            npx uglifyjs node_modules/jquery/dist/jquery.min.js node_modules/fitvids/dist/fitvids.min.js node_modules/magnific-popup/dist/jquery.magnific-popup.min.js node_modules/jquery-smooth-scroll/jquery.smooth-scroll.min.js assets/js/plugins/jquery.greedy-navigation.js assets/js/_main.js --compress --mangle --output assets/js/main.min.js --verbose
+          fi
+
+      - name: Verify JavaScript build
+        run: |
+          echo "Checking if main.min.js was created..."
+          ls -la assets/js/main.min.js
+          echo "File size:"
+          du -h assets/js/main.min.js
+          echo "Checking for theme toggle functionality..."
+          grep -q "theme-toggle" assets/js/main.min.js && echo "✓ Theme toggle found" || echo "✗ Theme toggle missing"
+          grep -q "data-theme" assets/js/main.min.js && echo "✓ Dark mode functionality found" || echo "✗ Dark mode functionality missing"
+
       - name: Setup Ruby
         # https://github.com/ruby/setup-ruby/releases/tag/v1.207.0
         uses: ruby/setup-ruby@4a9ddd6f338a97768b8006bf671dfbad383215f4

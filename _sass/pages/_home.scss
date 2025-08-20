@@ -1,0 +1,115 @@
+/* ==========================================================================
+   HOME PAGE SPECIFIC STYLES
+   ========================================================================== */
+
+/* Main heading blue styling */
+.page__inner-wrap h1 {
+  color: #2c5282 !important;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  border-bottom: 4px solid #f68712; /* UIBK primary orange */
+  padding-bottom: 0.75rem;
+}
+
+/* Edge AI sidebar title */
+.author__name {
+  color: #2c5282 !important;
+  font-size: 2.5rem !important;
+  font-weight: 700 !important;
+  text-align: center !important;
+}
+
+/* Main description paragraph */
+.page__content > p:first-of-type {
+  color: #4a5568;
+  font-size: 1.1em;
+  font-weight: 500;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+
+/* Regular paragraphs */
+.page__content p, li, dl {
+  color: #4a5568;
+  line-height: 1.6;
+}
+
+/* Section headings (About, Research, Teaching, Contact) */
+.page__content h2 {
+  color: #2c5282 ;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   DARK MODE ADAPTATIONS
+   ========================================================================== */
+
+html[data-theme="dark"] {
+  
+  /* Main heading blue styling for dark mode */
+  .page__inner-wrap h1 {
+    color: #90cdf4 !important; /* Light blue for dark theme */
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    border-bottom: 4px solid #f68712; /* UIBK primary orange */
+    padding-bottom: 0.75rem;
+  }
+
+  /* Edge AI sidebar title for dark mode */
+  .author__name {
+    color: #90cdf4 !important; /* Light blue for dark theme */
+    font-size: 2.5rem !important;
+    font-weight: 700 !important;
+    text-align: center !important;
+  }
+  
+  .author__desktop {
+      color: #e2e8f0;
+  }
+
+  /* Main description paragraph for dark mode */
+  .page__content > p:first-of-type {
+    color: #e2e8f0; /* Light gray for better readability in dark mode */
+    font-size: 1.1em;
+    font-weight: 500;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+  }
+
+  /* Regular paragraphs for dark mode */
+  .page__content p {
+    color: #e2e8f0; /* Lighter gray for regular text */
+    line-height: 1.6;
+  }
+
+    .page__content li, dl {
+    color: #e2e8f0;
+  }
+
+  /* Section headings for dark mode */
+  .page__content h2 {
+    color: #90cdf4 !important; /* Light blue for headings */
+    font-weight: 600;
+  }
+
+  /* Additional dark mode improvements */
+  .page__content h3,
+  .page__content h4 {
+    color: #90cdf4 !important; /* Medium gray for smaller headings */
+  }
+
+  /* Sidebar content adjustments */
+  .author__bio,
+  .author__urls {
+    color: #a0aec0;
+  }
+
+  /* Link colors in dark mode */
+  .page__content a {
+    color: #63b3ed; /* Medium blue for links */
+  }
+
+  .page__content a:hover {
+    color: #90cdf4; /* Light blue on hover */
+  }
+}

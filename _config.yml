@@ -9,12 +9,13 @@
 # Basic Site Settings
 locale                   : "en-US"
 site_theme               : "default"
-title                    : "universitaet-innsbruck-logo-rgb-farbe.png"
+title                    : ""
 title_separator          : "-"
-name                     : &name "Your Name"
+site_creator             : "T M Rayhan Gias"
+site_creator_url         : "/team/tanim_gias"
 description              : &description "personal description"
 url                      : https://uibk-edge-ai.github.io
-baseurl                  : "/edgeAI"
+baseurl                  : "/website"
 repository               : "https://github.com/UIBK-Edge-AI/"
 
 # Site Author - The following control what appear as part of the author content on the side bar.
@@ -23,13 +24,13 @@ repository               : "https://github.com/UIBK-Edge-AI/"
 author:
   # Biographic information
   avatar           : "edgeAI_logo.jpg"
-  name             : "Edge AI"
+  name             : "EDGE AI"
   pronouns         : # example: "she/her"  
-  bio              : "Short biography for the left-hand sidebar"
+  bio              : # URL
   location         : "Technikerstraße 21a, Innsbruck"
   employer         : "Universität Innsbruck, Austria"
   uri              : # URL
-  email            : "edge-ai@informatik.uibk.ac.at" 
+  email            : "edgeai-informatik@uibk.ac.at" 
 
   # Academic websites
   academia         : # URL
@@ -220,18 +221,15 @@ collections:
   teaching:
     output: true
     permalink: /:collection/:path/
-  theses:
-    output: true
-    permalink: /:collection/:path/
   projects:
     output: true
     permalink: /:collection/:path/
   team:
     output: true
     permalink: /:collection/:path/
-  research:
-    output: true
-    permalink: /:collection/:path/
+
+  student_projects:
+
 
 
 # These settings control how pages and collections are included in the site
@@ -263,10 +261,10 @@ defaults:
       author_profile: true
       share: true
       comments: true
-  # _theses
+  # _student_projects
   - scope:
       path: ""
-      type: theses
+      type: student_projects
     values:
       layout: single
       author_profile: true
@@ -277,25 +275,25 @@ defaults:
       path: ""
       type: projects
     values:
-      layout: single
+      layout: projects
       author_profile: true
       share: true
       comment: true
-  # _research
-  - scope:
-      path: ""
-      type: research
-    values:
-      layout: single
-      author_profile: true
-      share: true
-      comment: true
-  # _talks
+  # _team
   - scope:
       path: ""
       type: team
     values:
       layout: team
+      author_profile: true
+      share: true
+  
+  # __publications
+  - scope:
+      path: ""
+      type: publications
+    values:
+      layout: publications
       author_profile: true
       share: true
 
@@ -321,6 +319,7 @@ plugins:
   - jekyll-sitemap
   - jekyll-redirect-from
   - jemoji
+  - jekyll-redirect-from
 
 # Mimic GitHub Pages with --safe
 whitelist:

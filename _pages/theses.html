@@ -1,31 +1,107 @@
 ---
 layout: archive
-title: "Theses"
-permalink: /theses/
+title: ""
+permalink: /teaching/theses/
 author_profile: true
 ---
 
 {% include base_path %}
 <link rel="stylesheet" href="{{ '/assets/css/theses.css' | relative_url }}">
 
-<table class="theses-table">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Student</th>
-      <th>Supervisor</th>
-      <th>Degree</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% assign theses = site.theses | sort: 'date' | reverse %}
-    {% for thesis in theses %}
-    <tr>
-      <td><a href="{{ base_path }}{{ thesis.url }}">{{ thesis.title }}</a></td>
-      <td>{{ thesis.authors }}</td>
-      <td>{{ thesis.supervisor }}</td>
-      <td>{{ thesis.degree }}</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+<div class="theses-container">
+  <!-- Filter Buttons -->
+  <div class="filter-controls">
+    <button class="filter-btn active" data-filter="all">
+      All
+    </button>
+    <button class="filter-btn" data-filter="bachelor">
+      Bachelor
+    </button>
+    <button class="filter-btn" data-filter="master">
+      Master
+    </button>
+    <button class="filter-btn" data-filter="praktikum">
+      Internship
+    </button>
+    <button class="filter-btn" data-filter="open">
+      Open
+    </button>
+  </div>
+
+  <!-- Search Bar -->
+  <div class="search-container">
+    <input type="text" id="searchInput" placeholder="Search by title, student name, or supervisor..." class="search-input">
+    <span class="search-icon">🔍</span>
+  </div>
+
+  <!-- theses Projects Table -->
+    <table class="theses-table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Student</th>
+          <th>Supervisor</th>
+          <th>Degree</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="projectsTableBody">
+        {% comment %} Get the student_projects collection {% endcomment %}
+        {% assign all_projects = site.student_projects %}
+        
+        {% if all_projects and all_projects.size > 0 %}
+          {% for project in all_projects %}
+          <tr class="project-row" 
+              data-category="{{ project.degree | downcase | default: 'other' }}" 
+              data-status="{{ project.status | downcase | default: 'unknown' }}"
+              data-title="{{ project.title | downcase | default: '' }}"
+              data-student="{{ project.student | downcase | default: '' }}"
+              data-supervisor="{{ project.supervisor | downcase | default: '' }}">
+            <td class="title-cell">
+              {% if project.url and project.url != "" %}
+                <a href="{{ base_path }}{{ project.url }}" class="project-link">
+                  {{ project.title | default: "Untitled Project" }}
+                </a>
+              {% else %}
+                <span class="project-title">{{ project.title | default: "Untitled Project" }}</span>
+              {% endif %}
+            </td>
+            <td class="student-cell">
+              {% if project.authors and project.authors != "" %}
+                {{ project.authors | default: "TBA" }}
+              {% else %}
+                <span class="no-student">Available</span>
+              {% endif %}
+            </td>
+            <td class="supervisor-cell">{{ project.supervisor | default: "TBA" }}</td>
+            <td class="degree-cell">
+              <span class="degree-badge degree-{{ project.degree | downcase | default: 'other' }}">
+                {{ project.degree | upcase | default: "OTHER" }}
+              </span>
+            </td>
+            <td class="status-cell">
+              <span class="status-badge status-{{ project.status | downcase | default: 'unknown' }}">
+                {{ project.status | capitalize | default: "Unknown" }}
+              </span>
+            </td>
+          </tr>
+          {% endfor %}
+        {% else %}
+          <tr class="no-projects">
+            <td colspan="5" style="text-align: center; padding: 40px; color: #666;">
+              No theses projects found.
+            </td>
+          </tr>
+        {% endif %}
+      </tbody>
+    </table>
+
+  
+  <!-- No Results Message -->
+  <div id="noResults" class="no-results" style="display: none;">
+    <h3>No projects found</h3>
+    <p>Try adjusting your filters or search terms.</p>
+  </div>
+</div>
+
+<script src="{{ './assets/js/theses-filter.js' | relative_url }}"></script>

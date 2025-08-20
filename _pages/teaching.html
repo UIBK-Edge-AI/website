@@ -1,12 +1,96 @@
 ---
 layout: archive
-title: "Teaching"
-permalink: /teaching/
+title: ""
+permalink: /teaching/courses/
 author_profile: true
 ---
 
 {% include base_path %}
+<link rel="stylesheet" href="{{ '/assets/css/teaching.css' | relative_url }}">
 
-{% for post in site.teaching reversed %}
-  {% include archive-single.html %}
-{% endfor %}
+<div class="teaching-container">
+  <!-- Filter Buttons -->
+  <div class="filter-controls">
+    <button class="filter-btn active" data-filter="all">
+      All
+    </button>
+    <button class="filter-btn" data-filter="bachelor">
+      Bachelor
+    </button>
+    <button class="filter-btn" data-filter="master">
+      Master
+    </button>
+  </div>
+
+  <!-- Search Bar -->
+  <div class="search-container">
+    <input type="text" id="searchInput" placeholder="Search by course, instructor, degree or semester..." class="search-input">
+    <span class="search-icon">🔍</span>
+  </div>
+
+  <!-- Courses Table -->
+  <!-- <div class="table-container"> -->
+    <table class="courses-table">
+      <thead>
+        <tr>
+          <th>Course Title</th>
+          <th>Instructor</th>
+          <th>Room</th>
+          <th>Degree</th>
+          <th>Semester</th>
+        </tr>
+      </thead>
+      <tbody id="coursesTableBody">
+        {% comment %} Get the teaching collection {% endcomment %}
+        {% assign all_courses = site.teaching %}
+        
+        {% if all_courses and all_courses.size > 0 %}
+          {% for course in all_courses %}
+          <tr class="course-row" 
+              data-category="{{ course.degree | downcase | default: 'other' }}" 
+              data-semester="{{ course.semester | downcase | default: 'unknown' }}"
+              data-title="{{ course.title | downcase | default: '' }}"
+              data-instructor="{{ course.instructor | downcase | default: '' }}">
+            <td class="title-cell">
+              <a href="{{ base_path }}{{ course.url }}" class="course-link">
+                {{ course.title | default: "Untitled Course" }}
+              </a>
+            </td>
+            <td class="instructor-cell">{{ course.instructor | default: "TBA" }}</td>
+            <td class="room-cell">{{ course.room | default: "TBA" }}</td>
+            <td class="degree-cell">
+              {% assign degree_lower = course.degree | downcase %}
+              {% if degree_lower == 'bachelor' %}
+                <span class="degree-badge degree-bachelor">Bachelor</span>
+              {% elsif degree_lower == 'master' %}
+                <span class="degree-badge degree-master">Master</span>
+              {% else %}
+                <span class="degree-badge degree-other">{{ course.degree | default: "Other" }}</span>
+              {% endif %}
+            </td>
+            <td class="semester-cell">
+              <span class="semester-badge">{{ course.semester | default: "TBA" }}</span>
+            </td>
+          </tr>
+          {% endfor %}
+        {% else %}
+          <tr>
+            <td colspan="5" style="text-align: center; padding: 40px; color: #666;">
+              <strong>No courses found.</strong><br>
+              Please check that your <code>teaching</code> collection is properly configured in <code>_config.yml</code> and contains course files.
+            </td>
+          </tr>
+        {% endif %}
+      </tbody>
+    </table>
+  <!-- </div> -->
+
+  <!-- No Results Message -->
+  <div id="noResults" class="no-results" style="display: none;">
+    <div class="no-results-icon">🔍</div>
+    <h3>No courses found</h3>
+    <p>Try adjusting your search criteria or filter selection.</p>
+  </div>
+</div>
+
+<script src="{{ './assets/js/teaching-filter.js' | relative_url }}"></script>

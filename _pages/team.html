@@ -1,6 +1,6 @@
 ---
 layout: team
-title: "Team"
+title: ""
 permalink: /team/
 author_profile: true
 ---
@@ -20,7 +20,7 @@ author_profile: true
 {% endfor %}
 
 {% if has_categories %}
-  {% assign groups = "PROFESSOR|POST-DOC|SECRETARY|SYSTEMS ENGINEER|RESEARCH ASSISTANTS|STUDENT RESEARCH-ASSISTANTS"|split: "|" %}
+  {% assign groups = "PROFESSOR|SECRETARY|POST-DOCS|SYSTEMS ENGINEER|RESEARCH ASSISTANTS|STUDENT RESEARCH-ASSISTANTS|FORMER MEMBER"|split: "|" %}
   
   {% for group in groups %}
     {% assign members = site.team | where: "category", group %}
@@ -83,7 +83,11 @@ author_profile: true
   {% endcomment %}
   <div class="people-container">
     {% for person in team_members %}
-      <a href="{{ person.url | relative_url }}" class="person-card-link">
+        {% if person.external_profile %}
+          <a href="{{ person.external_profile }}" target="_blank" class="person-card-link">
+        {% else %}
+          <a href="{{ person.url | relative_url }}" class="person-card-link">
+        {% endif %}
         <div class="person-card">
           <div class="person-card__image-container">
             {% if person.image or person.img %}
@@ -116,6 +120,8 @@ author_profile: true
                     Student Assistant
                   {% when "secretary" %}
                     Secretary
+                  {% when "former" %}
+                    Former Member
                   {% else %}
                     {{ person.position }}
                 {% endcase %}
