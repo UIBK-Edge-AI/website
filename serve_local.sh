@@ -14,3 +14,4 @@ bundle exec jekyll clean
 # Get IP of specific interface (e.g., eth0, ens3, etc.)
 IP=$(ip route get 1 | awk '{print $7}' | head -1)
 bundle exec jekyll serve --baseurl '/website' --host $IP -P 4000
+
