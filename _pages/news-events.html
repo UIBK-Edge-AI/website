@@ -1,0 +1,168 @@
+---
+layout: archive
+title: "News & Events"
+permalink: /news-events/
+author_profile: true
+---
+
+{% include base_path %}
+
+<style>
+  /* Simple styling for the LinkedIn feed widget */
+  .linkedin-feed-section {
+    margin: 2rem 0;
+    padding: 2rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #0077B5;
+  }
+
+  .linkedin-feed-section h2 {
+    color: #0077B5;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .linkedin-feed-section p {
+    color: #666;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+
+  /* Dark theme support */
+  html[data-theme="dark"] .linkedin-feed-section {
+    background: #2d3748;
+    border-left-color: #63b3ed;
+  }
+
+  html[data-theme="dark"] .linkedin-feed-section h2 {
+    color: #63b3ed;
+  }
+
+  html[data-theme="dark"] .linkedin-feed-section p {
+    color: #a0aec0;
+  }
+
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .linkedin-feed-section {
+      padding: 1rem;
+      margin: 1rem 0;
+    }
+
+    .linkedin-feed-section h2 {
+      font-size: 1.3rem;
+    }
+  }
+
+  /* Loading placeholder styling */
+  .loading-placeholder {
+    text-align: center;
+    padding: 2rem;
+    color: #666;
+    font-style: italic;
+    background: rgba(0, 119, 181, 0.05);
+    border-radius: 6px;
+    margin: 1rem 0;
+  }
+
+  .loading-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #e3f2fd;
+    border-radius: 50%;
+    border-top-color: #0077B5;
+    animation: spin 1s ease-in-out infinite;
+    margin-right: 0.5rem;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  /* News items styling */
+  .news-item {
+    background: white;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border-left: 4px solid #2a7ae2;
+  }
+
+  html[data-theme="dark"] .news-item {
+    background: #1a202c;
+    border-left-color: #4299e1;
+  }
+
+  .news-item h3 {
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+  }
+
+  html[data-theme="dark"] .news-item h3 {
+    color: #e2e8f0;
+  }
+
+  .news-date {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+  }
+
+  html[data-theme="dark"] .news-date {
+    color: #a0aec0;
+  }
+
+  .news-content {
+    line-height: 1.6;
+  }
+</style>
+
+    <!-- Loading Placeholder -->
+    <div class="loading-placeholder" id="loading-placeholder">
+      <div class="loading-spinner"></div>
+      Loading LinkedIn content...
+    </div>
+
+    <!-- Elfsight LinkedIn Feed Widget -->
+    <div style="display: none;" id="linkedin-widget">
+      <!-- Elfsight LinkedIn Feed | Edge AI -->
+      <script src="https://elfsightcdn.com/platform.js" async></script>
+      <div class="elfsight-app-212f23be-cd91-4088-853e-f701fc20febc" data-elfsight-app-lazy></div>
+    </div>
+
+
+<script>
+  // Simple JavaScript to handle widget loading
+  document.addEventListener('DOMContentLoaded', function() {
+    const loadingPlaceholder = document.getElementById('loading-placeholder');
+    const linkedinWidget = document.getElementById('linkedin-widget');
+    
+    // Show widget after a short delay to ensure Elfsight script loads
+    setTimeout(function() {
+      if (loadingPlaceholder) {
+        loadingPlaceholder.style.display = 'none';
+      }
+      if (linkedinWidget) {
+        linkedinWidget.style.display = 'block';
+      }
+    }, 2000);
+    
+    // Fallback: Hide loading after 5 seconds regardless
+    setTimeout(function() {
+      if (loadingPlaceholder && loadingPlaceholder.style.display !== 'none') {
+        loadingPlaceholder.style.display = 'none';
+      }
+      if (linkedinWidget) {
+        linkedinWidget.style.display = 'block';
+      }
+    }, 5000);
+  });
+
+  console.log('📰 News & Events page with LinkedIn feed loaded');
+</script>
