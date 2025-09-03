@@ -8,13 +8,12 @@ author_profile: true
 {% include base_path %}
 <link rel="stylesheet" href="{{ '/assets/css/project.css' | relative_url }}">
 
-<table class="theses-table">
+<table class="projects-table">
   <thead>
     <tr>
       <th>Acronym</th>
       <th>Funding Organization</th>
       <th>Duration</th>
-      <th>Status</th>
     </tr>
   </thead>
   <tbody>
@@ -24,7 +23,6 @@ author_profile: true
       <td><a href="{{ base_path }}{{ project.url }}">{{ project.title }}</a></td>
       <td>{{ project.sponsor }}</td>
       <td>{{ project.duration }}</td>
-      <td>{{ project.status }}</td>
     </tr>
     {% endfor %}
   </tbody>

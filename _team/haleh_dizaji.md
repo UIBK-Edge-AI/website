@@ -9,7 +9,7 @@ img: /assets/img/team/P_haleh.jpg
 LinkedIn: haleh-dizaji-bb08a045
 phone: uibk phone number
 position: postdoc
-category: POST-DOCS
+category: POST-DOCOTORAL RESEARCHERS
 office: ICT 2M05A
 ORCID: 0000-0002-5886-9636
 LinkedIn: sareh-maleki-8392b7212
