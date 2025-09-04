@@ -14,7 +14,7 @@ title_separator          : "-"
 site_creator             : "T M Rayhan Gias"
 site_creator_url         : "/team/tanim_gias"
 description              : &description "personal description"
-url                      : https://uibk-edge-ai.github.io
+url                      : http://edgeai.uibk.ac.at
 baseurl                  : ""
 repository               : "https://github.com/UIBK-Edge-AI/"
 
