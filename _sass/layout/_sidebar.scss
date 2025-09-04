@@ -91,16 +91,33 @@
 // Author profile fixes for mobile
 .author__avatar {
   @media (max-width: 767px) {
-    width: 80px;
-    height: 80px;
+  color: var(--global-text-color);
+  text-decoration: none;
+  font-weight: normal;
+  font-size: inherit;
+  line-height: inherit;
+  transition: color 0.3s ease;
   }
 }
 
-.author__bio {
+.author__bio .website-link {
   @media (max-width: 767px) {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     margin: 1rem 0;
   }
+}
+
+
+.author__bio .website-link:hover {
+  color: var(--global-link-color-hover);
+  text-decoration: underline;
+}
+
+html[data-theme="dark"] .author__bio .website-link {
+  color: #e2e8f0;
+}
+html[data-theme="dark"] .author__bio .website-link:hover {
+  color: #90cdf4;
 }
 
 .sidebar__right {
@@ -179,6 +196,7 @@
 }
 
 .sidebar .author__desktop {
+  font-size: 1rem;
   display: none;
   color: var(--global-text-color);
   

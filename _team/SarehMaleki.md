@@ -8,7 +8,7 @@ permalink: /team/sarehmaleki
 img: /assets/img/team/P_Sareh_Maleki.jpg
 phone: +43 512 507-53251
 position: ra
-category: RESEARCH ASSISTANTS
+category: PhD STUDENTS
 office: ICT 2M05B
 ORCID: 0009-0006-3905-9407
 email: sareh.maleki@uibk.ac.at

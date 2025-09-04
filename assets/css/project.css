@@ -2,7 +2,7 @@
    TABLE STYLING - LIGHT & DARK MODE
    ========================================================================== */
 
-.theses-table {
+.projects-table {
   width: clamp(300px, 100%, 1200px); /* Fixed: 200% was causing horizontal scroll */       
   max-width: 100%;                   /* Fixed: 130% was causing overflow */         
   margin: 0 auto;          
@@ -11,15 +11,15 @@
 }
 
 /* Light Mode - Table Headers and Content - UIBK Brand Colors */
-.theses-table th,
-.theses-table td {
+.projects-table th,
+.projects-table td {
   color: #2c5aa0; /* UIBK Blue for content */
   padding: 0.75rem 1rem;
   border-bottom: 1px solid #e2e8f0;
   text-align: center;
 }
 
-.theses-table th {
+.projects-table th {
   background-color: #f8f9fa;
   font-weight: 600;
   color: #2c5aa0; /* UIBK Blue for headers */
@@ -27,71 +27,71 @@
 }
 
 /* Hover effects for rows */
-.theses-table tbody tr:hover {
+.projects-table tbody tr:hover {
   background-color: rgba(246, 135, 18, 0.05); /* Light UIBK Orange hover */
 }
 
-.theses-table tbody tr:hover td {
+.projects-table tbody tr:hover td {
   color: #1a4480; /* Darker UIBK Blue on hover */
 }
 
 /* Dark Mode - Table Headers and Content - UIBK Brand Colors */
-html[data-theme="dark"] .theses-table th,
-html[data-theme="dark"] .theses-table td {
+html[data-theme="dark"] .projects-table th,
+html[data-theme="dark"] .projects-table td {
   color: #90cdf4; /* Light blue for dark theme (consistent with existing dark theme) */
   border-bottom-color: #4a5568;
 }
 
-html[data-theme="dark"] .theses-table th {
+html[data-theme="dark"] .projects-table th {
   background-color: #2d3748;
   color: #90cdf4; /* Light blue for headers in dark theme */
   border-bottom: 3px solid #f68712; /* UIBK Orange accent (same in both themes) */
 }
 
-html[data-theme="dark"] .theses-table {
+html[data-theme="dark"] .projects-table {
   background-color: #1a202c;
 }
 
 /* Dark mode hover effects */
-html[data-theme="dark"] .theses-table tbody tr:hover {
+html[data-theme="dark"] .projects-table tbody tr:hover {
   background-color: rgba(246, 135, 18, 0.1); /* Slightly stronger UIBK Orange hover for dark theme */
 }
 
-html[data-theme="dark"] .theses-table tbody tr:hover td {
+html[data-theme="dark"] .projects-table tbody tr:hover td {
   color: #bee3f8; /* Lighter blue on hover in dark theme */
 }
 
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
-  .theses-table {
+  .projects-table {
     width: 100%;
     max-width: 100%;
     font-size: 0.9rem;
   }
   
-  .theses-table th,
-  .theses-table td {
+  .projects-table th,
+  .projects-table td {
     padding: 0.5rem 0.75rem;
   }
   
   /* Optional: Stack table on very small screens */
   @media (max-width: 480px) {
-    .theses-table,
-    .theses-table thead,
-    .theses-table tbody,
-    .theses-table th,
-    .theses-table td,
-    .theses-table tr {
+    .projects-table,
+    .projects-table thead,
+    .projects-table tbody,
+    .projects-table th,
+    .projects-table td,
+    .projects-table tr {
       display: block;
     }
     
-    .theses-table thead tr {
+    .projects-table thead tr {
       position: absolute;
       top: -9999px;
       left: -9999px;
     }
     
-    .theses-table tr {
+    .projects-table tr {
       border: 1px solid #e2e8f0;
       border-radius: 8px;
       margin-bottom: 1rem;
@@ -99,19 +99,19 @@ html[data-theme="dark"] .theses-table tbody tr:hover td {
       background: white;
     }
     
-    html[data-theme="dark"] .theses-table tr {
+    html[data-theme="dark"] .projects-table tr {
       border-color: #4a5568;
       background: #2d3748;
     }
     
-    .theses-table td {
+    .projects-table td {
       border: none;
       position: relative;
       padding-left: 30%;
       padding-bottom: 0.75rem;
     }
     
-    .theses-table td:before {
+    .projects-table td:before {
       content: attr(data-label);
       position: absolute;
       left: 6px;
@@ -122,7 +122,7 @@ html[data-theme="dark"] .theses-table tbody tr:hover td {
       color: #f68712; /* UIBK Orange for mobile labels */
     }
     
-    html[data-theme="dark"] .theses-table td:before {
+    html[data-theme="dark"] .projects-table td:before {
       color: #f68712; /* UIBK Orange for mobile labels in both themes */
     }
   }

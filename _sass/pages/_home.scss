@@ -2,6 +2,12 @@
    HOME PAGE SPECIFIC STYLES
    ========================================================================== */
 
+
+.wide-content {
+    max-width: 200%;
+    margin: 0 auto;
+}
+
 /* Main heading blue styling */
 .page__inner-wrap h1 {
   color: #2c5282 !important;
@@ -9,6 +15,7 @@
   margin-bottom: 1.5rem;
   border-bottom: 4px solid #f68712; /* UIBK primary orange */
   padding-bottom: 0.75rem;
+  text-align: center;
 }
 
 /* Edge AI sidebar title */
