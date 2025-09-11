@@ -11,4 +11,4 @@ echo ""
 echo "Cleaning previous builds and caching..."
 npm run build:js
 bundle exec jekyll clean
-bundle exec jekyll serve --baseurl '/website' --host 138.232.18.248 -P 4000
+authbind bundle exec jekyll serve --host "127.0.0.1" -P 4000

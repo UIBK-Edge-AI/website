@@ -8,7 +8,7 @@ permalink: /team/nafiseh
 img: /assets/img/team/P_Nafiseh_sh.jpg
 phone: +43 512 507-53248
 position: postdoc
-category: POST-DOCOTORAL RESEARCHERS
+category: POSTDOCOTORAL RESEARCHERS
 office: ICT 2M05D
 ORCID: 0000-0002-2546-0893
 LinkedIn: nafiseh-sharghivand-084b183a

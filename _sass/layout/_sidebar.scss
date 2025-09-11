@@ -22,50 +22,44 @@
     margin-bottom: 2rem;
   }
 
-  // Tablet and up: Use fixed positioning
-  @include breakpoint($large) {
+  @media (min-width: 768px) and (max-width: 1023px) {
+    position: relative;
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  // Large screens: Position under the logo squares
+  @media (min-width: 1024px) {
     position: fixed;
+    // Start at the same position as the logo squares
+    margin-left: calc((100vw - 1400px) / 2 - 23rem);
+    top: 0;
+    width: 320px;
     height: 100vh;
     overflow-y: auto;
     padding-top: $masthead-height;
-    @include span(2 of 12);
     opacity: 1;
     transition: opacity 0.2s ease-in-out;
+    z-index: 15;
   }
 
-  @include breakpoint($x-large) {
-    max-width: $sidebar-link-max-width;
-    padding-right: 0;
+  @media (min-width: 1024px) and (max-width: 1399px) {
+    left: calc((100vw - 1200px) / 2 - 5rem);
+    width: 200px;
   }
 
-
-  @media (orientation: portrait) {
-    margin-top: 1em;
+  @media (min-width: 1400px) {
+    left: calc((100vw - 1400px) / 2 - 5rem);
+    width: 200px;
   }
 
-  @media screen and (min-width: $sidebar-screen-min-width) {
-    height: 100vh;
-    overflow-y: auto;               // Add scrollbar if the sidebar is too long
-    position: fixed;
-    padding-top: $masthead-height;
+  @media (min-width: 2000px) {
+    left: calc((100vw - 1400px) / 2 + 2rem);
+    width: 340px;
   }
 
-  @include breakpoint($large) {
-    @include span(2 of 12);
-    opacity: 1;
-    -webkit-transition: opacity 0.2s ease-in-out;
-            transition: opacity 0.2s ease-in-out;
-
-    &:hover {
-      opacity: 1;
-    }
-  }
-
-  @include breakpoint($x-large) {
-    max-width: $sidebar-link-max-width;
-    padding-right: 0;
-  }
-
+  // Rest of sidebar styles...
   h2, h3, h4, h5, h6 {
     margin-bottom: 0;
     font-family: $sans-serif-narrow;
@@ -142,10 +136,10 @@ html[data-theme="dark"] .author__bio .website-link:hover {
 
 .author__avatar {
   display: table-cell;
-  vertical-align: top;
-  width: 36px;
+  vertical-align: middle;
+  width: 50px;
   // set width only, for non-square avatars
-  // height: 36px;
+  height: 50px;
 
   @include breakpoint($large) {
     display: block;
@@ -155,32 +149,38 @@ html[data-theme="dark"] .author__bio .website-link:hover {
 
   img {
     max-width: 175px;
-    border-radius: 50%;
+    border-radius: 0;
 
     @include breakpoint($large) {
       padding: 5px;
-      border: 1px solid var(--global-border-color);
+      // border: 1px solid var(--global-border-color);
     }
   }
 }
 
+html[data-theme="dark"] .author__avatar img {
+  color: #90cdf4;
+}
+
+
 .author__content {
   display: table-cell;
   vertical-align: top;
-  padding-left: 15px;
-  padding-right: 25px;
+  padding-left: 0px;
+  padding-right: 0px;
   line-height: 1;
 
   @include breakpoint($large) {
     display: block;
-    width: 100%;
-    padding-left: 0;
+    width: 90%;
     padding-right: 0;
+    box-sizing: border-box !important;
   }
 }
 
 .author__name {
   margin: 0;
+  margin-bottom: 0.5rem !important;
   color: var(--global-text-color);
 
   @include breakpoint($large) {
@@ -191,12 +191,14 @@ html[data-theme="dark"] .author__bio .website-link:hover {
 
 .sidebar .author__name {
   font-family: $sans-serif;
-  font-size: $type-size-5;
+  font-size: 3.5rem !important;
+  line-height: 1.3 !important;
+  word-wrap: break-word !important;
   color: var(--global-text-color);
 }
 
 .sidebar .author__desktop {
-  font-size: 1rem;
+  font-size: 1.1rem;
   display: none;
   color: var(--global-text-color);
   
@@ -221,6 +223,10 @@ html[data-theme="dark"] .author__bio .website-link:hover {
 
 .author__bio {
   margin: 0;
+  font-size: 1.1rem !important;
+  line-height: 1.4 !important;
+  margin-bottom: 1rem !important;
+  word-wrap: break-word !important;
   color: var(--global-text-color);
 
   @include breakpoint($large) {
@@ -270,12 +276,16 @@ html[data-theme="dark"] .author__bio .website-link:hover {
   right: 0;
   margin-top: 15px;
   padding: 10px;
+  padding-right: 1rem !important;
   list-style-type: none;
   border: 1px solid var(--global-border-color);
   border-radius: $border-radius;
   background: var(--global-bg-color);
   z-index: -1;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  width: 100% !important;
+  
+  box-sizing: border-box !important;
   cursor: default;
 
   @include breakpoint($large) {
@@ -334,9 +344,11 @@ html[data-theme="dark"] .author__bio .website-link:hover {
     padding-top: 2px;
     padding-bottom: 2px;
     color: var(--global-text-color);
-    font-size: $type-size-5;
+    font-size: 1.1rem !important;
     text-decoration: none;
     transition: color 0.3s ease;
+    line-height: 1.3 !important;
+    overflow-wrap: break-word !important;
 
     &:hover {
       text-decoration: underline;

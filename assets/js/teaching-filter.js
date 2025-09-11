@@ -1,6 +1,5 @@
 /**
- * Teaching Filter and Search Functionality - DEBUG VERSION
- * Handles filtering by course type and text search
+ * Teaching Filter and Search Functionality
  */
 
 class TeachingFilter {
@@ -101,7 +100,7 @@ class TeachingFilter {
   updateFilterStatus() {
     const filterNames = {
       'all': 'all courses',
-      'bachelor': 'Bachelor courses',
+      'ba-cs': 'Bachelor courses',
       'master': 'Master courses'
     };
 
@@ -316,7 +315,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Handle URL parameters for direct filtering
   const urlParams = new URLSearchParams(window.location.search);
   const filterParam = urlParams.get('filter');
-  if (filterParam && ['all', 'bachelor', 'master'].includes(filterParam)) {
+  if (filterParam && ['all', 'ba-cs', 'master'].includes(filterParam)) {
     console.log('🔗 Applying URL filter:', filterParam);
     window.teachingFilter.filterByCategory(filterParam);
   }

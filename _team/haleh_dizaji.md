@@ -2,14 +2,14 @@
 layout: person
 cv_ready: true
 kind: person
-title: Seyedehhaleh Seyeddizaji
+title: Haleh Dizaji
 identifier: ShSd
 permalink: /team/seyedehhaleh
 img: /assets/img/team/P_haleh.jpg
 LinkedIn: haleh-dizaji-bb08a045
 phone: uibk phone number
 position: postdoc
-category: POST-DOCOTORAL RESEARCHERS
+category: POSTDOCOTORAL RESEARCHERS
 office: ICT 2M05A
 ORCID: 0000-0002-5886-9636
 LinkedIn: sareh-maleki-8392b7212

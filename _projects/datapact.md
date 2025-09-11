@@ -7,7 +7,6 @@ sponsor: Horizon Europe
 image: /assets/img/projects/datapact.jpeg
 duration: 2025 – 2027
 website: https://datapact.eu/
-
 permalink: /projects/datapact
 ---
 

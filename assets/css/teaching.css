@@ -293,7 +293,7 @@
   font-weight: 500;
 }
 
-.thesis-count {
+.course-count {
   margin-left: 10px;
   padding: 4px 8px;
   background: rgba(44, 90, 160, 0.1);
@@ -349,7 +349,7 @@
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   width: 100%;
-  max-width: 100%;
+  max-width: 1000px;
   margin: 0 auto;
   position: relative;
   z-index: 1;
@@ -357,12 +357,12 @@
 
 .courses-table {
   width: 100%;
-  max-width: 100%;
-  min-width: auto;
+  max-width: auto;
+  min-width: 1000px;
   border-collapse: separate;
   border-spacing: 0;
   font-size: 15px;
-  table-layout: auto;
+  table-layout: fixed;
   background: white;
   position: relative;
   border-radius: 16px;
@@ -429,14 +429,14 @@
 
 .courses-table th:nth-child(4),
 .courses-table td:nth-child(4) { 
-  width: 10%;
+  width: 30%;
   min-width: 0;
   max-width: none;
 }
 
 .courses-table th:nth-child(5),
 .courses-table td:nth-child(5) { 
-  width: 10%;
+  width: 40%;
   min-width: 0;
   max-width: none;
 }
@@ -450,23 +450,23 @@
 
 /* Project Row Hover Effects */
 .project-row,
-.thesis-row {
+.course-row {
   transition: background-color 0.2s ease;
 }
 
 .project-row:hover,
-.thesis-row:hover {
+.course-row:hover {
   background-color: rgba(44, 90, 160, 0.05) !important;
 }
 
 .project-row:hover td,
-.thesis-row:hover td {
+.course-row:hover td {
   background-color: rgba(44, 90, 160, 0.05) !important;
 }
 
 /* courses Table Cell Content */
 .title-cell {
-  font-weight: 500;
+  font-weight: 600 !important;
   text-align: center !important;
   color: #212529;
   word-break: break-word;
@@ -474,7 +474,7 @@
 }
 
 .project-link,
-.thesis-link {
+.course-link {
   color: #2c5aa0;
   text-decoration: none;
   font-weight: 600;
@@ -482,7 +482,7 @@
 }
 
 .project-link:hover,
-.thesis-link:hover {
+.course-link:hover {
   color: #1e3a8a;
   text-decoration: underline;
 }
@@ -626,7 +626,7 @@
 }
 
 .project-row[style*="transform"],
-.thesis-row[style*="transform"] {
+.course-row[style*="transform"] {
   transform: none !important;
 }
 
@@ -707,7 +707,7 @@ html[data-theme="dark"] .filter-status span {
   color: #90cdf4;
 }
 
-html[data-theme="dark"] .thesis-count {
+html[data-theme="dark"] .course-count {
   background: rgba(144, 205, 244, 0.15);
   color: #90cdf4;
 }
@@ -757,12 +757,12 @@ html[data-theme="dark"] .courses-table td {
 }
 
 html[data-theme="dark"] .project-row:hover,
-html[data-theme="dark"] .thesis-row:hover {
+html[data-theme="dark"] .course-row:hover {
   background-color: rgba(144, 205, 244, 0.1) !important;
 }
 
 html[data-theme="dark"] .project-row:hover td,
-html[data-theme="dark"] .thesis-row:hover td {
+html[data-theme="dark"] .course-row:hover td {
   background-color: rgba(144, 205, 244, 0.1) !important;
 }
 
@@ -771,12 +771,12 @@ html[data-theme="dark"] .title-cell {
 }
 
 html[data-theme="dark"] .project-link,
-html[data-theme="dark"] .thesis-link {
+html[data-theme="dark"] .course-link {
   color: #90cdf4;
 }
 
 html[data-theme="dark"] .project-link:hover,
-html[data-theme="dark"] .thesis-link:hover {
+html[data-theme="dark"] .course-link:hover {
   color: #bee3f8;
 }
 
@@ -1048,7 +1048,7 @@ html[data-theme="dark"] .has-submenu:hover .submenu-arrow {
   }
   
   .project-row,
-  .thesis-row {
+  .course-row {
     background: white;
     margin-bottom: 20px;
     border-radius: 12px;
@@ -1083,7 +1083,7 @@ html[data-theme="dark"] .has-submenu:hover .submenu-arrow {
   .courses-table .status-cell::before { content: "Status"; }
   
   html[data-theme="dark"] .project-row,
-  html[data-theme="dark"] .thesis-row {
+  html[data-theme="dark"] .course-row {
     background: #2d3748;
     border-color: #4a5568;
   }

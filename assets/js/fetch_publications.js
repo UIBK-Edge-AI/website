@@ -146,9 +146,8 @@ class EdgeAIPublicationsAPI {
     // - If your site is at yourdomain.com (root) → use ''
     // - If your site is at username.github.io/repository → use '/repository'
     
-    const baseurl = '/website';  // <-- CHANGE THIS TO YOUR ACTUAL BASEURL
-    
-    this.bibFilePath = `${baseurl}/files/edgeai.bib`;
+    const baseurl = ''; 
+    this.bibFilePath = `${baseurl}/files/edgeai.bib`.replace('//', '/');
     
     console.log('🌐 Using baseurl:', baseurl);
     console.log('📚 BibTeX file path:', this.bibFilePath);

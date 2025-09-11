@@ -6,25 +6,72 @@
   @include container;
   @include clearfix;
   margin-top: 2em;
-  padding-left: 1em;
-  padding-right: 1em;
   animation: intro 0.3s both;
   animation-delay: 0.35s;
 
-  @include breakpoint($x-large) {
-    max-width: $x-large;
+  // Mobile and small screens
+  padding-left: 1em;
+  padding-right: 1em;
+
+  // Large screens: Position main content to align with HOME button
+  @media (min-width: 1024px) {
+    max-width: 1400px;
+    // Calculate position: where navigation items start (after logo + spacing)
+    margin-left: calc((100vw - 1400px) / 2 + 280px); // logo width + spacing to HOME
+    margin-right: calc((100vw - 1400px) / 2);
+    margin-top: 2em;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    width: calc(1400px - 280px); // FIXED: Use 280px consistently
+  }
+
+  @media (min-width: 1024px) and (max-width: 1399px) {
+    margin-left: calc((100vw - 1200px) / 2 + 280px);
+    margin-right: calc((100vw - 1200px) / 2);
+    width: calc(1200px - 280px); // FIXED: Use 280px consistently
+  }
+
+  @media (min-width: 1400px) {
+    margin-left: calc((100vw - 1400px) / 2 + 280px);
+    margin-right: calc((100vw - 1400px) / 2);
+    width: calc(1400px - 280px); // FIXED: Use 280px consistently
+  }
+
+  @media (min-width: 2000px) {
+    margin-left: calc((100vw - 1400px) / 2 + 280px); // FIXED: Use 280px consistently
+    margin-right: calc((100vw - 1400px) / 2);
+    width: calc(1400px - 280px); // FIXED: Use 280px consistently
   }
 }
 
 .page {
-  @include breakpoint($large) {
-    @include span(10 of 12 last);
-    @include prefix(0.5 of 12);
-    @include suffix(2 of 12);
+  @media (min-width: 1024px) {
+    width: 100%;
+    max-width: none;
+  }
+
+  @media (max-width: 1023px) {
+    @include breakpoint($large) {
+      @include span(10 of 12 last);
+      @include prefix(0.5 of 12);
+      @include suffix(2 of 12);
+    }
   }
 
   .page__inner-wrap {
     @include full();
+
+    @media (min-width: 1024px) {
+      max-width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    @media (max-width: 1023px) {
+      max-width: 130%;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
 
     .page__content,
     .page__meta,
@@ -32,12 +79,6 @@
       @include full();
     }
   }
-}
-
-.page .page__inner-wrap {
-  max-width: 130%; // Add this to increase width
-  margin: 0 auto;     // Center the content
-  padding: 0 2rem;    // Add some side padding
 }
 
 .page__title {
@@ -65,7 +106,7 @@
   }
 
   li, dl {
-    font-size: 1em;
+    font-size: 1.1em;
   }
 
   /* paragraph indents */

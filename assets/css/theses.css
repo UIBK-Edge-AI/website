@@ -293,7 +293,7 @@
   font-weight: 500;
 }
 
-.thesis-count {
+.theses-count {
   margin-left: 10px;
   padding: 4px 8px;
   background: rgba(44, 90, 160, 0.1);
@@ -450,17 +450,17 @@
 
 /* Project Row Hover Effects */
 .project-row,
-.thesis-row {
+.theses-row {
   transition: background-color 0.2s ease;
 }
 
 .project-row:hover,
-.thesis-row:hover {
+.theses-row:hover {
   background-color: rgba(44, 90, 160, 0.05) !important;
 }
 
 .project-row:hover td,
-.thesis-row:hover td {
+.theses-row:hover td {
   background-color: rgba(44, 90, 160, 0.05) !important;
 }
 
@@ -474,7 +474,7 @@
 }
 
 .project-link,
-.thesis-link {
+.theses-link {
   color: #2c5aa0;
   text-decoration: none;
   font-weight: 600;
@@ -482,7 +482,7 @@
 }
 
 .project-link:hover,
-.thesis-link:hover {
+.theses-link:hover {
   color: #1e3a8a;
   text-decoration: underline;
 }
@@ -626,7 +626,7 @@
 }
 
 .project-row[style*="transform"],
-.thesis-row[style*="transform"] {
+.theses-row[style*="transform"] {
   transform: none !important;
 }
 
@@ -707,7 +707,7 @@ html[data-theme="dark"] .filter-status span {
   color: #90cdf4;
 }
 
-html[data-theme="dark"] .thesis-count {
+html[data-theme="dark"] .theses-count {
   background: rgba(144, 205, 244, 0.15);
   color: #90cdf4;
 }
@@ -757,12 +757,12 @@ html[data-theme="dark"] .theses-table td {
 }
 
 html[data-theme="dark"] .project-row:hover,
-html[data-theme="dark"] .thesis-row:hover {
+html[data-theme="dark"] .theses-row:hover {
   background-color: rgba(144, 205, 244, 0.1) !important;
 }
 
 html[data-theme="dark"] .project-row:hover td,
-html[data-theme="dark"] .thesis-row:hover td {
+html[data-theme="dark"] .theses-row:hover td {
   background-color: rgba(144, 205, 244, 0.1) !important;
 }
 
@@ -771,12 +771,12 @@ html[data-theme="dark"] .title-cell {
 }
 
 html[data-theme="dark"] .project-link,
-html[data-theme="dark"] .thesis-link {
+html[data-theme="dark"] .theses-link {
   color: #90cdf4;
 }
 
 html[data-theme="dark"] .project-link:hover,
-html[data-theme="dark"] .thesis-link:hover {
+html[data-theme="dark"] .theses-link:hover {
   color: #bee3f8;
 }
 
@@ -1048,7 +1048,7 @@ html[data-theme="dark"] .has-submenu:hover .submenu-arrow {
   }
   
   .project-row,
-  .thesis-row {
+  .theses-row {
     background: white;
     margin-bottom: 20px;
     border-radius: 12px;
@@ -1083,7 +1083,7 @@ html[data-theme="dark"] .has-submenu:hover .submenu-arrow {
   .theses-table .status-cell::before { content: "Status"; }
   
   html[data-theme="dark"] .project-row,
-  html[data-theme="dark"] .thesis-row {
+  html[data-theme="dark"] .theses-row {
     background: #2d3748;
     border-color: #4a5568;
   }

@@ -8,20 +8,6 @@ author_profile: true
 {% include base_path %}
 <link rel="stylesheet" href="{{ '/assets/css/teaching.css' | relative_url }}">
 
-<div class="teaching-container">
-  <!-- Filter Buttons -->
-  <div class="filter-controls">
-    <button class="filter-btn active" data-filter="all">
-      All
-    </button>
-    <button class="filter-btn" data-filter="bachelor">
-      Bachelor
-    </button>
-    <button class="filter-btn" data-filter="master">
-      Master
-    </button>
-  </div>
-
   <!-- Search Bar -->
   <div class="search-container">
     <input type="text" id="searchInput" placeholder="Search by course, instructor, degree or semester..." class="search-input">
@@ -60,10 +46,10 @@ author_profile: true
             <td class="room-cell">{{ course.room | default: "TBA" }}</td>
             <td class="degree-cell">
               {% assign degree_lower = course.degree | downcase %}
-              {% if degree_lower == 'bachelor' %}
-                <span class="degree-badge degree-bachelor">Bachelor</span>
-              {% elsif degree_lower == 'master' %}
-                <span class="degree-badge degree-master">Master</span>
+              {% if degree_lower == 'ba-cs' %}
+                <span class="degree-badge degree-bachelor">BA Computer Science</span>
+              {% elsif degree_lower == 'ma-cs' %}
+                <span class="degree-badge degree-master">MA Computer Science</span>
               {% else %}
                 <span class="degree-badge degree-other">{{ course.degree | default: "Other" }}</span>
               {% endif %}

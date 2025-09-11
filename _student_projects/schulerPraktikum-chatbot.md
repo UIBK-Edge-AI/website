@@ -1,14 +1,16 @@
 ---
 title: "Chatbot on the Edge "
-collection: student_projects
+collection: _student_projects
 authors: "Luis Palma, Sulaiman Hazaa"
-supervisor: "Sareh Maleki, Seyedehhaleh Seyeddizaji"
+supervisor: "Sareh Maleki, Haleh Dizaji"
 permalink:
 status: Completed
 degree: 'praktikum'
+layout: single
 ---
-**Supervisor:** Sareh Maleki, Seyedehhaleh Seyeddizaji  
+**Supervisor:** Sareh Maleki, Haleh Dizaji  
 **Author:** Luis Palma, Sulaiman Hazaa
+
 ## Abstract 
 
 The Edge-AI project provides techniques for deploying intelligent systems on resource-constrained devices. Key research activities include model compression methods such as pruning and quantization, efficient embedding techniques for lightweight and effective data representation and retrieval, and secure, robust architectures for privacy-preserving, on-device inference. The scope of application spans various domains, including environmental monitoring, smart sensing systems, interactive interfaces, and compact conversational agents.

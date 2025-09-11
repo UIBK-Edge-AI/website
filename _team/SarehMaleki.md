@@ -7,9 +7,9 @@ identifier: SaMa
 permalink: /team/sarehmaleki
 img: /assets/img/team/P_Sareh_Maleki.jpg
 phone: +43 512 507-53251
-position: ra
+position: phd
 category: PhD STUDENTS
-office: ICT 2M05B
+office: ICT 2M05D
 ORCID: 0009-0006-3905-9407
 email: sareh.maleki@uibk.ac.at
 address: Technikerstraße 21A, 6020 Innsbruck, Austria
@@ -23,7 +23,7 @@ interests:
 
 positions:
   - from: 2025
-    title: Research Assistant
+    title: PhD Student
     dep: Department of Computer Science
     dep_uri: https://www.uibk.ac.at/informatik/index.html.en
     inst: University of Innsbruck

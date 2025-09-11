@@ -16,14 +16,14 @@ site_creator_url         : "/team/tanim_gias"
 description              : &description "personal description"
 url                      : https://uibk-edge-ai.github.io
 baseurl                  : ""
-repository               : "https://github.com/UIBK-Edge-AI/"
+repository               : "https://github.com/UIBK-Edge-AI/website"
 
 # Site Author - The following control what appear as part of the author content on the side bar.
 #               If a field is blank the icon and link will not appear, otherwise it will be shown.
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar           : "edge_ai01.svg"
+  avatar           : "edge_ai_logo_summer.jpeg"
   name             : "EDGE AI"
   pronouns         : # example: "she/her"  
   bio              : # URL
@@ -47,7 +47,7 @@ author:
   bitbucket        : # Username - Update with your username on the site
   codepen          : # Username
   dribbble         : # Username
-  github           : "UIBK-Edge-AI"
+  github           : # Username
   kaggle           : # Username  
   stackoverflow    : # User number or user number and name (i.e., use "1" or "1/jeff-atwood")    
 
@@ -227,8 +227,9 @@ collections:
   team:
     output: true
     permalink: /:collection/:path/
-
   student_projects:
+    output: true
+    permalink: /:collection/:path/
 
 
 
@@ -278,7 +279,7 @@ defaults:
       layout: projects
       author_profile: true
       share: true
-      comment: true
+      comments: true
   # _team
   - scope:
       path: ""
