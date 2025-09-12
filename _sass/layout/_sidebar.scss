@@ -15,48 +15,48 @@
   background-color: var(--global-bg-color);
   color: var(--global-text-color);
 
-  // Mobile and tablet: relative positioning
-  @media (max-width: 1023px) {
+  @media (max-width: 767px) {
     position: relative;
     width: 100%;
     padding: 1rem;
     margin-bottom: 2rem;
-    margin-left: 0;
-    left: auto;
   }
 
-  // Large screens: fixed positioning
+  @media (min-width: 768px) and (max-width: 1023px) {
+    position: relative;
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  // Large screens: Position under the logo squares
   @media (min-width: 1024px) {
     position: fixed;
+    // Start at the same position as the logo squares
+    margin-left: calc((100vw - 1400px) / 2 - 25rem);
     top: 0;
+    width: 340px;
     height: 100vh;
     overflow-y: auto;
     padding-top: $masthead-height;
     opacity: 1;
     transition: opacity 0.2s ease-in-out;
     z-index: 15;
-    margin-bottom: 0;
   }
 
-  // Medium large screens (1024px - 1399px)
   @media (min-width: 1024px) and (max-width: 1399px) {
-    left: calc((100vw - 1200px) / 2 - -10rem);
+    left: calc((100vw - 1200px) / 2 - 7rem);
     width: 200px;
-    margin-left: 0;
   }
 
-  // Large screens (1400px - 1999px)
-  @media (min-width: 1400px) and (max-width: 1999px) {
-    left: calc((100vw - 1400px) / 2 - 10rem);
+  @media (min-width: 1400px) {
+    left: calc((100vw - 1400px) / 2 - 7rem);
     width: 340px;
-    margin-left: 0;
   }
 
-  // Extra large screens (2000px+)
   @media (min-width: 2000px) {
     left: calc((100vw - 1400px) / 2 + 2rem);
     width: 340px;
-    margin-left: 0;
   }
 
   // Rest of sidebar styles...
