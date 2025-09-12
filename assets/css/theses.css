@@ -173,6 +173,19 @@
   color: #2c5aa0;
 }
 
+/* Override archive layout to shift left */
+#main {
+  padding-left: 0 !important;
+}
+
+.archive {
+  width: 100% !important;
+}
+
+.page {
+  margin-left: 0 !important;
+}
+
 /* THESES CONTAINER STYLES */
 .theses-container {
   max-width: 1200px;
@@ -630,7 +643,6 @@
   transform: none !important;
 }
 
-
 .theses-container .theses-table {
   position: relative !important;
   left: 0 !important;
@@ -916,7 +928,19 @@ html[data-theme="dark"] .has-submenu:hover .submenu-arrow {
    RESPONSIVE DESIGN
    ========================================================================== */
 
+@media (max-width: 1024px) {
+  .archive {
+    margin-left: -100px !important;
+    width: calc(100% + 100px) !important;
+  }
+}
+
 @media (max-width: 968px) {
+  .archive {
+    margin-left: -50px !important;
+    width: calc(100% + 50px) !important;
+  }
+  
   .theses-table {
     font-size: 14px;
   }
@@ -939,7 +963,6 @@ html[data-theme="dark"] .has-submenu:hover .submenu-arrow {
     font-size: 13px;
   }
   
-  /* Mobile dropdown adjustments */
   .dropdown-menu {
     position: static;
     transform: none;
@@ -988,6 +1011,11 @@ html[data-theme="dark"] .has-submenu:hover .submenu-arrow {
 }
 
 @media (max-width: 768px) {
+  .archive {
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
+  
   .theses-container {
     padding: 10px;
   }
@@ -1015,7 +1043,6 @@ html[data-theme="dark"] .has-submenu:hover .submenu-arrow {
     padding: 8px 4px; 
   }
   
-  /* FIXED: Responsive column widths for mobile */
   .theses-table th:nth-child(1),
   .theses-table td:nth-child(1) { 
     width: 50%; 
@@ -1035,7 +1062,6 @@ html[data-theme="dark"] .has-submenu:hover .submenu-arrow {
     width: 10%;
   }
   
-  /* Stack table on mobile */
   .theses-table thead {
     display: none;
   }
@@ -1075,7 +1101,6 @@ html[data-theme="dark"] .has-submenu:hover .submenu-arrow {
     margin-bottom: 4px;
   }
   
-  /* Theses Table Labels */
   .theses-table .title-cell::before { content: "Title"; }
   .theses-table .student-cell::before { content: "Student"; }
   .theses-table .supervisor-cell::before { content: "Supervisor"; }

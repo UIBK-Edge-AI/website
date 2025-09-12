@@ -50,6 +50,8 @@ author_profile: true
                 <span class="degree-badge degree-bachelor">BA Computer Science</span>
               {% elsif degree_lower == 'ma-cs' %}
                 <span class="degree-badge degree-master">MA Computer Science</span>
+              {% elsif degree_lower == 'ma-informatics' %}
+                <span class="degree-badge degree-master">MA Business Informatics</span>
               {% else %}
                 <span class="degree-badge degree-other">{{ course.degree | default: "Other" }}</span>
               {% endif %}

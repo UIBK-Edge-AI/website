@@ -1,5 +1,5 @@
 ---
-title: "Introduction to Graph AI"
+title: "VU Introduction to Graph AI"
 collection: teaching
 degree: "ma-cs"
 instructor: "Haleh Dizaji, Sareh Maleki"

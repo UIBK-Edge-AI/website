@@ -1,7 +1,7 @@
 ---
 permalink: /
 
-title: "Edge AI: Smart Computing Where It Matters"
+title: ""
 author_profile: true
 redirect_from: 
   - /about/
@@ -17,11 +17,11 @@ Research Topics
 
 * **Edge computing**
 * **Applied machine learning**
-* **Federated and Embedded machine learning**
-* **Graph Artificial Intelligence**
-* **Cloud and High-performance Computing**
-* **Scheduling and Resource Management**
-* **Compliance, Ethics, Sustainability**
+* **Federated and embedded machine learning**
+* **Graph artificial intelligence**
+* **Cloud and high-performance computing**
+* **Scheduling and resource management**
+* **Compliance, ethics, sustainability**
 
 Acknowledgments
 ======

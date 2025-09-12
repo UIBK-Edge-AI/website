@@ -8,6 +8,22 @@ author_profile: true
 {% include base_path %}
 
 <style>
+  /* Override the archive layout to shift content left */
+  .archive {
+    margin-left: 0 !important; /* Shift content left */
+    max-width: none !important;
+    width: fit-content !important;
+  }
+  
+  /* Alternative approach - target the main container */
+  #main {
+    padding-left: 0 !important;
+  }
+  
+  .page {
+    margin-left: 0px !important;
+  }
+
   /* Simple styling for the LinkedIn feed widget */
   .linkedin-feed-section {
     margin: 2rem 0;
@@ -15,6 +31,7 @@ author_profile: true
     background: #f8f9fa;
     border-radius: 8px;
     border-left: 4px solid #0077B5;
+    margin-left: 0 !important;
   }
 
   .linkedin-feed-section h2 {
@@ -48,6 +65,15 @@ author_profile: true
 
   /* Responsive design */
   @media (max-width: 768px) {
+    .archive {
+      margin-left: 0 !important;
+      width: 100% !important;
+    }
+    
+    .page {
+      margin-left: 0 !important;
+    }
+    
     .linkedin-feed-section {
       padding: 1rem;
       margin: 1rem 0;
@@ -61,7 +87,7 @@ author_profile: true
   /* Loading placeholder styling */
   .loading-placeholder {
     text-align: center;
-    padding: 2rem;
+    padding: 1rem;
     color: #666;
     font-style: italic;
     background: rgba(0, 119, 181, 0.05);
@@ -70,7 +96,7 @@ author_profile: true
   }
 
   .loading-spinner {
-    display: inline-block;
+    display: left-block;
     width: 20px;
     height: 20px;
     border: 2px solid #e3f2fd;
@@ -135,7 +161,6 @@ author_profile: true
       <script src="https://elfsightcdn.com/platform.js" async></script>
       <div class="elfsight-app-212f23be-cd91-4088-853e-f701fc20febc" data-elfsight-app-lazy></div>
     </div>
-
 
 <script>
   // Simple JavaScript to handle widget loading
