@@ -6,7 +6,13 @@ author_profile: true
 redirect_from: 
   - /about/
   - /about.html
+
+# Image filenames
+research_topics_image: "edge_computing.png"
+acknowledgments_image: "stiftung_edgeai.svg"
 ---
+
+
 
 Motivation
 ======
