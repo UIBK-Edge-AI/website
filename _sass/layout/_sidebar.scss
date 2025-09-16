@@ -216,7 +216,7 @@
   font-size: 4rem !important; // Your original large size
   line-height: 1.2 !important;
   word-wrap: break-word !important;
-  color: var(--global-text-color);
+  color: #2c5282!important;
 }
 
 .sidebar .author__desktop {
@@ -250,12 +250,21 @@
   line-height: 1.4 !important;
   margin-bottom: 1rem !important;
   word-wrap: break-word !important;
-  color: #2c5282;
+  color: #2c5282 !important;
 
   @include breakpoint($large) {
     margin-top: 10px;
     margin-bottom: 20px;
   }
+}
+html[data-theme="dark"] .sidebar {
+  .author__bio {
+  color: #90cdf4 !important;
+  }
+  .author__name {
+  font-size: 4rem !important;
+}
+
 }
 
 .author__urls-wrapper {

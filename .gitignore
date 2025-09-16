@@ -22,4 +22,4 @@ venv/
 *.ipynb
 
 # Ignore bash script
-*.sh~
+*.sh
