@@ -267,9 +267,9 @@ async function searchPublications() {
     updateStatistics(publications);
     renderPublications(publications);
     
-    showStatusMessage(`
-      <strong>✅ Search Complete:</strong> Found ${publications.length} publication${publications.length !== 1 ? 's' : ''} from the Edge AI research group.
-    `);
+    // showStatusMessage(`
+    //   <strong>✅ Search Complete:</strong> Found ${publications.length} publication${publications.length !== 1 ? 's' : ''} from the Edge AI research group.
+    // `);
     
   } catch (error) {
     document.getElementById('loading-indicator').style.display = 'none';

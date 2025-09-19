@@ -23,7 +23,8 @@ repository               : "https://github.com/UIBK-Edge-AI/website"
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar           : "edge_ai_logo_summer.jpeg"
+  avatar           : "winter1.png"
+  # avatar           : "summer1.png"
   name             : "EDGE AI"
   pronouns         : # example: "she/her"  
   bio              : "Smart Computing Where It Matters"

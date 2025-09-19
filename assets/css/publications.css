@@ -635,6 +635,10 @@
   word-wrap: break-word;
 }
 
+html[data-theme="dark"] .publication-meta {
+color: #ffffff;
+}
+
 @media (min-width: 768px) {
   .publication-meta {
     font-size: 0.95rem;
@@ -642,7 +646,7 @@
 }
 
 .publication-meta strong {
-  color: #000000;
+  color: var(--uibk-primary);
   font-weight: 600;
 }
 
