@@ -31,7 +31,7 @@ Research Topics
 
 Acknowledgments
 ======
-The Edge AI research group at the University of Innsbruck started in March 2025, partly funded by the Austrian Research Promotion Agency.
+The Edge AI research group at the University of Innsbruck started in March 2025, partly funded by the Austrian Research Promotion Agency (FFG): "AIM AT Stiftungsprofessur für Edge AI".
 
 Contact
 ======

@@ -6,7 +6,7 @@ title: Turgud Valiyev
 identifier: TuVa
 permalink: /team/turgudvaliyev
 img: assets/img/team/P_Turgud_Baliyev.jpg
-phone: +43 681 842-18262 
+phone: +43 512 507-53259
 position: phd
 category: PhD STUDENTS
 office: ICT 2M05B
@@ -29,7 +29,15 @@ positions:
     dep_uri: https://www.uibk.ac.at/informatik/index.html.en
     inst: University of Innsbruck
     inst_uri: http://informatik.uibk.ac.at
-    where: Austria
+    where: Innsbruck, Austria
+
+  - from: 2024
+    to:   2025
+    title: Business Finance Analyst Intern
+    dep_uri: https://www.uibk.ac.at/informatik/index.html.en
+    inst: Schneider Electric
+    inst_uri: https://www.se.com/pl/pl/
+    where: Warsaw, Poland
 
 education:
   - from: 2025
