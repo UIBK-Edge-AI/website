@@ -11,7 +11,7 @@ phone:
 position: ra
 category: PhD STUDENTS
 office: SAL-Doctoral College
-email:
+email: ahmed.mujtaba@silicon-austria.com
 address:  Silicon Austria Labs GmbH, Sandgasse 34, 8010 Graz, Austria
 
 ---
