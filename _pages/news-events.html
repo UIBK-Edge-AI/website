@@ -9,20 +9,64 @@ author_profile: true
 
 <style>
   /* Override the archive layout to shift content left */
-  .archive {
-    margin-left: 0 !important; /* Shift content left */
-    max-width: none !important;
-    width: fit-content !important;
-  }
-  
-  /* Alternative approach - target the main container */
+/* ---- Main --------------------------------------------------------------- */
+#main {
+  animation: intro 0.3s both;
+  animation-delay: 0.35s;
+}
+
+/* Mobile / Tablet: stacked */
+@media (max-width: 1023px) {
   #main {
-    padding-left: 0 !important;
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding-left: 1em;
+    padding-right: 1em;
   }
   
-  .page {
-    margin-left: 0px !important;
+  /* Override .archive constraints on mobile */
+  #main .archive {
+    width: 100% !important;
+    float: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
+}
+
+/* Desktop: DO NOT use grid on #main - it breaks the sidebar */
+@media (min-width: 1024px) {
+  #main {
+    /* Remove grid completely */
+    display: block;
+    margin-left: 280px; /* Space for fixed sidebar */
+    padding: 2em 2rem;
+    max-width: calc(100% - 280px);
+  }
+  
+  /* Override .archive Susy grid constraints */
+  #main .archive {
+    width: 100% !important;
+    max-width: 1200px !important;
+    float: none !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+  }
+}
+
+/* Larger screens */
+@media (min-width: 1400px) {
+  #main {
+    margin-left: 280px;
+    padding: 2em 3rem;
+    max-width: calc(100% - 280px);
+  }
+  
+  #main .archive {
+    max-width: 1400px !important;
+  }
+}
 
   /* Simple styling for the LinkedIn feed widget */
   .linkedin-feed-section {
@@ -64,7 +108,7 @@ author_profile: true
   }
 
   /* Responsive design */
-  @media (max-width: 768px) {
+  /* @media (max-width: 768px) {
     .archive {
       margin-left: 0 !important;
       width: 100% !important;
@@ -82,7 +126,7 @@ author_profile: true
     .linkedin-feed-section h2 {
       font-size: 1.3rem;
     }
-  }
+  } */
 
   /* Loading placeholder styling */
   .loading-placeholder {

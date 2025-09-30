@@ -1,5 +1,62 @@
 /* Theses Page Styles*/
+/* ---- Main --------------------------------------------------------------- */
+#main {
+  animation: intro 0.3s both;
+  animation-delay: 0.35s;
+}
 
+/* Mobile / Tablet: stacked */
+@media (max-width: 1023px) {
+  #main {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding-left: 1em;
+    padding-right: 1em;
+  }
+  
+  /* Override .archive constraints on mobile */
+  #main .archive {
+    width: 100% !important;
+    float: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}
+
+/* Desktop: DO NOT use grid on #main - it breaks the sidebar */
+@media (min-width: 1024px) {
+  #main {
+    /* Remove grid completely */
+    display: block;
+    margin-left: 280px; /* Space for fixed sidebar */
+    padding: 2em 2rem;
+    max-width: calc(100% - 280px);
+  }
+  
+  /* Override .archive Susy grid constraints */
+  #main .archive {
+    width: 100% !important;
+    max-width: 1200px !important;
+    float: none !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+  }
+}
+
+/* Larger screens */
+@media (min-width: 1400px) {
+  #main {
+    margin-left: 280px;
+    padding: 2em 3rem;
+    max-width: calc(100% - 280px);
+  }
+  
+  #main .archive {
+    max-width: 1400px !important;
+  }
+}
 .dropdown-item {
   position: relative;
 }

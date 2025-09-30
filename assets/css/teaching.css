@@ -1,5 +1,68 @@
 /* courses Page Styles*/
 
+
+/* ---- Main --------------------------------------------------------------- */
+#main {
+  animation: intro 0.3s both;
+  animation-delay: 0.35s;
+}
+
+/* Mobile / Tablet: stacked */
+@media (max-width: 1023px) {
+  #main {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding-left: 1em;
+    padding-right: 1em;
+  }
+  
+  /* Override .archive constraints on mobile */
+  #main .archive {
+    width: 100% !important;
+    float: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}
+
+/* Desktop: DO NOT use grid on #main - it breaks the sidebar */
+@media (min-width: 1024px) {
+  #main {
+    /* Remove grid completely */
+    display: block;
+    margin-left: 280px; /* Space for fixed sidebar */
+    padding: 2em 2rem;
+    max-width: calc(100% - 280px);
+  }
+  
+  /* Override .archive Susy grid constraints */
+  #main .archive {
+    width: 100% !important;
+    max-width: auto !important;
+    float: none !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+  }
+}
+
+/* Larger screens */
+@media (min-width: 1400px) {
+  #main {
+    margin-left: 580px;
+    padding: 2em 3rem;
+    max-width: calc(100% - 280px);
+  }
+  
+  #main .archive {
+    max-width: 1400px !important;
+  }
+}
+
+
+
+
 .dropdown-item {
   position: relative;
 }
@@ -171,19 +234,6 @@
 .dropdown-menu-item > a:hover .dropdown-icon,
 .submenu-item > a:hover .submenu-icon {
   color: #2c5aa0;
-}
-
-/* Override archive layout to shift left */
-#main {
-  padding-left: 0 !important;
-}
-
-.archive {
-  width: 100% !important;
-}
-
-.page {
-  margin-left: 0 !important;
 }
 
 /* courses CONTAINER STYLES */
@@ -362,7 +412,7 @@
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   width: 100%;
-  max-width: 1000px;
+  max-width: 1200px;
   margin: 0 auto;
   position: relative;
   z-index: 1;
@@ -370,17 +420,17 @@
 
 .courses-table {
   width: 100%;
-  max-width: auto;
-  min-width: 1000px;
+  
+  max-width: 1200px;
   border-collapse: separate;
   border-spacing: 0;
-  font-size: 15px;
+  font-size: 1rem;
   table-layout: fixed;
   background: white;
   position: relative;
   border-radius: 16px;
   overflow: hidden;
-  margin: 0;
+  margin: 2em 0;
   transform: translateX(0) !important;
   left: 0 !important;
   right: 0 !important;
