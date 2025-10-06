@@ -1,3 +1,4 @@
+/* filepath: /home/tm/Desktop/work/edgeAI/website/assets/css/person-profiles.css */
 /* Person Profile Individual Page Styles */
 /* Based on CV layout and professional academic styling */
 
@@ -829,30 +830,7 @@ html[data-theme="dark"] .publication-citation {
   color: #bbb;
 }
 
-/* Responsive design */
-@media (max-width: 768px) {
-  .publication-item {
-    padding: 1rem;
-  }
-  
-  .publication-title {
-    font-size: 1rem;
-  }
-  
-  .publication-meta {
-    font-size: 0.85rem;
-  }
-  
-  .publication-actions {
-    gap: 0.5rem;
-  }
-  
-  .pub-link {
-    padding: 0.3rem 0.6rem;
-    font-size: 0.8rem;
-  }
-
-  /* Additional styles for position and education notes */
+/* Additional styles for position and education notes */
 .position-notes,
 .education-notes {
   margin-top: 0.5rem;
@@ -895,7 +873,7 @@ html[data-theme="dark"] .education-notes h3 {
   color: #ffffff;
 }
 
-* Additional styles for new sections */
+/* Additional styles for new sections */
 .journal-reviews-list ul,
 .program-committees-list ul {
   list-style-type: none;
@@ -1024,6 +1002,27 @@ html[data-theme="dark"] .grant-notes {
     grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
     gap: 0.5rem;
   }
+  
+  .publication-item {
+    padding: 1rem;
+  }
+  
+  .publication-title {
+    font-size: 1rem;
+  }
+  
+  .publication-meta {
+    font-size: 0.85rem;
+  }
+  
+  .publication-actions {
+    gap: 0.5rem;
+  }
+  
+  .pub-link {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.8rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1041,14 +1040,15 @@ html[data-theme="dark"] .grant-notes {
   }
 }
 
-#main {
+/* Layout fixes - ONLY FOR PERSON PAGES */
+.person-page #main {
   animation: intro 0.3s both;
   animation-delay: 0.35s;
 }
 
 /* Mobile / Tablet: stacked */
 @media (max-width: 1023px) {
-  #main {
+  .person-page #main {
     display: block;
     width: 100%;
     max-width: 100%;
@@ -1058,7 +1058,7 @@ html[data-theme="dark"] .grant-notes {
   }
   
   /* Override .archive constraints on mobile */
-  #main .archive {
+  .person-page #main .archive {
     width: 100% !important;
     float: none !important;
     margin: 0 !important;
@@ -1068,7 +1068,7 @@ html[data-theme="dark"] .grant-notes {
 
 /* Desktop: DO NOT use grid on #main - it breaks the sidebar */
 @media (min-width: 1024px) {
-  #main {
+  .person-page #main {
     /* Remove grid completely */
     display: block;
     margin-left: 280px; /* Space for fixed sidebar */
@@ -1077,25 +1077,24 @@ html[data-theme="dark"] .grant-notes {
   }
   
   /* Override .archive Susy grid constraints */
-  #main .archive {
+  .person-page #main .archive {
     width: 100% !important;
     max-width: auto !important;
     float: none !important;
     margin: 0 auto !important;
-    padding-left: 100px !important;
+    padding-left: 0 !important;
   }
 }
 
 /* Larger screens */
 @media (min-width: 1400px) {
-  #main {
+  .person-page #main {
     margin-left: 280px;
     padding: 1em 2rem;
     max-width: calc(100% - 280px);
   }
   
-  #main .archive {
+  .person-page #main .archive {
     max-width: 1200px !important;
   }
-}
 }
