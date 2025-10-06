@@ -5,9 +5,22 @@
 .person-page {
   max-width: 1000px;
   margin: 0 auto;
+  padding: 0 2rem;
   font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   line-height: 1.6;
   color: #333;
+}
+
+@media (max-width: 1023px) {
+  .person-page {
+    padding: 0 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .person-page {
+    padding: 0 1rem;
+  }
 }
 
 html[data-theme="dark"] .person-page {
@@ -1028,5 +1041,61 @@ html[data-theme="dark"] .grant-notes {
   }
 }
 
+#main {
+  animation: intro 0.3s both;
+  animation-delay: 0.35s;
+}
 
+/* Mobile / Tablet: stacked */
+@media (max-width: 1023px) {
+  #main {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding-left: 1em;
+    padding-right: 1em;
+  }
+  
+  /* Override .archive constraints on mobile */
+  #main .archive {
+    width: 100% !important;
+    float: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}
+
+/* Desktop: DO NOT use grid on #main - it breaks the sidebar */
+@media (min-width: 1024px) {
+  #main {
+    /* Remove grid completely */
+    display: block;
+    margin-left: 280px; /* Space for fixed sidebar */
+    padding: 2em 2rem;
+    max-width: calc(100% - 280px);
+  }
+  
+  /* Override .archive Susy grid constraints */
+  #main .archive {
+    width: 100% !important;
+    max-width: auto !important;
+    float: none !important;
+    margin: 0 auto !important;
+    padding-left: 100px !important;
+  }
+}
+
+/* Larger screens */
+@media (min-width: 1400px) {
+  #main {
+    margin-left: 280px;
+    padding: 1em 2rem;
+    max-width: calc(100% - 280px);
+  }
+  
+  #main .archive {
+    max-width: 1200px !important;
+  }
+}
 }
