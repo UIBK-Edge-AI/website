@@ -37,6 +37,9 @@
     @media (max-width: 767px) {
       padding: 0.25rem 1rem;
       max-width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
     @media (min-width: 1800px) {
@@ -68,16 +71,16 @@
   align-items: center;
   list-style-type: none;
   white-space: nowrap;
-  font-size: 2rem; // Added larger base font size
+  font-size: 1.7rem;
 
   &--lg {
     padding-right: 2em;
     font-weight: 700;
-    font-size: 2rem; // Increased from default
+    font-size: 2rem;
     
     @media (max-width: 767px) {
-      padding-right: 1em;
-      font-size: 2rem; // Increased from 0.9rem
+      padding-right: 0;
+      font-size: 2rem;
     }
   }
 }
@@ -94,22 +97,21 @@
 
   @media (max-width: 767px) {
     min-width: auto;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    width: auto;
   }
 
   a {
     display: block;
-    margin: 0 1.5rem; // Increased from 1rem to 1.5rem
-    padding: 0.75rem 0; // Increased from 0.5rem to 0.75rem
+    margin: 0 1.5rem;
+    padding: 0.75rem 0;
     color: var(--global-masthead-link-color);
     text-decoration: none;
-    font-size: 1.7rem; // Added larger font size
+    font-size: 1.7rem;
 
     @media (max-width: 767px) {
-      margin: 0 0.75rem; // Increased from 0.5rem to 0.75rem
-      padding: 0.6rem 0; // Increased from 0.4rem to 0.6rem
-      font-size: 1.7rem; // Increased from 0.9rem to 1rem
+      margin: 0 0.75rem;
+      padding: 0.6rem 0;
+      font-size: 1.7rem;
     }
 
     &:hover {
@@ -126,7 +128,7 @@
       background: none;
       border: none;
       color: var(--global-masthead-link-color);
-      font-size: 1.7rem; // Increased from 1.2rem
+      font-size: 2rem;
       cursor: pointer;
       padding: 0.5rem;
       position: relative;
@@ -150,21 +152,13 @@
     padding: 0;
 
     @media (max-width: 767px) {
-      flex-wrap: wrap;
-      justify-content: center;
-      width: auto;
-    }
-
-    @media (max-width: 480px) {
-      &.hidden {
-        display: none !important;
-      }
+      display: none !important;
       
       &.show-mobile-menu {
         display: flex !important;
         flex-direction: column;
-        position: absolute;
-        top: 100%;
+        position: fixed;
+        top: 70px;
         left: 0;
         right: 0;
         background: var(--global-bg-color);
@@ -172,6 +166,8 @@
         box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         z-index: 1000;
         padding: 1rem 0;
+        max-height: calc(100vh - 70px);
+        overflow-y: auto;
       }
     }
 
@@ -182,7 +178,7 @@
       white-space: nowrap;
       margin-left: 0;
 
-      @media (max-width: 480px) {
+      @media (max-width: 767px) {
         .show-mobile-menu & {
           width: 100%;
           border-bottom: 1px solid var(--global-border-color);
@@ -283,7 +279,7 @@
         transform: scaleX(1);
       }
 
-      @media (max-width: 480px) {
+      @media (max-width: 767px) {
         .show-mobile-menu & {
           margin: 0;
           padding: 0.75rem 1rem;
@@ -323,7 +319,7 @@
           margin: 0 !important;
           padding: 1rem !important;
           text-align: center !important;
-          font-size: 1.1rem !important; // Increased from 1rem
+          font-size: 1.7rem !important;
           
           &:hover {
             background: var(--global-border-color) !important;
@@ -351,26 +347,26 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    margin: 0 1.5rem; // Increased from 1rem to 1.5rem
-    padding: 0.75rem 0; // Increased from 0.5rem to 0.75rem
+    margin: 0 1.5rem;
+    padding: 0.75rem 0;
     color: var(--global-masthead-link-color);
     font-weight: normal;
     text-decoration: none;
     transition: all 0.3s ease;
     position: relative;
     cursor: pointer;
-    font-size: 1.7rem; // Added larger font size
+    font-size: 1.7rem;
     
     @media (max-width: 767px) {
-      margin: 0 0.75rem; // Increased from 0.5rem to 0.75rem
-      padding: 0.6rem 0; // Increased from 0.4rem to 0.6rem
+      margin: 0 0.75rem;
+      padding: 0.6rem 0;
       gap: 4px;
-      font-size: 1rem; // Increased from 0.9rem to 1rem
+      font-size: 1.7rem;
     }
   }
 
   .dropdown-arrow {
-    font-size: 14px; // Increased from 12px
+    font-size: 14px;
     margin-left: 6px;
     color: #666;
     transition: transform 0.3s ease;
@@ -378,7 +374,7 @@
     line-height: 1;
     
     @media (max-width: 767px) {
-      font-size: 12px; // Increased from 10px
+      font-size: 12px;
       margin-left: 4px;
     }
   }
@@ -386,11 +382,11 @@
   .dropdown-toggle {
     i, .fa, .fas, .far, .fab {
       pointer-events: none;
-      font-size: 14px; // Increased from 12px
+      font-size: 14px;
       line-height: 1;
       
       @media (max-width: 767px) {
-        font-size: 12px; // Increased from 10px
+        font-size: 12px;
       }
     }
   }
@@ -414,7 +410,7 @@
   top: 100%;
   left: 0;
   background: white;
-  min-width: 280px; // Increased from 220px
+  min-width: 280px;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
   border: 1px solid #e0e0e0;
   border-radius: 8px;
@@ -464,18 +460,18 @@
 
   a {
     display: block;
-    padding: 14px 20px; // Increased from 12px 20px
+    padding: 14px 20px;
     text-decoration: none;
     color: #555;
-    font-size: 16px; // Increased from 14px
-    font-weight: 600; // Added bold font weight
+    font-size: 16px;
+    font-weight: 600;
     transition: all 0.2s ease;
     position: relative;
     cursor: pointer;
 
     @media (max-width: 767px) {
-      padding: 18px 20px; // Increased from 16px 20px
-      font-size: 18px; // Increased from 16px
+      padding: 18px 20px;
+      font-size: 18px;
     }
 
     &:hover {
@@ -519,15 +515,15 @@
 }
 
 .dropdown-icon {
-  font-size: 16px; // Increased from 14px
-  width: 18px; // Increased from 16px
+  font-size: 16px;
+  width: 18px;
   text-align: center;
   margin-right: 8px;
   pointer-events: none;
   
   @media (max-width: 767px) {
-    font-size: 18px; // Increased from 16px
-    width: 20px; // Increased from 18px
+    font-size: 18px;
+    width: 20px;
   }
 }
 
@@ -536,10 +532,10 @@
    ========================================================================== */
 
 body {
-  padding-top: 100px !important; // Increased from 90px to accommodate larger nav
+  padding-top: 100px !important;
   
   @media (max-width: 767px) {
-    padding-top: 85px !important; // Increased from 75px
+    padding-top: 70px !important;
   }
 }
 

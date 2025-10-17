@@ -7,19 +7,19 @@ main:
 
   - title: "Team"
     url: /team/  
-
-  - title: "Projects"
-    url: /projects/
-    
+  
   - title: "Teaching"
     url: /teaching/courses/
     dropdown: true
     dropdown_items:
-      - title: "Courses"
-        url: /teaching/courses/
-        filter: "all"
-      - title: "Theses"
-        url: /teaching/theses/
+    - title: "Courses"
+      url: /teaching/courses/
+      filter: "all"
+    - title: "Theses"
+      url: /teaching/theses/
+
+  - title: "Projects"
+    url: /projects/
     
   - title: "Publications"
     url: /publications/

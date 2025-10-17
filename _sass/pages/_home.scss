@@ -55,73 +55,83 @@
   content: none !important;
 }
 
-html[data-theme="dark"] {
-  .page__inner-wrap h1 {
-    color: #90cdf4 !important;
-    font-weight: 600;
-    margin-bottom: 1.5rem;
-    border-bottom: 4px solid #f68712;
-    padding-bottom: 0.75rem;
+/* Hero/Banner Section Mobile Fix */
+@media (max-width: 768px) {
+  .author__avatar {
+    display: block !important;
+    width: 100% !important;
+    max-width: 280px !important;
+    margin: 0 auto 2rem auto !important;
+    float: none !important;
+    
+    img {
+      width: 100% !important;
+      height: auto !important;
+      display: block !important;
+      margin: 0 auto !important;
+    }
   }
-
-  .author__name {
-    color: #90cdf4 !important;
-    font-size: 2.5rem !important;
-    font-weight: 700 !important;
+  
+  .author__content {
+    width: 100% !important;
+    display: block !important;
     text-align: center !important;
+    margin: 0 !important;
+    float: none !important;
+    
+    .author__name {
+      margin-bottom: 1rem !important;
+      font-size: 3rem !important;
+      white-space: nowrap !important;
+      line-height: 1.2 !important;
+    }
+    
+    .author__bio {
+      font-size: 1.5rem !important;
+      line-height: 1.4 !important;
+      margin-top: 0.5rem !important;
+      white-space: normal !important;
+    }
   }
-
-  .page__content > p:first-of-type {
-    color: #e2e8f0;
-    font-size: 1.1em;
-    line-height: 1.7;
-    margin-bottom: 2rem;
+  
+  /* Force single column layout */
+  .sidebar {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    width: 100% !important;
+    margin-bottom: 2rem !important;
   }
-
-  .page__content p {
-    color: #e2e8f0;
-    line-height: 1.6;
+  
+  .author__urls-wrapper {
+    display: none !important;
   }
+}
 
-  .page__content li, dl {
-    color: #e2e8f0;
+/* Medium screens - tablet */
+@media (min-width: 769px) and (max-width: 1023px) {
+  .author__avatar {
+    max-width: 200px !important;
   }
-
-  .page__content h2 {
-    color: #90cdf4 !important;
-    font-weight: 600;
-    border-bottom: 4px solid #f68712 !important;
-    padding-bottom: 0.5em !important;
+  
+  .author__name {
+    font-size: 2.2rem !important;
   }
-
-  .page__content h2:first-of-type,
-  .home .page__content h2:first-of-type {
-    font-size: 2.5rem !important;
-    border-bottom: none !important;
-    border-top: none !important;
-    padding-bottom: 0.75rem !important;
-    padding-top: 0 !important;
-    margin-bottom: 1.5rem !important;
-    margin-top: 0 !important;
-    color: #90cdf4 !important;
+  
+  .author__bio {
+    font-size: 1.3rem !important;
   }
+}
 
-  .page__content h3,
-  .page__content h4 {
-    color: #90cdf4 !important;
+/* Ensure proper spacing for hero content */
+@media (max-width: 768px) {
+  .page__inner-wrap {
+    padding-top: 1rem !important;
   }
-
-  .author__bio,
-  .author__urls {
-    color: #a0aec0;
-  }
-
-  .page__content a {
-    color: #63b3ed;
-  }
-
-  .page__content a:hover {
-    color: #90cdf4;
+  
+  .page__content h2:first-of-type {
+    margin-top: 2rem !important;
+    font-size: 2rem !important;
   }
 }
 
@@ -164,7 +174,8 @@ html[data-theme="dark"] {
     padding-bottom: 0.5em !important;
   }
 
-  .page__content h2:first-of-type {
+  .page__content h2:first-of-type,
+  .home .page__content h2:first-of-type {
     font-size: 2.5rem !important;
     border-bottom: none !important;
     border-top: none !important;

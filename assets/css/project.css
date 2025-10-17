@@ -63,135 +63,277 @@
   }
 }
 
+.table-container {
+  background: transparent;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 1144px;
+  margin: 0 auto 30px auto;
+  position: relative;
+  z-index: 1;
+}
+
 .projects-table {
   width: 100%;
-  max-width: 1000px;
+  max-width: 1144px;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 1rem; /* Matched with course table */
+  table-layout: fixed;
+  background: white;
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
   margin: 2em auto;
-  border-collapse: collapse;
-  font-size: 1rem;
+  transform: translateX(0) !important;
+  left: 0 !important;
+  right: 0 !important;
 }
 
-/* Table container for better control */
-.table-container {
-  width: 100%;
-  overflow-x: auto;
-  margin: 2em 0;
+/* Column width distribution */
+.projects-table th:nth-child(1),
+.projects-table td:nth-child(1) {
+  width: 19.6%;
 }
 
-/* Light Mode - Table Headers and Content - UIBK Brand Colors */
-.projects-table th,
-.projects-table td {
-  color: #2c5aa0; /* UIBK Blue for content */
-  padding: 0.75rem 1rem;
-  border-bottom: 1px solid #e2e8f0;
-  text-align: center;
+.projects-table th:nth-child(2),
+.projects-table td:nth-child(2) {
+  width: 30.4%;
+}
+
+.projects-table th:nth-child(3),
+.projects-table td:nth-child(3) {
+  width: 35%;
+}
+
+.projects-table th:nth-child(4),
+.projects-table td:nth-child(4) {
+  width: 15%;
+}
+
+.projects-table thead {
+  background: linear-gradient(135deg, #2c5aa0, #1e3a8a);
+  color: white;
 }
 
 .projects-table th {
-  background-color: #f8f9fa;
+  padding: 20px 16px; /* Matched with course table */
+  text-align: center;
+  font-weight: 600; /* Matched with course table */
+  font-size: 14px; /* Matched with course table */
+  letter-spacing: 0.5px; /* Matched with course table */
+  text-transform: uppercase;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1); /* Matched with course table */
+  white-space: nowrap;
+  color: white;
+}
+
+/* Round top corners for first row headers */
+.projects-table th:first-child {
+  border-top-left-radius: 16px;
+}
+
+.projects-table th:last-child {
+  border-top-right-radius: 16px;
+}
+
+/* Round bottom corners for last row */
+.projects-table tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 16px;
+}
+
+.projects-table tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 16px;
+}
+
+.projects-table td {
+  padding: 18px 16px; /* Matched with course table */
+  border-bottom: 1px solid #f8f9fa; /* Matched with course table */
+  vertical-align: middle;
+  text-align: center;
+  background: white;
+  color: #495057; /* Matched with course table */
+  font-size: 1rem; /* Base font size matched */
+  font-weight: 400;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  white-space: normal;
+  line-height: 1.5;
+}
+
+/* Make first column (Acronym) text stand out with links */
+.projects-table td:first-child {
   font-weight: 600;
-  color: #2c5aa0; /* UIBK Blue for headers */
-  border-bottom: 3px solid #f68712; /* UIBK Orange accent */
+  color: #2c5aa0;
 }
 
-/* Hover effects for rows */
+.projects-table td:first-child a {
+  color: #2c5aa0;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.projects-table td:first-child a:hover {
+  color: #1e3a8a;
+  text-decoration: underline;
+}
+
+.projects-table tbody tr {
+  transition: background-color 0.2s ease;
+}
+
 .projects-table tbody tr:hover {
-  background-color: rgba(246, 135, 18, 0.05); /* Light UIBK Orange hover */
+  background-color: rgba(44, 90, 160, 0.05);
 }
 
-.projects-table tbody tr:hover td {
-  color: #1a4480; /* Darker UIBK Blue on hover */
-}
-
-/* Dark Mode - Table Headers and Content - UIBK Brand Colors */
-html[data-theme="dark"] .projects-table th,
-html[data-theme="dark"] .projects-table td {
-  color: #90cdf4; /* Light blue for dark theme (consistent with existing dark theme) */
-  border-bottom-color: #4a5568;
-}
-
-html[data-theme="dark"] .projects-table th {
-  background-color: #2d3748;
-  color: #90cdf4; /* Light blue for headers in dark theme */
-  border-bottom: 3px solid #f68712; /* UIBK Orange accent (same in both themes) */
+/* Dark Mode Styles */
+html[data-theme="dark"] .table-container {
+  background: transparent;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
 }
 
 html[data-theme="dark"] .projects-table {
-  background-color: #1a202c;
+  background: #2d3748;
 }
 
-/* Dark mode hover effects */
+html[data-theme="dark"] .projects-table thead {
+  background: linear-gradient(135deg, #90cdf4, #4299e1);
+  color: #1a202c;
+}
+
+html[data-theme="dark"] .projects-table th {
+  color: #1a202c;
+  border-bottom-color: rgba(26, 32, 44, 0.2);
+  font-weight: 600;
+}
+
+html[data-theme="dark"] .projects-table td {
+  border-bottom-color: #4a5568;
+  color: #e2e8f0;
+  background: #2d3748;
+}
+
+html[data-theme="dark"] .projects-table td:first-child {
+  color: #90cdf4;
+  font-weight: 600;
+}
+
+html[data-theme="dark"] .projects-table td:first-child a {
+  color: #90cdf4;
+}
+
+html[data-theme="dark"] .projects-table td:first-child a:hover {
+  color: #63b3ed;
+}
+
 html[data-theme="dark"] .projects-table tbody tr:hover {
-  background-color: rgba(246, 135, 18, 0.1); /* Slightly stronger UIBK Orange hover for dark theme */
+  background-color: rgba(144, 205, 244, 0.15);
 }
 
-html[data-theme="dark"] .projects-table tbody tr:hover td {
-  color: #bee3f8; /* Lighter blue on hover in dark theme */
+/* Responsive layout */
+@media (max-width: 1200px) {
+  .table-container {
+    max-width: 95%;
+    margin: 0 auto 30px auto;
+  }
+  
+  .projects-table {
+    max-width: 100%;
+  }
 }
 
-/* Mobile Responsiveness */
+@media (max-width: 1023px) {
+  .table-container {
+    max-width: calc(100% - 40px);
+    margin: 0 20px 30px 20px;
+  }
+  
+  .projects-table th {
+    font-size: 14px; /* Consistent */
+    padding: 20px 16px;
+  }
+  
+  .projects-table td {
+    font-size: 1rem; /* Consistent */
+    padding: 18px 16px;
+  }
+}
+
 @media (max-width: 768px) {
   .projects-table {
-    width: 100%;
+    display: block;
+    font-size: 13px; /* Matched with course table mobile size */
     max-width: 100%;
-    font-size: 0.9rem;
   }
   
-  .projects-table th,
+  .projects-table thead {
+    display: none;
+  }
+  
+  .projects-table,
+  .projects-table tbody,
+  .projects-table tr,
   .projects-table td {
-    padding: 0.5rem 0.75rem;
+    display: block;
+    width: 100% !important;
   }
   
-  /* Optional: Stack table on very small screens */
-  @media (max-width: 480px) {
-    .projects-table,
-    .projects-table thead,
-    .projects-table tbody,
-    .projects-table th,
-    .projects-table td,
-    .projects-table tr {
-      display: block;
-    }
-    
-    .projects-table thead tr {
-      position: absolute;
-      top: -9999px;
-      left: -9999px;
-    }
-    
-    .projects-table tr {
-      border: 1px solid #e2e8f0;
-      border-radius: 8px;
-      margin-bottom: 1rem;
-      padding: 1rem;
-      background: white;
-    }
-    
-    html[data-theme="dark"] .projects-table tr {
-      border-color: #4a5568;
-      background: #2d3748;
-    }
-    
-    .projects-table td {
-      border: none;
-      position: relative;
-      padding-left: 30%;
-      padding-bottom: 0.75rem;
-    }
-    
-    .projects-table td:before {
-      content: attr(data-label);
-      position: absolute;
-      left: 6px;
-      width: 25%;
-      padding-right: 10px;
-      white-space: nowrap;
-      font-weight: 600;
-      color: #f68712; /* UIBK Orange for mobile labels */
-    }
-    
-    html[data-theme="dark"] .projects-table td:before {
-      color: #f68712; /* UIBK Orange for mobile labels in both themes */
-    }
+  .projects-table tbody tr {
+    background: white;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+    border: 1px solid #e9ecef;
+  }
+  
+  .projects-table td {
+    border: none;
+    padding: 8px 0;
+    text-align: left !important;
+    border-radius: 0 !important;
+    font-size: 13px; /* Matched with course table */
+  }
+  
+  .projects-table td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: #2c3e50;
+    text-transform: uppercase;
+    font-size: 11px; /* Matched with course table */
+    letter-spacing: 0.5px; /* Matched with course table */
+    display: block;
+    margin-bottom: 4px; /* Matched with course table */
+  }
+  
+  html[data-theme="dark"] .projects-table tbody tr {
+    background: #2d3748;
+    border-color: #4a5568;
+  }
+  
+  html[data-theme="dark"] .projects-table td::before {
+    color: #90cdf4;
+  }
+}
+
+@media (max-width: 480px) {
+  .table-container {
+    margin: 0 10px 20px 10px;
+  }
+  
+  .projects-table tbody tr {
+    padding: 12px;
+  }
+  
+  .projects-table td {
+    padding: 6px 0;
+    font-size: 13px; /* Consistent with 768px breakpoint */
+  }
+  
+  .projects-table td::before {
+    font-size: 10px; /* Matched with course table */
   }
 }

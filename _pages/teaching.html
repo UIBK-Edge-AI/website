@@ -37,26 +37,44 @@ author_profile: true
               data-semester="{{ course.semester | downcase | default: 'unknown' }}"
               data-title="{{ course.title | downcase | default: '' }}"
               data-instructor="{{ course.instructor | downcase | default: '' }}">
-            <td class="title-cell">
+            <td class="title-cell" data-label="Course Title">
               <a href="{{ base_path }}{{ course.url }}" class="course-link">
                 {{ course.title | default: "Untitled Course" }}
               </a>
             </td>
-            <td class="instructor-cell">{{ course.instructor | default: "TBA" }}</td>
-            <td class="room-cell">{{ course.room | default: "TBA" }}</td>
-            <td class="degree-cell">
-              {% assign degree_lower = course.degree | downcase %}
-              {% if degree_lower == 'ba-cs' %}
-                <span class="degree-badge degree-bachelor">BA Computer Science</span>
-              {% elsif degree_lower == 'ma-cs' %}
-                <span class="degree-badge degree-master">MA Computer Science</span>
-              {% elsif degree_lower == 'ma-informatics' %}
-                <span class="degree-badge degree-master">MA Business Informatics</span>
+            <td class="instructor-cell" data-label="Instructor">{{ course.instructor | default: "TBA" }}</td>
+            <td class="room-cell" data-label="Room">{{ course.room | default: "TBA" }}</td>
+            <td class="degree-cell" data-label="Degree">
+              {% if course.degree contains ',' %}
+                {% assign degrees = course.degree | split: ',' %}
+                <div class="degree-badges-container">
+                  {% for degree in degrees %}
+                    {% assign degree_trimmed = degree | strip | downcase %}
+                    {% if degree_trimmed == 'ba-cs' %}
+                      <span class="degree-badge degree-bachelor">BA Computer Science</span>
+                    {% elsif degree_trimmed == 'ma-cs' %}
+                      <span class="degree-badge degree-master">MA Computer Science</span>
+                    {% elsif degree_trimmed == 'ma-informatics' %}
+                      <span class="degree-badge degree-master">MA Business Informatics</span>
+                    {% else %}
+                      <span class="degree-badge degree-other">{{ degree | strip | default: "Other" }}</span>
+                    {% endif %}
+                  {% endfor %}
+                </div>
               {% else %}
-                <span class="degree-badge degree-other">{{ course.degree | default: "Other" }}</span>
+                {% assign degree_lower = course.degree | downcase %}
+                {% if degree_lower == 'ba-cs' %}
+                  <span class="degree-badge degree-bachelor">BA Computer Science</span>
+                {% elsif degree_lower == 'ma-cs' %}
+                  <span class="degree-badge degree-master">MA Computer Science</span>
+                {% elsif degree_lower == 'ma-informatics' %}
+                  <span class="degree-badge degree-master">MA Business Informatics</span>
+                {% else %}
+                  <span class="degree-badge degree-other">{{ course.degree | default: "Other" }}</span>
+                {% endif %}
               {% endif %}
             </td>
-            <td class="semester-cell">
+            <td class="semester-cell" data-label="Semester">
               <span class="semester-badge">{{ course.semester | default: "TBA" }}</span>
             </td>
           </tr>

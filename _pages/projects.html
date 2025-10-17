@@ -12,6 +12,7 @@ author_profile: true
   <thead>
     <tr>
       <th>Acronym</th>
+      <th>Title</th>
       <th>Funding Organization</th>
       <th>Duration</th>
     </tr>
@@ -20,7 +21,8 @@ author_profile: true
     {% assign projects = site.projects | sort: 'duration' | reverse %}
     {% for project in projects %}
     <tr>
-      <td><a href="{{ base_path }}{{ project.url }}">{{ project.title }}</a></td>
+      <td><a href="{{ base_path }}{{ project.url }}">{{ project.name }}</a></td>
+      <td>{{ project.title }}</td>
       <td>{{ project.sponsor }}</td>
       <td>{{ project.duration }}</td>
     </tr>
