@@ -1,11 +1,11 @@
 ---
-name: Edge-AI
+name: Edge AI
 collection: projects
 identifier: aim_edgeai
 status: ongoing
 sponsor: Austrian Research Promotion Agency (FFG)
 title: AIM AT Endowed Professorship
-image: 
+image: /images/winter1.png
 duration: 2025 – 2030
 website: https://www.ffg.at/aim
 permalink: /projects/aimAtEdgeAI

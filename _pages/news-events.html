@@ -60,49 +60,59 @@ author_profile: true
 /* ---- LinkedIn Widget ----------------------------------------------------- */
 .linkedin-widget-wrapper {
   margin: 2rem 0;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-  background: #f8f9fa;
+  border-radius: 0;
+  overflow: visible;
+  box-shadow: none;
+  background: transparent;
+  border: none;
 }
 
 #linkedin-widget {
   width: 100%;
   max-width: 100%;
-  overflow: hidden;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  margin: 2rem 0;
+  overflow: visible;
+  border-radius: 0;
+  box-shadow: none;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: none;
 }
 
 #linkedin-widget iframe {
   width: 100% !important;
-  height: 800px !important; /* Increased height to reduce scrolling */
-  min-height: 800px;
+  height: 3000px !important; /* Very tall to show all content */
+  min-height: 3000px;
   max-height: none;
-  border: 0;
-  border-radius: 8px;
+  border: 0 !important;
+  border-radius: 0 !important;
   display: block;
-  overflow: hidden;
-  /* Remove scrollbars */
-  scrolling: no;
+  overflow: hidden !important; /* Hide iframe scrollbar */
+  box-shadow: none !important;
+  background: transparent !important;
 }
 
-/* Container wrapper to control overflow */
+/* Container wrapper */
 .linkedin-container {
   width: 100%;
   max-width: 100%;
-  overflow: hidden;
+  overflow: visible;
   position: relative;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
 }
 
 /* ---- LinkedIn Feed Section ---------------------------------------------- */
 .linkedin-feed-section {
   margin: 2rem 0;
-  padding: 2rem;
-  background: #f8f9fa;
-  border-radius: 8px;
-  border-left: 4px solid #0077B5;
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+  border: none;
+  box-shadow: none;
 }
 
 .linkedin-feed-section h2 {
@@ -136,7 +146,7 @@ author_profile: true
 }
 
 .loading-spinner {
-  display: inline-block; /* Fixed from 'left-block' */
+  display: inline-block;
   width: 20px;
   height: 20px;
   border: 2px solid #e3f2fd;
@@ -165,10 +175,44 @@ author_profile: true
 .news-date { color: #666; font-size: 0.9rem; margin-bottom: 0.5rem; }
 .news-content { line-height: 1.6; }
 
+/* ---- Elfsight Widget Customization -------------------------------------- */
+/* Remove any default boxes or borders from Elfsight */
+.elfsight-app-212f23be-cd91-4088-853e-f701fc20febc,
+div[class*="elfsight"],
+div[class*="eapps"] {
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Ensure Load More button is visible */
+.elfsight-widget-linkedin-feed-button,
+.eapps-linkedin-feed-load-more,
+.eapps-link,
+button[class*="load"],
+button[class*="more"],
+a[class*="load"],
+a[class*="more"] {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  margin: 1rem auto !important;
+  position: relative !important;
+  z-index: 999 !important;
+}
+
+/* Remove scrollbars from iframe content */
+body.eapps-widget-loaded {
+  overflow: visible !important;
+}
+
 /* ---- Dark Theme --------------------------------------------------------- */
 html[data-theme="dark"] .linkedin-feed-section {
-  background: #1f2937;
-  border-left-color: #63b3ed;
+  background: transparent;
+  border: none;
 }
 
 html[data-theme="dark"] .linkedin-feed-section h2 { color: #63b3ed; }
@@ -181,6 +225,25 @@ html[data-theme="dark"] .news-item {
 
 html[data-theme="dark"] .news-item h3 { color: #e2e8f0; }
 html[data-theme="dark"] .news-date { color: #a0aec0; }
+
+/* ---- Mobile Responsiveness ---------------------------------------------- */
+@media (max-width: 768px) {
+  #linkedin-widget iframe {
+    height: 2500px !important;
+    min-height: 2500px;
+  }
+}
+
+@media (max-width: 480px) {
+  #linkedin-widget iframe {
+    height: 2000px !important;
+    min-height: 2000px;
+  }
+  
+  .linkedin-widget-wrapper {
+    margin: 1rem 0;
+  }
+}
 </style>
 
 <!-- Loading Placeholder -->
@@ -189,18 +252,17 @@ html[data-theme="dark"] .news-date { color: #a0aec0; }
   Loading LinkedIn content...
 </div>
 
-<!-- iframe Feed Container - Added wrapper -->
-
+<!-- iframe Feed Container - No box, no scrollbar -->
 <div id="linkedin-widget" style="display:none;">
   <iframe
     src="https://apps.elfsight.com/widget/212f23be-cd91-4088-853e-f701fc20febc"
-    style="width:100%;height:800px;border:0;overflow:hidden;border-radius:8px;"
+    style="width:100%;height:3000px;border:0;overflow:hidden;border-radius:0;box-shadow:none;"
     loading="lazy"
     scrolling="no"
     frameborder="0"
-    title="LinkedIn Feed – Edge AI">
+    title="LinkedIn Feed – Edge AI"
+    allow="autoplay; encrypted-media">
   </iframe>
 </div>
-
 
 <script src="{{ './assets/js/fetch_news.js' | relative_url }}"></script>

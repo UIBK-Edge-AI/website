@@ -1,19 +1,22 @@
-/* UIBK Branded Publications CSS - Fixed Light/Dark Mode Separation */
+/* UIBK Branded Publications CSS - Blue & Orange Theme */
 
 /* ==================== LIGHT MODE (DEFAULT) ==================== */
 :root,
 :root:not([data-theme="dark"]) {
   /* UIBK Brand Colors - Light Mode */
-  --uibk-primary: #0066cc;
-  --uibk-secondary: #0080ff;
-  --uibk-accent: #ff6600;
-  --uibk-gold: #ffcc00;
+  --uibk-blue-dark: #003366;
+  --uibk-blue: #0066cc;
+  --uibk-blue-light: #3399ff;
+  --uibk-orange-dark: #cc5200;
+  --uibk-orange: #ff6600;
+  --uibk-orange-light: #ff9933;
   
-  /* Light Mode Colors - Readable on light backgrounds */
-  --text-primary: #0066cc;
-  --text-secondary: #666666;
-  --text-muted: #888888;
+  /* Light Mode Colors */
+  --text-primary: #003366;
+  --text-secondary: #0066cc;
+  --text-muted: #666666;
   --text-inverse: #ffffff;
+  --text-body: #333333;
   
   /* All Backgrounds Transparent */
   --bg-main: transparent;
@@ -25,31 +28,35 @@
   --bg-footer-code: transparent;
   
   /* Light Mode Borders & Effects */
-  --border-color: #cccccc;
-  --border-light: #dddddd;
+  --border-color: #0066cc;
+  --border-light: #cce0ff;
   --shadow-light: rgba(0, 102, 204, 0.1);
   --shadow-medium: rgba(0, 102, 204, 0.15);
-  --shadow-strong: rgba(0, 102, 204, 0.2);
+  --shadow-strong: rgba(0, 102, 204, 0.25);
   
   /* Light Mode Button */
   --button-bg: #0066cc;
-  --button-hover-bg: #0080ff;
+  --button-hover-bg: #ff6600;
+  --button-text: #ffffff;
 }
 
 /* ==================== DARK MODE - MEDIA QUERY ==================== */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    /* UIBK Brand Colors - Dark Mode */
-    --uibk-primary: #66b3ff;
-    --uibk-secondary: #80c0ff;
-    --uibk-accent: #ff9966;
-    --uibk-gold: #ffeb66;
+    /* UIBK Brand Colors - Dark Mode (Lighter variations) */
+    --uibk-blue-dark: #3399ff;
+    --uibk-blue: #66b3ff;
+    --uibk-blue-light: #99ccff;
+    --uibk-orange-dark: #ff8533;
+    --uibk-orange: #ff9933;
+    --uibk-orange-light: #ffad66;
     
-    /* Dark Mode Colors - Readable on dark backgrounds */
-    --text-primary: #66b3ff;
-    --text-secondary: #aaaaaa;
-    --text-muted: #888888;
+    /* Dark Mode Colors */
+    --text-primary: #99ccff;
+    --text-secondary: #66b3ff;
+    --text-muted: #aaaaaa;
     --text-inverse: #1a1a1a;
+    --text-body: #e0e0e0;
     
     /* All Backgrounds Transparent */
     --bg-main: transparent;
@@ -61,31 +68,35 @@
     --bg-footer-code: transparent;
     
     /* Dark Mode Borders & Effects */
-    --border-color: #555555;
-    --border-light: #444444;
+    --border-color: #66b3ff;
+    --border-light: #334d66;
     --shadow-light: rgba(102, 179, 255, 0.15);
     --shadow-medium: rgba(102, 179, 255, 0.2);
     --shadow-strong: rgba(102, 179, 255, 0.3);
     
     /* Dark Mode Button */
     --button-bg: #66b3ff;
-    --button-hover-bg: #80c0ff;
+    --button-hover-bg: #ff9933;
+    --button-text: #1a1a1a;
   }
 }
 
 /* ==================== MANUAL DARK MODE OVERRIDE ==================== */
 [data-theme="dark"] {
-  /* UIBK Brand Colors - Dark Mode */
-  --uibk-primary: #66b3ff !important;
-  --uibk-secondary: #80c0ff !important;
-  --uibk-accent: #ff9966 !important;
-  --uibk-gold: #ffeb66 !important;
+  /* UIBK Brand Colors - Dark Mode (Lighter variations) */
+  --uibk-blue-dark: #3399ff !important;
+  --uibk-blue: #66b3ff !important;
+  --uibk-blue-light: #99ccff !important;
+  --uibk-orange-dark: #ff8533 !important;
+  --uibk-orange: #ff9933 !important;
+  --uibk-orange-light: #ffad66 !important;
   
-  /* Dark Mode Colors - Readable on dark backgrounds */
-  --text-primary: #66b3ff !important;
-  --text-secondary: #aaaaaa !important;
-  --text-muted: #888888 !important;
+  /* Dark Mode Colors */
+  --text-primary: #99ccff !important;
+  --text-secondary: #66b3ff !important;
+  --text-muted: #aaaaaa !important;
   --text-inverse: #1a1a1a !important;
+  --text-body: #e0e0e0 !important;
   
   /* All Backgrounds Transparent */
   --bg-main: transparent !important;
@@ -97,30 +108,34 @@
   --bg-footer-code: transparent !important;
   
   /* Dark Mode Borders & Effects */
-  --border-color: #555555 !important;
-  --border-light: #444444 !important;
+  --border-color: #66b3ff !important;
+  --border-light: #334d66 !important;
   --shadow-light: rgba(102, 179, 255, 0.15) !important;
   --shadow-medium: rgba(102, 179, 255, 0.2) !important;
   --shadow-strong: rgba(102, 179, 255, 0.3) !important;
   
   /* Dark Mode Button */
   --button-bg: #66b3ff !important;
-  --button-hover-bg: #80c0ff !important;
+  --button-hover-bg: #ff9933 !important;
+  --button-text: #1a1a1a !important;
 }
 
 /* ==================== MANUAL LIGHT MODE OVERRIDE ==================== */
 [data-theme="light"] {
   /* UIBK Brand Colors - Light Mode */
-  --uibk-primary: #0066cc !important;
-  --uibk-secondary: #0080ff !important;
-  --uibk-accent: #ff6600 !important;
-  --uibk-gold: #ffcc00 !important;
+  --uibk-blue-dark: #003366 !important;
+  --uibk-blue: #0066cc !important;
+  --uibk-blue-light: #3399ff !important;
+  --uibk-orange-dark: #cc5200 !important;
+  --uibk-orange: #ff6600 !important;
+  --uibk-orange-light: #ff9933 !important;
   
-  /* Light Mode Colors - Readable on light backgrounds */
-  --text-primary: #0066cc !important;
-  --text-secondary: #666666 !important;
-  --text-muted: #888888 !important;
+  /* Light Mode Colors */
+  --text-primary: #003366 !important;
+  --text-secondary: #0066cc !important;
+  --text-muted: #666666 !important;
   --text-inverse: #ffffff !important;
+  --text-body: #333333 !important;
   
   /* All Backgrounds Transparent */
   --bg-main: transparent !important;
@@ -132,15 +147,16 @@
   --bg-footer-code: transparent !important;
   
   /* Light Mode Borders & Effects */
-  --border-color: #cccccc !important;
-  --border-light: #dddddd !important;
+  --border-color: #0066cc !important;
+  --border-light: #cce0ff !important;
   --shadow-light: rgba(0, 102, 204, 0.1) !important;
   --shadow-medium: rgba(0, 102, 204, 0.15) !important;
-  --shadow-strong: rgba(0, 102, 204, 0.2) !important;
+  --shadow-strong: rgba(0, 102, 204, 0.25) !important;
   
   /* Light Mode Button */
   --button-bg: #0066cc !important;
-  --button-hover-bg: #0080ff !important;
+  --button-hover-bg: #ff6600 !important;
+  --button-text: #ffffff !important;
 }
 
 /* ==================== BASE STYLES ==================== */
@@ -152,7 +168,7 @@
   padding: 1rem;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   background: var(--bg-main);
-  color: var(--text-primary);
+  color: var(--text-body);
   min-height: 100vh;
   position: relative;
 }
@@ -182,7 +198,7 @@
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, var(--uibk-primary), var(--uibk-secondary));
+  background: linear-gradient(90deg, var(--uibk-blue), var(--uibk-orange));
 }
 
 @media (min-width: 768px) {
@@ -229,7 +245,7 @@
 .form-group label {
   font-weight: 600;
   margin-bottom: 0.6rem;
-  color: var(--uibk-primary);
+  color: var(--uibk-blue);
   font-size: 0.9rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -249,7 +265,7 @@
   border-radius: 10px;
   font-size: 0.9rem;
   background: var(--bg-input);
-  color: var(--text-primary);
+  color: var(--text-body);
   width: 100%;
   box-sizing: border-box;
   transition: all 0.3s ease;
@@ -259,8 +275,8 @@
 .form-group input:focus,
 .form-group select:focus {
   outline: none;
-  border-color: var(--uibk-secondary);
-  box-shadow: 0 0 0 4px rgba(102, 179, 255, 0.15), 0 4px 16px var(--shadow-medium);
+  border-color: var(--uibk-orange);
+  box-shadow: 0 0 0 4px rgba(255, 102, 0, 0.15), 0 4px 16px var(--shadow-medium);
   transform: translateY(-1px);
 }
 
@@ -271,14 +287,14 @@
 
 .form-group select option {
   background: var(--bg-input);
-  color: var(--text-primary);
+  color: var(--text-body);
   padding: 0.5rem;
 }
 
 /* Search Button */
 .search-button {
   background: var(--button-bg);
-  color: var(--text-inverse);
+  color: var(--button-text);
   border: 2px solid var(--border-color);
   padding: 0.9rem 1.2rem;
   border-radius: 10px;
@@ -322,6 +338,7 @@
 
 .search-button:hover {
   background: var(--button-hover-bg);
+  border-color: var(--uibk-orange);
   transform: translateY(-2px);
   box-shadow: 0 8px 32px var(--shadow-strong);
 }
@@ -352,7 +369,7 @@
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, var(--uibk-secondary), var(--uibk-gold));
+  background: linear-gradient(90deg, var(--uibk-blue), var(--uibk-orange));
 }
 
 @media (min-width: 576px) {
@@ -382,13 +399,14 @@
 
 .stats-item:hover {
   transform: translateY(-2px);
+  border-color: var(--uibk-orange);
 }
 
 .stats-number {
   display: block;
-  font-size: 1rem;
+  font-size: 2rem;
   font-weight: 800;
-  color: var(--uibk-primary);
+  color: var(--uibk-blue);
   line-height: 1;
   text-shadow: 0 2px 4px var(--shadow-light);
 }
@@ -411,7 +429,7 @@
 
 @media (min-width: 768px) {
   .stats-label {
-    font-size: 0.7rem;
+    font-size: 0.9rem;
   }
 }
 
@@ -420,8 +438,9 @@
   margin: 2rem auto;
   width: 48px;
   height: 48px;
-  border: 4px solid var(--border-color);
-  border-top: 4px solid var(--uibk-primary);
+  border: 4px solid var(--border-light);
+  border-top: 4px solid var(--uibk-blue);
+  border-right: 4px solid var(--uibk-orange);
   border-radius: 50%;
   animation: spin 1s linear infinite;
   box-shadow: 0 4px 16px var(--shadow-light);
@@ -439,21 +458,21 @@
   border-radius: 12px;
   padding: 1.2rem;
   margin-bottom: 2rem;
-  color: var(--uibk-secondary);
+  color: var(--text-body);
   font-size: 0.95rem;
   line-height: 1.6;
   box-shadow: 0 4px 16px var(--shadow-light);
-  border-left: 4px solid var(--uibk-secondary);
+  border-left: 4px solid var(--uibk-blue);
 }
 
 .status-message.error {
-  color: #dc3545;
   border-left-color: #dc3545;
+  color: #dc3545;
 }
 
 .status-message.success {
-  color: #198754;
   border-left-color: #198754;
+  color: #198754;
 }
 
 /* Publication Cards */
@@ -464,7 +483,7 @@
   padding: 1.5rem;
   margin-bottom: 2rem;
   box-shadow: 0 4px 24px var(--shadow-light);
-  border-left: 6px solid var(--text-muted);
+  border-left: 6px solid var(--uibk-blue);
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
@@ -482,8 +501,8 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 2px;
-  background: linear-gradient(90deg, var(--uibk-primary), var(--uibk-secondary), var(--uibk-accent));
+  height: 3px;
+  background: linear-gradient(90deg, var(--uibk-blue), var(--uibk-orange));
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -491,7 +510,7 @@
 .publication-card:hover {
   box-shadow: 0 12px 48px var(--shadow-strong);
   transform: translateY(-4px);
-  border-left-color: var(--uibk-primary);
+  border-left-color: var(--uibk-orange);
 }
 
 .publication-card:hover::before {
@@ -555,35 +574,35 @@
   }
 }
 
-/* UIBK-inspired Type Colors */
+/* UIBK Blue & Orange Type Colors */
 .type-journal { 
-  background: linear-gradient(135deg, var(--uibk-primary), #004080);
+  background: linear-gradient(135deg, #003366, #0066cc);
 }
 .type-conference { 
-  background: linear-gradient(135deg, var(--uibk-secondary), #0080ff);
+  background: linear-gradient(135deg, #0066cc, #3399ff);
 }
 .type-chapter { 
-  background: linear-gradient(135deg, var(--uibk-accent), #ff8533);
+  background: linear-gradient(135deg, #cc5200, #ff6600);
 }
 .type-book { 
-  background: linear-gradient(135deg, var(--uibk-gold), #ffdd33);
-  color: #1a1a1a !important;
+  background: linear-gradient(135deg, #ff6600, #ff9933);
+  color: #ffffff !important;
 }
 .type-thesis { 
-  background: linear-gradient(135deg, #cc3300, #ff4444);
+  background: linear-gradient(135deg, #003366, #ff6600);
 }
 .type-report { 
-  background: linear-gradient(135deg, #666666, #888888);
+  background: linear-gradient(135deg, #666666, #0066cc);
 }
 .type-other { 
-  background: linear-gradient(135deg, #666666, #888888);
+  background: linear-gradient(135deg, #666666, #999999);
 }
 
 /* Publication Title */
 .publication-title {
   font-size: 1.1rem;
   font-weight: 700;
-  color: #000000;
+  color: var(--text-primary);
   line-height: 1.4;
   margin: 0 0 1.2rem 0;
   word-wrap: break-word;
@@ -596,7 +615,7 @@
 }
 
 .publication-title a {
-  color: var(--uibk-primary);
+  color: var(--uibk-blue);
   text-decoration: none;
   display: flex;
   align-items: flex-start;
@@ -605,7 +624,7 @@
 }
 
 .publication-title a:hover {
-  color: var(--uibk-secondary);
+  color: var(--uibk-orange);
   text-shadow: 0 2px 4px var(--shadow-light);
 }
 
@@ -631,12 +650,8 @@
 .publication-meta {
   font-size: 0.9rem;
   line-height: 1.6;
-  color: #373636;
+  color: var(--text-body);
   word-wrap: break-word;
-}
-
-html[data-theme="dark"] .publication-meta {
-color: #ffffff;
 }
 
 @media (min-width: 768px) {
@@ -646,7 +661,7 @@ color: #ffffff;
 }
 
 .publication-meta strong {
-  color: var(--uibk-primary);
+  color: var(--uibk-blue);
   font-weight: 600;
 }
 
@@ -662,7 +677,7 @@ color: #ffffff;
   margin-bottom: 1.5rem;
   padding-bottom: 0.8rem;
   border-bottom: 3px solid;
-  border-image: linear-gradient(90deg, var(--uibk-primary), var(--uibk-secondary)) 1;
+  border-image: linear-gradient(90deg, var(--uibk-blue), var(--uibk-orange)) 1;
   flex-wrap: wrap;
   gap: 0.8rem;
 }
@@ -676,7 +691,7 @@ color: #ffffff;
 .year-title {
   font-size: 1.5rem;
   font-weight: 800;
-  color: var(--uibk-primary);
+  color: var(--uibk-blue);
   margin: 0;
   text-shadow: 0 2px 4px var(--shadow-light);
 }
@@ -689,13 +704,13 @@ color: #ffffff;
 
 .year-count {
   font-size: 0.85rem;
-  color: #888888;
+  color: var(--text-secondary);
   background: var(--bg-year-count);
   padding: 0.4rem 1rem;
   border-radius: 20px;
   font-weight: 600;
   white-space: nowrap;
-  border: 2px solid var(--border-light);
+  border: 2px solid var(--uibk-orange);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -709,7 +724,7 @@ color: #ffffff;
 
 /* Header Styling */
 .publications-container header h1 {
-  color: var(--text-primary) !important;
+  color: var(--uibk-blue) !important;
   font-size: 2.5rem;
   margin-bottom: 0.8rem;
   font-weight: 800;
@@ -734,7 +749,7 @@ color: #ffffff;
 }
 
 .controls-section h2 {
-  color: var(--text-primary) !important;
+  color: var(--uibk-blue) !important;
   font-size: 1.5rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -751,7 +766,7 @@ color: #ffffff;
 .publications-container footer {
   color: var(--text-secondary) !important;
   border-top: 3px solid;
-  border-image: linear-gradient(90deg, var(--uibk-primary), var(--uibk-secondary)) 1;
+  border-image: linear-gradient(90deg, var(--uibk-blue), var(--uibk-orange)) 1;
   font-size: 0.9rem;
   padding-top: 1.5rem;
   margin-top: 3rem;
@@ -765,7 +780,7 @@ color: #ffffff;
 
 .publications-container footer code {
   background: var(--bg-footer-code);
-  color: var(--uibk-secondary);
+  color: var(--uibk-orange);
   padding: 0.3rem 0.6rem;
   border-radius: 6px;
   font-size: 0.85rem;

@@ -32,15 +32,3 @@ Research Topics
 Acknowledgments
 ======
 The Edge AI research group at the University of Innsbruck started in March 2025, partly funded by the Austrian Research Promotion Agency (FFG): "AIM AT Stiftungsprofessur für Edge AI".
-
-Contact
-======
-
-
-|  | **[Mitra-Yolanda Naderi (secretary)]({{ site.baseurl }}/team/mitra)** |
-|---|---|---|
-| **E-mail** | [edgeai-informatik@uibk.ac.at](mailto:edgeai-informatik@uibk.ac.at) |
-| **Phone** | [+43 512 507-53494](tel:+4351250753494) |
-| **Address** | Universität Innsbruck<br>Edge AI<br>Technikerstraße 21A<br>6020 Innsbruck<br>Austria |
-
-[Directions](https://www.uibk.ac.at/de/informatik/kontakt/anfahrt/)

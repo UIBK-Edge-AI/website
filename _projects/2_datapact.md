@@ -14,7 +14,7 @@ permalink: /projects/datapact
 ## DataPACT
 
 ### Motivation
-We are proud to contribute to **DataPACT**, a **Horizon Europe-funded** initiative that redefines how data and AI systems are built—embedding compliance, ethics, and sustainability from the ground up. Our team leads the design of the DataPACT architecture, which serves as the blueprint for integrating diverse tools and frameworks.
+**DataPACT**, a **Horizon Europe-funded** initiative, that researches how data and AI systems are built—embedding compliance, ethics, and sustainability from the ground up. Our team leads the design of the DataPACT architecture, which serves as the blueprint for integrating diverse tools and frameworks.
 
 We also play a central role in enabling compliance-aware **Data/AI operations**, empowering users to interact with pipelines through intuitive, **intent-driven interfaces**. In addition, we contribute to shaping the next generation of **pipeline design tools**, leveraging **large language models** to support the creation of transparent, trustworthy, and regulation-ready workflows.
 

@@ -14,7 +14,7 @@ title_separator          : "-"
 site_creator             : "T M Rayhan Gias"
 site_creator_url         : "/team/tanim_gias"
 description              : &description "personal description"
-url                      : "https://edgeai-informatik.uibk.ac.at"
+# url                      : "https://edgeai-informatik.uibk.ac.at"
 baseurl                  : ""
 repository               : "https://github.com/UIBK-Edge-AI/website"
 
@@ -29,6 +29,8 @@ author:
   pronouns         : # example: "she/her"  
   bio              : "Smart Computing Where It Matters"
   location         : "Technikerstraße 21a, Innsbruck"
+  location_map     : https://www.uibk.ac.at/de/informatik/kontakt/anfahrt/
+  telephone        : +43 512 507-53494
   employer         : "Universität Innsbruck, Austria"
   uri              : # URL
   email            : "edgeai-informatik@uibk.ac.at" 

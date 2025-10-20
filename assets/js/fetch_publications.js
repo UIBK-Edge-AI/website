@@ -229,7 +229,8 @@ class EdgeAIPublicationsAPI {
 let publicationsAPI = new EdgeAIPublicationsAPI();
 let currentPublications = [];
 
-// Main search function
+// COMMENTED OUT - Main search function - Uncomment when needed
+/*
 async function searchPublications() {
   const currentYear = new Date().getFullYear();
   const params = {
@@ -243,17 +244,22 @@ async function searchPublications() {
   console.log('🔍 Starting search with parameters:', params);
 
   // Show loading
-  document.getElementById('loading-indicator').style.display = 'block';
-  document.getElementById('publications-list').innerHTML = '';
-  document.getElementById('stats-bar').style.display = 'none';
-  document.getElementById('status-message').style.display = 'none';
+  const loadingEl = document.getElementById('loading-indicator');
+  const listEl = document.getElementById('publications-list');
+  const statsEl = document.getElementById('stats-bar');
+  const statusEl = document.getElementById('status-message');
+  
+  if (loadingEl) loadingEl.style.display = 'block';
+  if (listEl) listEl.innerHTML = '';
+  if (statsEl) statsEl.style.display = 'none';
+  if (statusEl) statusEl.style.display = 'none';
 
   try {
     const publications = await publicationsAPI.searchPublications(params);
     currentPublications = publications;
     
     // Hide loading
-    document.getElementById('loading-indicator').style.display = 'none';
+    if (loadingEl) loadingEl.style.display = 'none';
     
     if (publications.length === 0) {
       showStatusMessage(`
@@ -264,19 +270,61 @@ async function searchPublications() {
     }
 
     console.log(`✅ Found ${publications.length} publications`);
-    updateStatistics(publications);
+    
+    // COMMENTED OUT - Uncomment when needed
+    // updateStatistics(publications);
+    
     renderPublications(publications);
     
-    // showStatusMessage(`
-    //   <strong>✅ Search Complete:</strong> Found ${publications.length} publication${publications.length !== 1 ? 's' : ''} from the Edge AI research group.
-    // `);
-    
   } catch (error) {
-    document.getElementById('loading-indicator').style.display = 'none';
+    if (loadingEl) loadingEl.style.display = 'none';
     console.error('❌ Search failed:', error);
     
     showStatusMessage(`
       <strong>❌ Search Failed:</strong> ${error.message}
+    `);
+  }
+}
+*/
+
+// Simplified function to load all publications without search
+async function loadAllPublications() {
+  console.log('📚 Loading all publications...');
+
+  // Show loading - safely check if elements exist
+  const loadingEl = document.getElementById('loading-indicator');
+  const listEl = document.getElementById('publications-list');
+  const statusEl = document.getElementById('status-message');
+  
+  if (loadingEl) loadingEl.style.display = 'block';
+  if (listEl) listEl.innerHTML = '';
+  if (statusEl) statusEl.style.display = 'none';
+
+  try {
+    const publications = await publicationsAPI.loadPublications();
+    currentPublications = publications;
+    
+    // Hide loading
+    if (loadingEl) loadingEl.style.display = 'none';
+    
+    if (publications.length === 0) {
+      showStatusMessage(`
+        <strong>No publications found</strong> in the BibTeX file.
+      `);
+      return;
+    }
+
+    console.log(`✅ Found ${publications.length} publications`);
+    
+    renderPublications(publications);
+    
+  } catch (error) {
+    if (loadingEl) loadingEl.style.display = 'none';
+    console.error('❌ Failed to load publications:', error);
+    
+    showStatusMessage(`
+      <strong>❌ Loading Failed:</strong> ${error.message}<br>
+      <small>Check the browser console for details.</small>
     `);
   }
 }
@@ -322,7 +370,6 @@ function createPublicationCard(pub) {
   card.innerHTML = `
     <div class="publication-header">
       <span class="publication-type ${typeClass}">${pub.type.toUpperCase()}</span>
-
     </div>
     ${titleElement}
     <div class="publication-meta">${metadata}</div>
@@ -344,21 +391,36 @@ function getTypeClass(typeCode) {
   return typeClasses[typeCode] || 'type-other';
 }
 
+// COMMENTED OUT FUNCTION - Uncomment when needed
+/*
 function updateStatistics(publications) {
   const currentYear = new Date().getFullYear();
   const recentPubs = publications.filter(pub => pub.year >= currentYear - 5);
   const journalPubs = publications.filter(pub => pub.typeCode === '1');
   const confPubs = publications.filter(pub => pub.typeCode === '2');
 
-  document.getElementById('total-pubs').textContent = publications.length;
-  document.getElementById('recent-pubs').textContent = recentPubs.length;
-  document.getElementById('journal-pubs').textContent = journalPubs.length;
-  document.getElementById('conf-pubs').textContent = confPubs.length;
-  
-  document.getElementById('stats-bar').style.display = 'flex';
+  const totalEl = document.getElementById('total-pubs');
+  const recentEl = document.getElementById('recent-pubs');
+  const journalEl = document.getElementById('journal-pubs');
+  const confEl = document.getElementById('conf-pubs');
+  const statsEl = document.getElementById('stats-bar');
+
+  if (totalEl) totalEl.textContent = publications.length;
+  if (recentEl) recentEl.textContent = recentPubs.length;
+  if (journalEl) journalEl.textContent = journalPubs.length;
+  if (confEl) confEl.textContent = confPubs.length;
+  if (statsEl) statsEl.style.display = 'flex';
 }
+*/
 
 function renderPublications(publications) {
+  const listContainer = document.getElementById('publications-list');
+  
+  if (!listContainer) {
+    console.error('❌ publications-list element not found!');
+    return;
+  }
+
   // Group by year
   const groupedByYear = publications.reduce((acc, pub) => {
     if (!acc[pub.year]) {
@@ -369,7 +431,6 @@ function renderPublications(publications) {
   }, {});
 
   const sortedYears = Object.keys(groupedByYear).sort((a, b) => b - a);
-  const listContainer = document.getElementById('publications-list');
   listContainer.innerHTML = '';
 
   sortedYears.forEach(year => {
@@ -396,22 +457,39 @@ function renderPublications(publications) {
     
     listContainer.appendChild(yearSection);
   });
+  
+  console.log(`✅ Rendered ${publications.length} publications in ${sortedYears.length} year sections`);
 }
 
 function showStatusMessage(message) {
-  document.getElementById('status-text').innerHTML = message;
-  document.getElementById('status-message').style.display = 'block';
+  const statusText = document.getElementById('status-text');
+  const statusMessage = document.getElementById('status-message');
+  
+  if (statusText) statusText.innerHTML = message;
+  if (statusMessage) statusMessage.style.display = 'block';
+  
+  console.log('📢 Status message:', message);
 }
 
 // Auto-load publications on page load
 async function initializePublications() {
   try {
-    console.log('🚀 Edge AI Publications System - Loading from BibTeX file');
+    console.log('🚀 Edge AI Publications System - Initializing...');
     
-    // Show all publications by default
-    setTimeout(searchPublications, 500);
+    // Check if required elements exist
+    const listEl = document.getElementById('publications-list');
+    if (!listEl) {
+      console.error('❌ Required element #publications-list not found!');
+      return;
+    }
+    
+    console.log('✅ Required elements found, loading publications...');
+    
+    // Load all publications by default
+    await loadAllPublications();
+    
   } catch (error) {
-    console.error('Failed to initialize publications:', error);
+    console.error('❌ Failed to initialize publications:', error);
     showStatusMessage(`
       <strong>❌ Initialization Failed:</strong> ${error.message}
     `);
@@ -420,6 +498,19 @@ async function initializePublications() {
 
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', function() {
+  console.log('📄 DOM loaded, checking for publication page...');
+  
+  // Check if we're on the publications page
+  const listEl = document.getElementById('publications-list');
+  if (!listEl) {
+    console.log('ℹ️ Not on publications page, skipping initialization');
+    return;
+  }
+  
+  console.log('✅ Publications page detected');
+  
+  // COMMENTED OUT - Search functionality initialization - Uncomment when needed
+  /*
   const currentYear = new Date().getFullYear();
   
   // Set default values
@@ -446,7 +537,10 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   });
+  */
   
-  // Initialize the publications system
-  initializePublications();
+  // Initialize the publications system with a small delay to ensure DOM is fully ready
+  setTimeout(() => {
+    initializePublications();
+  }, 100);
 });

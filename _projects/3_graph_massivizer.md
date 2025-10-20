@@ -1,5 +1,5 @@
 ---
-name: Graph Massivizer
+name: Graph-Massivizer
 title: Extreme and Sustainable Graph Processing for Urgent Societal Challenges in Europe
 collection: projects
 identifier: graphMassivizer
