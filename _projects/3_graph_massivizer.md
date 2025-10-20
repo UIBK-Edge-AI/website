@@ -1,11 +1,11 @@
 ---
 name: Graph Massivizer
-title: Transforming Extreme Data through Massive Graph Processing
+title: Extreme and Sustainable Graph Processing for Urgent Societal Challenges in Europe
 collection: projects
 identifier: graphMassivizer
 status: ongoing
 sponsor: Horizon Europe
-image: /assets/img/projects/datapact.jpeg
+image: /assets/img/projects/graph_massivizer.png
 duration: 2023 – 2025
 website: https://graph-massivizer.eu/
 permalink: /projects/graphmassivizer
