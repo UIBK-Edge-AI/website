@@ -665,6 +665,36 @@
   font-weight: 600;
 }
 
+/* Ensure all metadata text is readable */
+.publication-meta p,
+.publication-meta span,
+.publication-meta div {
+  color: var(--text-body);
+}
+
+/* Metadata labels - ensure they use proper colors */
+.publication-meta strong,
+.publication-meta b {
+  color: var(--uibk-blue) !important;
+}
+
+/* Metadata values should be clearly visible */
+:root:not([data-theme="dark"]) .publication-meta {
+  color: #333333;
+}
+
+[data-theme="dark"] .publication-meta {
+  color: #e0e0e0 !important;
+}
+
+:root:not([data-theme="dark"]) .publication-meta strong {
+  color: #0066cc !important;
+}
+
+[data-theme="dark"] .publication-meta strong {
+  color: #66b3ff !important;
+}
+
 /* Year Sections */
 .year-section {
   margin-bottom: 3rem;

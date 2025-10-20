@@ -11,7 +11,7 @@ website: https://graph-massivizer.eu/
 permalink: /projects/graphmassivizer
 ---
 
-## Graph Massivizer
+## Graph-Massivizer
 
 ### Motivation
 Graph Massivizer researches and develops a high-performance, scalable, and sustainable platform for information processing and reasoning based on the massive graph representation of extreme data. It delivers a toolkit of five open-source software tools and FAIR graph datasets covering the sustainable lifecycle of processing extreme data as massive graphs. The tools focus on holistic usability (from extreme data ingestion and massive graph creation), automated intelligence (through analytics and reasoning), performance modelling, and environmental sustainability tradeoffs, supported by credible data-driven evidence across the computing continuum.
