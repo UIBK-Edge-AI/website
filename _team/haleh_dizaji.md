@@ -3,8 +3,8 @@ layout: person
 cv_ready: true
 kind: person
 title: Haleh Dizaji
-identifier: ShSd
-permalink: /team/seyedehhaleh
+identifier: hd
+permalink: /team/haleh
 img: /assets/img/team/P_haleh.jpg
 LinkedIn: haleh-dizaji-bb08a045
 phone: uibk phone number
@@ -12,8 +12,7 @@ position: postdoc
 category: POSTDOCOTORAL RESEARCHERS
 office: ICT 2M05A
 ORCID: 0000-0002-5886-9636
-LinkedIn: sareh-maleki-8392b7212
-email: Seyedehhaleh.Seyeddizaji@aau.at
+email: haleh.dizaji@uibk.ac.at
 address: Technikerstraße 21A, 6020 Innsbruck, Austria
 
 interests:
