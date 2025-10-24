@@ -8,8 +8,9 @@ status: open
 degree: 'Master'
 layout: single
 ---
-**Supervisor:** Univ.-Prof. Dr. Radu Prodan  
-**Author:** Maria Makhov
+**Supervisor:** Turgut Valiyev
+
+**Author:** N/A
 
 ## Abstract 
 
