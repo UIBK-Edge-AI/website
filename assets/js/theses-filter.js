@@ -12,6 +12,7 @@ class ThesesFilter {
     console.log('🔧 ThesesFilter initializing...');
     this.setupElements();
     this.setupEventListeners();
+    this.sortInitialRows(); // Sort rows on page load
     this.updateProjectCount();
     this.debugInfo();
   }
@@ -81,6 +82,23 @@ class ThesesFilter {
         }
       });
     }
+  }
+
+  sortInitialRows() {
+    console.log('📋 Sorting initial rows by status...');
+    const rows = Array.from(this.projectRows);
+    const sortedRows = this.sortRowsByStatus(rows);
+    
+    // Reorder rows in the DOM
+    sortedRows.forEach(row => {
+      if (this.tableBody) {
+        this.tableBody.appendChild(row);
+      }
+    });
+    
+    // Update projectRows reference to reflect new order
+    this.projectRows = document.querySelectorAll('.project-row');
+    console.log('✅ Initial sorting complete');
   }
 
   setActiveFilter(filter) {
@@ -153,7 +171,10 @@ class ThesesFilter {
     let visibleCount = 0;
     const rows = Array.from(this.projectRows);
 
-    rows.forEach((row, index) => {
+    // First, sort rows by status: ongoing > completed > open > others
+    const sortedRows = this.sortRowsByStatus(rows);
+
+    sortedRows.forEach((row, index) => {
       const shouldShow = this.shouldShowRow(row);
       
       if (shouldShow) {
@@ -161,6 +182,11 @@ class ThesesFilter {
         row.classList.remove('filtering-out', 'filtering-in');
         visibleCount++;
         console.log(`✅ Showing row ${index}`);
+        
+        // Reorder in DOM to maintain sort order
+        if (this.tableBody) {
+          this.tableBody.appendChild(row);
+        }
       } else {
         row.style.display = 'none';
         row.classList.remove('filtering-out', 'filtering-in');
@@ -171,6 +197,33 @@ class ThesesFilter {
     console.log(`📊 Filter result: ${visibleCount} rows visible out of ${rows.length}`);
     this.updateProjectCount(visibleCount);
     this.toggleNoResults(visibleCount === 0);
+  }
+
+  sortRowsByStatus(rows) {
+    // Define status priority: ongoing (1) > completed (2) > open (3) > others (4)
+    const statusPriority = {
+      'ongoing': 1,
+      'completed': 2,
+      'open': 3
+    };
+
+    return rows.sort((a, b) => {
+      const statusA = (a.getAttribute('data-status') || '').toLowerCase();
+      const statusB = (b.getAttribute('data-status') || '').toLowerCase();
+      
+      const priorityA = statusPriority[statusA] || 4;
+      const priorityB = statusPriority[statusB] || 4;
+      
+      // Sort by priority (lower number = higher priority)
+      if (priorityA !== priorityB) {
+        return priorityA - priorityB;
+      }
+      
+      // If same status, maintain original order or sort by title
+      const titleA = a.getAttribute('data-title') || '';
+      const titleB = b.getAttribute('data-title') || '';
+      return titleA.localeCompare(titleB);
+    });
   }
 
   updateProjectCount(count) {

@@ -49,8 +49,30 @@ author_profile: true
         {% comment %} Get the student_projects collection {% endcomment %}
         {% assign all_projects = site.student_projects %}
         
-        {% if all_projects and all_projects.size > 0 %}
-          {% for project in all_projects %}
+        {% comment %} Sort projects by status: ongoing > completed > open {% endcomment %}
+        {% comment %} Use downcase to normalize status values {% endcomment %}
+        {% assign ongoing_projects = "" | split: "" %}
+        {% assign completed_projects = "" | split: "" %}
+        {% assign open_projects = "" | split: "" %}
+        {% assign other_projects = "" | split: "" %}
+        
+        {% for project in all_projects %}
+          {% assign status_lower = project.status | downcase %}
+          {% if status_lower == "ongoing" %}
+            {% assign ongoing_projects = ongoing_projects | push: project %}
+          {% elsif status_lower == "completed" %}
+            {% assign completed_projects = completed_projects | push: project %}
+          {% elsif status_lower == "open" %}
+            {% assign open_projects = open_projects | push: project %}
+          {% else %}
+            {% assign other_projects = other_projects | push: project %}
+          {% endif %}
+        {% endfor %}
+        
+        {% assign sorted_projects = ongoing_projects | concat: completed_projects | concat: open_projects | concat: other_projects %}
+        
+        {% if sorted_projects and sorted_projects.size > 0 %}
+          {% for project in sorted_projects %}
           <tr class="project-row" 
               data-category="{{ project.degree | downcase | default: 'other' }}" 
               data-status="{{ project.status | downcase | default: 'unknown' }}"
