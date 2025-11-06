@@ -64,4 +64,5 @@ education:
 publications:
   - TVNA2025-JEMA       # Macroeconomic Impact on Stock Indices: Turkey & Russia
   - TVAC2024-AGORA      # Doctor Migration: Unpacking Economic and Social Impacts
+  - TLTU2025NAR
 ---
