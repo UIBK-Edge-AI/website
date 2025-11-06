@@ -4,8 +4,8 @@ cv_ready: true
 kind: person
 title: Marvin Raaijmakers
 identifier: maraa
-permalink: /team/nafiseh
-img: ?
+permalink: /team/marvin
+img: assets/img/team/person-placeholder.svg
 LinkedIn: marvinr
 phone: +43 512 507-53265
 position: postdoc
@@ -25,11 +25,12 @@ interests:
 positions:
   - from: 2025
     title: PostDoctoral Researcher
-    dep: Edge AI group at the Institut für Informatik
+    dep: Department of Computer Science
     dep_uri: https://edgeai-informatik.uibk.ac.at/
     inst: Universität Innsbruck
     inst_uri: https://uibk.ac.at/
     where: Innsbruck, Austria
+    
   - from: 2025
     to: 2017
     title: Computer vision research engineer at Audi AG & CARIAD SE
@@ -42,7 +43,7 @@ positions:
 education:
   - from: 2013
     to: 2017
-    title: PhD Research: "Towards Environment Perception for Highly Automated Driving (with a case study on roundabouts)"
+    title: PhD Research - "Towards Environment Perception for Highly Automated Driving (with a case study on roundabouts)"
     inst: Audi AG / Eindhoven University of Technology
     inst_uri: https://audi.com / https://tue.nl
     where: Ingolstadt, Germany

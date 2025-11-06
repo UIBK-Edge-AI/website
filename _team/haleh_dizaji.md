@@ -7,7 +7,7 @@ identifier: hd
 permalink: /team/haleh
 img: /assets/img/team/P_haleh.jpg
 LinkedIn: haleh-dizaji-bb08a045
-phone: uibk phone number
+phone: +43 512 507-53261
 position: postdoc
 category: POSTDOCOTORAL RESEARCHERS
 office: ICT 2M05A
@@ -21,7 +21,16 @@ interests:
   - Reinforcement Learning
 
 positions:
+  - from: 2025
+    title: Postdoctoral Researcher
+    dep: Department of Computer Science
+    dep_uri: https://www.uibk.ac.at/informatik/index.html.en
+    inst: University of Innsbruck
+    inst_uri: http://informatik.uibk.ac.at
+    where: Austria
+    
   - from: 2023
+    to: 2025
     title: PostDoctoral Researcher
     dep: Department of Information Technology (ITEC)
     dep_uri: https://itec.aau.at/
