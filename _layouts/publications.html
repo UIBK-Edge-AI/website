@@ -24,36 +24,85 @@ layout: default
     {% if page.modified %}<meta itemprop="dateModified" content="{{ page.modified | date: "%B %d, %Y" }}">{% endif %}
 
     <div class="page__inner-wrap">
+      
+      <!-- Publication Type Badge -->
+      {% if page.pubtype %}
+      <div class="publication-type-badge">
+        {% case page.pubtype %}
+          {% when 'journal' %}
+            <span class="pub-badge pub-badge-journal">📄 Journal Article</span>
+          {% when 'conference' %}
+            <span class="pub-badge pub-badge-conference">🎤 Conference Paper</span>
+          {% when 'workshop' %}
+            <span class="pub-badge pub-badge-workshop">🛠️ Workshop Paper</span>
+          {% when 'tutorial' %}
+            <span class="pub-badge pub-badge-tutorial">📚 Tutorial</span>
+          {% when 'dataset' %}
+            <span class="pub-badge pub-badge-dataset">💾 Dataset</span>
+          {% when 'presentation' %}
+            <span class="pub-badge pub-badge-presentation">📊 Presentation</span>
+          {% when 'poster' %}
+            <span class="pub-badge pub-badge-poster">🖼️ Poster</span>
+          {% when 'book' %}
+            <span class="pub-badge pub-badge-book">📖 Book Chapter</span>
+          {% when 'thesis' %}
+            <span class="pub-badge pub-badge-thesis">🎓 Thesis</span>
+          {% else %}
+            <span class="pub-badge pub-badge-other">📝 Publication</span>
+        {% endcase %}
+      </div>
+      {% endif %}
+
       <section class="page__content" itemprop="text">
         {{ content }}
 
-        {% if page.citation and page.paperurl and page.slidesurl and page.bibtexurl %}
-          <p style="font-size: smaller">Recommended citation: {{ page.citation }}<br /><a href="{{ page.paperurl }}">Download Paper</a> | <a href="{{ page.slidesurl }}">Download Slides</a> | <a href="{{ page.bibtexurl }}">Download Bibtex</a></p>
-        {% elsif page.citation and page.paperurl and page.slidesurl %}
-          <p style="font-size: smaller">Recommended citation: {{ page.citation }}<br /><a href="{{ page.paperurl }}">Download Paper</a> | <a href="{{ page.slidesurl }}">Download Slides</a></p>
-        {% elsif page.citation and page.paperurl and page.bibtexurl %}
-          <p style="font-size: smaller">Recommended citation: {{ page.citation }}<br /><a href="{{ page.paperurl }}">Download Paper</a> | <a href="{{ page.bibtexurl }}">Download Bibtex</a></p>
-        {% elsif page.citation and page.paperurl %}
-          <p style="font-size: smaller">Recommended citation: {{ page.citation }}<br /><a href="{{ page.paperurl }}">Download Paper</a></p>
-        {% elsif page.citation and page.slidesurl and page.bibtexurl %}
-          <p style="font-size: smaller">Recommended citation: {{ page.citation }}<br /><a href="{{ page.slidesurl }}">Download Slides</a> | <a href="{{ page.bibtexurl }}">Download Bibtex</a></p>
-        {% elsif page.citation and page.slidesurl %}
-          <p style="font-size: smaller">Recommended citation: {{ page.citation }}<br /><a href="{{ page.slidesurl }}">Download Slides</a></p>
-        {% elsif page.slidesurl and page.bibtexurl %}
-          <p style="font-size: smaller"><a href="{{ page.slidesurl }}">Download Slides</a> | <a href="{{ page.bibtexurl }}">Download Bibtex</a></p>
-        {% elsif page.paperurl and page.bibtexurl %}
-          <p style="font-size: smaller"><a href="{{ page.paperurl }}">Download Paper</a> | <a href="{{ page.bibtexurl }}">Download Bibtex</a></p>
-        {% elsif page.citation and page.bibtexurl %}
-          <p style="font-size: smaller">Recommended citation: {{ page.citation }}<br /><a href="{{ page.bibtexurl }}">Download Bibtex</a></p>
-        {% elsif page.citation %}
-          <p style="font-size: smaller">Recommended citation: {{ page.citation }}</p>
-        {% elsif page.slidesurl %}
-          <p style="font-size: smaller"><a href="{{ page.slidesurl }}">Download Slides</a></p>
-        {% elsif page.bibtexurl %}
-          <p style="font-size: smaller"><a href="{{ page.bibtexurl }}">Download Bibtex</a></p>
+        <!-- Download Links -->
+        <div class="publication-downloads">
+          {% if page.paperurl %}
+            <a href="{{ page.paperurl }}" class="btn btn-primary btn-download">
+              <i class="fas fa-file-pdf"></i> Download Paper
+            </a>
+          {% endif %}
+          
+          {% if page.slidesurl %}
+            <a href="{{ page.slidesurl }}" class="btn btn-secondary btn-download">
+              <i class="fas fa-file-powerpoint"></i> Download Slides
+            </a>
+          {% endif %}
+          
+          {% if page.bibtexurl %}
+            <a href="{{ page.bibtexurl }}" class="btn btn-secondary btn-download">
+              <i class="fas fa-quote-right"></i> Download BibTeX
+            </a>
+          {% endif %}
+          
+          {% if page.codeurl %}
+            <a href="{{ page.codeurl }}" class="btn btn-secondary btn-download">
+              <i class="fab fa-github"></i> View Code
+            </a>
+          {% endif %}
+          
+          {% if page.dataurl %}
+            <a href="{{ page.dataurl }}" class="btn btn-secondary btn-download">
+              <i class="fas fa-database"></i> View Dataset
+            </a>
+          {% endif %}
+        </div>
+
+        {% if page.citation %}
+          <div class="publication-citation">
+            <h3>Citation</h3>
+            <pre><code>{{ page.citation }}</code></pre>
+          </div>
         {% endif %}
 
-        {% if page.link %}<div><a href="{{ page.link }}" class="btn">{{ site.data.ui-text[site.locale].ext_link_label | default: "Direct Link" }}</a></div>{% endif %}
+        {% if page.link %}
+          <div class="publication-external-link">
+            <a href="{{ page.link }}" class="btn btn-info">
+              {{ site.data.ui-text[site.locale].ext_link_label | default: "View Publication" }}
+            </a>
+          </div>
+        {% endif %}
       </section>
 
       <footer class="page__meta">
@@ -62,10 +111,6 @@ layout: default
         {% endif %}
         {% include page__taxonomy.html %}
       </footer>
-
-      <!-- {% if page.share %}{% include social-share.html %}{% endif %} -->
-
-      <!-- {% include post_pagination.html %} -->
     </div>
 
     {% if site.comments.provider and page.comments %}
@@ -87,3 +132,4 @@ layout: default
     </div>
   {% endif %}
 </div>
+

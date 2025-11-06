@@ -1,8 +1,7 @@
 /* UIBK Branded Publications CSS - Blue & Orange Theme */
 
-/* ==================== LIGHT MODE (DEFAULT) ==================== */
-:root,
-:root:not([data-theme="dark"]) {
+/* ==================== CSS VARIABLES ==================== */
+:root {
   /* UIBK Brand Colors - Light Mode */
   --uibk-blue-dark: #003366;
   --uibk-blue: #0066cc;
@@ -40,128 +39,37 @@
   --button-text: #ffffff;
 }
 
-/* ==================== DARK MODE - MEDIA QUERY ==================== */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    /* UIBK Brand Colors - Dark Mode (Lighter variations) */
-    --uibk-blue-dark: #3399ff;
-    --uibk-blue: #66b3ff;
-    --uibk-blue-light: #99ccff;
-    --uibk-orange-dark: #ff8533;
-    --uibk-orange: #ff9933;
-    --uibk-orange-light: #ffad66;
-    
-    /* Dark Mode Colors */
-    --text-primary: #99ccff;
-    --text-secondary: #66b3ff;
-    --text-muted: #aaaaaa;
-    --text-inverse: #1a1a1a;
-    --text-body: #e0e0e0;
-    
-    /* All Backgrounds Transparent */
-    --bg-main: transparent;
-    --bg-card: transparent;
-    --bg-controls: transparent;
-    --bg-stats: transparent;
-    --bg-input: transparent;
-    --bg-year-count: transparent;
-    --bg-footer-code: transparent;
-    
-    /* Dark Mode Borders & Effects */
-    --border-color: #66b3ff;
-    --border-light: #334d66;
-    --shadow-light: rgba(102, 179, 255, 0.15);
-    --shadow-medium: rgba(102, 179, 255, 0.2);
-    --shadow-strong: rgba(102, 179, 255, 0.3);
-    
-    /* Dark Mode Button */
-    --button-bg: #66b3ff;
-    --button-hover-bg: #ff9933;
-    --button-text: #1a1a1a;
-  }
-}
-
-/* ==================== MANUAL DARK MODE OVERRIDE ==================== */
+/* ==================== DARK MODE ==================== */
 [data-theme="dark"] {
-  /* UIBK Brand Colors - Dark Mode (Lighter variations) */
-  --uibk-blue-dark: #3399ff !important;
-  --uibk-blue: #66b3ff !important;
-  --uibk-blue-light: #99ccff !important;
-  --uibk-orange-dark: #ff8533 !important;
-  --uibk-orange: #ff9933 !important;
-  --uibk-orange-light: #ffad66 !important;
+  /* UIBK Brand Colors - Dark Mode */
+  --uibk-blue-dark: #3399ff;
+  --uibk-blue: #66b3ff;
+  --uibk-blue-light: #99ccff;
+  --uibk-orange-dark: #ff8533;
+  --uibk-orange: #ff9933;
+  --uibk-orange-light: #ffad66;
   
   /* Dark Mode Colors */
-  --text-primary: #99ccff !important;
-  --text-secondary: #66b3ff !important;
-  --text-muted: #aaaaaa !important;
-  --text-inverse: #1a1a1a !important;
-  --text-body: #e0e0e0 !important;
-  
-  /* All Backgrounds Transparent */
-  --bg-main: transparent !important;
-  --bg-card: transparent !important;
-  --bg-controls: transparent !important;
-  --bg-stats: transparent !important;
-  --bg-input: transparent !important;
-  --bg-year-count: transparent !important;
-  --bg-footer-code: transparent !important;
+  --text-primary: #99ccff;
+  --text-secondary: #66b3ff;
+  --text-muted: #aaaaaa;
+  --text-inverse: #1a1a1a;
+  --text-body: #e0e0e0;
   
   /* Dark Mode Borders & Effects */
-  --border-color: #66b3ff !important;
-  --border-light: #334d66 !important;
-  --shadow-light: rgba(102, 179, 255, 0.15) !important;
-  --shadow-medium: rgba(102, 179, 255, 0.2) !important;
-  --shadow-strong: rgba(102, 179, 255, 0.3) !important;
+  --border-color: #66b3ff;
+  --border-light: #334d66;
+  --shadow-light: rgba(102, 179, 255, 0.15);
+  --shadow-medium: rgba(102, 179, 255, 0.2);
+  --shadow-strong: rgba(102, 179, 255, 0.3);
   
   /* Dark Mode Button */
-  --button-bg: #66b3ff !important;
-  --button-hover-bg: #ff9933 !important;
-  --button-text: #1a1a1a !important;
+  --button-bg: #66b3ff;
+  --button-hover-bg: #ff9933;
+  --button-text: #1a1a1a;
 }
 
-/* ==================== MANUAL LIGHT MODE OVERRIDE ==================== */
-[data-theme="light"] {
-  /* UIBK Brand Colors - Light Mode */
-  --uibk-blue-dark: #003366 !important;
-  --uibk-blue: #0066cc !important;
-  --uibk-blue-light: #3399ff !important;
-  --uibk-orange-dark: #cc5200 !important;
-  --uibk-orange: #ff6600 !important;
-  --uibk-orange-light: #ff9933 !important;
-  
-  /* Light Mode Colors */
-  --text-primary: #003366 !important;
-  --text-secondary: #0066cc !important;
-  --text-muted: #666666 !important;
-  --text-inverse: #ffffff !important;
-  --text-body: #333333 !important;
-  
-  /* All Backgrounds Transparent */
-  --bg-main: transparent !important;
-  --bg-card: transparent !important;
-  --bg-controls: transparent !important;
-  --bg-stats: transparent !important;
-  --bg-input: transparent !important;
-  --bg-year-count: transparent !important;
-  --bg-footer-code: transparent !important;
-  
-  /* Light Mode Borders & Effects */
-  --border-color: #0066cc !important;
-  --border-light: #cce0ff !important;
-  --shadow-light: rgba(0, 102, 204, 0.1) !important;
-  --shadow-medium: rgba(0, 102, 204, 0.15) !important;
-  --shadow-strong: rgba(0, 102, 204, 0.25) !important;
-  
-  /* Light Mode Button */
-  --button-bg: #0066cc !important;
-  --button-hover-bg: #ff6600 !important;
-  --button-text: #ffffff !important;
-}
-
-/* ==================== BASE STYLES ==================== */
-
-/* Base Container */
+/* ==================== BASE CONTAINER ==================== */
 .publications-container {
   max-width: 1400px;
   margin: 0 auto;
@@ -179,7 +87,33 @@
   }
 }
 
-/* Controls Section */
+/* ==================== HEADER ==================== */
+.publications-container header h1 {
+  color: var(--uibk-blue);
+  font-size: 2.5rem;
+  margin-bottom: 0.8rem;
+  font-weight: 800;
+}
+
+@media (min-width: 768px) {
+  .publications-container header h1 {
+    font-size: 3rem;
+  }
+}
+
+.publications-container header p {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+@media (min-width: 768px) {
+  .publications-container header p {
+    font-size: 1.2rem;
+  }
+}
+
+/* ==================== CONTROLS SECTION ==================== */
 .controls-section {
   background: var(--bg-controls);
   border-radius: 16px;
@@ -207,7 +141,21 @@
   }
 }
 
-/* Search Grid */
+.controls-section h2 {
+  color: var(--uibk-blue);
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+@media (min-width: 768px) {
+  .controls-section h2 {
+    font-size: 1.8rem;
+  }
+}
+
+/* ==================== SEARCH GRID ==================== */
 .search-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -235,7 +183,7 @@
   }
 }
 
-/* Form Groups */
+/* ==================== FORM ELEMENTS ==================== */
 .form-group {
   display: flex;
   flex-direction: column;
@@ -257,7 +205,6 @@
   }
 }
 
-/* Form Inputs */
 .form-group input,
 .form-group select {
   padding: 0.9rem;
@@ -291,7 +238,7 @@
   padding: 0.5rem;
 }
 
-/* Search Button */
+/* ==================== SEARCH BUTTON ==================== */
 .search-button {
   background: var(--button-bg);
   color: var(--button-text);
@@ -347,7 +294,7 @@
   transform: translateY(0);
 }
 
-/* Stats Bar */
+/* ==================== STATS BAR ==================== */
 .stats-bar {
   display: none;
   background: var(--bg-stats);
@@ -433,7 +380,7 @@
   }
 }
 
-/* Loading Spinner */
+/* ==================== LOADING & STATUS ==================== */
 .loading-spinner {
   margin: 2rem auto;
   width: 48px;
@@ -451,7 +398,6 @@
   100% { transform: rotate(360deg); }
 }
 
-/* Status Messages */
 .status-message {
   background: var(--bg-card);
   border: 2px solid var(--border-color);
@@ -475,227 +421,7 @@
   color: #198754;
 }
 
-/* Publication Cards */
-.publication-card {
-  background: var(--bg-card);
-  border: 2px solid var(--border-color);
-  border-radius: 16px;
-  padding: 1.5rem;
-  margin-bottom: 2rem;
-  box-shadow: 0 4px 24px var(--shadow-light);
-  border-left: 6px solid var(--uibk-blue);
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-@media (min-width: 768px) {
-  .publication-card {
-    padding: 2rem;
-  }
-}
-
-.publication-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 3px;
-  background: linear-gradient(90deg, var(--uibk-blue), var(--uibk-orange));
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.publication-card:hover {
-  box-shadow: 0 12px 48px var(--shadow-strong);
-  transform: translateY(-4px);
-  border-left-color: var(--uibk-orange);
-}
-
-.publication-card:hover::before {
-  opacity: 1;
-}
-
-/* Publication Header */
-.publication-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 1.2rem;
-  flex-wrap: wrap;
-  gap: 0.8rem;
-}
-
-@media (min-width: 576px) {
-  .publication-header {
-    align-items: center;
-    flex-wrap: nowrap;
-  }
-}
-
-/* Publication Type Badges */
-.publication-type {
-  padding: 0.4rem 1rem;
-  border-radius: 25px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: white;
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-  white-space: nowrap;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-}
-
-@media (min-width: 768px) {
-  .publication-type {
-    padding: 0.4rem 1.2rem;
-    font-size: 0.8rem;
-  }
-}
-
-.publication-doi {
-  padding: 0.4rem 1rem;
-  border-radius: 25px;
-  font-size: 0.7rem;
-  font-weight: 600;
-  background: transparent;
-  color: #198754;
-  border: 2px solid #198754;
-  white-space: nowrap;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-@media (min-width: 768px) {
-  .publication-doi {
-    padding: 0.4rem 1.2rem;
-    font-size: 0.75rem;
-  }
-}
-
-/* UIBK Blue & Orange Type Colors */
-.type-journal { 
-  background: linear-gradient(135deg, #003366, #0066cc);
-}
-.type-conference { 
-  background: linear-gradient(135deg, #0066cc, #3399ff);
-}
-.type-chapter { 
-  background: linear-gradient(135deg, #cc5200, #ff6600);
-}
-.type-book { 
-  background: linear-gradient(135deg, #ff6600, #ff9933);
-  color: #ffffff !important;
-}
-.type-thesis { 
-  background: linear-gradient(135deg, #003366, #ff6600);
-}
-.type-report { 
-  background: linear-gradient(135deg, #666666, #0066cc);
-}
-.type-other { 
-  background: linear-gradient(135deg, #666666, #999999);
-}
-
-/* Publication Title */
-.publication-title {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  line-height: 1.4;
-  margin: 0 0 1.2rem 0;
-  word-wrap: break-word;
-}
-
-@media (min-width: 768px) {
-  .publication-title {
-    font-size: 1.25rem;
-  }
-}
-
-.publication-title a {
-  color: var(--uibk-blue);
-  text-decoration: none;
-  display: flex;
-  align-items: flex-start;
-  gap: 0.6rem;
-  transition: all 0.3s ease;
-}
-
-.publication-title a:hover {
-  color: var(--uibk-orange);
-  text-shadow: 0 2px 4px var(--shadow-light);
-}
-
-.title-link-icon {
-  font-size: 0.8rem;
-  opacity: 0.8;
-  flex-shrink: 0;
-  margin-top: 0.3rem;
-  transition: transform 0.3s ease;
-}
-
-.publication-title a:hover .title-link-icon {
-  transform: translateX(2px);
-}
-
-@media (min-width: 768px) {
-  .title-link-icon {
-    font-size: 0.9rem;
-  }
-}
-
-/* Publication Metadata */
-.publication-meta {
-  font-size: 0.9rem;
-  line-height: 1.6;
-  color: var(--text-body);
-  word-wrap: break-word;
-}
-
-@media (min-width: 768px) {
-  .publication-meta {
-    font-size: 0.95rem;
-  }
-}
-
-.publication-meta strong {
-  color: var(--uibk-blue);
-  font-weight: 600;
-}
-
-/* Ensure all metadata text is readable */
-.publication-meta p,
-.publication-meta span,
-.publication-meta div {
-  color: var(--text-body);
-}
-
-/* Metadata labels - ensure they use proper colors */
-.publication-meta strong,
-.publication-meta b {
-  color: var(--uibk-blue) !important;
-}
-
-/* Metadata values should be clearly visible */
-:root:not([data-theme="dark"]) .publication-meta {
-  color: #333333;
-}
-
-[data-theme="dark"] .publication-meta {
-  color: #e0e0e0 !important;
-}
-
-:root:not([data-theme="dark"]) .publication-meta strong {
-  color: #0066cc !important;
-}
-
-[data-theme="dark"] .publication-meta strong {
-  color: #66b3ff !important;
-}
-
-/* Year Sections */
+/* ==================== YEAR SECTIONS ==================== */
 .year-section {
   margin-bottom: 3rem;
 }
@@ -752,49 +478,335 @@
   }
 }
 
-/* Header Styling */
-.publications-container header h1 {
-  color: var(--uibk-blue) !important;
-  font-size: 2.5rem;
-  margin-bottom: 0.8rem;
-  font-weight: 800;
+/* ==================== PUBLICATION CARDS ==================== */
+.publication-card {
+  background: var(--bg-card);
+  border: 2px solid var(--border-color);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 24px var(--shadow-light);
+  border-left: 6px solid var(--uibk-blue);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 @media (min-width: 768px) {
-  .publications-container header h1 {
-    font-size: 3rem;
+  .publication-card {
+    padding: 2rem;
   }
 }
 
-.publications-container header p {
-  color: var(--text-secondary) !important;
-  font-size: 1.1rem;
-  font-weight: 500;
+.publication-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--uibk-blue), var(--uibk-orange));
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
-@media (min-width: 768px) {
-  .publications-container header p {
-    font-size: 1.2rem;
+.publication-card:hover {
+  box-shadow: 0 12px 48px var(--shadow-strong);
+  transform: translateY(-4px);
+  border-left-color: var(--uibk-orange);
+}
+
+.publication-card:hover::before {
+  opacity: 1;
+}
+
+/* ==================== PUBLICATION HEADER ==================== */
+.publication-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.2rem;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+@media (min-width: 576px) {
+  .publication-header {
+    align-items: center;
+    flex-wrap: nowrap;
   }
 }
 
-.controls-section h2 {
-  color: var(--uibk-blue) !important;
-  font-size: 1.5rem;
-  font-weight: 700;
+/* ==================== PUBLICATION TYPE BADGES ==================== */
+.publication-type-badge {
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.pub-badge,
+.publication-type {
+  display: inline-block;
+  padding: 0.5rem 1.25rem;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 0.9rem;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  color: white;
 }
 
 @media (min-width: 768px) {
-  .controls-section h2 {
-    font-size: 1.8rem;
+  .pub-badge,
+  .publication-type {
+    padding: 0.5rem 1.25rem;
+    font-size: 0.9rem;
   }
 }
 
-/* Footer */
+.pub-badge:hover,
+.publication-type:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Type-specific colors */
+.pub-badge-journal,
+.type-journal { 
+  background: linear-gradient(135deg, #003366, #0066cc);
+}
+
+.pub-badge-conference,
+.type-conference { 
+  background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
+}
+
+.pub-badge-workshop,
+.type-chapter { 
+  background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%);
+  color: #000;
+}
+
+.pub-badge-tutorial { 
+  background: linear-gradient(135deg, #9c27b0 0%, #7b1fa2 100%);
+}
+
+.pub-badge-dataset { 
+  background: linear-gradient(135deg, #17a2b8 0%, #138496 100%);
+}
+
+.pub-badge-presentation { 
+  background: linear-gradient(135deg, #e91e63 0%, #c2185b 100%);
+}
+
+.pub-badge-poster { 
+  background: linear-gradient(135deg, #ff5722 0%, #e64a19 100%);
+}
+
+.pub-badge-book,
+.type-book { 
+  background: linear-gradient(135deg, #795548 0%, #5d4037 100%);
+}
+
+.pub-badge-thesis,
+.type-thesis { 
+  background: linear-gradient(135deg, #607d8b 0%, #455a64 100%);
+}
+
+.type-report { 
+  background: linear-gradient(135deg, #666666, #0066cc);
+}
+
+.pub-badge-other,
+.type-other { 
+  background: linear-gradient(135deg, #6c757d 0%, #545b62 100%);
+}
+
+[data-theme="dark"] .pub-badge,
+[data-theme="dark"] .publication-type {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .pub-badge:hover,
+[data-theme="dark"] .publication-type:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.publication-doi {
+  padding: 0.4rem 1rem;
+  border-radius: 25px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  background: transparent;
+  color: #198754;
+  border: 2px solid #198754;
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+@media (min-width: 768px) {
+  .publication-doi {
+    padding: 0.4rem 1.2rem;
+    font-size: 0.75rem;
+  }
+}
+
+/* ==================== PUBLICATION CONTENT ==================== */
+.publication-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.4;
+  margin: 0 0 1.2rem 0;
+  word-wrap: break-word;
+}
+
+@media (min-width: 768px) {
+  .publication-title {
+    font-size: 1.25rem;
+  }
+}
+
+.publication-title a {
+  color: var(--uibk-blue);
+  text-decoration: none;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  transition: all 0.3s ease;
+}
+
+.publication-title a:hover {
+  color: var(--uibk-orange);
+  text-shadow: 0 2px 4px var(--shadow-light);
+}
+
+.title-link-icon {
+  font-size: 0.8rem;
+  opacity: 0.8;
+  flex-shrink: 0;
+  margin-top: 0.3rem;
+  transition: transform 0.3s ease;
+}
+
+.publication-title a:hover .title-link-icon {
+  transform: translateX(2px);
+}
+
+@media (min-width: 768px) {
+  .title-link-icon {
+    font-size: 0.9rem;
+  }
+}
+
+.publication-meta {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--text-body);
+  word-wrap: break-word;
+}
+
+@media (min-width: 768px) {
+  .publication-meta {
+    font-size: 0.95rem;
+  }
+}
+
+.publication-meta strong,
+.publication-meta b {
+  color: var(--uibk-blue);
+  font-weight: 600;
+}
+
+/* ==================== DOWNLOAD BUTTONS ==================== */
+.publication-downloads {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 2rem 0;
+}
+
+.btn-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.btn-download:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  text-decoration: none;
+}
+
+.btn-primary {
+  background: var(--uibk-blue);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: var(--uibk-blue-dark);
+}
+
+.btn-secondary {
+  background: #6c757d;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background: #545b62;
+}
+
+.btn-info {
+  background: #17a2b8;
+  color: white;
+}
+
+.btn-info:hover {
+  background: #138496;
+}
+
+/* ==================== CITATION BOX ==================== */
+.publication-citation {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: rgba(0, 102, 204, 0.05);
+  border-left: 4px solid var(--uibk-blue);
+  border-radius: 4px;
+}
+
+.publication-citation h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: var(--uibk-blue);
+  font-size: 1.2rem;
+}
+
+.publication-citation pre {
+  background: var(--bg-card);
+  padding: 1rem;
+  border-radius: 4px;
+  overflow-x: auto;
+  margin: 0;
+  border: 1px solid var(--border-light);
+}
+
+.publication-citation code {
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+  color: var(--text-body);
+}
+
+/* ==================== FOOTER ==================== */
 .publications-container footer {
-  color: var(--text-secondary) !important;
+  color: var(--text-secondary);
   border-top: 3px solid;
   border-image: linear-gradient(90deg, var(--uibk-blue), var(--uibk-orange)) 1;
   font-size: 0.9rem;
@@ -818,7 +830,29 @@
   font-weight: 600;
 }
 
-/* Mobile Optimizations */
+/* ==================== RESPONSIVE DESIGN ==================== */
+@media (max-width: 768px) {
+  .publication-downloads {
+    flex-direction: column;
+  }
+  
+  .btn-download {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .search-button,
+  .form-group input,
+  .form-group select {
+    min-height: 48px;
+  }
+  
+  .publication-title a {
+    padding: 0.3rem 0;
+    margin: -0.3rem 0;
+  }
+}
+
 @media (max-width: 480px) {
   .publications-container {
     padding: 1rem;
@@ -855,37 +889,29 @@
   }
 }
 
-/* Touch-friendly elements */
-@media (max-width: 768px) {
-  .search-button,
-  .form-group input,
-  .form-group select {
-    min-height: 48px;
-  }
-  
-  .publication-title a {
-    padding: 0.3rem 0;
-    margin: -0.3rem 0;
-  }
-}
-
-/* Reduced motion support */
+/* ==================== ACCESSIBILITY ==================== */
 @media (prefers-reduced-motion: reduce) {
   .publication-card,
   .search-button,
   .stats-item,
   .form-group input,
-  .form-group select {
+  .form-group select,
+  .btn-download {
     transition: none;
   }
   
   .publication-card:hover,
   .search-button:hover,
-  .stats-item:hover {
+  .stats-item:hover,
+  .btn-download:hover {
     transform: none;
   }
   
   .search-button::before {
     display: none;
+  }
+  
+  .loading-spinner {
+    animation: none;
   }
 }
