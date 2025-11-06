@@ -2,7 +2,7 @@
 layout: person
 cv_ready: true
 kind: person
-title: Dr. Marvin Raaijmakers
+title: Marvin Raaijmakers
 identifier: maraa
 permalink: /team/nafiseh
 img: ?
