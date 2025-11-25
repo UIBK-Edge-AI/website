@@ -3,7 +3,7 @@ layout: person
 cv_ready: true
 kind: person
 title: Mitra-Yolanda Naderi
-identifier: mn
+identifier: 1
 permalink: /team/mitra
 img: /assets/img/team/P_mitra.jpg
 phone: +43 512 507-53494

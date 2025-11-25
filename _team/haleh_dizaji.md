@@ -3,7 +3,7 @@ layout: person
 cv_ready: true
 kind: person
 title: Haleh Dizaji
-identifier: hd
+identifier: 2
 permalink: /team/haleh
 img: /assets/img/team/P_haleh.jpg
 LinkedIn: haleh-dizaji-bb08a045

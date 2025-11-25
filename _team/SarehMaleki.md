@@ -3,7 +3,7 @@ layout: person
 cv_ready: true
 kind: person
 title: Sareh Maleki
-identifier: SaMa
+identifier: 1
 permalink: /team/sarehmaleki
 img: /assets/img/team/P_Sareh_Maleki.jpg
 phone: +43 512 507-53251

@@ -3,7 +3,7 @@ layout: person
 cv_ready: true
 kind: person
 title: Nafiseh Sharghivand
-identifier: nash
+identifier: 3
 permalink: /team/nafiseh
 img: /assets/img/team/P_Nafiseh_sh.jpg
 phone: +43 512 507-53248

@@ -3,7 +3,7 @@ layout: person
 cv_ready: true
 kind: person
 title: Tanim M. Rayhan Gias
-identifier: tmrg
+identifier: 1
 permalink: /team/tanim_gias
 img: /assets/img/team/P_Tanim_Gias.jpg
 phone: +43 512 507-53253

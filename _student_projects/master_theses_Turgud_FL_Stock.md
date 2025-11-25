@@ -2,13 +2,13 @@
 title: "Federated Learning-Based Knowledge Transfer for Multi-Sector Stock Forecasting"
 collection: _student_projects
 authors: "N/A"
-supervisor: "Turgut Valiyev"
+supervisor: "Turgud Valiyev"
 permalink:
 status: open
 degree: 'Master'
 layout: single
 ---
-**Supervisor:** Turgut Valiyev
+**Supervisor:** Turgud Valiyev
 
 **Author:** N/A
 

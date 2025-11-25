@@ -7,6 +7,7 @@ author_profile: true
 
 {% comment %}
   If people have categories, group them. Otherwise, show all people together.
+  Within each group, sort by identifier number (ascending).
 {% endcomment %}
 
 {% assign team_members = site.team %}
@@ -20,10 +21,10 @@ author_profile: true
 {% endfor %}
 
 {% if has_categories %}
-  {% assign groups = "PROFESSOR|PhD STUDENTS|POSTDOCOTORAL RESEARCHERS|SECRETARY|SYSTEMS ENGINEER|STUDENT|FORMER MEMBER"|split: "|" %}
+  {% assign groups = "PROFESSOR|POSTDOCOTORAL RESEARCHERS|PhD STUDENTS|SECRETARY|SYSTEMS ENGINEER|STUDENT|FORMER MEMBER"|split: "|" %}
   
   {% for group in groups %}
-    {% assign members = site.team | where: "category", group %}
+    {% assign members = site.team | where: "category", group | sort: "identifier" %}
     {% if members.size > 0 %}
       <div class="group-section">
         <h2 class="group-title">{{ group }}</h2>
@@ -47,6 +48,40 @@ author_profile: true
                     {{ person.title }}
                   </h3>
                   
+                  {% if person.position %}
+                    <div class="person-card__position">
+                      {% case person.position %}
+                        {% when "sysad" %}
+                          Systems Engineer
+                        {% when "postdoc" %}
+                          Post-doctoral Researcher
+                        {% when "professor" %}
+                          Professor
+                        {% when "phd" %}
+                          PhD Student
+                        {% when "sa" %}
+                          Student Assistant
+                        {% when "sect" %}
+                          Secretary
+                        {% when "former" %}
+                          Former Member
+                        {% else %}
+                          {{ person.position }}
+                      {% endcase %}
+                    </div>
+                  {% endif %}
+                  
+                  {% if person.interests %}
+                    <div class="person-card__interests">
+                      <div class="person-card__interests-title">Research Interests</div>
+                      <div class="person-card__interests-list">
+                        {% for interest in person.interests limit:3 %}
+                          <span class="interest-tag">{{ interest }}</span>
+                        {% endfor %}
+                      </div>
+                    </div>
+                  {% endif %}
+                  
                   <div class="person-card__contact">
                     {% if person.email %}
                       <div class="contact-item">
@@ -68,6 +103,13 @@ author_profile: true
                         <span>{{ person.office }}</span>
                       </div>
                     {% endif %}
+                    
+                    {% if person.ORCID %}
+                      <div class="contact-item">
+                        <span>🔗</span>
+                        <span>ORCID</span>
+                      </div>
+                    {% endif %}
                   </div>
                 </div>
               </div>
@@ -79,10 +121,11 @@ author_profile: true
   {% endfor %}
 {% else %}
   {% comment %}
-    If no categories are defined, show all team members in one grid
+    If no categories are defined, show all team members in one grid, sorted by identifier
   {% endcomment %}
+  {% assign sorted_members = team_members | sort: "identifier" %}
   <div class="people-container">
-    {% for person in team_members %}
+    {% for person in sorted_members %}
         {% if person.external_profile %}
           <a href="{{ person.external_profile }}" target="_blank" class="person-card-link">
         {% else %}
@@ -114,11 +157,11 @@ author_profile: true
                     Post-doctoral Researcher
                   {% when "professor" %}
                     Professor
-                  {% when "ra" %}
-                    Research Assistant
+                  {% when "phd" %}
+                    PhD Students
                   {% when "sa" %}
                     Student Assistant
-                  {% when "secretary" %}
+                  {% when "sect" %}
                     Secretary
                   {% when "former" %}
                     Former Member
@@ -136,7 +179,7 @@ author_profile: true
             
             {% if person.interests %}
               <div class="person-card__interests">
-                <div class="person-card__interests-title">Research Interests</div>
+                <!-- <div class="person-card__interests-title">Research Interests</div> -->
                 <div class="person-card__interests-list">
                   {% for interest in person.interests limit:3 %}
                     <span class="interest-tag">{{ interest }}</span>
@@ -166,7 +209,6 @@ author_profile: true
                   <span>ORCID</span>
                 </div>
               {% endif %}
-              
             </div>
           </div>
         </div>

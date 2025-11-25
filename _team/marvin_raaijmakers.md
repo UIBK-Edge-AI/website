@@ -3,9 +3,9 @@ layout: person
 cv_ready: true
 kind: person
 title: Marvin Raaijmakers
-identifier: maraa
+identifier: 4
 permalink: /team/marvin
-img: assets/img/team/person-placeholder.svg
+img: assets/img/team/P_marvin_raaijmakers.jpg
 LinkedIn: marvinr
 phone: +43 512 507-53265
 position: postdoc

@@ -3,7 +3,7 @@ layout: person
 cv_ready: true
 kind: person
 title: Turgud Valiyev
-identifier: TuVa
+identifier: 2
 permalink: /team/turgudvaliyev
 img: assets/img/team/P_Turgud_Baliyev.jpg
 phone: +43 512 507-53259
