@@ -5,7 +5,7 @@ authors: "N/A"
 supervisor: "Turgud Valiyev"
 permalink:
 status: open
-degree: 'Master'
+degree: 'Bachelor'
 layout: single
 ---
 **Supervisor:** Turgud Valiyev

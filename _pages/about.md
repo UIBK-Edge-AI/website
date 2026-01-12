@@ -10,6 +10,17 @@ redirect_from:
 # Image filenames
 research_topics_image: "edge_computing.png"
 acknowledgments_image: "stiftung_edgeai.svg"
+
+# Carousel images
+carousel_images:
+  - image: "christmas_market_2025.jpg"
+    caption: "Edge AI visits Innsbruck christmas market"
+  - image: "spontaneous_x-mas_dinner.jpeg"
+    caption: "Spontaneous Edge AI Xmas dinner"
+  - image: "inn_day_event_1.jpeg"
+    caption: "Students experiencing AR/VR glass"
+  - image: "inn_day_event_2.jpeg"
+    caption: "Edge AI researcher explains to visitors"
 ---
 
 

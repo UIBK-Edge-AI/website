@@ -67,15 +67,13 @@ positions:
     where: Vienna, Austria
 
 education:
-  - from: 2025
-    to: present
-    title: Ph.D. in Computer Engineering
+  - year: 2009
+    title: Privatdozent (Habilitation)
     inst: University of Innsbruck
     inst_uri: https://www.uibk.ac.at
     where: Innsbruck, Austria
 
-  - from: 2022
-    to: 2025
+  - year: 2004
     title:  Doctor of Technical Sciences
     inst: Vienna University of Technology
     inst_uri: https://www.tuwien.at/en/
