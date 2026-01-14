@@ -20,7 +20,7 @@ carousel_images:
   - image: "inn_day_event_1.jpeg"
     caption: "Students experiencing AR/VR glass"
   - image: "inn_day_event_2.jpeg"
-    caption: "Edge AI researcher explains to visitors"
+    caption: "homepage/Edge AI researcher explains to visitors"
 ---
 
 

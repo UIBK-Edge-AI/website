@@ -226,7 +226,7 @@ layout: default
             float: right;
             width: 600px;
             height: 420px;
-            background-image: url("{{ site.baseurl }}/images/{{ page.research_topics_image }}");
+            background-image: url("{{ site.baseurl }}/images/homepage/{{ page.research_topics_image }}");
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
@@ -259,7 +259,7 @@ layout: default
           window.carouselImages = [
             {% for slide in page.carousel_images %}
             {
-              image: "{{ site.baseurl }}/images/{{ slide.image }}",
+              image: "{{ site.baseurl }}/images/homepage/{{ slide.image }}",
               caption: "{{ slide.caption | default: '' }}"
             }{% unless forloop.last %},{% endunless %}
             {% endfor %}
@@ -278,7 +278,7 @@ layout: default
               if (ackSection && ackSection.nextElementSibling && ackSection.nextElementSibling.tagName === 'P') {
                 var imgDiv = document.createElement('div');
                 imgDiv.style.cssText = 'width: 100%; margin: 20px 0; text-align: center;';
-                imgDiv.innerHTML = '<img src="{{ site.baseurl }}/images/{{ page.acknowledgments_image }}" alt="Funding and Support" style="width: 100%; height: auto; border-radius: 8px;">';
+                imgDiv.innerHTML = '<img src="{{ site.baseurl }}/images/logo/{{ page.acknowledgments_image }}" alt="Funding and Support" style="width: 100%; height: auto; border-radius: 8px;">';
                 ackSection.nextElementSibling.parentNode.insertBefore(imgDiv, ackSection.nextElementSibling.nextSibling);
               }
             });

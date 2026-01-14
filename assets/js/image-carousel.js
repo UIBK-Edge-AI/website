@@ -1,6 +1,5 @@
 /**
  * Image Carousel for Home Page
- * Automatically inserts carousel after Motivation section and handles sliding functionality
  */
 
 (function() {
@@ -38,7 +37,7 @@
       // Initialize carousel functionality after a short delay
       setTimeout(function() {
         setupCarouselControls();
-      }, 10000);
+      }, 100);
     }
   }
 
