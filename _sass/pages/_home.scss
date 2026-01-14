@@ -204,3 +204,232 @@ html[data-theme="dark"] {
     color: #90cdf4;
   }
 }
+
+/* ==========================================================================
+   Image Carousel Slider
+   ========================================================================== */
+
+.carousel-container {
+  position: relative;
+  max-width: 800px;
+  margin: 2rem auto;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.carousel-wrapper {
+  position: relative;
+  width: 100%;
+  padding-bottom: 50%; /* 2:1 aspect ratio */
+  overflow: hidden;
+  background: #f0f0f0;
+}
+
+.carousel-slides {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.carousel-slide {
+  min-width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.carousel-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.carousel-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+  color: white;
+  padding: 1.5rem 1.25rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* Navigation Arrows */
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 0.75rem;
+  cursor: pointer;
+  font-size: 1.25rem;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.carousel-btn:hover {
+  background: rgba(0, 102, 204, 0.8);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-btn-prev {
+  left: 0.75rem;
+}
+
+.carousel-btn-next {
+  right: 0.75rem;
+}
+
+/* Dots Navigation */
+.carousel-dots {
+  position: absolute;
+  bottom: 0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.4rem;
+  z-index: 10;
+}
+
+.carousel-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.carousel-dot.active {
+  background: #0066cc;
+  transform: scale(1.2);
+}
+
+.carousel-dot:hover {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+/* Dark mode support */
+html[data-theme="dark"] {
+  .carousel-container {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .carousel-wrapper {
+    background: #2a2a2a;
+  }
+
+  .carousel-btn {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .carousel-btn:hover {
+    background: rgba(102, 179, 255, 0.8);
+  }
+
+  .carousel-dot.active {
+    background: #66b3ff;
+  }
+
+  /* Acknowledgments image dark mode fix */
+  .acknowledgments-img {
+    filter: invert(1);
+    mix-blend-mode: screen;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .carousel-container {
+    max-width: 100%;
+  }
+
+  .carousel-wrapper {
+    padding-bottom: 60%;
+  }
+
+  .carousel-btn {
+    width: 36px;
+    height: 36px;
+    padding: 0.6rem;
+    font-size: 1.1rem;
+  }
+
+  .carousel-btn-prev {
+    left: 0.5rem;
+  }
+
+  .carousel-btn-next {
+    right: 0.5rem;
+  }
+
+  .carousel-caption {
+    font-size: 0.85rem;
+    padding: 1.25rem 1rem 0.6rem;
+  }
+
+  .carousel-dot {
+    width: 8px;
+    height: 8px;
+  }
+}
+
+/* ==========================================================================
+   Research Topics Image
+   ========================================================================== */
+
+#research-topics + ul {
+  margin: 20px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+#research-topics + ul::before {
+  content: "";
+  display: block;
+  float: right;
+  width: 600px;
+  height: 420px;
+  background-image: var(--research-topics-image);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-left: 15px;
+  margin-bottom: 30px;
+  margin-right: -40px;
+  margin-top: -10px;
+}
+
+#research-topics + ul li {
+  margin-bottom: 8px;
+  margin-right: 500px;
+}
+
+@media (max-width: 768px) {
+  #research-topics + ul::before {
+    float: none;
+    width: 100%;
+    margin-left: 0;
+    margin-bottom: 20px;
+  }
+  
+  #research-topics + ul li {
+    margin-right: 0;
+  }
+}
