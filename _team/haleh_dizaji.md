@@ -9,7 +9,7 @@ img: /assets/img/team/P_haleh.jpg
 LinkedIn: haleh-dizaji-bb08a045
 phone: +43 512 507-53261
 position: postdoc
-category: POSTDOCOTORAL RESEARCHERS
+category: POSTDOCTORAL RESEARCHERS
 office: ICT 2M05A
 ORCID: 0000-0002-5886-9636
 email: haleh.dizaji@uibk.ac.at

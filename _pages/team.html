@@ -21,7 +21,7 @@ author_profile: true
 {% endfor %}
 
 {% if has_categories %}
-  {% assign groups = "PROFESSOR|POSTDOCOTORAL RESEARCHERS|PhD STUDENTS|SECRETARY|SYSTEMS ENGINEER|STUDENT|FORMER MEMBER"|split: "|" %}
+  {% assign groups = "PROFESSOR|PhD STUDENTS|POSTDOCTORAL RESEARCHERS|SECRETARY|SYSTEMS ENGINEER|STUDENT|FORMER MEMBER"|split: "|" %}
   
   {% for group in groups %}
     {% assign members = site.team | where: "category", group | sort: "identifier" %}

@@ -9,7 +9,7 @@ img: assets/img/team/P_marvin_raaijmakers.jpg
 LinkedIn: marvinr
 phone: +43 512 507-53265
 position: postdoc
-category: POSTDOCOTORAL RESEARCHERS
+category: POSTDOCTORAL RESEARCHERS
 office: ICT 2M05B
 ORCID: 
 email: marvin.raaijmakers@uibk.ac.at
