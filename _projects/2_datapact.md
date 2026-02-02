@@ -5,7 +5,7 @@ identifier: datapact
 status: ongoing
 title: Embedding Compliance, Ethics, and Sustainability into Data and AI Operations
 sponsor: Horizon Europe
-image: /assets/img/projects/datapact.jpeg
+image: /assets/img/projects/datapact-logo.svg
 duration: 2025 – 2027
 website: https://datapact.eu/
 permalink: /projects/datapact
