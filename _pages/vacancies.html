@@ -1,0 +1,92 @@
+---
+layout: archive
+title: ""
+permalink: /vacancies/
+author_profile: true
+---
+
+{% include base_path %}
+<link rel="stylesheet" href="{{ '/assets/css/vacancies.css' | relative_url }}">
+
+<div class="vacancies-container">
+  <!-- Vacancies Table -->
+    <table class="positions-table">
+      <thead>
+        <tr>
+          <th>Position</th>
+          <th>Area</th>
+          <th>Start Date</th>
+          <th>Duration</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="positionsTableBody">
+        {% comment %} Get the vacancies collection {% endcomment %}
+        {% assign all_positions = site.vacancies %}
+        
+        {% assign open_positions_list = "" | split: "" %}
+        {% assign filled_positions = "" | split: "" %}
+        {% assign closed_positions = "" | split: "" %}
+        {% assign other_positions = "" | split: "" %}
+        
+        {% for position in all_positions %}
+          {% assign status_lower = position.status | downcase %}
+          {% if status_lower == "open" %}
+            {% assign open_positions_list = open_positions_list | push: position %}
+          {% elsif status_lower == "filled" %}
+            {% assign filled_positions = filled_positions | push: position %}
+          {% elsif status_lower == "closed" %}
+            {% assign closed_positions = closed_positions | push: position %}
+          {% else %}
+            {% assign other_positions = other_positions | push: position %}
+          {% endif %}
+        {% endfor %}
+        
+        {% assign sorted_positions = open_positions_list | concat: filled_positions | concat: closed_positions | concat: other_positions %}
+        
+        {% if sorted_positions and sorted_positions.size > 0 %}
+          {% for position in sorted_positions %}
+          <tr class="position-row" 
+              data-category="{{ position.position_type | downcase | default: 'other' }}" 
+              data-status="{{ position.status | downcase | default: 'unknown' }}"
+              data-position="{{ position.title | downcase | default: '' }}"
+              data-area="{{ position.area | downcase | default: '' }}">
+            <td class="position-cell" data-label="Position">
+              {% if position.url and position.url != "" %}
+                <a href="{{ base_path }}{{ position.url }}" class="position-link">
+                  {{ position.title | default: "Untitled Position" }}
+                </a>
+              {% else %}
+                <span class="position-title">{{ position.title | default: "Untitled Position" }}</span>
+              {% endif %}
+            </td>
+            <td class="area-cell" data-label="Area">{{ position.area | default: "TBA" }}</td>
+            <td class="date-cell" data-label="Start Date">{{ position.start_date | default: "TBA" }}</td>
+            <td class="duration-cell" data-label="Duration">{{ position.duration | default: "TBA" }}</td>
+            <td class="status-cell" data-label="Status">
+              <span class="status-badge status-{{ position.status | downcase | default: 'unknown' }}">
+                {{ position.status | capitalize | default: "Unknown" }}
+              </span>
+            </td>
+          </tr>
+          {% endfor %}
+        {% else %}
+          <tr class="no-positions">
+            <td colspan="5" style="text-align: center; padding: 40px; color: #666;">
+              No open positions found.
+            </td>
+          </tr>
+        {% endif %}
+      </tbody>
+    </table>
+  
+
+  
+  <!-- No Results Message -->
+  <div id="noResults" class="no-results" style="display: none;">
+    <h3>No positions found</h3>
+    <p>Try adjusting your filters or search terms.</p>
+  </div>
+</div>
+
+<script src="{{ './assets/js/vacancies-filter.js' | relative_url }}"></script>

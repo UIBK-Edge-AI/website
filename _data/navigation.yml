@@ -24,6 +24,9 @@ main:
   - title: "Publications"
     url: /publications/
   
+  - title: "Vacancies"
+    url: /vacancies/
+  
   - title: "News"
     url: /news/
 

@@ -233,6 +233,9 @@ collections:
   student_projects:
     output: true
     permalink: /:collection/:path/
+  vacancies:
+    output: true
+    permalink: /:collection/:path/
 
 
 
@@ -299,7 +302,15 @@ defaults:
       layout: publications
       author_profile: true
       share: true
-
+  #_vacancies
+  - scope:
+      path: ""
+      type: vacancies
+    values:
+      layout: single
+      author_profile: true
+      share: true
+      comments: true
 
 # Sass/SCSS
 sass:
