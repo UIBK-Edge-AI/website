@@ -13,6 +13,8 @@ acknowledgments_image: "stiftung_edgeai.svg"
 
 # Carousel images
 carousel_images:
+  - image: "meeting_prof_rus.jpeg"
+    caption: "Informal meeting with visiting Professor Rus from the University of Memphis"
   - image: "christmas_market_2025.jpg"
     caption: "Edge AI visits Innsbruck christmas market"
   - image: "spontaneous_x-mas_dinner.jpeg"
@@ -20,7 +22,7 @@ carousel_images:
   - image: "inn_day_event_1.jpeg"
     caption: "Students experiencing AR/VR glass"
   - image: "inn_day_event_2.jpeg"
-    caption: "homepage/Edge AI researcher explains to visitors"
+    caption: "Edge AI researcher explains to visitors"
 ---
 
 

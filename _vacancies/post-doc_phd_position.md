@@ -1,5 +1,5 @@
 ---
-title: "Post-Doc/PhD Position"
+title: "PhD Position"
 collection: vacancies
 permalink: /vacancies/post-doc-phd-position/
 position_type: phd
