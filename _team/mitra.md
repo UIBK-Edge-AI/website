@@ -11,6 +11,7 @@ position: sect
 category: SECRETARY
 office: ICT 3S11
 email: mitra.naderi@uibk.ac.at
+scholar_id:          
 address: Technikerstraße 21A, 6020 Innsbruck, Austria
 officehours:
   monday: "08:00 — 16:00"

@@ -11,6 +11,7 @@ position: sysad
 category: SYSTEMS ENGINEER
 office: ICT 3W05
 ORCID: 0009-0006-3083-3259
+scholar_id: P1y45b0AAAAJ     
 email: tm-rayhan.gias@uibk.ac.at
 address: Technikerstraße 21A, 6020 Innsbruck, Austria
 

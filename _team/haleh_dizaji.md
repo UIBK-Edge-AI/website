@@ -12,6 +12,7 @@ position: postdoc
 category: POSTDOCTORAL RESEARCHERS
 office: ICT 2M05A
 ORCID: 0000-0002-5886-9636
+scholar_id: G6XHMs0AAAAJ    
 email: haleh.dizaji@uibk.ac.at
 address: Technikerstraße 21A, 6020 Innsbruck, Austria
 

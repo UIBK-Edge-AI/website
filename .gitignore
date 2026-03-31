@@ -17,7 +17,7 @@ vendor/
 .bundle/
 
 # venv
-venv/
+.venv/
 *.py
 *.ipynb
 

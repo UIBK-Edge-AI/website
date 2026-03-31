@@ -7,24 +7,20 @@ sponsor: Austrian Research Promotion Agency (FFG)
 title: AIM AT Endowed Professorship
 image: /images/logo/winter1.png
 duration: 2025 – 2030
-website: https://www.ffg.at/aim
+website: https://projekte.ffg.at/projekt/5121131
 permalink: /projects/aimAtEdgeAI
 ---
 
 ## Artificial Intelligence Mission Austria (AIM AT) funding initiative
 
-### Motivation
-<!-- We are committed to advancing Austria's position in the global microelectronics ecosystem through the Austria Innovationsstiftung Mikroelektronik (AIM) initiative, a cornerstone of European semiconductor sovereignty. As part of the Important Project of Common European Interest (IPCEI), we drive innovation in energy-efficient chips, advanced semiconductor materials, and next-generation communication technologies that are essential for Europe's digital transformation.
-
-Our mission is to strengthen Austria's role as a technology leader in microelectronics, fostering collaboration between world-class research institutions and industry partners. We focus on developing cutting-edge semiconductor solutions that address critical challenges in mobility, renewable energy, and industrial digitalization. Through strategic investments and targeted support, we enable Austrian companies to compete at the forefront of silicon carbide, gallium nitride, and advanced packaging technologies. -->
-
 ### Project Goals
-<!-- Together with leading Austrian technology companies and research partners, we are:
 
-- Building resilient semiconductor value chains that reduce European dependencies and strengthen supply chain security through local production capabilities and advanced manufacturing processes
-- Accelerating green technology adoption by developing energy-efficient power electronics and chips that enable CO2 reduction in data centers, electric vehicles, and renewable energy systems
-- Establishing innovation hubs for advanced IC substrates, high-performance chip packaging, and AI-supported semiconductor manufacturing that position Austria as a critical node in the European chips ecosystem
-- Fostering technology transfer between academia and industry through collaborative R&D projects, ensuring rapid commercialization of breakthrough innovations in sensors, power electronics, and secure chip platforms
-- Supporting SME integration into the semiconductor ecosystem through knowledge spillovers, strategic partnerships, and access to cutting-edge research infrastructure
+Edge AI further develops the vision of intelligent networked devices in that devices are equipped with “on-site intelligence” and, through clever distribution of data and algorithms, can act not only autonomously and with foresight, but also in fail-safe, performant, energy-efficient ways and in compliance with data protection regulations. The endowed professorship in computer science with a focus on Edge AI will be part of the Department of Computer Science and can be filled both in a technology-oriented manner from edge computing or in an algorithm-oriented manner from machine learning.
 
-Our initiatives span critical application domains including autonomous mobility, Industry 4.0, Internet of Things, and sustainable energy systems—ensuring that Austrian innovation contributes to a more digital, green, and resilient Europe. -->
+The endowed professorship expands the existing research groups into a competence cluster by building a bridge between the topics of edge, IoT, ML, software engineering, security, and privacy. This competence cluster is outstanding because it takes an end-to-end quality-driven view of intelligent networked systems, thus contributing to science, economy and society by bringing this future generation of systems to application in a controllable, value-based way.
+
+This submission is strongly supported by the innovation leaders in Western Austria in core industries such as construction, medical technology and traffic engineering, as well as by the professional associations and the province of Tyrol. This underpins the great importance attached to this professorship for the further development of the economy in this region. Furthermore, the endowed professorship Edge AI fits ideally into the structure of the interdisciplinary research area Digital Science Center (DiSC) at the University of Innsbruck. At the DiSC, the endowed professorship expands the existing ML competencies, which are carried across the breadth of scientific disciplines, and also promotes discussions on the societal impact of artificial intelligence.
+
+Beyond industrial applications, the University of Innsbruck as a full university offers an optimal environment for the future application of "smart" sensors to reach a new level of evidence-based understanding of our world. This potential extends to diverse branches of science, including ecology, geology, atmospheric sciences and civil engineering. Research successes already achieved on the basis of sensor networks in high mountain regions illustrate the promises for the future. They open up broad fields of action to strengthen Austria as a science location and to solve societal challenges.
+
+The University of Innsbruck offers an internationally outstanding scientific environment that is uniquely positioned for high-performance computing, quantum computing, machine learning, and edge computing to join forces towards a future of intelligent edge devices.

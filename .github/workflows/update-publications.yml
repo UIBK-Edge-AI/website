@@ -1,0 +1,46 @@
+name: Update Publications from Google Scholar
+
+on:
+  # Run on the 1st of every month at 03:00 UTC
+  schedule:
+    - cron: '0 3 1 * *'
+
+  # Allow manual trigger from the Actions tab
+  workflow_dispatch:
+
+permissions:
+  contents: write   # needed to commit the updated bibtex.bib
+
+jobs:
+  fetch-publications:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          # Use a PAT if the repo is private, otherwise GITHUB_TOKEN is fine
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install scholarly python-frontmatter
+
+      - name: Fetch publications
+        env:
+          # Optional: set SERPAPI_KEY in repo Settings → Secrets → Actions
+          # for more reliable Scholar access (https://serpapi.com)
+          SERPAPI_KEY: ${{ secrets.SERPAPI_KEY }}
+        run: python scripts/fetch_scholar_publications.py
+
+      - name: Commit updated bibtex.bib (if changed)
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: auto-update publications from Google Scholar [skip ci]"
+          file_pattern: files/bibtex.bib
+          commit_user_name: "github-actions[bot]"
+          commit_user_email: "github-actions[bot]@users.noreply.github.com"

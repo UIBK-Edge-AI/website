@@ -24,7 +24,7 @@ author_profile: true
   {% assign groups = "PROFESSOR|PhD STUDENTS|POSTDOCTORAL RESEARCHERS|SECRETARY|SYSTEMS ENGINEER|STUDENT|FORMER MEMBER"|split: "|" %}
   
   {% for group in groups %}
-    {% assign members = site.team | where: "category", group | sort: "identifier" %}
+    {% assign members = site.team | where: "category", group | sort: "title" %}
     {% if members.size > 0 %}
       <div class="group-section">
         <h2 class="group-title">{{ group }}</h2>

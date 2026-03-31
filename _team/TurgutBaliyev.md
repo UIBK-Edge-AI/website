@@ -11,6 +11,7 @@ position: phd
 category: PhD STUDENTS
 office: ICT 2M05B
 ORCID: 0009-0000-3261-8970
+scholar_id: qHmwI_QAAAAJ        
 email: turgud.valiyev@student.uibk.ac.at
 address: Technikerstraße 21A, 6020 Innsbruck, Austria
 

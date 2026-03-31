@@ -11,6 +11,7 @@ position: phd
 category: PhD STUDENTS
 office: ICT 2M05D
 ORCID: 0009-0006-3905-9407
+scholar_id: 5nmmzLsAAAAJ    
 email: sareh.maleki@uibk.ac.at
 address: Technikerstraße 21A, 6020 Innsbruck, Austria
 
