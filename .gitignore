@@ -20,6 +20,6 @@ vendor/
 .venv/
 *.py
 *.ipynb
-
+.vscode
 # Ignore bash script
 *.sh
