@@ -127,7 +127,14 @@ def unique_key(base_key, existing_keys):
 # ---------------------------------------------------------------------------
 
 def normalise_title(title):
-    """Lowercase + strip punctuation/spaces for deduplication."""
+    """
+    Lowercase + strip punctuation/spaces for deduplication.
+    Also strips the trailing ': First et al.' suffix that Google Scholar
+    sometimes appends to titles (e.g. 'A review: P. Czarnul et al.'),
+    so near-duplicates are correctly detected.
+    """
+    # Strip trailing ": First et al." or ": Surname et al" appended by Scholar
+    title = re.sub(r":\s+[A-Z][a-z]+.*?\bet al\.?\s*$", "", title).strip()
     return re.sub(r"[^a-z0-9]", "", title.lower())
 
 
