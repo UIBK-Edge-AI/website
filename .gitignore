@@ -19,6 +19,7 @@ vendor/
 # venv
 .venv/
 *.py
+!scripts/*.py
 *.ipynb
 .vscode
 # Ignore bash script
