@@ -144,7 +144,17 @@ def format_authors_bibtex(author_str):
     """
     Convert scholarly author string to BibTeX  "Last, First and Last, First".
     scholarly: "First Last, First Last"  or  "First Last and First Last"
+
+    If the input is already in BibTeX "Last, First and Last, First" form
+    (detected by splitting on " and " and checking every token has a comma),
+    it is returned unchanged.
     """
+    and_tokens = [t.strip() for t in re.split(r"\s+and\s+", author_str) if t.strip()]
+    # Detect "Last, First and Last, First" BibTeX format:
+    # multiple authors separated by " and " where every token has ", "
+    if len(and_tokens) > 1 and all(", " in t for t in and_tokens):
+        return " and ".join(and_tokens)
+
     author_str = author_str.replace(" and ", ", ")
     tokens = [t.strip() for t in author_str.split(",") if t.strip()]
     result = []
@@ -258,8 +268,10 @@ def pub_to_bibtex(pub, existing_keys, existing_titles):
         entry_type = "inproceedings"
 
     fields = {}
-    fields["title"]  = f"{{{{{title}}}}}"
-    fields["author"] = format_authors_bibtex(authors)
+    fields["title"]  = f"{{{title}}}"
+    # Use pre-formatted BibTeX authors when available (already "Last, First and")
+    bibtex_author = pub.get("bibtex_author", "")
+    fields["author"] = bibtex_author if bibtex_author else format_authors_bibtex(authors)
 
     if entry_type == "misc":
         if arxiv_id:
@@ -275,7 +287,7 @@ def pub_to_bibtex(pub, existing_keys, existing_titles):
             fields["journal"] = f"{{{venue_clean}}}"
     else:
         if venue_clean:
-            fields["booktitle"] = f"{{{{{venue_clean}}}}}"
+            fields["booktitle"] = f"{{{venue_clean}}}"
 
     pages = bib.get("pages", "")
     if pages:
@@ -366,8 +378,8 @@ def clean_edgeai_bib(target_path, personal_path):
                         buf.append(ch)
                     else:
                         buf.append(ch)
-                raw = ''.join(buf).replace('{', '').replace('}', '').strip()
-                title_norm = normalise_title(raw)
+                title_str = ''.join(buf).replace('{', '').replace('}', '').strip()
+                title_norm = normalise_title(title_str)
 
         key_m = re.match(r'@\w+\s*\{\s*([^,\s]+)\s*,', block)
         key   = key_m.group(1) if key_m else "?"
@@ -509,18 +521,31 @@ def _serpapi_fetch_pubs(scholar_id, api_key):
                     )
                     if cit_resp.ok:
                         cit_data   = cit_resp.json()
-                        # citation result exposes full author strings per format
                         cit_links  = cit_data.get("citation", {})
-                        # Try MLA / BibTeX formatted authors embedded in the result
-                        mla_text   = cit_links.get("MLA", cit_links.get("mla", ""))
-                        if mla_text:
-                            # MLA: "Surname, First, Second Author, ..." — best we can get
-                            # Just store as-is; format_authors_bibtex will still reorder
-                            full_auths = mla_text.split(".")[0]  # first sentence ≈ authors
+
+                        # Prefer BibTeX format — gives "Last, First and Last, First"
+                        # which is already correct for BibTeX author fields.
+                        bibtex_text = cit_links.get("BibTeX", cit_links.get("bibtex", ""))
+                        bibtex_auths = ""
+                        if bibtex_text:
+                            am = re.search(
+                                r'\bauthor\s*=\s*[{"](.*?)[}"]',
+                                bibtex_text, re.IGNORECASE | re.DOTALL,
+                            )
+                            if am:
+                                bibtex_auths = am.group(1).strip()
+
+                        if bibtex_auths:
+                            # Store separately so pub_to_bibtex skips format_authors_bibtex
+                            article["_bibtex_author"] = bibtex_auths
                         else:
-                            full_auths = ""
-                        if full_auths:
-                            authors = full_auths
+                            # Fallback: MLA format; split before the first quoted title
+                            # ("Surname, First, et al. \"Title...\"" → author part)
+                            mla_text = cit_links.get("MLA", cit_links.get("mla", ""))
+                            if mla_text:
+                                full_auths = re.split(r'\.[\s\u201c\u2018\"]', mla_text)[0].strip()
+                                if full_auths:
+                                    authors = full_auths
                 except Exception as cit_err:
                     pass  # keep abbreviated authors on error
                 time.sleep(0.5)
@@ -538,6 +563,8 @@ def _serpapi_fetch_pubs(scholar_id, api_key):
                     "venue":    venue,
                     "abstract": article.get("description", ""),
                 },
+                # Pre-formatted BibTeX authors ("Last, First and ...") when available
+                "bibtex_author": article.get("_bibtex_author", ""),
                 "pub_url": article_link,
             })
 
