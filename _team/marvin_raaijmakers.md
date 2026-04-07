@@ -3,6 +3,7 @@ layout: person
 cv_ready: true
 kind: person
 title: Marvin Raaijmakers
+lastname: Raaijmakers
 identifier: 4
 permalink: /team/marvin
 img: assets/img/team/P_marvin_raaijmakers.jpg

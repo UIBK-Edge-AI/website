@@ -3,6 +3,7 @@ layout: person
 cv_ready: true
 kind: person
 title: Mitra-Yolanda Naderi
+lastname: Naderi
 identifier: 1
 permalink: /team/mitra
 img: /assets/img/team/P_mitra.jpg

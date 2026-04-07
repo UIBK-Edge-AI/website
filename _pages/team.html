@@ -24,7 +24,7 @@ author_profile: true
   {% assign groups = "PROFESSOR|PhD STUDENTS|POSTDOCTORAL RESEARCHERS|SECRETARY|SYSTEMS ENGINEER|STUDENT|FORMER MEMBER"|split: "|" %}
   
   {% for group in groups %}
-    {% assign members = site.team | where: "category", group | sort: "title" %}
+    {% assign members = site.team | where: "category", group | sort: "lastname" %}
     {% if members.size > 0 %}
       <div class="group-section">
         <h2 class="group-title">{{ group }}</h2>
@@ -123,7 +123,7 @@ author_profile: true
   {% comment %}
     If no categories are defined, show all team members in one grid, sorted by identifier
   {% endcomment %}
-  {% assign sorted_members = team_members | sort: "identifier" %}
+  {% assign sorted_members = team_members | sort: "lastname" %}
   <div class="people-container">
     {% for person in sorted_members %}
         {% if person.external_profile %}

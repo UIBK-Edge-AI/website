@@ -3,6 +3,7 @@ layout: person
 cv_ready: true
 kind: person
 title: Turgud Valiyev
+lastname: Valiyev
 identifier: 2
 permalink: /team/turgudvaliyev
 img: assets/img/team/P_Turgud_Baliyev.jpg

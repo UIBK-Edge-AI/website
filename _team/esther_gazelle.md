@@ -3,6 +3,7 @@ layout: person
 cv_ready: true
 kind: person
 title: Esther Gezzele-Lechner
+lastname: Gezzele-Lechner
 identifier: 2
 permalink: /team/esther
 img: /assets/img/team/P_esther.jpg

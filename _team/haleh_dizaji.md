@@ -3,6 +3,7 @@ layout: person
 cv_ready: true
 kind: person
 title: Haleh Dizaji
+lastname: Dizaji
 identifier: 2
 permalink: /team/haleh
 img: /assets/img/team/P_haleh.jpg

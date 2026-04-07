@@ -3,6 +3,7 @@ layout: person
 cv_ready: true
 kind: person
 title: Tanim M. Rayhan Gias
+lastname: Gias
 identifier: 1
 permalink: /team/tanim_gias
 img: /assets/img/team/P_Tanim_Gias.jpg
@@ -64,7 +65,7 @@ education:
     where: Dhaka, Bangladesh
 
 publications:
-  - RDGB2025-CCNC
+  - RDGB2025-CCNCa
   - AWGK2021-ACMICN
   - KAWG2021-ACMICN
   - PGIHTB2019-IEEEGLOBECOM

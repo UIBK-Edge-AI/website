@@ -3,6 +3,7 @@ layout: person
 cv_ready: true
 kind: person
 title: Nafiseh Sharghivand
+lastname: Sharghivand
 identifier: 3
 permalink: /team/nafiseh
 img: /assets/img/team/P_Nafiseh_sh.jpg

@@ -3,6 +3,7 @@ layout: person
 cv_ready: true
 kind: person
 title: Ahmed Mujtaba
+lastname: Mujtaba
 identifier: 3
 permalink: /team/ahmedMujtaba
 redirect_to: https://silicon-austria-labs.elsevierpure.com/de/persons/ahmed-mujtaba

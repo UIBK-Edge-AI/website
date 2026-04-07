@@ -3,6 +3,7 @@ layout: person
 cv_ready: true
 kind: person
 title: Rajashekar Kolichala
+lastname: Kolichala
 identifier: 1
 permalink: /team/rajashekar
 redirect_to: https://sites.google.com/view/kolichala-rajashekar/

@@ -4,7 +4,7 @@ collection: _student_projects
 authors: "Balázs Bozsó"
 supervisor: "Haleh Dizaji"
 permalink:
-status: open
+status: Ongoing
 degree: 'bachelor'
 layout: single
 ---

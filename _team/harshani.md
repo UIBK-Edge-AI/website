@@ -3,6 +3,7 @@ layout: person
 cv_ready: true
 kind: person
 title: Harshani Wickramarathna
+lastname: Wickramarathna
 identifier: 2
 permalink: /team/harshaniwickramarathna
 img: /assets/img/team/P_Harshani_Wickramarathna.jpg

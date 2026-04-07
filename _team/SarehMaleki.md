@@ -3,6 +3,7 @@ layout: person
 cv_ready: true
 kind: person
 title: Sareh Maleki
+lastname: Maleki
 identifier: 1
 permalink: /team/sarehmaleki
 img: /assets/img/team/P_Sareh_Maleki.jpg

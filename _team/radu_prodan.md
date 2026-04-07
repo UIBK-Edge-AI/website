@@ -3,6 +3,7 @@ layout: person
 cv_ready: true
 kind: person
 title: Univ.-Prof. Dr. Radu Prodan
+lastname: Prodan
 identifier: 1
 permalink: /team/raduprodan
 img: /assets/img/team/P_radu_prodan.jpg
