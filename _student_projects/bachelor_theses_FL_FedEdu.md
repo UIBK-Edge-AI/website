@@ -2,13 +2,13 @@
 title: "FedEdu: Facilitating FL in an Educational Context and Evaluating Different FL Scenarios"
 collection: _student_projects
 authors: "Julian Weihs, Sebastian Wildervanck"
-supervisor: "Radu Prodan, Turgud Valiyev"
+supervisor: "Turgud Valiyev"
 permalink:
 status: Ongoing
 degree: 'Bachelor'
 layout: single
 ---
-**Supervisor:** Univ.-Prof. Dr. Radu Prodan, Turgud Valiyev
+**Supervisor:** Turgud Valiyev
 
 **Author:** Julian Weihs, Sebastian Wildervanck
 

@@ -7,7 +7,7 @@ lastname: Kolichala
 identifier: 1
 permalink: /team/rajashekar
 redirect_to: https://sites.google.com/view/kolichala-rajashekar/
-img: /assets/img/team/P_shekar.jpg
+img: /assets/img/team/P_shekar2.jpeg
 phone: +43 512 507-53247
 position: postdoc
 category: POSTDOCTORAL RESEARCHERS
