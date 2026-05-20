@@ -351,21 +351,21 @@ function createPublicationCard(pub) {
     titleElement = `<h3 class="publication-title">${pub.title}</h3>`;
   }
   
-  // Build metadata
-  let metadata = `<strong>Authors:</strong> ${pub.authors}<br>`;
-  metadata += `<strong>Year:</strong> ${pub.year}<br>`;
-  metadata += `<strong>Venue:</strong> ${pub.venue}`;
-  
-  // Add additional details if available
+  // Build metadata - only include fields that have values
+  const metadataLines = [];
+  if (pub.authors) metadataLines.push(`<strong>Authors:</strong> ${pub.authors}`);
+  if (pub.year)    metadataLines.push(`<strong>Year:</strong> ${pub.year}`);
+  if (pub.venue)   metadataLines.push(`<strong>Venue:</strong> ${pub.venue}`);
+
   const details = [];
   if (pub.volume) details.push(`Vol. ${pub.volume}`);
   if (pub.number) details.push(`No. ${pub.number}`);
-  if (pub.pages) details.push(`pp. ${pub.pages}`);
-  if (pub.publisher && !pub.venue.includes(pub.publisher)) details.push(`Publisher: ${pub.publisher}`);
-  
-  if (details.length > 0) {
-    metadata += '<br><strong>Details:</strong> ' + details.join(', ');
-  }
+  if (pub.pages)  details.push(`pp. ${pub.pages}`);
+  if (pub.publisher && pub.venue && !pub.venue.includes(pub.publisher)) details.push(`Publisher: ${pub.publisher}`);
+  else if (pub.publisher && !pub.venue) details.push(`Publisher: ${pub.publisher}`);
+  if (details.length > 0) metadataLines.push(`<strong>Details:</strong> ${details.join(', ')}`);
+
+  const metadata = metadataLines.join('<br>');
   
   card.innerHTML = `
     <div class="publication-header">

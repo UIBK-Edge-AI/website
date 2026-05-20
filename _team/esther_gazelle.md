@@ -11,7 +11,7 @@ phone: +43 512 507-53257
 position: sect
 category: SECRETARY
 office: ICT 3M12
-email: esther.gezzele-lechner@uibk.ac.at
+email: esther.gezzele-lechner(at)uibk(dot)ac(dot)at
 scholar_id:          
 address: Technikerstraße 21A, 6020 Innsbruck, Austria
 officehours:

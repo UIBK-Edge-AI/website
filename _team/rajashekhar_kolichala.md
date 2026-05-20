@@ -12,7 +12,7 @@ phone: +43 512 507-53247
 position: postdoc
 category: POSTDOCTORAL RESEARCHERS
 office: ICT 2M05C
-email: rajashekar.kolichala@uibk.ac.at
+email: rajashekar.kolichala(at)uibk(dot)ac(dot)at
 scholar_id: wq36gfgAAAAJ     
 address: Technikerstraße 21A, 6020 Innsbruck, Austria
 

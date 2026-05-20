@@ -21,7 +21,7 @@ author_profile: true
 {% endfor %}
 
 {% if has_categories %}
-  {% assign groups = "PROFESSOR|PhD STUDENTS|POSTDOCTORAL RESEARCHERS|SECRETARY|SYSTEMS ENGINEER|STUDENT|FORMER MEMBER"|split: "|" %}
+  {% assign groups = "PROFESSOR|PhD STUDENTS|POSTDOCTORAL RESEARCHERS|SECRETARY|SYSTEMS ENGINEER|STUDENT|UNDERGRADUATE STUDENTS|FORMER MEMBER"|split: "|" %}
   
   {% for group in groups %}
     {% assign members = site.team | where: "category", group | sort: "lastname" %}
@@ -61,6 +61,8 @@ author_profile: true
                           PhD Student
                         {% when "sa" %}
                           Student Assistant
+                        {% when "undergrad" %}
+                          Undergraduate Student
                         {% when "sect" %}
                           Secretary
                         {% when "former" %}
@@ -86,7 +88,7 @@ author_profile: true
                     {% if person.email %}
                       <div class="contact-item">
                         <span>📧</span>
-                        <span>{{ person.email }}</span>
+                        <span>{{ person.email | replace: '(at)', '<span style="font-size:0.75em">(at)</span>' | replace: '(dot)', '<span style="font-size:0.75em">(dot)</span>' }}</span>
                       </div>
                     {% endif %}
 

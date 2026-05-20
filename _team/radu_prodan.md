@@ -13,7 +13,7 @@ category: PROFESSOR
 office: ICT 3S06
 ORCID: 0000-0002-8247-5426
 scholar_id: ELx8lB8AAAAJ        
-email: radu.prodan@uibk.ac.at
+email: radu.prodan(at)uibk(dot)ac(dot)at
 LinkedIn: radu-prodan-182812b1
 address: Technikerstraße 21A, 6020 Innsbruck, Austria
 

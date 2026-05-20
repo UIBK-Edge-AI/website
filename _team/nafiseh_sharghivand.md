@@ -14,7 +14,7 @@ office: ICT 2M05D
 ORCID: 0000-0002-2546-0893
 scholar_id: vdg5a5QAAAAJ       
 LinkedIn: nafiseh-sharghivand-084b183a
-email: nafiseh.sharghivand@uibk.ac.at
+email: nafiseh.sharghivand(at)uibk(dot)ac(dot)at
 address: Technikerstraße 21A, 6020 Innsbruck, Austria
 
 interests:

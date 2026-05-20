@@ -13,7 +13,7 @@ category: PhD STUDENTS
 office: ICT 2M05D
 ORCID: 
 scholar_id: k3h95RwAAAAJ       
-email: Sedillage.Wickramarathna@student.uibk.ac.at
+email: Sedillage.Wickramarathna(at)student.uibk(dot)ac(dot)at
 address: Technikerstraße 21A, 6020 Innsbruck, Austria
 
 interests:

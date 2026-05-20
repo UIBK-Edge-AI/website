@@ -51,7 +51,7 @@ layout: default
             {% if page.email %}
               <div class="contact-item">
                 <span>📧</span>
-                <a href="mailto:{{ page.email }}" itemprop="email">{{ page.email }}</a>
+                <span itemprop="email">{{ page.email | replace: '(at)', '<span style="font-size:0.75em">(at)</span>' | replace: '(dot)', '<span style="font-size:0.75em">(dot)</span>' }}</span>
               </div>
             {% endif %}
             

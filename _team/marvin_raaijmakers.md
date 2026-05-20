@@ -14,7 +14,7 @@ category: POSTDOCTORAL RESEARCHERS
 office: ICT 2M05B
 ORCID: 
 scholar_id: UijBASYAAAAJ
-email: marvin.raaijmakers@uibk.ac.at
+email: marvin.raaijmakers(at)uibk(dot)ac(dot)at
 address: Technikerstraße 21A, 6020 Innsbruck, Austria
 
 interests:
