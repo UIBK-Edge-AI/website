@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Fetch publications from Google Scholar for all team members and append
+Fetch publications from Google Scholar andappend
 new entries to files/edgeai.bib.
 
 Each _team/*.md file must have:
@@ -52,7 +52,7 @@ UIBK_MARKERS = [
 ]
 
 # ---------------------------------------------------------------------------
-# Helpers – UIBK start year
+#finding UIBK start year
 # ---------------------------------------------------------------------------
 
 def get_uibk_start_year(positions):
@@ -71,11 +71,11 @@ def get_uibk_start_year(positions):
 
 
 # ---------------------------------------------------------------------------
-# Helpers – BibTeX key generation
+# BibTeX key generation
 # ---------------------------------------------------------------------------
-
+"""Return the uppercased first letter of the last name in a token."""
 def _last_name_initial(author_token):
-    """Return the uppercased first letter of the last name in a token."""
+
     parts = author_token.strip().split()
     return parts[-1][0].upper() if parts else ""
 
@@ -249,9 +249,11 @@ def pub_to_bibtex(pub, existing_keys, existing_titles):
 
     year = str(year_raw).strip()
 
-    # --- Detect arXiv preprints ---
+    # --- Detect arXiv preprints – skip, not peer-reviewed ---
     arxiv_id = _arxiv_id_from_venue(venue)
     is_arxiv = bool(arxiv_id) or "arxiv preprint" in venue.lower()
+    if is_arxiv:
+        return None
 
     # --- Clean venue (remove page numbers, volume etc. embedded in venue) ---
     venue_clean = _clean_venue(venue)
@@ -259,15 +261,11 @@ def pub_to_bibtex(pub, existing_keys, existing_titles):
     # --- key ---
     initials    = make_initials(authors)
     venue_abbr  = make_venue_abbr(venue_clean)
-    if is_arxiv:
-        venue_abbr = "MISC"
     base_key    = f"{initials}{year}-{venue_abbr}"
     key         = unique_key(base_key, existing_keys)
 
     # --- entry type & fields ---
-    if is_arxiv:
-        entry_type = "misc"
-    elif any(w in venue_clean.lower() for w in
+    if any(w in venue_clean.lower() for w in
              ["journal", "transactions", "letters", "magazine", "review",
               "acm computing", "records", "sigm"]):
         entry_type = "article"
@@ -280,16 +278,7 @@ def pub_to_bibtex(pub, existing_keys, existing_titles):
     bibtex_author = pub.get("bibtex_author", "")
     fields["author"] = bibtex_author if bibtex_author else format_authors_bibtex(authors)
 
-    if entry_type == "misc":
-        if arxiv_id:
-            fields["howpublished"] = "arXiv e-prints"
-            fields["doi"]          = f"10.48550/arXiv.{arxiv_id}"
-            fields["url"]          = f"https://arxiv.org/abs/{arxiv_id}"
-            fields["eprint"]       = arxiv_id
-            fields["archiveprefix"] = "arXiv"
-        elif venue_clean:
-            fields["howpublished"] = venue_clean
-    elif entry_type == "article":
+    if entry_type == "article":
         if venue_clean:
             fields["journal"] = f"{{{venue_clean}}}"
     else:
@@ -304,13 +293,11 @@ def pub_to_bibtex(pub, existing_keys, existing_titles):
 
     # Only use pub_url if it is NOT a Google Scholar URL
     pub_url = pub.get("pub_url", "") or pub.get("eprint_url", "")
-    if pub_url and "scholar.google.com" not in pub_url and not arxiv_id:
+    if pub_url and "scholar.google.com" not in pub_url:
         fields["publisherurl"] = pub_url
 
     # pubtype inference
-    if entry_type == "misc" and is_arxiv:
-        fields["pubtype"] = "preprint"
-    elif entry_type == "article":
+    if entry_type == "article":
         fields["pubtype"] = "journal"
     else:
         fields["pubtype"] = "conference"

@@ -361,9 +361,10 @@ function createPublicationCard(pub) {
   if (pub.volume) details.push(`Vol. ${pub.volume}`);
   if (pub.number) details.push(`No. ${pub.number}`);
   if (pub.pages)  details.push(`pp. ${pub.pages}`);
-  if (pub.publisher && pub.venue && !pub.venue.includes(pub.publisher)) details.push(`Publisher: ${pub.publisher}`);
-  else if (pub.publisher && !pub.venue) details.push(`Publisher: ${pub.publisher}`);
   if (details.length > 0) metadataLines.push(`<strong>Details:</strong> ${details.join(', ')}`);
+
+  if (pub.publisher && pub.venue && !pub.venue.includes(pub.publisher)) metadataLines.push(`<strong>Publisher:</strong> ${pub.publisher}`);
+  else if (pub.publisher && !pub.venue) metadataLines.push(`<strong>Publisher:</strong> ${pub.publisher}`);
 
   const metadata = metadataLines.join('<br>');
   

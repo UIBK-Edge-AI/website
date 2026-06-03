@@ -4,7 +4,7 @@ collection: _student_projects
 authors: "Maria Makhov"
 supervisor: "Radu Prodan"
 permalink:
-status: ongoing
+status: completed
 degree: 'bachelor'
 layout: single
 ---

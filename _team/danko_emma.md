@@ -22,13 +22,17 @@ interests:
 
 positions:
   - from: 2026
-    title: Teaching Assistant, EdgeAI Group
+    title: Teaching Assistant, Edge AI
+    dep: Department of Computer Science
+    dep_uri: https://www.uibk.ac.at/informatik/index.html.en
     inst: University of Innsbruck
     inst_uri: http://informatik.uibk.ac.at
     where: Austria
   - from: 2024
     to: 2025
-    title: Student Worker, Quality Engineering Group
+    title: Student Worker, Quality Engineering
+    dep: Department of Computer Science
+    dep_uri: https://www.uibk.ac.at/informatik/index.html.en
     inst: University of Innsbruck
     inst_uri: http://informatik.uibk.ac.at
     where: Austria
