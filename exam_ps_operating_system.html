@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Exam - PS Operating System</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f5f5f5;
+      color: #222;
+    }
+
+    .container {
+      text-align: center;
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
+      width: min(90%, 520px);
+    }
+
+    h1 {
+      margin-top: 0;
+      margin-bottom: 1.5rem;
+      font-size: 1.8rem;
+    }
+
+    .button-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    button {
+      padding: 1rem 1.25rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background: #1f5fbf;
+      color: white;
+      transition: background 0.2s ease, transform 0.1s ease;
+    }
+
+    button:hover {
+      background: #174a94;
+    }
+
+    button:active {
+      transform: scale(0.98);
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <h1>Exam - PS Operating Systems</h1>
+
+    <div class="button-grid">
+      <button onclick="openWindow('https://artemis.codeability.uibk.ac.at/courses/191/exams/')">
+        Open new exam window
+      </button>
+
+      <button onclick="openWindow('https://artemis.codeability.uibk.ac.at/courses/191/lectures/')">
+        Open new lecture notes window
+      </button>
+
+      <button onclick="openWindow('https://artemis.codeability.uibk.ac.at/courses/191/exercises/')">
+        Open new Artemis exercises window
+      </button>
+
+      <button onclick="openWindow('https://man.archlinux.org')">
+        Open new manual pages window
+      </button>
+    </div>
+  </main>
+
+  <script>
+    function openWindow(url) {
+      window.open(url, '_blank', 'noopener,noreferrer');
+    }
+  </script>
+</body>
+</html>

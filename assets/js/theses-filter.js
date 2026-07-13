@@ -122,7 +122,8 @@ class ThesesFilter {
       'bachelor': 'Bachelor thesis projects',
       'master': 'Master thesis projects', 
       'praktikum': 'Internship (Praktikum) projects',
-      'open': 'open topics'
+      'open': 'open topics',
+      'completed': 'completed theses'
     };
 
     const statusText = `Showing ${filterNames[this.currentFilter] || 'filtered projects'}`;
@@ -153,6 +154,8 @@ class ThesesFilter {
       categoryMatch = true;
     } else if (this.currentFilter === 'open') {
       categoryMatch = status === 'open';
+    } else if (this.currentFilter === 'completed') {
+      categoryMatch = status === 'completed';
     } else {
       categoryMatch = category === this.currentFilter;
     }
@@ -300,7 +303,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Handle URL parameters for direct filtering
   const urlParams = new URLSearchParams(window.location.search);
   const filterParam = urlParams.get('filter');
-  if (filterParam && ['all', 'bachelor', 'master', 'praktikum', 'open'].includes(filterParam)) {
+  if (filterParam && ['all', 'bachelor', 'master', 'praktikum', 'open', 'completed'].includes(filterParam)) {
     console.log('🔗 Applying URL filter:', filterParam);
     window.thesesFilter.filterByCategory(filterParam);
   }

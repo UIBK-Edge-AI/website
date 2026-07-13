@@ -15,6 +15,8 @@ acknowledgments_image: "stiftung_edgeai.svg"
 carousel_images:
   - image: "LNDF.jpeg"
     caption: "Edge AI particpates Lange Nacht der Forschung 2026"
+  - image: "sommerfest_2026.jpeg"
+    caption: "Edge AI at Summer Festival 2026"
   - image: "meeting_prof_rus.jpeg"
     caption: "Informal meeting with visiting Professor Rus from the University of Memphis"
   - image: "christmas_market_2025.jpg"
