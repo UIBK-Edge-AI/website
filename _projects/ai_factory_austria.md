@@ -5,9 +5,9 @@ collection: projects
 identifier: aiFactoryAustria
 status: ongoing
 sponsor: Horizon EuroHPC Joint Untertaking
-image: 
+image: /assets/img/projects/aiFactory.png
 duration: 2025 – 2028
-website: https://cordis.europa.eu/project/id/101253078
+website: https://ai-at.eu/
 permalink: /projects/aiFactoryAustria
 ---
 

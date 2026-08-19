@@ -5,7 +5,7 @@ collection: projects
 identifier: coAgent
 status: ongoing
 sponsor: Horizon Europe
-image: 
+image: /assets/img/projects/coAgent.jpeg
 duration: 2026 – 2029
 website: https://cordis.europa.eu/project/id/101297191
 permalink: /projects/coAgent
