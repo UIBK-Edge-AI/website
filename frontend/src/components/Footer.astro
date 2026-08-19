@@ -1,0 +1,233 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <!-- Col 1: Group info -->
+    <div class="footer-col">
+      <div class="footer-brand">
+        <img src="/images/logo/winter1.png" alt="Edge AI" class="footer-logo" />
+        <span class="footer-title">EDGE AI RESEARCH GROUP</span>
+      </div>
+      <p class="footer-desc">
+        Advancing scalable, sustainable, and secure Artificial Intelligence at the network's edge.
+      </p>
+      <div class="affiliation-badge">
+        <span class="pulse-dot"></span>
+        <span>Department of Computer Science & DiSC</span>
+      </div>
+    </div>
+
+    <!-- Col 2: Navigation Links -->
+    <div class="footer-col">
+      <h4 class="col-title">Navigation</h4>
+      <ul class="footer-links">
+        <li><a href="/team">Research Team</a></li>
+        <li><a href="/projects">Research Projects</a></li>
+        <li><a href="/publications">Publications</a></li>
+        <li><a href="/teaching">Courses & Theses</a></li>
+        <li><a href="/vacancies">Open Positions</a></li>
+        <li><a href="/news">News & Events</a></li>
+      </ul>
+    </div>
+
+    <!-- Col 3: Contact & Location -->
+    <div class="footer-col">
+      <h4 class="col-title">Contact & Location</h4>
+      <p class="contact-line"><strong>Institution:</strong> Universität Innsbruck</p>
+      <p class="contact-line"><strong>Address:</strong> Technikerstraße 21a, 6020 Innsbruck, Austria</p>
+      <p class="contact-line"><strong>Email:</strong> <a href="mailto:edgeai-informatik@uibk.ac.at">edgeai-informatik@uibk.ac.at</a></p>
+      <p class="contact-line"><strong>Phone:</strong> +43 512 507-53494</p>
+      <div class="location-link-wrapper">
+        <a href="https://www.uibk.ac.at/de/informatik/kontakt/anfahrt/" target="_blank" rel="noopener noreferrer" class="map-link">
+          &rarr; Campus Map & Directions
+        </a>
+      </div>
+    </div>
+
+    <!-- Col 4: Sponsorships & CMS -->
+    <div class="footer-col">
+      <h4 class="col-title">Funding & Partners</h4>
+      <div class="sponsor-logos">
+        <img src="/images/logo/stiftung_edgeai.svg" alt="AIM AT Stiftungsprofessur" class="partner-logo" />
+        <img src="/images/logo/uibk_light.svg" alt="Universität Innsbruck" class="partner-logo uibk-logo" />
+      </div>
+      <div class="cms-admin-link">
+        <a href="http://localhost:8055" target="_blank" rel="noopener noreferrer" class="tag-pill">
+          Directus Admin &rarr;
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container footer-bottom">
+    <p>&copy; {currentYear} Edge AI Research Group, University of Innsbruck. All rights reserved.</p>
+    <div class="footer-meta">
+      <span>High-Tech Minimalist Static Architecture</span>
+      <span>Powered by Directus + Astro</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
+    margin-top: auto;
+    padding-top: 4rem;
+    padding-bottom: 2rem;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1.3fr 1.3fr;
+    gap: 2.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .footer-logo {
+    height: 32px;
+    width: auto;
+  }
+
+  .footer-title {
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--text-primary);
+  }
+
+  .footer-desc {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: 1.25rem;
+  }
+
+  .affiliation-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    font-family: var(--font-mono);
+    color: var(--text-secondary);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-color);
+    padding: 0.35rem 0.75rem;
+    border-radius: var(--radius-full);
+  }
+
+  .col-title {
+    font-size: 0.95rem;
+    font-family: var(--font-heading);
+    color: var(--text-primary);
+    margin-bottom: 1.25rem;
+    letter-spacing: 0.02em;
+  }
+
+  .footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .footer-links a {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s ease, transform 0.2s ease;
+    display: inline-block;
+  }
+
+  .footer-links a:hover {
+    color: var(--accent-cyan);
+    transform: translateX(3px);
+  }
+
+  .contact-line {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.4rem;
+    line-height: 1.4;
+  }
+
+  .contact-line strong {
+    color: var(--text-primary);
+  }
+
+  .location-link-wrapper {
+    margin-top: 0.75rem;
+  }
+
+  .map-link {
+    font-size: 0.82rem;
+    font-family: var(--font-mono);
+    color: var(--accent-cyan);
+  }
+
+  .sponsor-logos {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .partner-logo {
+    max-height: 36px;
+    max-width: 180px;
+    object-fit: contain;
+    filter: brightness(0.9) contrast(1.1);
+  }
+
+  .uibk-logo {
+    max-height: 28px;
+  }
+
+  .footer-bottom {
+    border-top: 1px solid var(--border-color);
+    padding-top: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+  }
+
+  .footer-meta {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 992px) {
+    .footer-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    .footer-bottom {
+      flex-direction: column;
+      gap: 0.75rem;
+      text-align: center;
+    }
+    .footer-meta {
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+  }
+</style>

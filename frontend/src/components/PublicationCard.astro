@@ -1,0 +1,123 @@
+---
+import type { Publication } from '../lib/types';
+
+interface Props {
+  pub: Publication;
+}
+
+const { pub } = Astro.props;
+
+const typeBadges: Record<string, string> = {
+  'journal': 'badge-cyan',
+  'conference': 'badge-blue',
+  'workshop': 'badge-purple',
+  'book': 'badge-amber',
+  'preprint': 'badge-emerald'
+};
+
+const badgeClass = typeBadges[pub.pubtype] || 'badge-blue';
+---
+
+<div class="card-glass pub-card" data-year={pub.year} data-type={pub.pubtype} data-key={pub.bibtex_key}>
+  <div class="pub-header">
+    <div class="pub-badges">
+      <span class={`badge ${badgeClass}`}>{pub.pubtype}</span>
+      <span class="badge badge-amber">{pub.year}</span>
+    </div>
+    <span class="bibtex-key">{pub.bibtex_key}</span>
+  </div>
+
+  <h3 class="pub-title">{pub.title}</h3>
+  <p class="pub-authors">{pub.authors}</p>
+  <p class="pub-venue"><em>{pub.venue}</em> {pub.pages ? `pp. ${pub.pages}` : ''}</p>
+
+  {pub.keywords && pub.keywords.length > 0 && (
+    <div class="pub-keywords">
+      {pub.keywords.slice(0, 3).map((kw) => (
+        <span class="tag-pill">{kw}</span>
+      ))}
+    </div>
+  )}
+
+  <div class="pub-actions">
+    {pub.doi && (
+      <a href={`https://doi.org/${pub.doi}`} target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">
+        DOI &rarr;
+      </a>
+    )}
+    {pub.url && (
+      <a href={pub.url} target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">
+        Link &rarr;
+      </a>
+    )}
+    <button class="btn btn-secondary btn-sm bibtex-btn" data-bibtex={pub.bibtex_raw}>
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+      </svg>
+      BibTeX
+    </button>
+  </div>
+</div>
+
+<style>
+  .pub-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .pub-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .pub-badges {
+    display: flex;
+    gap: 0.4rem;
+  }
+
+  .bibtex-key {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  .pub-title {
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    line-height: 1.35;
+    margin-top: 0.2rem;
+  }
+
+  .pub-authors {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+  }
+
+  .pub-venue {
+    font-size: 0.85rem;
+    color: var(--accent-cyan);
+  }
+
+  .pub-keywords {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-top: 0.25rem;
+  }
+
+  .pub-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border-color);
+  }
+
+  .bibtex-btn {
+    margin-left: auto;
+  }
+</style>

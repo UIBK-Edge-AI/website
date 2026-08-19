@@ -1,0 +1,118 @@
+---
+import type { Vacancy } from '../lib/types';
+
+interface Props {
+  vacancy: Vacancy;
+}
+
+const { vacancy } = Astro.props;
+---
+
+<div class="card-glass vacancy-card">
+  <div class="vacancy-header">
+    <div class="vacancy-badges">
+      <span class="badge badge-cyan">{vacancy.position_type.toUpperCase()}</span>
+      <span class="badge badge-emerald">OPEN POSITION</span>
+    </div>
+    <span class="pulse-dot"></span>
+  </div>
+
+  <h3 class="vacancy-title">
+    <a href={`/vacancies/${vacancy.slug}`}>{vacancy.title}</a>
+  </h3>
+
+  <div class="vacancy-meta">
+    <div class="meta-item">
+      <span class="meta-label">Research Area:</span>
+      <span class="meta-val">{vacancy.area}</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Start Date:</span>
+      <span class="meta-val">{vacancy.start_date}</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Duration:</span>
+      <span class="meta-val">{vacancy.duration}</span>
+    </div>
+  </div>
+
+  <div class="vacancy-footer">
+    <div class="contact-info">
+      <span>Contact: {vacancy.contact_name}</span>
+    </div>
+    <a href={`/vacancies/${vacancy.slug}`} class="btn btn-primary btn-sm">
+      View Position &rarr;
+    </a>
+  </div>
+</div>
+
+<style>
+  .vacancy-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .vacancy-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+
+  .vacancy-badges {
+    display: flex;
+    gap: 0.35rem;
+  }
+
+  .vacancy-title {
+    font-size: 1.35rem;
+    margin-bottom: 1rem;
+  }
+
+  .vacancy-title a {
+    color: var(--text-primary);
+    text-decoration: none;
+  }
+
+  .vacancy-title a:hover {
+    color: var(--accent-cyan);
+  }
+
+  .vacancy-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .meta-item {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .meta-label {
+    color: var(--text-muted);
+  }
+
+  .meta-val {
+    color: var(--text-secondary);
+  }
+
+  .vacancy-footer {
+    border-top: 1px solid var(--border-color);
+    padding-top: 1rem;
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .contact-info {
+    font-size: 0.82rem;
+    font-family: var(--font-mono);
+    color: var(--text-muted);
+  }
+</style>

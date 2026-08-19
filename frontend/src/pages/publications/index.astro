@@ -1,0 +1,225 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PublicationCard from '../../components/PublicationCard.astro';
+import { getPublications } from '../../lib/directus';
+
+const publications = await getPublications();
+
+// Extract unique years
+const years = Array.from(new Set(publications.map(p => p.year))).sort((a, b) => b - a);
+
+const pubTypes = [
+  { label: 'All Types', value: 'all' },
+  { label: 'Journals', value: 'journal' },
+  { label: 'Conferences', value: 'conference' },
+  { label: 'Preprints & Others', value: 'preprint' }
+];
+---
+
+<BaseLayout 
+  title="Publications Archive | Edge AI Research Group" 
+  description="Peer-reviewed conference papers, journal articles, and preprints published by the Edge AI group at University of Innsbruck."
+>
+  <div class="page-header">
+    <div class="container">
+      <span class="badge badge-cyan">Scholarship</span>
+      <h1 class="page-title">Publications</h1>
+      <p class="page-subtitle">
+        Peer-reviewed research across distributed AI, edge computing, federated learning, and graph machine learning.
+      </p>
+    </div>
+  </div>
+
+  <div class="container section-py" style="padding-top: 0;">
+    <!-- Search & Filter Bar -->
+    <div class="card-glass search-filter-card">
+      <div class="search-input-wrapper">
+        <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input 
+          type="text" 
+          id="pub-search" 
+          class="input-control search-input" 
+          placeholder="Search by title, author, keyword, or venue..." 
+        />
+      </div>
+
+      <div class="filter-controls">
+        <!-- Type Filter -->
+        <div class="filter-pills" id="type-filter-group">
+          {pubTypes.map((pt, idx) => (
+            <button class={`filter-btn ${idx === 0 ? 'active' : ''}`} data-type={pt.value}>
+              {pt.label}
+            </button>
+          ))}
+        </div>
+
+        <!-- Year Filter Dropdown -->
+        <div class="select-wrapper">
+          <select id="year-select" class="input-control select-control">
+            <option value="all">All Years</option>
+            {years.map((y) => (
+              <option value={y}>{y}</option>
+            ))}
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Results Counter -->
+    <div class="results-header">
+      <span class="results-count" id="results-count">Showing {publications.length} publications</span>
+      <a href="/files/edgeai.bib" download class="btn btn-secondary btn-sm">
+        Download Complete .BIB File &rarr;
+      </a>
+    </div>
+
+    <!-- Publications List -->
+    <div class="pubs-grid" id="pubs-list">
+      {publications.map((pub) => (
+        <div class="pub-wrapper" data-year={pub.year} data-type={pub.pubtype} data-search={`${pub.title} ${pub.authors} ${pub.venue} ${pub.keywords.join(' ')}`.toLowerCase()}>
+          <PublicationCard pub={pub} />
+        </div>
+      ))}
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .search-filter-card {
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .search-input-wrapper {
+    position: relative;
+    width: 100%;
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+  }
+
+  .search-input {
+    padding-left: 2.75rem;
+    font-size: 1rem;
+  }
+
+  .filter-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .filter-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .select-wrapper {
+    min-width: 140px;
+  }
+
+  .select-control {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    padding: 0.45rem 1rem;
+    cursor: pointer;
+  }
+
+  .results-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .results-count {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  .pubs-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  @media (max-width: 768px) {
+    .filter-controls {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+</style>
+
+<script>
+  const searchInput = document.getElementById('pub-search') as HTMLInputElement;
+  const typeBtns = document.querySelectorAll<HTMLButtonElement>('#type-filter-group .filter-btn');
+  const yearSelect = document.getElementById('year-select') as HTMLSelectElement;
+  const pubItems = document.querySelectorAll<HTMLElement>('.pub-wrapper');
+  const resultsCount = document.getElementById('results-count');
+
+  let activeType = 'all';
+  let activeYear = 'all';
+  let searchTerm = '';
+
+  function filterPublications() {
+    let visibleCount = 0;
+
+    pubItems.forEach((item) => {
+      const itemType = item.getAttribute('data-type') || '';
+      const itemYear = item.getAttribute('data-year') || '';
+      const searchData = item.getAttribute('data-search') || '';
+
+      const matchesType = activeType === 'all' || itemType === activeType || (activeType === 'preprint' && !['journal', 'conference'].includes(itemType));
+      const matchesYear = activeYear === 'all' || itemYear === activeYear;
+      const matchesSearch = searchTerm === '' || searchData.includes(searchTerm);
+
+      if (matchesType && matchesYear && matchesSearch) {
+        item.style.display = 'block';
+        visibleCount++;
+      } else {
+        item.style.display = 'none';
+      }
+    });
+
+    if (resultsCount) {
+      resultsCount.textContent = `Showing ${visibleCount} publication${visibleCount === 1 ? '' : 's'}`;
+    }
+  }
+
+  searchInput?.addEventListener('input', (e) => {
+    searchTerm = (e.target as HTMLInputElement).value.toLowerCase().trim();
+    filterPublications();
+  });
+
+  typeBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      typeBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeType = btn.getAttribute('data-type') || 'all';
+      filterPublications();
+    });
+  });
+
+  yearSelect?.addEventListener('change', (e) => {
+    activeYear = (e.target as HTMLSelectElement).value;
+    filterPublications();
+  });
+</script>

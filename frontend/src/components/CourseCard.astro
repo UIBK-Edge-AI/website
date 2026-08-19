@@ -1,0 +1,124 @@
+---
+import type { TeachingCourse } from '../lib/types';
+
+interface Props {
+  course: TeachingCourse;
+}
+
+const { course } = Astro.props;
+
+const typeLabels: Record<string, string> = {
+  'VO': 'Lecture (VO)',
+  'PS': 'Proseminar (PS)',
+  'VU': 'Lecture + Exercise (VU)',
+  'SE': 'Seminar (SE)',
+  'PR': 'Project (PR)'
+};
+---
+
+<div class="card-glass course-card" data-semester={course.semester} data-degree={course.degree}>
+  <div class="course-header">
+    <div class="course-badges">
+      <span class="badge badge-cyan">{typeLabels[course.course_type] || course.course_type}</span>
+      <span class="badge badge-blue">{course.degree.toUpperCase()}</span>
+    </div>
+    <span class="course-sem-badge">{course.semester}</span>
+  </div>
+
+  <h3 class="course-title">{course.title}</h3>
+
+  <div class="course-meta">
+    <div class="meta-item">
+      <span class="meta-label">Instructors:</span>
+      <span class="meta-value">{course.instructors}</span>
+    </div>
+    {course.room && (
+      <div class="meta-item">
+        <span class="meta-label">Location:</span>
+        <span class="meta-value">{course.room}</span>
+      </div>
+    )}
+  </div>
+
+  <div class="course-footer">
+    {course.redirect_to ? (
+      <a href={course.redirect_to} target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm lfu-btn">
+        LFU Online &rarr;
+      </a>
+    ) : (
+      <span class="tag-pill">University of Innsbruck</span>
+    )}
+  </div>
+</div>
+
+<style>
+  .course-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .course-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+  }
+
+  .course-badges {
+    display: flex;
+    gap: 0.35rem;
+  }
+
+  .course-sem-badge {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--accent-amber);
+    background: rgba(245, 158, 11, 0.1);
+    border: 1px solid rgba(245, 158, 11, 0.3);
+    padding: 0.2rem 0.55rem;
+    border-radius: var(--radius-full);
+  }
+
+  .course-title {
+    font-size: 1.15rem;
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+  }
+
+  .course-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    font-size: 0.85rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .meta-item {
+    display: flex;
+    gap: 0.4rem;
+    font-family: var(--font-mono);
+  }
+
+  .meta-label {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+  }
+
+  .meta-value {
+    color: var(--text-secondary);
+  }
+
+  .course-footer {
+    border-top: 1px solid var(--border-color);
+    padding-top: 0.75rem;
+    margin-top: auto;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .lfu-btn {
+    font-size: 0.78rem;
+  }
+</style>

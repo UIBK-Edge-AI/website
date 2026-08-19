@@ -1,0 +1,50 @@
+{
+  "site_name": "Edge AI Research Group",
+  "tagline": "Smart Computing Where It Matters",
+  "employer": "Universität Innsbruck, Austria",
+  "location": "Technikerstraße 21a, 6020 Innsbruck, Austria",
+  "email": "edgeai-informatik@uibk.ac.at",
+  "telephone": "+43 512 507-53494",
+  "location_map_url": "https://www.uibk.ac.at/de/informatik/kontakt/anfahrt/",
+  "motivation": "We are a research group dedicated to advancing the development and practical application of Artificial Intelligence at the network's edge, where users and devices operate. Our work focuses on creating scalable, sustainable, and secure AI systems distributed on edge devices with limited capabilities, backed by powerful clouds and supercomputers, enabling robust decision-making and enhanced privacy. By combining AI innovation with edge computing, we aim to create smarter environments hosting and operating innovative industrial applications from social media, smart cities, medicine, finance, and more.",
+  "acknowledgments": "The Edge AI research group at the University of Innsbruck started in March 2025, partly funded by the Austrian Research Promotion Agency (FFG): \"AIM AT Stiftungsprofessur für Edge AI\".",
+  "research_topics": [
+    "Edge computing",
+    "Applied machine learning",
+    "Federated and embedded machine learning",
+    "Graph artificial intelligence",
+    "Cloud and high-performance computing",
+    "Scheduling and resource management",
+    "Compliance, ethics, sustainability"
+  ],
+  "carousel_images": [
+    {
+      "image": "/images/homepage/LNDF.jpeg",
+      "caption": "Edge AI particpates Lange Nacht der Forschung 2026"
+    },
+    {
+      "image": "/images/homepage/sommerfest_2026.jpeg",
+      "caption": "Edge AI at Summer Festival 2026"
+    },
+    {
+      "image": "/images/homepage/meeting_prof_rus.jpeg",
+      "caption": "Informal meeting with visiting Professor Rus from the University of Memphis"
+    },
+    {
+      "image": "/images/homepage/christmas_market_2025.jpg",
+      "caption": "Edge AI visits Innsbruck christmas market"
+    },
+    {
+      "image": "/images/homepage/spontaneous_x-mas_dinner.jpeg",
+      "caption": "Spontaneous Edge AI Xmas dinner"
+    },
+    {
+      "image": "/images/homepage/inn_day_event_1.jpeg",
+      "caption": "Students experiencing AR/VR glass"
+    },
+    {
+      "image": "/images/homepage/inn_day_event_2.jpeg",
+      "caption": "Edge AI researcher explains to visitors"
+    }
+  ]
+}

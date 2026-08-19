@@ -1,0 +1,230 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getVacancies } from '../../lib/directus';
+import type { Vacancy } from '../../lib/types';
+
+export async function getStaticPaths() {
+  const vacancies = await getVacancies();
+  return vacancies.map((vacancy) => ({
+    params: { slug: vacancy.slug },
+    props: { vacancy }
+  }));
+}
+
+interface Props {
+  vacancy: Vacancy;
+}
+
+const { vacancy } = Astro.props;
+---
+
+<BaseLayout 
+  title={`${vacancy.title} | Edge AI Careers`} 
+  description={`${vacancy.title} in ${vacancy.area} at University of Innsbruck.`}
+>
+  <div class="container section-py">
+    <a href="/vacancies" class="back-link">&larr; Back to Vacancies</a>
+
+    <div class="vacancy-layout">
+      <!-- Main Job Description -->
+      <div class="vacancy-main">
+        <div class="card-glass vacancy-header-card">
+          <div class="vacancy-badges">
+            <span class="badge badge-cyan">{vacancy.position_type.toUpperCase()}</span>
+            <span class="badge badge-emerald">OPEN POSITION</span>
+            <span class="badge badge-amber">{vacancy.area}</span>
+          </div>
+
+          <h1 class="job-title">{vacancy.title}</h1>
+          <p class="job-sub">Department of Computer Science &bull; University of Innsbruck, Austria</p>
+        </div>
+
+        <div class="card-glass job-content-card">
+          <div class="job-text" set:html={
+            vacancy.content
+              .replace(/\n\n/g, '<br/><br/>')
+              .replace(/# (.*?)\n/g, '<h2 class="content-h2">$1</h2>')
+              .replace(/> (.*?)\n/g, '<blockquote class="quote-callout">$1</blockquote>')
+              .replace(/- (.*?)\n/g, '<li>$1</li>')
+          } />
+        </div>
+      </div>
+
+      <!-- Application Sidebar -->
+      <div class="vacancy-sidebar">
+        <div class="card-glass apply-card">
+          <h3 class="apply-title">Position Details</h3>
+          
+          <div class="apply-meta-list">
+            <div class="apply-meta-item">
+              <span class="meta-lbl">Start Date</span>
+              <span class="meta-val">{vacancy.start_date}</span>
+            </div>
+            <div class="apply-meta-item">
+              <span class="meta-lbl">Duration</span>
+              <span class="meta-val">{vacancy.duration}</span>
+            </div>
+            <div class="apply-meta-item">
+              <span class="meta-lbl">Location</span>
+              <span class="meta-val">Innsbruck, Austria</span>
+            </div>
+            <div class="apply-meta-item">
+              <span class="meta-lbl">Remuneration</span>
+              <span class="meta-val">Austrian Collective Agreement</span>
+            </div>
+          </div>
+
+          <div class="apply-contact-box">
+            <span class="contact-lbl">Inquiries & Applications:</span>
+            <strong class="contact-name">{vacancy.contact_name}</strong>
+            <a href={`mailto:${vacancy.contact_email}?subject=Application for ${vacancy.title}`} class="btn btn-primary btn-block">
+              Apply via Email &rarr;
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .back-link {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--accent-cyan);
+    margin-bottom: 2rem;
+    text-decoration: none;
+  }
+
+  .vacancy-layout {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  .vacancy-header-card {
+    padding: 2.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .vacancy-badges {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .job-title {
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .job-sub {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+  }
+
+  .job-content-card {
+    padding: 2.5rem;
+  }
+
+  .job-text {
+    font-size: 1.02rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+  }
+
+  .job-text :global(.content-h2) {
+    font-size: 1.4rem;
+    color: var(--text-primary);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+  }
+
+  .job-text :global(.quote-callout) {
+    background: rgba(0, 240, 255, 0.05);
+    border-left: 3px solid var(--accent-cyan);
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    font-style: italic;
+    color: var(--text-primary);
+  }
+
+  .job-text :global(li) {
+    margin-left: 1.5rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .apply-card {
+    padding: 2rem;
+  }
+
+  .apply-title {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+  }
+
+  .apply-meta-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    margin-bottom: 2rem;
+  }
+
+  .apply-meta-item {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border-subtle);
+    padding-bottom: 0.4rem;
+  }
+
+  .meta-lbl {
+    color: var(--text-muted);
+  }
+
+  .meta-val {
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+
+  .apply-contact-box {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-color);
+    padding: 1.25rem;
+    border-radius: var(--radius-md);
+  }
+
+  .contact-lbl {
+    font-size: 0.8rem;
+    font-family: var(--font-mono);
+    color: var(--text-muted);
+  }
+
+  .contact-name {
+    font-size: 0.95rem;
+    color: var(--text-primary);
+  }
+
+  .btn-block {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+
+  @media (max-width: 900px) {
+    .vacancy-layout {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

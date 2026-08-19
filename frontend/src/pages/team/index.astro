@@ -1,0 +1,81 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import MemberCard from '../../components/MemberCard.astro';
+import { getMembers } from '../../lib/directus';
+
+const members = await getMembers();
+
+const categories = [
+  { label: 'All Members', value: 'all' },
+  { label: 'Professors', value: 'PROFESSOR' },
+  { label: 'Postdoctoral Researchers', value: 'POSTDOCTORAL RESEARCHERS' },
+  { label: 'PhD Students', value: 'PHD STUDENTS' },
+  { label: 'Systems Engineering', value: 'SYSTEMS ENGINEER' },
+  { label: 'Alumni', value: 'ALUMNI' }
+];
+---
+
+<BaseLayout 
+  title="Research Team | Edge AI Research Group" 
+  description="Faculty, postdoctoral researchers, PhD students, and systems engineers in the Edge AI group at the University of Innsbruck."
+>
+  <div class="page-header">
+    <div class="container">
+      <span class="badge badge-cyan">People</span>
+      <h1 class="page-title">Research Team</h1>
+      <p class="page-subtitle">
+        Meet our interdisciplinary group of professors, researchers, and systems engineers advancing edge intelligence.
+      </p>
+    </div>
+  </div>
+
+  <div class="container section-py" style="padding-top: 0;">
+    <!-- Filter Navigation -->
+    <div class="filter-nav" id="team-filter-nav">
+      {categories.map((cat, idx) => (
+        <button 
+          class={`filter-btn ${idx === 0 ? 'active' : ''}`} 
+          data-filter={cat.value}
+        >
+          {cat.label}
+        </button>
+      ))}
+    </div>
+
+    <!-- Members Grid -->
+    <div class="grid-3" id="members-grid">
+      {members.map((member) => (
+        <div class="member-item-wrapper" data-category={member.category} data-status={member.member_status}>
+          <MemberCard member={member} />
+        </div>
+      ))}
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  const filterBtns = document.querySelectorAll<HTMLButtonElement>('#team-filter-nav .filter-btn');
+  const memberItems = document.querySelectorAll<HTMLElement>('.member-item-wrapper');
+
+  filterBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filterVal = btn.getAttribute('data-filter');
+
+      memberItems.forEach((item) => {
+        const itemCat = item.getAttribute('data-category');
+        const itemStatus = item.getAttribute('data-status');
+
+        if (filterVal === 'all') {
+          item.style.display = 'block';
+        } else if (filterVal === 'ALUMNI') {
+          item.style.display = (itemStatus === 'alumni' || itemCat === 'ALUMNI') ? 'block' : 'none';
+        } else {
+          item.style.display = (itemCat === filterVal) ? 'block' : 'none';
+        }
+      });
+    });
+  });
+</script>

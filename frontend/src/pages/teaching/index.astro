@@ -1,0 +1,79 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CourseCard from '../../components/CourseCard.astro';
+import { getTeaching } from '../../lib/directus';
+
+const courses = await getTeaching();
+
+// Group semesters
+const semesters = Array.from(new Set(courses.map(c => c.semester)));
+---
+
+<BaseLayout 
+  title="Teaching & Courses | Edge AI Research Group" 
+  description="University courses, lectures, and proseminars offered by the Edge AI group at the University of Innsbruck."
+>
+  <div class="page-header">
+    <div class="container">
+      <span class="badge badge-cyan">Curriculum</span>
+      <h1 class="page-title">Academic Teaching</h1>
+      <p class="page-subtitle">
+        Undergraduate and graduate courses in operating systems, compiler construction, computer vision, and graph machine learning.
+      </p>
+      <div class="teaching-subnav">
+        <a href="/teaching" class="btn btn-primary btn-sm">Courses</a>
+        <a href="/teaching/theses" class="btn btn-secondary btn-sm">Student Theses & Topics &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container section-py" style="padding-top: 0;">
+    <!-- Filter Navigation -->
+    <div class="filter-nav" id="teaching-filter-nav">
+      <button class="filter-btn active" data-filter="all">All Semesters</button>
+      {semesters.map((sem) => (
+        <button class="filter-btn" data-filter={sem}>{sem}</button>
+      ))}
+    </div>
+
+    <!-- Courses Grid -->
+    <div class="grid-3" id="courses-grid">
+      {courses.map((course) => (
+        <div class="course-item-wrapper" data-semester={course.semester}>
+          <CourseCard course={course} />
+        </div>
+      ))}
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .teaching-subnav {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+</style>
+
+<script>
+  const filterBtns = document.querySelectorAll<HTMLButtonElement>('#teaching-filter-nav .filter-btn');
+  const courseItems = document.querySelectorAll<HTMLElement>('.course-item-wrapper');
+
+  filterBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filterVal = btn.getAttribute('data-filter');
+
+      courseItems.forEach((item) => {
+        const itemSem = item.getAttribute('data-semester');
+        if (filterVal === 'all' || itemSem === filterVal) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>

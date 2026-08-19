@@ -1,0 +1,124 @@
+---
+import type { Thesis } from '../lib/types';
+
+interface Props {
+  thesis: Thesis;
+}
+
+const { thesis } = Astro.props;
+
+const statusBadges: Record<string, string> = {
+  'open': 'badge-emerald',
+  'ongoing': 'badge-amber',
+  'completed': 'badge-cyan'
+};
+---
+
+<div class="card-glass thesis-card" data-degree={thesis.degree} data-status={thesis.thesis_status}>
+  <div class="thesis-header">
+    <div class="thesis-badges">
+      <span class="badge badge-blue">{thesis.degree.toUpperCase()} THESIS</span>
+      <span class={`badge ${statusBadges[thesis.thesis_status] || 'badge'}`}>
+        {thesis.thesis_status}
+      </span>
+    </div>
+  </div>
+
+  <h3 class="thesis-title">{thesis.title}</h3>
+
+  <div class="thesis-meta">
+    {thesis.author && (
+      <div class="meta-row">
+        <span class="meta-label">Author:</span>
+        <span class="meta-val">{thesis.author}</span>
+      </div>
+    )}
+    <div class="meta-row">
+      <span class="meta-label">Supervisor:</span>
+      <span class="meta-val">{thesis.supervisors}</span>
+    </div>
+  </div>
+
+  {thesis.abstract && (
+    <div class="thesis-abstract">
+      <p>{thesis.abstract}</p>
+    </div>
+  )}
+
+  <div class="thesis-footer">
+    {thesis.thesis_status === 'open' ? (
+      <a href="mailto:edgeai-informatik@uibk.ac.at?subject=Application for Thesis: " class="btn btn-primary btn-sm">
+        Apply for Topic &rarr;
+      </a>
+    ) : (
+      <span class="tag-pill">University of Innsbruck</span>
+    )}
+  </div>
+</div>
+
+<style>
+  .thesis-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .thesis-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+  }
+
+  .thesis-badges {
+    display: flex;
+    gap: 0.35rem;
+  }
+
+  .thesis-title {
+    font-size: 1.15rem;
+    color: var(--text-primary);
+    line-height: 1.35;
+    margin-bottom: 0.75rem;
+  }
+
+  .thesis-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    margin-bottom: 1rem;
+  }
+
+  .meta-row {
+    display: flex;
+    gap: 0.4rem;
+  }
+
+  .meta-label {
+    color: var(--text-muted);
+  }
+
+  .meta-val {
+    color: var(--text-secondary);
+  }
+
+  .thesis-abstract {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-bottom: 1.25rem;
+  }
+
+  .thesis-footer {
+    border-top: 1px solid var(--border-color);
+    padding-top: 0.75rem;
+    margin-top: auto;
+    display: flex;
+    justify-content: flex-end;
+  }
+</style>

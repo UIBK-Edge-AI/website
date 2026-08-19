@@ -1,0 +1,62 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { getProjects } from '../../lib/directus';
+
+const projects = await getProjects();
+---
+
+<BaseLayout 
+  title="Research Projects | Edge AI Research Group" 
+  description="Funded research projects and initiatives in edge computing, distributed AI, and autonomous systems at the University of Innsbruck."
+>
+  <div class="page-header">
+    <div class="container">
+      <span class="badge badge-cyan">Innovation</span>
+      <h1 class="page-title">Research Projects</h1>
+      <p class="page-subtitle">
+        National and international collaborative research initiatives funded by the FFG, EU Horizon, and academic endowments.
+      </p>
+    </div>
+  </div>
+
+  <div class="container section-py" style="padding-top: 0;">
+    <!-- Filter Navigation -->
+    <div class="filter-nav" id="project-filter-nav">
+      <button class="filter-btn active" data-filter="all">All Projects ({projects.length})</button>
+      <button class="filter-btn" data-filter="ongoing">Ongoing</button>
+      <button class="filter-btn" data-filter="completed">Completed</button>
+    </div>
+
+    <div class="grid-3" id="projects-grid">
+      {projects.map((project) => (
+        <div class="project-item-wrapper" data-status={project.project_status}>
+          <ProjectCard project={project} />
+        </div>
+      ))}
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  const filterBtns = document.querySelectorAll<HTMLButtonElement>('#project-filter-nav .filter-btn');
+  const projectItems = document.querySelectorAll<HTMLElement>('.project-item-wrapper');
+
+  filterBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filterVal = btn.getAttribute('data-filter');
+
+      projectItems.forEach((item) => {
+        const itemStatus = item.getAttribute('data-status');
+        if (filterVal === 'all' || itemStatus === filterVal) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>

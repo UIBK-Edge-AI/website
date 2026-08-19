@@ -1,0 +1,415 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PublicationCard from '../../components/PublicationCard.astro';
+import { getMembers, getPublications } from '../../lib/directus';
+import type { Member, Publication } from '../../lib/types';
+
+export async function getStaticPaths() {
+  const members = await getMembers();
+  return members.map((member) => ({
+    params: { slug: member.slug },
+    props: { member }
+  }));
+}
+
+interface Props {
+  member: Member;
+}
+
+const { member } = Astro.props;
+const allPublications = await getPublications();
+
+// Find publications authored by this member
+const memberPubs = allPublications.filter((pub: Publication) => {
+  const lastnameMatch = pub.authors.toLowerCase().includes(member.lastname.toLowerCase());
+  const nameMatch = member.name && pub.authors.toLowerCase().includes(member.name.toLowerCase());
+  const explicitKeyMatch = member.publications && member.publications.includes(pub.bibtex_key);
+  return lastnameMatch || nameMatch || explicitKeyMatch;
+});
+---
+
+<BaseLayout 
+  title={`${member.title} | Edge AI Research Group`}
+  description={`Academic profile and research portfolio of ${member.title}, ${member.category} at University of Innsbruck.`}
+>
+  <div class="container section-py">
+    <!-- Back to Team Link -->
+    <a href="/team" class="back-link">&larr; Back to Team Directory</a>
+
+    <div class="profile-layout">
+      <!-- Sidebar / Bio Card -->
+      <div class="profile-sidebar">
+        <div class="card-glass profile-card">
+          <div class="profile-avatar-wrapper">
+            <img 
+              src={member.avatar_path || '/images/team/person-placeholder.svg'} 
+              alt={member.title} 
+              class="profile-avatar" 
+              onerror="this.src='/images/team/person-placeholder.svg'"
+            />
+          </div>
+
+          <span class="badge badge-cyan profile-category-badge">{member.category}</span>
+          <h1 class="profile-name">{member.title}</h1>
+          <p class="profile-role">{member.position.toUpperCase()}</p>
+
+          <div class="profile-contact-list">
+            {member.office && (
+              <div class="contact-item">
+                <span class="contact-label">Office:</span>
+                <span class="contact-val">{member.office}</span>
+              </div>
+            )}
+            {member.phone && (
+              <div class="contact-item">
+                <span class="contact-label">Phone:</span>
+                <span class="contact-val">{member.phone}</span>
+              </div>
+            )}
+            {member.email && (
+              <div class="contact-item">
+                <span class="contact-label">Email:</span>
+                <a href={`mailto:${member.email}`} class="contact-val email">{member.email}</a>
+              </div>
+            )}
+            {member.address && (
+              <div class="contact-item">
+                <span class="contact-label">Address:</span>
+                <span class="contact-val">{member.address}</span>
+              </div>
+            )}
+          </div>
+
+          <!-- Academic Profiles -->
+          <div class="profile-links">
+            {member.orcid && (
+              <a href={`https://orcid.org/${member.orcid}`} target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm link-btn">
+                ORCID: {member.orcid}
+              </a>
+            )}
+            {member.scholar_id && (
+              <a href={`https://scholar.google.com/citations?user=${member.scholar_id}`} target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm link-btn">
+                Google Scholar &rarr;
+              </a>
+            )}
+            {member.linkedin && (
+              <a href={member.linkedin.startsWith('http') ? member.linkedin : `https://linkedin.com/in/${member.linkedin}`} target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm link-btn">
+                LinkedIn Profile &rarr;
+              </a>
+            )}
+            {member.github && (
+              <a href={`https://github.com/${member.github}`} target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm link-btn">
+                GitHub: @{member.github}
+              </a>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Profile Content -->
+      <div class="profile-main">
+        <!-- Research Interests -->
+        {member.interests && member.interests.length > 0 && (
+          <div class="card-glass content-block">
+            <h2 class="block-title">Research Interests</h2>
+            <div class="tags-cloud">
+              {member.interests.map((interest) => (
+                <span class="tag-pill tag-lg">{interest}</span>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <!-- Biography -->
+        {member.bio && (
+          <div class="card-glass content-block">
+            <h2 class="block-title">Biography & Summary</h2>
+            <div class="bio-text">
+              <p>{member.bio}</p>
+            </div>
+          </div>
+        )}
+
+        <!-- Academic & Professional Positions -->
+        {member.positions && member.positions.length > 0 && (
+          <div class="card-glass content-block">
+            <h2 class="block-title">Positions & Experience</h2>
+            <div class="timeline">
+              {member.positions.map((pos) => (
+                <div class="timeline-item">
+                  <div class="timeline-date">
+                    {pos.from} {pos.to ? `– ${pos.to}` : '– Present'}
+                  </div>
+                  <div class="timeline-content">
+                    <h3 class="timeline-title">{pos.title}</h3>
+                    <p class="timeline-sub">
+                      {pos.dep ? `${pos.dep}, ` : ''}
+                      <strong>{pos.inst}</strong>
+                      {pos.where ? ` (${pos.where})` : ''}
+                    </p>
+                    {pos.notes && (
+                      <p class="timeline-notes">{pos.notes}</p>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <!-- Education History -->
+        {member.education && member.education.length > 0 && (
+          <div class="card-glass content-block">
+            <h2 class="block-title">Education</h2>
+            <div class="timeline">
+              {member.education.map((edu) => (
+                <div class="timeline-item">
+                  <div class="timeline-date">
+                    {edu.year || `${edu.from || ''} – ${edu.to || ''}`}
+                  </div>
+                  <div class="timeline-content">
+                    <h3 class="timeline-title">{edu.title}</h3>
+                    <p class="timeline-sub">
+                      <strong>{edu.inst}</strong>
+                      {edu.where ? ` (${edu.where})` : ''}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <!-- Publications by this member -->
+        {memberPubs.length > 0 && (
+          <div class="content-block">
+            <div class="section-header-flex">
+              <h2 class="block-title">Selected Publications ({memberPubs.length})</h2>
+              <a href="/publications" class="btn btn-secondary btn-sm">All Publications &rarr;</a>
+            </div>
+            <div class="pubs-stack">
+              {memberPubs.slice(0, 5).map((pub) => (
+                <PublicationCard pub={pub} />
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .back-link {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--accent-cyan);
+    margin-bottom: 2rem;
+    text-decoration: none;
+  }
+
+  .profile-layout {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  .profile-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 2.5rem 1.75rem;
+  }
+
+  .profile-avatar-wrapper {
+    width: 140px;
+    height: 140px;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 2px solid var(--border-highlight);
+    box-shadow: var(--shadow-cyan);
+    margin-bottom: 1.25rem;
+    background: #000;
+  }
+
+  .profile-avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+  }
+
+  .profile-category-badge {
+    margin-bottom: 0.75rem;
+  }
+
+  .profile-name {
+    font-size: 1.45rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .profile-role {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+    margin-bottom: 1.5rem;
+  }
+
+  .profile-contact-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    font-size: 0.85rem;
+    font-family: var(--font-mono);
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    padding: 1.25rem 0;
+    margin-bottom: 1.5rem;
+    text-align: left;
+  }
+
+  .contact-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  .contact-label {
+    color: var(--text-muted);
+    flex-shrink: 0;
+  }
+
+  .contact-val {
+    color: var(--text-secondary);
+    word-break: break-all;
+  }
+
+  .contact-val.email {
+    color: var(--accent-cyan);
+  }
+
+  .profile-links {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .link-btn {
+    width: 100%;
+    font-size: 0.8rem;
+    font-family: var(--font-mono);
+  }
+
+  .profile-main {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .content-block {
+    padding: 2rem;
+  }
+
+  .block-title {
+    font-size: 1.35rem;
+    margin-bottom: 1.25rem;
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+  }
+
+  .tags-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tag-lg {
+    font-size: 0.9rem;
+    padding: 0.35rem 0.8rem;
+  }
+
+  .bio-text p {
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  /* Timeline */
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    position: relative;
+    padding-left: 1.5rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    top: 0.5rem;
+    bottom: 0.5rem;
+    left: 4px;
+    width: 2px;
+    background: var(--border-color);
+  }
+
+  .timeline-item {
+    position: relative;
+  }
+
+  .timeline-item::after {
+    content: '';
+    position: absolute;
+    left: -1.5rem;
+    top: 0.4rem;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent-cyan);
+    box-shadow: 0 0 8px var(--accent-cyan);
+  }
+
+  .timeline-date {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--accent-cyan);
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+  }
+
+  .timeline-title {
+    font-size: 1.05rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .timeline-sub {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+  }
+
+  .timeline-notes {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 0.4rem;
+    white-space: pre-line;
+  }
+
+  .pubs-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  @media (max-width: 900px) {
+    .profile-layout {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

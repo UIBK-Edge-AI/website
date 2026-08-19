@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import VacancyCard from '../../components/VacancyCard.astro';
+import { getVacancies } from '../../lib/directus';
+
+const vacancies = await getVacancies();
+---
+
+<BaseLayout 
+  title="Open Positions & Vacancies | Edge AI Research Group" 
+  description="Join our team at University of Innsbruck. PhD and PostDoctoral positions in Edge AI, Cloud Computing, and Machine Learning."
+>
+  <div class="page-header">
+    <div class="container">
+      <span class="badge badge-emerald">Careers</span>
+      <h1 class="page-title">Open Positions</h1>
+      <p class="page-subtitle">
+        Join our growing research group in the Austrian Alps. We offer funded PhD and PostDoc positions with competitive Austrian salary scales and international collaboration.
+      </p>
+    </div>
+  </div>
+
+  <div class="container section-py" style="padding-top: 0;">
+    {vacancies.length > 0 ? (
+      <div class="grid-2">
+        {vacancies.map((vacancy) => (
+          <VacancyCard vacancy={vacancy} />
+        ))}
+      </div>
+    ) : (
+      <div class="card-glass empty-state">
+        <h3>No open positions at this moment</h3>
+        <p>We are always looking for talented researchers. Feel free to reach out with an unsolicited application.</p>
+        <a href="mailto:edgeai-informatik@uibk.ac.at" class="btn btn-secondary btn-sm">Contact Us &rarr;</a>
+      </div>
+    )}
+  </div>
+</BaseLayout>
+
+<style>
+  .empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+</style>

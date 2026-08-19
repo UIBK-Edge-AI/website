@@ -1,0 +1,205 @@
+---
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const {
+  title = 'Edge AI Research Group | Universität Innsbruck',
+  description = 'Advancing scalable, sustainable, and secure Artificial Intelligence at the network edge. Department of Computer Science, University of Innsbruck.',
+  image = '/images/logo/winter1.png'
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://edgeai.uibk.ac.at');
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="/images/favicon-32x32.png" />
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon-180x180.png" />
+
+  <!-- SEO Meta Tags -->
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonicalURL} />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonicalURL} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={image} />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content={canonicalURL} />
+  <meta property="twitter:title" content={title} />
+  <meta property="twitter:description" content={description} />
+  <meta property="twitter:image" content={image} />
+
+  <!-- Prevent FOUC for theme -->
+  <script is:inline>
+    const theme = localStorage.getItem('theme');
+    if (theme === 'light') {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  </script>
+</head>
+<body>
+  <Navbar />
+  
+  <main id="main-content">
+    <slot />
+  </main>
+
+  <Footer />
+
+  <!-- Global BibTeX Modal -->
+  <div id="bibtex-modal" class="modal-backdrop" style="display:none;">
+    <div class="modal-container">
+      <div class="modal-header">
+        <span class="modal-title">BibTeX Citation</span>
+        <button id="modal-close" class="modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <pre><code id="bibtex-code"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <span id="copy-status" class="copy-status"></span>
+        <button id="copy-bibtex-btn" class="btn btn-primary btn-sm">
+          Copy Citation
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <style is:global>
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(8px);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .modal-container {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-highlight);
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 650px;
+      box-shadow: var(--shadow-lg), var(--shadow-cyan);
+      overflow: hidden;
+    }
+
+    .modal-header {
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .modal-title {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .modal-close-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.5rem;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .modal-close-btn:hover {
+      color: var(--text-primary);
+    }
+
+    .modal-body {
+      padding: 1.5rem;
+      max-height: 350px;
+      overflow-y: auto;
+      background: var(--bg-primary);
+    }
+
+    .modal-body pre {
+      margin: 0;
+      color: var(--accent-cyan);
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+
+    .modal-footer {
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .copy-status {
+      font-size: 0.85rem;
+      font-family: var(--font-mono);
+      color: var(--accent-emerald);
+    }
+  </style>
+
+  <script>
+    const modal = document.getElementById('bibtex-modal');
+    const closeBtn = document.getElementById('modal-close');
+    const copyBtn = document.getElementById('copy-bibtex-btn');
+    const codeEl = document.getElementById('bibtex-code');
+    const statusEl = document.getElementById('copy-status');
+
+    document.addEventListener('click', (e) => {
+      const target = (e.target as HTMLElement).closest('.bibtex-btn');
+      if (target) {
+        const bibtex = target.getAttribute('data-bibtex');
+        if (bibtex && codeEl && modal) {
+          codeEl.textContent = bibtex;
+          if (statusEl) statusEl.textContent = '';
+          modal.style.display = 'flex';
+        }
+      }
+    });
+
+    closeBtn?.addEventListener('click', () => {
+      if (modal) modal.style.display = 'none';
+    });
+
+    modal?.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+
+    copyBtn?.addEventListener('click', () => {
+      if (codeEl?.textContent) {
+        navigator.clipboard.writeText(codeEl.textContent);
+        if (statusEl) statusEl.textContent = '✓ Copied to clipboard!';
+        setTimeout(() => {
+          if (statusEl) statusEl.textContent = '';
+        }, 3000);
+      }
+    });
+  </script>
+</body>
+</html>

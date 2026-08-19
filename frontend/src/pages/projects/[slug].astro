@@ -1,0 +1,252 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getProjects } from '../../lib/directus';
+import type { Project } from '../../lib/types';
+
+export async function getStaticPaths() {
+  const projects = await getProjects();
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project }
+  }));
+}
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+---
+
+<BaseLayout 
+  title={`${project.title} | Edge AI Projects`} 
+  description={`${project.title} - Research project in the Edge AI group at University of Innsbruck.`}
+>
+  <div class="container section-py">
+    <a href="/projects" class="back-link">&larr; Back to Projects</a>
+
+    <div class="project-detail-layout">
+      <!-- Main Content -->
+      <div class="project-main-col">
+        <div class="card-glass project-header-card">
+          <div class="project-meta-badges">
+            <span class={`badge ${project.project_status === 'ongoing' ? 'badge-emerald' : 'badge'}`}>
+              {project.project_status}
+            </span>
+            {project.duration && (
+              <span class="badge badge-cyan">{project.duration}</span>
+            )}
+            <span class="badge badge-amber">{project.sponsor}</span>
+          </div>
+
+          <h1 class="project-main-title">{project.name}</h1>
+          <p class="project-main-sub">{project.title}</p>
+        </div>
+
+        <div class="card-glass project-content-card">
+          <h2 class="section-heading">Project Overview & Objectives</h2>
+          <div class="markdown-body">
+            {project.content ? (
+              <div class="content-text" set:html={project.content.replace(/\n\n/g, '<br/><br/>').replace(/## (.*?)\n/g, '<h3>$1</h3>').replace(/### (.*?)\n/g, '<h4>$1</h4>')} />
+            ) : (
+              <p>{project.summary}</p>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="project-sidebar-col">
+        <div class="card-glass info-card">
+          {project.cover_image_path && (
+            <div class="project-img-box">
+              <img src={project.cover_image_path} alt={project.name} class="project-cover" />
+            </div>
+          )}
+
+          <div class="info-list">
+            <div class="info-item">
+              <span class="info-label">Sponsor</span>
+              <span class="info-val">{project.sponsor}</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Duration</span>
+              <span class="info-val">{project.duration}</span>
+            </div>
+            {project.identifier && (
+              <div class="info-item">
+                <span class="info-label">Identifier</span>
+                <span class="info-val">{project.identifier}</span>
+              </div>
+            )}
+          </div>
+
+          {project.website && (
+            <div class="sidebar-action">
+              <a href={project.website} target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm btn-block">
+                Official Project Site &rarr;
+              </a>
+            </div>
+          )}
+        </div>
+
+        <!-- Tags -->
+        {project.tags && project.tags.length > 0 && (
+          <div class="card-glass info-card">
+            <h3 class="info-card-title">Research Tags</h3>
+            <div class="tags-cloud">
+              {project.tags.map((tag) => (
+                <span class="tag-pill">{tag}</span>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .back-link {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--accent-cyan);
+    margin-bottom: 2rem;
+    text-decoration: none;
+  }
+
+  .project-detail-layout {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  .project-header-card {
+    padding: 2.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .project-meta-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .project-main-title {
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .project-main-sub {
+    font-size: 1.2rem;
+    color: var(--accent-cyan);
+    font-weight: 500;
+  }
+
+  .project-content-card {
+    padding: 2.5rem;
+  }
+
+  .section-heading {
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+  }
+
+  .content-text {
+    font-size: 1.02rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+  }
+
+  .content-text h3 {
+    font-size: 1.3rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+  }
+
+  .content-text h4 {
+    font-size: 1.15rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    color: var(--accent-cyan);
+  }
+
+  .project-sidebar-col {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .info-card {
+    padding: 1.75rem;
+  }
+
+  .project-img-box {
+    margin-bottom: 1.5rem;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border-color);
+  }
+
+  .project-cover {
+    max-height: 80px;
+    max-width: 100%;
+    object-fit: contain;
+  }
+
+  .info-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    margin-bottom: 1.5rem;
+    font-family: var(--font-mono);
+  }
+
+  .info-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    border-bottom: 1px solid var(--border-subtle);
+    padding-bottom: 0.4rem;
+  }
+
+  .info-label {
+    color: var(--text-muted);
+  }
+
+  .info-val {
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+
+  .btn-block {
+    width: 100%;
+  }
+
+  .info-card-title {
+    font-size: 1.05rem;
+    margin-bottom: 1rem;
+  }
+
+  .tags-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  @media (max-width: 900px) {
+    .project-detail-layout {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

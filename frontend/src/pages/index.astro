@@ -1,0 +1,446 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroCarousel from '../components/HeroCarousel.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import MemberCard from '../components/MemberCard.astro';
+import { getSiteSettings, getProjects, getMembers, getNewsEvents } from '../lib/directus';
+
+const settings = await getSiteSettings();
+const allProjects = await getProjects();
+const allMembers = await getMembers();
+const news = await getNewsEvents();
+
+const featuredProjects = allProjects.slice(0, 3);
+const professorsAndPostdocs = allMembers.filter(m => ['PROFESSOR', 'POSTDOCTORAL RESEARCHERS'].includes(m.category)).slice(0, 4);
+
+const topicIcons: Record<string, string> = {
+  'Edge computing': '⚡',
+  'Applied machine learning': '🧠',
+  'Federated and embedded machine learning': '🌐',
+  'Graph artificial intelligence': '🕸️',
+  'Cloud and high-performance computing': '☁️',
+  'Scheduling and resource management': '⏱️',
+  'Compliance, ethics, sustainability': '🌱'
+};
+---
+
+<BaseLayout title="Edge AI Research Group | University of Innsbruck">
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container hero-container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="pulse-dot"></span>
+          <span>Universität Innsbruck &bull; Department of Computer Science</span>
+        </div>
+        <h1 class="hero-title">
+          EDGE <span class="gradient-text">ARTIFICIAL</span> INTELLIGENCE
+        </h1>
+        <p class="hero-tagline">
+          {settings.tagline || 'Smart Computing Where It Matters'}
+        </p>
+        <p class="hero-lead">
+          Creating scalable, sustainable, and secure AI systems distributed on edge devices with limited capabilities, backed by powerful clouds and supercomputers.
+        </p>
+        <div class="hero-actions">
+          <a href="/projects" class="btn btn-primary">
+            Explore Research &rarr;
+          </a>
+          <a href="/team" class="btn btn-secondary">
+            Meet the Team
+          </a>
+          <a href="/vacancies" class="btn btn-secondary">
+            <span class="pulse-dot"></span> Open Positions
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-carousel-wrapper">
+        <HeroCarousel images={settings.carousel_images} />
+      </div>
+    </div>
+  </section>
+
+  <!-- Research Pillars Section -->
+  <section class="section-py pillars-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge badge-cyan">Core Competencies</span>
+        <h2 class="section-title">Research Focus Areas</h2>
+        <p class="section-subtitle">
+          Bridging the gap between edge devices, machine learning, distributed software engineering, and societal sustainability.
+        </p>
+      </div>
+
+      <div class="grid-4 pillars-grid">
+        {settings.research_topics.map((topic) => (
+          <div class="card-glass topic-card">
+            <div class="topic-icon">{topicIcons[topic] || '🔹'}</div>
+            <h3 class="topic-title">{topic}</h3>
+            <p class="topic-desc">
+              Developing next-generation architectures and algorithmic foundations for {topic.toLowerCase()} on the computing continuum.
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Motivation & Mission Section -->
+  <section class="section-py motivation-section">
+    <div class="container motivation-grid">
+      <div class="card-glass motivation-card">
+        <span class="badge badge-emerald">Our Mission</span>
+        <h2 class="motivation-title">Edge AI at the Computing Continuum</h2>
+        <div class="motivation-body">
+          <p>{settings.motivation}</p>
+        </div>
+        <div class="stats-row">
+          <div class="stat-item">
+            <span class="stat-number">12+</span>
+            <span class="stat-label">Researchers</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">5+</span>
+            <span class="stat-label">Active Grants</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">55+</span>
+            <span class="stat-label">Publications</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-glass funding-card">
+        <span class="badge badge-amber">Endowment & Support</span>
+        <h3 class="funding-title">AIM AT Endowed Professorship</h3>
+        <p class="funding-text">
+          {settings.acknowledgments}
+        </p>
+        <div class="funding-logos">
+          <img src="/images/logo/stiftung_edgeai.svg" alt="AIM AT Edge AI Stiftung" class="funding-logo-img" />
+          <img src="/images/logo/uibk_light.svg" alt="Universität Innsbruck" class="funding-logo-img" />
+        </div>
+        <div class="funding-footer">
+          <a href="/projects/aimAtEdgeAI" class="btn btn-secondary btn-sm">
+            About the Professorship &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Research Projects -->
+  <section class="section-py projects-section">
+    <div class="container">
+      <div class="section-header-flex">
+        <div>
+          <span class="badge badge-blue">Key Initiatives</span>
+          <h2 class="section-title">Featured Research Projects</h2>
+        </div>
+        <a href="/projects" class="btn btn-secondary">
+          View All Projects ({allProjects.length}) &rarr;
+        </a>
+      </div>
+
+      <div class="grid-3">
+        {featuredProjects.map((project) => (
+          <ProjectCard project={project} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Latest News & Highlights -->
+  <section class="section-py news-section">
+    <div class="container">
+      <div class="section-header-flex">
+        <div>
+          <span class="badge badge-amber">Group Highlights</span>
+          <h2 class="section-title">Latest News & Events</h2>
+        </div>
+        <a href="/news" class="btn btn-secondary">
+          All News &rarr;
+        </a>
+      </div>
+
+      <div class="grid-3">
+        {news.map((item) => (
+          <div class="card-glass news-card">
+            {item.cover_image_path && (
+              <div class="news-img-wrapper">
+                <img src={item.cover_image_path} alt={item.title} class="news-img" />
+              </div>
+            )}
+            <div class="news-body">
+              <div class="news-meta">
+                <span class="badge badge-cyan">{item.category}</span>
+                <span class="news-date">{item.date}</span>
+              </div>
+              <h3 class="news-card-title">{item.title}</h3>
+              <p class="news-summary">{item.summary}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero-section {
+    padding-top: 3.5rem;
+    padding-bottom: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-container {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .hero-content {
+    max-width: 850px;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-color);
+    padding: 0.35rem 0.9rem;
+    border-radius: var(--radius-full);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-title {
+    font-size: 3.2rem;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: 0.75rem;
+  }
+
+  .gradient-text {
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .hero-tagline {
+    font-family: var(--font-mono);
+    font-size: 1.15rem;
+    color: var(--accent-cyan);
+    margin-bottom: 1rem;
+  }
+
+  .hero-lead {
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    max-width: 750px;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .hero-carousel-wrapper {
+    width: 100%;
+  }
+
+  .section-header {
+    margin-bottom: 2.5rem;
+    text-align: center;
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .section-header-flex {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 2.5rem;
+  }
+
+  .section-title {
+    font-size: 2.2rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .section-subtitle {
+    font-size: 1.05rem;
+  }
+
+  .topic-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .topic-icon {
+    font-size: 1.75rem;
+  }
+
+  .topic-title {
+    font-size: 1.15rem;
+    color: var(--text-primary);
+  }
+
+  .topic-desc {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  .motivation-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 2rem;
+  }
+
+  .motivation-card {
+    padding: 2.5rem;
+  }
+
+  .motivation-title {
+    font-size: 1.75rem;
+    margin-top: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .motivation-body p {
+    font-size: 1.02rem;
+    line-height: 1.65;
+    margin-bottom: 2rem;
+  }
+
+  .stats-row {
+    display: flex;
+    gap: 2.5rem;
+    border-top: 1px solid var(--border-color);
+    padding-top: 1.5rem;
+  }
+
+  .stat-number {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--accent-cyan);
+    line-height: 1;
+    margin-bottom: 0.35rem;
+  }
+
+  .stat-label {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+
+  .funding-card {
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .funding-title {
+    font-size: 1.35rem;
+    margin-top: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .funding-text {
+    font-size: 0.95rem;
+    line-height: 1.55;
+    margin-bottom: 1.5rem;
+  }
+
+  .funding-logos {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+  }
+
+  .funding-logo-img {
+    max-height: 48px;
+    max-width: 220px;
+    object-fit: contain;
+  }
+
+  .funding-footer {
+    margin-top: auto;
+  }
+
+  .news-card {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .news-img-wrapper {
+    height: 180px;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .news-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .news-card:hover .news-img {
+    transform: scale(1.05);
+  }
+
+  .news-body {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .news-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+  }
+
+  .news-date {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  .news-card-title {
+    font-size: 1.15rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .news-summary {
+    font-size: 0.88rem;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 992px) {
+    .hero-title { font-size: 2.5rem; }
+    .motivation-grid { grid-template-columns: 1fr; }
+    .section-header-flex { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  }
+</style>

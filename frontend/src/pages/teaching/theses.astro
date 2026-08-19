@@ -1,0 +1,140 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ThesisCard from '../../components/ThesisCard.astro';
+import { getTheses } from '../../lib/directus';
+
+const theses = await getTheses();
+
+const degrees = [
+  { label: 'All Theses', value: 'all' },
+  { label: 'Master Theses', value: 'master' },
+  { label: 'Bachelor Theses', value: 'bachelor' },
+  { label: 'Open Topics', value: 'open' }
+];
+---
+
+<BaseLayout 
+  title="Student Theses & Research Topics | Edge AI" 
+  description="Bachelor, Master, and PhD theses topics and completed student projects in Edge AI at University of Innsbruck."
+>
+  <div class="page-header">
+    <div class="container">
+      <span class="badge badge-cyan">Mentorship</span>
+      <h1 class="page-title">Student Theses & Projects</h1>
+      <p class="page-subtitle">
+        Explore ongoing and completed Bachelor and Master theses, or apply for open thesis topics supervised by our faculty.
+      </p>
+      <div class="teaching-subnav">
+        <a href="/teaching" class="btn btn-secondary btn-sm">&larr; Back to Courses</a>
+        <a href="/teaching/theses" class="btn btn-primary btn-sm">Student Theses</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container section-py" style="padding-top: 0;">
+    <!-- Thesis Guidelines Card -->
+    <div class="card-glass guide-card">
+      <div class="guide-content">
+        <h3 class="guide-title">Looking for a Bachelor or Master Thesis?</h3>
+        <p class="guide-text">
+          We offer thesis topics across federated learning, graph neural networks, UAV computer vision, embedded AI, and edge orchestration. If you are interested in working with us, contact our supervisors with your CV and transcript of records.
+        </p>
+      </div>
+      <div class="guide-action">
+        <a href="mailto:edgeai-informatik@uibk.ac.at?subject=Inquiry regarding Thesis Topic" class="btn btn-primary btn-sm">
+          Inquire About Topics &rarr;
+        </a>
+      </div>
+    </div>
+
+    <!-- Filter Navigation -->
+    <div class="filter-nav" id="theses-filter-nav">
+      {degrees.map((d, idx) => (
+        <button class={`filter-btn ${idx === 0 ? 'active' : ''}`} data-filter={d.value}>
+          {d.label}
+        </button>
+      ))}
+    </div>
+
+    <!-- Theses Grid -->
+    <div class="grid-2" id="theses-grid">
+      {theses.map((thesis) => (
+        <div class="thesis-item-wrapper" data-degree={thesis.degree} data-status={thesis.thesis_status}>
+          <ThesisCard thesis={thesis} />
+        </div>
+      ))}
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .teaching-subnav {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+
+  .guide-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem;
+    margin-bottom: 2.5rem;
+    border-color: var(--border-highlight);
+    background: var(--gradient-glow);
+  }
+
+  .guide-title {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .guide-text {
+    font-size: 0.92rem;
+    max-width: 750px;
+    line-height: 1.55;
+  }
+
+  .guide-action {
+    flex-shrink: 0;
+    margin-left: 2rem;
+  }
+
+  @media (max-width: 768px) {
+    .guide-card {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.5rem;
+    }
+    .guide-action {
+      margin-left: 0;
+    }
+  }
+</style>
+
+<script>
+  const filterBtns = document.querySelectorAll<HTMLButtonElement>('#theses-filter-nav .filter-btn');
+  const thesisItems = document.querySelectorAll<HTMLElement>('.thesis-item-wrapper');
+
+  filterBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filterVal = btn.getAttribute('data-filter');
+
+      thesisItems.forEach((item) => {
+        const itemDegree = item.getAttribute('data-degree');
+        const itemStatus = item.getAttribute('data-status');
+
+        if (filterVal === 'all') {
+          item.style.display = 'block';
+        } else if (filterVal === 'open') {
+          item.style.display = (itemStatus === 'open') ? 'block' : 'none';
+        } else {
+          item.style.display = (itemDegree === filterVal) ? 'block' : 'none';
+        }
+      });
+    });
+  });
+</script>

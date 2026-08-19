@@ -1,0 +1,248 @@
+---
+import type { Member } from '../lib/types';
+
+interface Props {
+  member: Member;
+}
+
+const { member } = Astro.props;
+
+const categoryBadges: Record<string, string> = {
+  'PROFESSOR': 'badge-cyan',
+  'POSTDOCTORAL RESEARCHERS': 'badge-blue',
+  'SYSTEMS ENGINEER': 'badge-emerald',
+  'PHD STUDENTS': 'badge-amber',
+  'STUDENTS': 'badge-blue',
+  'ALUMNI': 'badge'
+};
+
+const badgeClass = categoryBadges[member.category] || 'badge-blue';
+---
+
+<div class="card-glass member-card" data-category={member.category} data-status={member.member_status}>
+  <div class="member-header">
+    <div class="avatar-wrapper">
+      <img 
+        src={member.avatar_path || '/images/team/person-placeholder.svg'} 
+        alt={member.title} 
+        class="member-avatar" 
+        onerror="this.src='/images/team/person-placeholder.svg'"
+      />
+    </div>
+    <div class="member-intro">
+      <span class={`badge ${badgeClass}`}>{member.category}</span>
+      <h3 class="member-name">
+        <a href={`/team/${member.slug}`}>{member.title}</a>
+      </h3>
+      <p class="member-role">{member.position.toUpperCase()}</p>
+    </div>
+  </div>
+
+  <div class="member-details">
+    {member.office && (
+      <div class="detail-row">
+        <svg class="detail-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+          <polyline points="9 22 9 12 15 12 15 22"></polyline>
+        </svg>
+        <span>Office: {member.office}</span>
+      </div>
+    )}
+
+    {member.email && (
+      <div class="detail-row">
+        <svg class="detail-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+          <polyline points="22,6 12,13 2,6"></polyline>
+        </svg>
+        <a href={`mailto:${member.email}`} class="member-email-link">{member.email}</a>
+      </div>
+    )}
+  </div>
+
+  {member.interests && member.interests.length > 0 && (
+    <div class="interests-container">
+      <div class="interests-list">
+        {member.interests.slice(0, 3).map((interest) => (
+          <span class="tag-pill">{interest}</span>
+        ))}
+        {member.interests.length > 3 && (
+          <span class="tag-pill">+{member.interests.length - 3}</span>
+        )}
+      </div>
+    </div>
+  )}
+
+  <div class="member-footer">
+    <div class="social-links">
+      {member.orcid && (
+        <a href={`https://orcid.org/${member.orcid}`} target="_blank" rel="noopener noreferrer" class="social-icon-link orcid" title="ORCID Profile">
+          <span class="social-pill">ORCID</span>
+        </a>
+      )}
+      {member.scholar_id && (
+        <a href={`https://scholar.google.com/citations?user=${member.scholar_id}`} target="_blank" rel="noopener noreferrer" class="social-icon-link scholar" title="Google Scholar">
+          <span class="social-pill">Scholar</span>
+        </a>
+      )}
+      {member.linkedin && (
+        <a href={member.linkedin.startsWith('http') ? member.linkedin : `https://linkedin.com/in/${member.linkedin}`} target="_blank" rel="noopener noreferrer" class="social-icon-link linkedin" title="LinkedIn Profile">
+          <span class="social-pill">LinkedIn</span>
+        </a>
+      )}
+    </div>
+
+    <a href={`/team/${member.slug}`} class="view-profile-link">
+      Profile &rarr;
+    </a>
+  </div>
+</div>
+
+<style>
+  .member-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+  }
+
+  .member-header {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .avatar-wrapper {
+    width: 72px;
+    height: 72px;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    flex-shrink: 0;
+    border: 1px solid var(--border-color);
+    background: #000;
+  }
+
+  .member-avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    transition: transform 0.3s ease;
+  }
+
+  .member-card:hover .member-avatar {
+    transform: scale(1.05);
+  }
+
+  .member-intro {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .member-name {
+    font-size: 1.05rem;
+    margin-top: 0.2rem;
+  }
+
+  .member-name a {
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .member-name a:hover {
+    color: var(--accent-cyan);
+  }
+
+  .member-role {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+  }
+
+  .member-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    font-family: var(--font-mono);
+  }
+
+  .detail-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .detail-icon {
+    color: var(--accent-cyan);
+    flex-shrink: 0;
+  }
+
+  .member-email-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .member-email-link:hover {
+    color: var(--accent-cyan);
+  }
+
+  .interests-container {
+    margin-bottom: 1.25rem;
+  }
+
+  .interests-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+
+  .member-footer {
+    border-top: 1px solid var(--border-color);
+    padding-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+  }
+
+  .social-links {
+    display: flex;
+    gap: 0.35rem;
+  }
+
+  .social-pill {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-color);
+    padding: 0.15rem 0.45rem;
+    border-radius: var(--radius-sm);
+    transition: all 0.2s ease;
+  }
+
+  .social-pill:hover {
+    color: var(--accent-cyan);
+    border-color: var(--border-highlight);
+  }
+
+  .view-profile-link {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--accent-cyan);
+    text-decoration: none;
+    font-weight: 600;
+  }
+</style>

@@ -1,0 +1,145 @@
+---
+import type { Project } from '../lib/types';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+---
+
+<div class="card-glass project-card" data-status={project.project_status}>
+  <div class="project-header">
+    <div class="project-logo-wrapper">
+      <img src={project.cover_image_path || '/images/logo/winter1.png'} alt={project.name} class="project-logo" />
+    </div>
+    <div class="project-badges">
+      <span class={`badge ${project.project_status === 'ongoing' ? 'badge-emerald' : 'badge'}`}>
+        {project.project_status}
+      </span>
+      {project.duration && (
+        <span class="badge badge-cyan">{project.duration}</span>
+      )}
+    </div>
+  </div>
+
+  <div class="project-body">
+    <h3 class="project-title">
+      <a href={`/projects/${project.slug}`}>{project.name}</a>
+    </h3>
+    <p class="project-subtitle">{project.title}</p>
+    <p class="project-sponsor"><strong>Sponsor:</strong> {project.sponsor}</p>
+    <p class="project-summary">{project.summary}</p>
+  </div>
+
+  <div class="project-footer">
+    <div class="project-tags">
+      {project.tags && project.tags.slice(0, 2).map((tag) => (
+        <span class="tag-pill">{tag}</span>
+      ))}
+    </div>
+    <a href={`/projects/${project.slug}`} class="project-link">
+      Read Details &rarr;
+    </a>
+  </div>
+</div>
+
+<style>
+  .project-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .project-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.25rem;
+  }
+
+  .project-logo-wrapper {
+    height: 48px;
+    display: flex;
+    align-items: center;
+  }
+
+  .project-logo {
+    max-height: 44px;
+    max-width: 130px;
+    object-fit: contain;
+  }
+
+  .project-badges {
+    display: flex;
+    gap: 0.35rem;
+  }
+
+  .project-body {
+    flex: 1;
+    margin-bottom: 1.25rem;
+  }
+
+  .project-title {
+    font-size: 1.25rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .project-title a {
+    color: var(--text-primary);
+    text-decoration: none;
+  }
+
+  .project-title a:hover {
+    color: var(--accent-cyan);
+  }
+
+  .project-subtitle {
+    font-size: 0.9rem;
+    color: var(--accent-cyan);
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+  }
+
+  .project-sponsor {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    margin-bottom: 0.75rem;
+  }
+
+  .project-sponsor strong {
+    color: var(--text-secondary);
+  }
+
+  .project-summary {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .project-footer {
+    border-top: 1px solid var(--border-color);
+    padding-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+  }
+
+  .project-tags {
+    display: flex;
+    gap: 0.35rem;
+  }
+
+  .project-link {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--accent-cyan);
+  }
+</style>
