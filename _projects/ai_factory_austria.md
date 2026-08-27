@@ -11,7 +11,6 @@ website: https://ai-at.eu/
 permalink: /projects/aiFactoryAustria
 ---
 
-## AI:AT Factory Austria
 
 ### Motivation
 The spread of large language models (LLMs) and AI technologies in recent years has given them a key role in transforming and expanding industries and markets, with their role continually growing. The EU-funded AI:AT project aims to develop and operate a national initiative to sustainably strengthen Austria’s AI ecosystem. The project will bring together a strong partner network, develop targeted support services and create state-of-the-art supercomputing infrastructure that will enable and empower Europe’s competitiveness, initiative, and innovation in the global field of AI. It will encourage and foster synergies with other AI initiatives throughout Europe, becoming a key building block of the European visible AI ecosystem.

@@ -4,24 +4,24 @@
     "status": "published",
     "project_status": "ongoing",
     "name": "Edge AI",
-    "title": "AIM AT Endowed Professorship",
+    "title": "AIM AT Endowed Professorship \u2013 Artificial Intelligence Mission Austria (AIM AT) funding initiative",
     "slug": "aimAtEdgeAI",
     "identifier": "aim_edgeai",
     "sponsor": "Austrian Research Promotion Agency (FFG)",
-    "duration": "2025 – 2030",
+    "duration": "2025 \u2013 2030",
     "website": "https://projekte.ffg.at/projekt/5121131",
     "cover_image_path": "/images/logo/winter1.png",
     "sort_order": 1,
     "tags": [
       "Edge Computing",
-      "AI",
-      "Distributed Systems"
+      "Distributed AI",
+      "Orchestration"
     ],
     "researchers": [
-      "Radu Prodan"
+      "Univ.-Prof. Dr. Radu Prodan"
     ],
     "summary": "AIM AT Endowed Professorship supported by Austrian Research Promotion Agency (FFG).",
-    "content": "## Artificial Intelligence Mission Austria (AIM AT) funding initiative\n\n### Project Goals\n\nEdge AI further develops the vision of intelligent networked devices in that devices are equipped with “on-site intelligence” and, through clever distribution of data and algorithms, can act not only autonomously and with foresight, but also in fail-safe, performant, energy-efficient ways and in compliance with data protection regulations. The endowed professorship in computer science with a focus on Edge AI will be part of the Department of Computer Science and can be filled both in a technology-oriented manner from edge computing or in an algorithm-oriented manner from machine learning.\n\nThe endowed professorship expands the existing research groups into a competence cluster by building a bridge between the topics of edge, IoT, ML, software engineering, security, and privacy. This competence cluster is outstanding because it takes an end-to-end quality-driven view of intelligent networked systems, thus contributing to science, economy and society by bringing this future generation of systems to application in a controllable, value-based way.\n\nThis submission is strongly supported by the innovation leaders in Western Austria in core industries such as construction, medical technology and traffic engineering, as well as by the professional associations and the province of Tyrol. This underpins the great importance attached to this professorship for the further development of the economy in this region. Furthermore, the endowed professorship Edge AI fits ideally into the structure of the interdisciplinary research area Digital Science Center (DiSC) at the University of Innsbruck. At the DiSC, the endowed professorship expands the existing ML competencies, which are carried across the breadth of scientific disciplines, and also promotes discussions on the societal impact of artificial intelligence.\n\nBeyond industrial applications, the University of Innsbruck as a full university offers an optimal environment for the future application of \"smart\" sensors to reach a new level of evidence-based understanding of our world. This potential extends to diverse branches of science, including ecology, geology, atmospheric sciences and civil engineering. Research successes already achieved on the basis of sensor networks in high mountain regions illustrate the promises for the future. They open up broad fields of action to strengthen Austria as a science location and to solve societal challenges.\n\nThe University of Innsbruck offers an internationally outstanding scientific environment that is uniquely positioned for high-performance computing, quantum computing, machine learning, and edge computing to join forces towards a future of intelligent edge devices."
+    "content": "### Project Goals\n\nEdge AI further develops the vision of intelligent networked devices in that devices are equipped with \u201con-site intelligence\u201d and, through clever distribution of data and algorithms, can act not only autonomously and with foresight, but also in fail-safe, performant, energy-efficient ways and in compliance with data protection regulations. The endowed professorship in computer science with a focus on Edge AI will be part of the Department of Computer Science and can be filled both in a technology-oriented manner from edge computing or in an algorithm-oriented manner from machine learning.\n\nThe endowed professorship expands the existing research groups into a competence cluster by building a bridge between the topics of edge, IoT, ML, software engineering, security, and privacy. This competence cluster is outstanding because it takes an end-to-end quality-driven view of intelligent networked systems, thus contributing to science, economy and society by bringing this future generation of systems to application in a controllable, value-based way.\n\nThis submission is strongly supported by the innovation leaders in Western Austria in core industries such as construction, medical technology and traffic engineering, as well as by the professional associations and the province of Tyrol. This underpins the great importance attached to this professorship for the further development of the economy in this region. Furthermore, the endowed professorship Edge AI fits ideally into the structure of the interdisciplinary research area Digital Science Center (DiSC) at the University of Innsbruck. At the DiSC, the endowed professorship expands the existing ML competencies, which are carried across the breadth of scientific disciplines, and also promotes discussions on the societal impact of artificial intelligence.\n\nBeyond industrial applications, the University of Innsbruck as a full university offers an optimal environment for the future application of \"smart\" sensors to reach a new level of evidence-based understanding of our world. This potential extends to diverse branches of science, including ecology, geology, atmospheric sciences and civil engineering. Research successes already achieved on the basis of sensor networks in high mountain regions illustrate the promises for the future. They open up broad fields of action to strengthen Austria as a science location and to solve societal challenges.\n\nThe University of Innsbruck offers an internationally outstanding scientific environment that is uniquely positioned for high-performance computing, quantum computing, machine learning, and edge computing to join forces towards a future of intelligent edge devices."
   },
   {
     "id": 2,
@@ -32,20 +32,20 @@
     "slug": "datapact",
     "identifier": "datapact",
     "sponsor": "Horizon Europe",
-    "duration": "2025 – 2027",
+    "duration": "2025 \u2013 2027",
     "website": "https://datapact.eu/",
     "cover_image_path": "/images/logo/datapact-logo.svg",
     "sort_order": 2,
     "tags": [
       "Edge Computing",
-      "AI",
-      "Distributed Systems"
+      "Distributed AI",
+      "Orchestration"
     ],
     "researchers": [
-      "Radu Prodan"
+      "Univ.-Prof. Dr. Radu Prodan"
     ],
     "summary": "Embedding Compliance, Ethics, and Sustainability into Data and AI Operations supported by Horizon Europe.",
-    "content": "## DataPACT\n\n### Motivation\n**DataPACT**, a **Horizon Europe-funded** initiative, that researches how data and AI systems are built—embedding compliance, ethics, and sustainability from the ground up. Our team leads the design of the DataPACT architecture, which serves as the blueprint for integrating diverse tools and frameworks.\n\nWe also play a central role in enabling compliance-aware **Data/AI operations**, empowering users to interact with pipelines through intuitive, **intent-driven interfaces**. In addition, we contribute to shaping the next generation of **pipeline design tools**, leveraging **large language models** to support the creation of transparent, trustworthy, and regulation-ready workflows.\n\n### Project Goals\nTogether with 17 other partners from across Europe, we are developing cutting-edge solutions to ensure that data-driven innovation respects privacy, complies with regulations such as the GDPR and the AI Act, and minimizes environmental impact. DataPACT's impact spans healthcare, smart cities, public services, and beyond—making AI not just powerful, but principled."
+    "content": "### Motivation\n**DataPACT**, a **Horizon Europe-funded** initiative, that researches how data and AI systems are built\u2014embedding compliance, ethics, and sustainability from the ground up. Our team leads the design of the DataPACT architecture, which serves as the blueprint for integrating diverse tools and frameworks.\n\nWe also play a central role in enabling compliance-aware **Data/AI operations**, empowering users to interact with pipelines through intuitive, **intent-driven interfaces**. In addition, we contribute to shaping the next generation of **pipeline design tools**, leveraging **large language models** to support the creation of transparent, trustworthy, and regulation-ready workflows.\n\n### Project Goals\nTogether with 17 other partners from across Europe, we are developing cutting-edge solutions to ensure that data-driven innovation respects privacy, complies with regulations such as the GDPR and the AI Act, and minimizes environmental impact. DataPACT's impact spans healthcare, smart cities, public services, and beyond\u2014making AI not just powerful, but principled."
   },
   {
     "id": 3,
@@ -56,44 +56,44 @@
     "slug": "graphmassivizer",
     "identifier": "graphMassivizer",
     "sponsor": "Horizon Europe",
-    "duration": "2023 – 2025",
+    "duration": "2023 \u2013 2025",
     "website": "https://graph-massivizer.eu/",
-    "cover_image_path": "/images/logo/graph_massivizer.png",
+    "cover_image_path": "/images/projects/graph_massivizer.png",
     "sort_order": 3,
     "tags": [
       "Edge Computing",
-      "AI",
-      "Distributed Systems"
+      "Distributed AI",
+      "Orchestration"
     ],
     "researchers": [
-      "Radu Prodan"
+      "Univ.-Prof. Dr. Radu Prodan"
     ],
     "summary": "Extreme and Sustainable Graph Processing for Urgent Societal Challenges in Europe supported by Horizon Europe.",
-    "content": "## Graph-Massivizer\n\n### Motivation\nGraph Massivizer researches and develops a high-performance, scalable, and sustainable platform for information processing and reasoning based on the massive graph representation of extreme data. It delivers a toolkit of five open-source software tools and FAIR graph datasets covering the sustainable lifecycle of processing extreme data as massive graphs. The tools focus on holistic usability (from extreme data ingestion and massive graph creation), automated intelligence (through analytics and reasoning), performance modelling, and environmental sustainability tradeoffs, supported by credible data-driven evidence across the computing continuum.\n\n### Project Goals\nThe automated operation based on the emerging serverless computing paradigm supports experienced and novice stakeholders from a broad group of large and small organizations to capitalize on extreme data through massive graph programming and processing. Graph Massivizer validates its innovation on four complementary use cases considering their extreme data properties and coverage of the three sustainability pillars (economy, society, and environment): sustainable green finance, global environment protection foresight, green AI for the sustainable automotive industry, and data center digital twin for exascale computing. Graph Massivizer promises 70% more efficient analytics than AliGraph, and 30% improved energy awareness for ETL storage operations than Amazon Redshift. Furthermore, it aims to demonstrate a possible two-fold improvement in data center energy efficiency and over 25% lower GHG emissions for basic graph operations."
+    "content": "### Motivation\nGraph Massivizer researches and develops a high-performance, scalable, and sustainable platform for information processing and reasoning based on the massive graph representation of extreme data. It delivers a toolkit of five open-source software tools and FAIR graph datasets covering the sustainable lifecycle of processing extreme data as massive graphs. The tools focus on holistic usability (from extreme data ingestion and massive graph creation), automated intelligence (through analytics and reasoning), performance modelling, and environmental sustainability tradeoffs, supported by credible data-driven evidence across the computing continuum.\n\n### Project Goals\nThe automated operation based on the emerging serverless computing paradigm supports experienced and novice stakeholders from a broad group of large and small organizations to capitalize on extreme data through massive graph programming and processing. Graph Massivizer validates its innovation on four complementary use cases considering their extreme data properties and coverage of the three sustainability pillars (economy, society, and environment): sustainable green finance, global environment protection foresight, green AI for the sustainable automotive industry, and data center digital twin for exascale computing. Graph Massivizer promises 70% more efficient analytics than AliGraph, and 30% improved energy awareness for ETL storage operations than Amazon Redshift. Furthermore, it aims to demonstrate a possible two-fold improvement in data center energy efficiency and over 25% lower GHG emissions for basic graph operations."
   },
   {
     "id": 4,
     "status": "published",
     "project_status": "ongoing",
     "name": "AI:AT Factory Austria",
-    "title": "Sustainably growing Austria’s AI ecosystem",
+    "title": "Sustainably growing Austria\u2019s AI ecosystem",
     "slug": "aiFactoryAustria",
     "identifier": "aiFactoryAustria",
     "sponsor": "Horizon EuroHPC Joint Untertaking",
-    "duration": "2025 – 2028",
+    "duration": "2025 \u2013 2028",
     "website": "https://ai-at.eu/",
-    "cover_image_path": "/images/logo/aiFactory.png",
+    "cover_image_path": "/images/projects/aiFactory.png",
     "sort_order": 4,
     "tags": [
       "Edge Computing",
-      "AI",
-      "Distributed Systems"
+      "Distributed AI",
+      "Orchestration"
     ],
     "researchers": [
-      "Radu Prodan"
+      "Univ.-Prof. Dr. Radu Prodan"
     ],
-    "summary": "Sustainably growing Austria’s AI ecosystem supported by Horizon EuroHPC Joint Untertaking.",
-    "content": "## AI:AT Factory Austria\n\n### Motivation\nThe spread of large language models (LLMs) and AI technologies in recent years has given them a key role in transforming and expanding industries and markets, with their role continually growing. The EU-funded AI:AT project aims to develop and operate a national initiative to sustainably strengthen Austria’s AI ecosystem. The project will bring together a strong partner network, develop targeted support services and create state-of-the-art supercomputing infrastructure that will enable and empower Europe’s competitiveness, initiative, and innovation in the global field of AI. It will encourage and foster synergies with other AI initiatives throughout Europe, becoming a key building block of the European visible AI ecosystem.\n\n### Project Goals\nAI:AT – the AI Factory Austria – is a national initiative aimed at sustainably strengthening Austria's AI ecosystem. Through state-of-the-art supercomputing infrastructure, targeted support services, and a strong partner network, we are laying the foundation for powerful, secure, and economically viable AI applications.\n\nFunded by the European High Performance Computing (EuroHPC) Joint Undertaking, AI:AT makes a central contribution to Europe's competitiveness and innovation capacity in the field of artificial intelligence.\n\nWith AI:AT, a key building block for a Europe-wide visible AI ecosystem is being created. We are fostering synergies with flagship projects such as the planned AI Center at the University of Vienna and TU Vienna, the biomedical AI institute AITHYRA, and the FWF Excellence Cluster Bilateral AI.\n\nIn this way, AI:AT – the AI Factory Austria – sustainably strengthens Austria's international position as a hub for technology and innovation."
+    "summary": "Sustainably growing Austria\u2019s AI ecosystem supported by Horizon EuroHPC Joint Untertaking.",
+    "content": "### Motivation\nThe spread of large language models (LLMs) and AI technologies in recent years has given them a key role in transforming and expanding industries and markets, with their role continually growing. The EU-funded AI:AT project aims to develop and operate a national initiative to sustainably strengthen Austria\u2019s AI ecosystem. The project will bring together a strong partner network, develop targeted support services and create state-of-the-art supercomputing infrastructure that will enable and empower Europe\u2019s competitiveness, initiative, and innovation in the global field of AI. It will encourage and foster synergies with other AI initiatives throughout Europe, becoming a key building block of the European visible AI ecosystem.\n\n### Project Goals\nAI:AT \u2013 the AI Factory Austria \u2013 is a national initiative aimed at sustainably strengthening Austria's AI ecosystem. Through state-of-the-art supercomputing infrastructure, targeted support services, and a strong partner network, we are laying the foundation for powerful, secure, and economically viable AI applications.\n\nFunded by the European High Performance Computing (EuroHPC) Joint Undertaking, AI:AT makes a central contribution to Europe's competitiveness and innovation capacity in the field of artificial intelligence.\n\nWith AI:AT, a key building block for a Europe-wide visible AI ecosystem is being created. We are fostering synergies with flagship projects such as the planned AI Center at the University of Vienna and TU Vienna, the biomedical AI institute AITHYRA, and the FWF Excellence Cluster Bilateral AI.\n\nIn this way, AI:AT \u2013 the AI Factory Austria \u2013 sustainably strengthens Austria's international position as a hub for technology and innovation."
   },
   {
     "id": 5,
@@ -104,19 +104,19 @@
     "slug": "coAgent",
     "identifier": "coAgent",
     "sponsor": "Horizon Europe",
-    "duration": "2026 – 2029",
+    "duration": "2026 \u2013 2029",
     "website": "https://cordis.europa.eu/project/id/101297191",
-    "cover_image_path": "/images/logo/coAgent.jpeg",
+    "cover_image_path": "/images/projects/coAgent.png",
     "sort_order": 5,
     "tags": [
       "Edge Computing",
-      "AI",
-      "Distributed Systems"
+      "Distributed AI",
+      "Orchestration"
     ],
     "researchers": [
-      "Radu Prodan"
+      "Univ.-Prof. Dr. Radu Prodan"
     ],
     "summary": "Cognitive Computing Continuum for Large-Scale Distributed GenAI Agents supported by Horizon Europe.",
-    "content": "## Cognitive Computing Continuum for Large-Scale Distributed GenAI Agents\n\n\n### Project Goals\nAI agents show great potential in solving real-world problems, but are hard to scale. Some of the reasons are their heavy resource consumption, brittle collaboration under distributed infrastructures, and the inherent AI uncertainty of AI lacking human trust.\n\nCoAgent researches a new agent continuum that enables GenAI agents to operate seamlessly across trustworthy cloud-edge infrastructures via three groundbreaking research pillars: (1) Agent Operation for intent-based orchestration of models and agents cross edge, cloud and HPC, exploiting small and unconventional devices with energy efficiency; (2) Agent Connectivity for autonomous agent collaboration and distributed decision making, supported by on-demand network and tool use; and (3) Agent Trustworthiness for secure execution, continuous observability, risk governance, and human-agent alignment.\n\nThe results are 12 enablers that help agentic AI application developers and infrastructure providers to build a cognitive continuum, validated by four at-scale pilots for mobility management, medical device maintenance, drone mission control, and telecom operation, extended to biomedical research and smart cities.\n\nImpact-wise, CoAgent aims to reduce Europe’s dependency on US cloud providers, currently operating over two-thirds of its GenAI workloads, to less than one-third by enabling GenAI agents to run across the cloud-edge continuum and promoting EU cloud and models.\n\nCoAgent gathers a consortium of 17 partners (plus 4 affiliated entities) from 9 countries. Five world-leading industry groups drive the large-scale uptake of agentic AI and CoAgent results, with five SMEs as technology suppliers, supported by five universities, research institutes, and one public sector organization. The consortium covers a complete value chain for EU-made continuum, provides access to EU GenAI models and agentic platforms, and represents strong international collaboration with the Republic of Korea and New Zealand."
+    "content": "### Project Goals\nAI agents show great potential in solving real-world problems, but are hard to scale. Some of the reasons are their heavy resource consumption, brittle collaboration under distributed infrastructures, and the inherent AI uncertainty of AI lacking human trust.\n\nCoAgent researches a new agent continuum that enables GenAI agents to operate seamlessly across trustworthy cloud-edge infrastructures via three groundbreaking research pillars: (1) Agent Operation for intent-based orchestration of models and agents cross edge, cloud and HPC, exploiting small and unconventional devices with energy efficiency; (2) Agent Connectivity for autonomous agent collaboration and distributed decision making, supported by on-demand network and tool use; and (3) Agent Trustworthiness for secure execution, continuous observability, risk governance, and human-agent alignment.\n\nThe results are 12 enablers that help agentic AI application developers and infrastructure providers to build a cognitive continuum, validated by four at-scale pilots for mobility management, medical device maintenance, drone mission control, and telecom operation, extended to biomedical research and smart cities.\n\nImpact-wise, CoAgent aims to reduce Europe\u2019s dependency on US cloud providers, currently operating over two-thirds of its GenAI workloads, to less than one-third by enabling GenAI agents to run across the cloud-edge continuum and promoting EU cloud and models.\n\nCoAgent gathers a consortium of 17 partners (plus 4 affiliated entities) from 9 countries. Five world-leading industry groups drive the large-scale uptake of agentic AI and CoAgent results, with five SMEs as technology suppliers, supported by five universities, research institutes, and one public sector organization. The consortium covers a complete value chain for EU-made continuum, provides access to EU GenAI models and agentic platforms, and represents strong international collaboration with the Republic of Korea and New Zealand."
   }
 ]

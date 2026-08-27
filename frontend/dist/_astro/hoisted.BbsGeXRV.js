@@ -1,0 +1,1 @@
+import"./hoisted.C4TRJ3V7.js";document.querySelectorAll(".spam-safe-email").forEach(t=>{try{const a=atob(t.getAttribute("data-u")||""),e=atob(t.getAttribute("data-d")||"");if(a&&e){const o=`${a}@${e}`;t.setAttribute("href",`mailto:${o}`),t.textContent=o}}catch{}});

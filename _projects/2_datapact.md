@@ -11,7 +11,6 @@ website: https://datapact.eu/
 permalink: /projects/datapact
 ---
 
-## DataPACT
 
 ### Motivation
 **DataPACT**, a **Horizon Europe-funded** initiative, that researches how data and AI systems are built—embedding compliance, ethics, and sustainability from the ground up. Our team leads the design of the DataPACT architecture, which serves as the blueprint for integrating diverse tools and frameworks.

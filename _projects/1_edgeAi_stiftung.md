@@ -11,7 +11,6 @@ website: https://projekte.ffg.at/projekt/5121131
 permalink: /projects/aimAtEdgeAI
 ---
 
-## Artificial Intelligence Mission Austria (AIM AT) funding initiative
 
 ### Project Goals
 

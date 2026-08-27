@@ -11,8 +11,6 @@ website: https://cordis.europa.eu/project/id/101297191
 permalink: /projects/coAgent
 ---
 
-## Cognitive Computing Continuum for Large-Scale Distributed GenAI Agents
-
 
 ### Project Goals
 AI agents show great potential in solving real-world problems, but are hard to scale. Some of the reasons are their heavy resource consumption, brittle collaboration under distributed infrastructures, and the inherent AI uncertainty of AI lacking human trust.

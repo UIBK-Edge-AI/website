@@ -1,0 +1,240 @@
+{
+  "version": "1.0.0",
+  "name": "Edge AI Research Group Schema",
+  "description": "Strict relational schema for Directus CMS without WYSIWYG editors",
+  "collections": [
+    {
+      "collection": "members",
+      "meta": {
+        "collection": "members",
+        "icon": "group",
+        "note": "Edge AI group members, professors, researchers, and alumni",
+        "display_template": "{{title}} ({{category}})",
+        "hidden": false,
+        "singleton": false,
+        "translations": null,
+        "archive_field": "status",
+        "archive_app_filter": true,
+        "archive_value": "archived",
+        "unarchive_value": "published",
+        "sort_field": "sort_order"
+      },
+      "schema": {
+        "name": "members"
+      },
+      "fields": [
+        { "field": "id", "type": "integer", "meta": { "hidden": true, "interface": "input", "readonly": true }, "schema": { "is_primary_key": true, "has_auto_increment": true } },
+        { "field": "status", "type": "string", "meta": { "interface": "select-dropdown", "options": { "choices": [{ "text": "Published", "value": "published" }, { "text": "Draft", "value": "draft" }, { "text": "Archived", "value": "archived" }] }, "display": "labels", "width": "half" }, "schema": { "default_value": "published" } },
+        { "field": "member_status", "type": "string", "meta": { "interface": "select-dropdown", "options": { "choices": [{ "text": "Active Member", "value": "active" }, { "text": "Alumni", "value": "alumni" }] }, "width": "half" }, "schema": { "default_value": "active" } },
+        { "field": "title", "type": "string", "meta": { "interface": "input", "options": { "placeholder": "e.g. Univ.-Prof. Dr. Radu Prodan" }, "required": true, "width": "half" } },
+        { "field": "name", "type": "string", "meta": { "interface": "input", "options": { "placeholder": "First and Middle names" }, "required": true, "width": "half" } },
+        { "field": "lastname", "type": "string", "meta": { "interface": "input", "options": { "placeholder": "Lastname" }, "required": true, "width": "half" } },
+        { "field": "slug", "type": "string", "meta": { "interface": "input", "options": { "placeholder": "e.g. raduprodan, tanim_gias" }, "required": true, "width": "half" } },
+        { "field": "category", "type": "string", "meta": { "interface": "select-dropdown", "options": { "choices": [{ "text": "Professor", "value": "PROFESSOR" }, { "text": "Postdoctoral Researcher", "value": "POSTDOCTORAL RESEARCHERS" }, { "text": "PhD Student", "value": "PHD STUDENTS" }, { "text": "Systems Engineer", "value": "SYSTEMS ENGINEER" }, { "text": "Student Researcher", "value": "STUDENTS" }, { "text": "Alumni", "value": "ALUMNI" }] }, "required": true, "width": "half" } },
+        { "field": "position", "type": "string", "meta": { "interface": "input", "options": { "placeholder": "e.g. professor, postdoc, phd, sysad" }, "width": "half" } },
+        { "field": "sort_order", "type": "integer", "meta": { "interface": "input", "width": "half" }, "schema": { "default_value": 10 } },
+        { "field": "office", "type": "string", "meta": { "interface": "input", "options": { "placeholder": "e.g. ICT 3S06" }, "width": "half" } },
+        { "field": "phone", "type": "string", "meta": { "interface": "input", "options": { "placeholder": "+43 512 507-53249" }, "width": "half" } },
+        { "field": "email", "type": "string", "meta": { "interface": "input", "options": { "placeholder": "firstname.lastname@uibk.ac.at" }, "width": "half" } },
+        { "field": "address", "type": "string", "meta": { "interface": "input", "options": { "placeholder": "Technikerstraße 21A, 6020 Innsbruck, Austria" }, "width": "full" } },
+        { "field": "orcid", "type": "string", "meta": { "interface": "input", "options": { "placeholder": "0000-0002-8247-5426" }, "width": "half" } },
+        { "field": "scholar_id", "type": "string", "meta": { "interface": "input", "options": { "placeholder": "Google Scholar User ID" }, "width": "half" } },
+        { "field": "linkedin", "type": "string", "meta": { "interface": "input", "options": { "placeholder": "LinkedIn username/slug" }, "width": "half" } },
+        { "field": "github", "type": "string", "meta": { "interface": "input", "options": { "placeholder": "GitHub username" }, "width": "half" } },
+        { "field": "avatar", "type": "uuid", "meta": { "interface": "file-image", "width": "half" } },
+        { "field": "avatar_path", "type": "string", "meta": { "interface": "input", "note": "Local fallback image path", "width": "half" } },
+        { "field": "cv_url", "type": "string", "meta": { "interface": "input", "width": "full" } },
+        { "field": "interests", "type": "json", "meta": { "interface": "tags", "options": { "placeholder": "Add research topic tags..." }, "width": "full" } },
+        { "field": "positions", "type": "json", "meta": { "interface": "list", "note": "Career positions list with from, to, title, dep, inst, where", "width": "full" } },
+        { "field": "education", "type": "json", "meta": { "interface": "list", "note": "Education history list with year/from/to, title, inst, where", "width": "full" } },
+        { "field": "bio", "type": "text", "meta": { "interface": "input-multiline", "options": { "placeholder": "Short biographical note or summary" }, "width": "full" } }
+      ]
+    },
+    {
+      "collection": "projects",
+      "meta": {
+        "collection": "projects",
+        "icon": "rocket_launch",
+        "note": "Research projects and funding initiatives",
+        "display_template": "{{title}} ({{status}})",
+        "sort_field": "sort_order"
+      },
+      "schema": {
+        "name": "projects"
+      },
+      "fields": [
+        { "field": "id", "type": "integer", "meta": { "hidden": true, "interface": "input" }, "schema": { "is_primary_key": true, "has_auto_increment": true } },
+        { "field": "status", "type": "string", "meta": { "interface": "select-dropdown", "options": { "choices": [{ "text": "Published", "value": "published" }, { "text": "Draft", "value": "draft" }] }, "width": "half" }, "schema": { "default_value": "published" } },
+        { "field": "project_status", "type": "string", "meta": { "interface": "select-dropdown", "options": { "choices": [{ "text": "Ongoing", "value": "ongoing" }, { "text": "Completed", "value": "completed" }] }, "required": true, "width": "half" }, "schema": { "default_value": "ongoing" } },
+        { "field": "name", "type": "string", "meta": { "interface": "input", "options": { "placeholder": "Short Name (e.g. Edge AI, DATAPACT)" }, "required": true, "width": "half" } },
+        { "field": "title", "type": "string", "meta": { "interface": "input", "options": { "placeholder": "Full Project Title" }, "required": true, "width": "half" } },
+        { "field": "slug", "type": "string", "meta": { "interface": "input", "options": { "placeholder": "e.g. aimAtEdgeAI, datapact" }, "required": true, "width": "half" } },
+        { "field": "identifier", "type": "string", "meta": { "interface": "input", "width": "half" } },
+        { "field": "sponsor", "type": "string", "meta": { "interface": "input", "options": { "placeholder": "e.g. FFG, Horizon Europe, FWF" }, "width": "half" } },
+        { "field": "duration", "type": "string", "meta": { "interface": "input", "options": { "placeholder": "e.g. 2025 – 2030" }, "width": "half" } },
+        { "field": "website", "type": "string", "meta": { "interface": "input", "options": { "placeholder": "https://..." }, "width": "half" } },
+        { "field": "cover_image", "type": "uuid", "meta": { "interface": "file-image", "width": "half" } },
+        { "field": "cover_image_path", "type": "string", "meta": { "interface": "input", "width": "half" } },
+        { "field": "sort_order", "type": "integer", "meta": { "interface": "input", "width": "half" }, "schema": { "default_value": 1 } },
+        { "field": "tags", "type": "json", "meta": { "interface": "tags", "width": "full" } },
+        { "field": "researchers", "type": "json", "meta": { "interface": "tags", "options": { "placeholder": "Associated researcher names or slugs" }, "width": "full" } },
+        { "field": "summary", "type": "text", "meta": { "interface": "input-multiline", "options": { "placeholder": "Brief 1-2 sentence overview" }, "width": "full" } },
+        { "field": "content", "type": "text", "meta": { "interface": "input-multiline", "options": { "placeholder": "Markdown project description, goals, and results" }, "width": "full" } }
+      ]
+    },
+    {
+      "collection": "publications",
+      "meta": {
+        "collection": "publications",
+        "icon": "menu_book",
+        "note": "Peer-reviewed papers, journals, conferences, and preprints",
+        "display_template": "{{title}} ({{year}})",
+        "sort_field": "year"
+      },
+      "schema": {
+        "name": "publications"
+      },
+      "fields": [
+        { "field": "id", "type": "integer", "meta": { "hidden": true, "interface": "input" }, "schema": { "is_primary_key": true, "has_auto_increment": true } },
+        { "field": "bibtex_key", "type": "string", "meta": { "interface": "input", "required": true, "width": "half" } },
+        { "field": "pubtype", "type": "string", "meta": { "interface": "select-dropdown", "options": { "choices": [{ "text": "Journal Article", "value": "journal" }, { "text": "Conference Paper", "value": "conference" }, { "text": "Workshop Paper", "value": "workshop" }, { "text": "Book / Chapter", "value": "book" }, { "text": "Preprint", "value": "preprint" }] }, "required": true, "width": "half" }, "schema": { "default_value": "conference" } },
+        { "field": "title", "type": "string", "meta": { "interface": "input", "required": true, "width": "full" } },
+        { "field": "authors", "type": "string", "meta": { "interface": "input", "options": { "placeholder": "e.g. Radu Prodan, Kurt Horvath" }, "required": true, "width": "full" } },
+        { "field": "year", "type": "integer", "meta": { "interface": "input", "required": true, "width": "half" }, "schema": { "default_value": 2026 } },
+        { "field": "venue", "type": "string", "meta": { "interface": "input", "options": { "placeholder": "e.g. IEEE Transactions on Cloud Computing, ACM EDGE" }, "required": true, "width": "half" } },
+        { "field": "volume", "type": "string", "meta": { "interface": "input", "width": "half" } },
+        { "field": "pages", "type": "string", "meta": { "interface": "input", "width": "half" } },
+        { "field": "publisher", "type": "string", "meta": { "interface": "input", "width": "half" } },
+        { "field": "doi", "type": "string", "meta": { "interface": "input", "options": { "placeholder": "10.1109/..." }, "width": "half" } },
+        { "field": "url", "type": "string", "meta": { "interface": "input", "options": { "placeholder": "https://..." }, "width": "half" } },
+        { "field": "pdf_url", "type": "string", "meta": { "interface": "input", "width": "half" } },
+        { "field": "keywords", "type": "json", "meta": { "interface": "tags", "width": "full" } },
+        { "field": "abstract", "type": "text", "meta": { "interface": "input-multiline", "width": "full" } },
+        { "field": "bibtex_raw", "type": "text", "meta": { "interface": "input-multiline", "note": "Complete BibTeX citation code", "width": "full" } }
+      ]
+    },
+    {
+      "collection": "theses",
+      "meta": {
+        "collection": "theses",
+        "icon": "school",
+        "note": "Bachelor, Master, and PhD Theses / Student Research Projects",
+        "display_template": "{{title}} ({{degree}})"
+      },
+      "schema": {
+        "name": "theses"
+      },
+      "fields": [
+        { "field": "id", "type": "integer", "meta": { "hidden": true, "interface": "input" }, "schema": { "is_primary_key": true, "has_auto_increment": true } },
+        { "field": "title", "type": "string", "meta": { "interface": "input", "required": true, "width": "full" } },
+        { "field": "slug", "type": "string", "meta": { "interface": "input", "width": "half" } },
+        { "field": "degree", "type": "string", "meta": { "interface": "select-dropdown", "options": { "choices": [{ "text": "Bachelor Thesis", "value": "bachelor" }, { "text": "Master Thesis", "value": "master" }, { "text": "PhD Thesis", "value": "phd" }, { "text": "Internship / Project", "value": "internship" }] }, "required": true, "width": "half" }, "schema": { "default_value": "master" } },
+        { "field": "thesis_status", "type": "string", "meta": { "interface": "select-dropdown", "options": { "choices": [{ "text": "Open / Available Topic", "value": "open" }, { "text": "Ongoing", "value": "ongoing" }, { "text": "Completed", "value": "completed" }] }, "required": true, "width": "half" }, "schema": { "default_value": "completed" } },
+        { "field": "author", "type": "string", "meta": { "interface": "input", "options": { "placeholder": "Student Name (leave blank if Open topic)" }, "width": "half" } },
+        { "field": "supervisors", "type": "string", "meta": { "interface": "input", "options": { "placeholder": "e.g. Univ.-Prof. Dr. Radu Prodan, Haleh Dizaji" }, "required": true, "width": "half" } },
+        { "field": "start_date", "type": "string", "meta": { "interface": "input", "width": "half" } },
+        { "field": "submission_date", "type": "string", "meta": { "interface": "input", "width": "half" } },
+        { "field": "pdf_url", "type": "string", "meta": { "interface": "input", "width": "half" } },
+        { "field": "abstract", "type": "text", "meta": { "interface": "input-multiline", "options": { "placeholder": "Thesis abstract, problem description, and objectives" }, "width": "full" } }
+      ]
+    },
+    {
+      "collection": "teaching_courses",
+      "meta": {
+        "collection": "teaching_courses",
+        "icon": "co_present",
+        "note": "University of Innsbruck academic courses and lectures",
+        "display_template": "{{title}} ({{semester}})"
+      },
+      "schema": {
+        "name": "teaching_courses"
+      },
+      "fields": [
+        { "field": "id", "type": "integer", "meta": { "hidden": true, "interface": "input" }, "schema": { "is_primary_key": true, "has_auto_increment": true } },
+        { "field": "title", "type": "string", "meta": { "interface": "input", "required": true, "width": "half" } },
+        { "field": "course_type", "type": "string", "meta": { "interface": "select-dropdown", "options": { "choices": [{ "text": "VO - Lecture", "value": "VO" }, { "text": "PS - Proseminar", "value": "PS" }, { "text": "VU - Lecture + Exercise", "value": "VU" }, { "text": "SE - Seminar", "value": "SE" }, { "text": "PR - Project", "value": "PR" }] }, "width": "half" }, "schema": { "default_value": "VO" } },
+        { "field": "degree", "type": "string", "meta": { "interface": "select-dropdown", "options": { "choices": [{ "text": "BSc Computer Science", "value": "ba-cs" }, { "text": "MSc Computer Science", "value": "ma-cs" }, { "text": "PhD", "value": "phd" }] }, "width": "half" }, "schema": { "default_value": "ba-cs" } },
+        { "field": "semester", "type": "string", "meta": { "interface": "input", "options": { "placeholder": "e.g. Summer 26, Winter 25/26" }, "required": true, "width": "half" } },
+        { "field": "room", "type": "string", "meta": { "interface": "input", "options": { "placeholder": "e.g. HS A, ICT 3S06" }, "width": "half" } },
+        { "field": "instructors", "type": "string", "meta": { "interface": "input", "options": { "placeholder": "e.g. Radu Prodan, Marvin Raaijmakers" }, "required": true, "width": "half" } },
+        { "field": "redirect_to", "type": "string", "meta": { "interface": "input", "options": { "placeholder": "LFU Online Course Link" }, "width": "full" } },
+        { "field": "description", "type": "text", "meta": { "interface": "input-multiline", "width": "full" } }
+      ]
+    },
+    {
+      "collection": "vacancies",
+      "meta": {
+        "collection": "vacancies",
+        "icon": "work",
+        "note": "Open academic positions and job vacancies",
+        "display_template": "{{title}} ({{status}})"
+      },
+      "schema": {
+        "name": "vacancies"
+      },
+      "fields": [
+        { "field": "id", "type": "integer", "meta": { "hidden": true, "interface": "input" }, "schema": { "is_primary_key": true, "has_auto_increment": true } },
+        { "field": "title", "type": "string", "meta": { "interface": "input", "required": true, "width": "half" } },
+        { "field": "slug", "type": "string", "meta": { "interface": "input", "required": true, "width": "half" } },
+        { "field": "position_type", "type": "string", "meta": { "interface": "select-dropdown", "options": { "choices": [{ "text": "PhD Position", "value": "phd" }, { "text": "PostDoc Position", "value": "postdoc" }, { "text": "Student Assistant", "value": "student_assistant" }, { "text": "Researcher / Engineer", "value": "researcher" }] }, "required": true, "width": "half" }, "schema": { "default_value": "phd" } },
+        { "field": "vacancy_status", "type": "string", "meta": { "interface": "select-dropdown", "options": { "choices": [{ "text": "Open", "value": "open" }, { "text": "Closed / Filled", "value": "closed" }] }, "required": true, "width": "half" }, "schema": { "default_value": "open" } },
+        { "field": "area", "type": "string", "meta": { "interface": "input", "options": { "placeholder": "e.g. Cloud/Edge Computing & AI" }, "width": "half" } },
+        { "field": "start_date", "type": "string", "meta": { "interface": "input", "options": { "placeholder": "Immediately, Oct 2026..." }, "width": "half" } },
+        { "field": "duration", "type": "string", "meta": { "interface": "input", "options": { "placeholder": "e.g. 2-3 years, 4 years" }, "width": "half" } },
+        { "field": "contact_name", "type": "string", "meta": { "interface": "input", "options": { "placeholder": "Univ. Prof. Dr. Radu Prodan" }, "width": "half" } },
+        { "field": "contact_email", "type": "string", "meta": { "interface": "input", "options": { "placeholder": "radu.prodan@uibk.ac.at" }, "width": "half" } },
+        { "field": "content", "type": "text", "meta": { "interface": "input-multiline", "options": { "placeholder": "Job profile, requirements, environment, equal opportunity info" }, "required": true, "width": "full" } }
+      ]
+    },
+    {
+      "collection": "news_events",
+      "meta": {
+        "collection": "news_events",
+        "icon": "newspaper",
+        "note": "News updates, workshop talks, awards, and media announcements",
+        "display_template": "{{title}} ({{date}})",
+        "sort_field": "date"
+      },
+      "schema": {
+        "name": "news_events"
+      },
+      "fields": [
+        { "field": "id", "type": "integer", "meta": { "hidden": true, "interface": "input" }, "schema": { "is_primary_key": true, "has_auto_increment": true } },
+        { "field": "title", "type": "string", "meta": { "interface": "input", "required": true, "width": "half" } },
+        { "field": "slug", "type": "string", "meta": { "interface": "input", "required": true, "width": "half" } },
+        { "field": "date", "type": "date", "meta": { "interface": "datetime", "required": true, "width": "half" } },
+        { "field": "category", "type": "string", "meta": { "interface": "select-dropdown", "options": { "choices": [{ "text": "News", "value": "News" }, { "text": "Event", "value": "Event" }, { "text": "Award", "value": "Award" }, { "text": "Talk", "value": "Talk" }] }, "width": "half" }, "schema": { "default_value": "News" } },
+        { "field": "summary", "type": "text", "meta": { "interface": "input-multiline", "width": "full" } },
+        { "field": "cover_image_path", "type": "string", "meta": { "interface": "input", "width": "half" } },
+        { "field": "external_url", "type": "string", "meta": { "interface": "input", "width": "half" } },
+        { "field": "content", "type": "text", "meta": { "interface": "input-multiline", "width": "full" } }
+      ]
+    },
+    {
+      "collection": "site_settings",
+      "meta": {
+        "collection": "site_settings",
+        "icon": "settings",
+        "note": "Global website configuration, mission statement, hero carousel, contact info",
+        "singleton": true
+      },
+      "schema": {
+        "name": "site_settings"
+      },
+      "fields": [
+        { "field": "id", "type": "integer", "meta": { "hidden": true, "interface": "input" }, "schema": { "is_primary_key": true } },
+        { "field": "site_name", "type": "string", "meta": { "interface": "input", "width": "half" }, "schema": { "default_value": "Edge AI Research Group" } },
+        { "field": "tagline", "type": "string", "meta": { "interface": "input", "width": "half" }, "schema": { "default_value": "Smart Computing Where It Matters" } },
+        { "field": "employer", "type": "string", "meta": { "interface": "input", "width": "half" }, "schema": { "default_value": "Universität Innsbruck, Austria" } },
+        { "field": "location", "type": "string", "meta": { "interface": "input", "width": "half" }, "schema": { "default_value": "Technikerstraße 21a, 6020 Innsbruck, Austria" } },
+        { "field": "email", "type": "string", "meta": { "interface": "input", "width": "half" }, "schema": { "default_value": "edgeai-informatik@uibk.ac.at" } },
+        { "field": "telephone", "type": "string", "meta": { "interface": "input", "width": "half" }, "schema": { "default_value": "+43 512 507-53494" } },
+        { "field": "location_map_url", "type": "string", "meta": { "interface": "input", "width": "full" }, "schema": { "default_value": "https://www.uibk.ac.at/de/informatik/kontakt/anfahrt/" } },
+        { "field": "motivation", "type": "text", "meta": { "interface": "input-multiline", "width": "full" } },
+        { "field": "acknowledgments", "type": "text", "meta": { "interface": "input-multiline", "width": "full" } },
+        { "field": "research_topics", "type": "json", "meta": { "interface": "tags", "width": "full" } },
+        { "field": "carousel_images", "type": "json", "meta": { "interface": "list", "width": "full" } }
+      ]
+    }
+  ]
+}

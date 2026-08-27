@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import PublicationCard from '../../components/PublicationCard.astro';
 import { getMembers, getPublications } from '../../lib/directus';
 import type { Member, Publication } from '../../lib/types';
+import { marked } from 'marked';
 
 export async function getStaticPaths() {
   const members = await getMembers();
@@ -26,6 +27,13 @@ const memberPubs = allPublications.filter((pub: Publication) => {
   const explicitKeyMatch = member.publications && member.publications.includes(pub.bibtex_key);
   return lastnameMatch || nameMatch || explicitKeyMatch;
 });
+
+const renderedBio = member.bio ? marked.parse(member.bio) : '';
+
+// Spam-safe email encoding
+const emailParts = member.email ? member.email.split('@') : [];
+const emailUserB64 = emailParts[0] ? Buffer.from(emailParts[0]).toString('base64') : '';
+const emailDomainB64 = emailParts[1] ? Buffer.from(emailParts[1]).toString('base64') : '';
 ---
 
 <BaseLayout 
@@ -51,30 +59,38 @@ const memberPubs = allPublications.filter((pub: Publication) => {
 
           <span class="badge badge-cyan profile-category-badge">{member.category}</span>
           <h1 class="profile-name">{member.title}</h1>
-          <p class="profile-role">{member.position.toUpperCase()}</p>
 
           <div class="profile-contact-list">
             {member.office && (
               <div class="contact-item">
-                <span class="contact-label">Office:</span>
+                <span class="contact-label">Office</span>
                 <span class="contact-val">{member.office}</span>
               </div>
             )}
             {member.phone && (
               <div class="contact-item">
-                <span class="contact-label">Phone:</span>
+                <span class="contact-label">Phone</span>
                 <span class="contact-val">{member.phone}</span>
               </div>
             )}
             {member.email && (
               <div class="contact-item">
-                <span class="contact-label">Email:</span>
-                <a href={`mailto:${member.email}`} class="contact-val email">{member.email}</a>
+                <span class="contact-label">Email</span>
+                <!-- Spam-proof email -->
+                <a 
+                  href="#" 
+                  class="contact-val email spam-safe-email" 
+                  data-u={emailUserB64} 
+                  data-d={emailDomainB64}
+                  title="Contact via email"
+                >
+                  {emailParts[0]} [at] {emailParts[1]}
+                </a>
               </div>
             )}
             {member.address && (
               <div class="contact-item">
-                <span class="contact-label">Address:</span>
+                <span class="contact-label">Address</span>
                 <span class="contact-val">{member.address}</span>
               </div>
             )}
@@ -121,12 +137,10 @@ const memberPubs = allPublications.filter((pub: Publication) => {
         )}
 
         <!-- Biography -->
-        {member.bio && (
+        {renderedBio && (
           <div class="card-glass content-block">
             <h2 class="block-title">Biography & Summary</h2>
-            <div class="bio-text">
-              <p>{member.bio}</p>
-            </div>
+            <div class="bio-text" set:html={renderedBio} />
           </div>
         )}
 
@@ -211,7 +225,7 @@ const memberPubs = allPublications.filter((pub: Publication) => {
 
   .profile-layout {
     display: grid;
-    grid-template-columns: 340px 1fr;
+    grid-template-columns: 320px 1fr;
     gap: 2.5rem;
     align-items: start;
   }
@@ -221,7 +235,7 @@ const memberPubs = allPublications.filter((pub: Publication) => {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding: 2.5rem 1.75rem;
+    padding: 2.25rem 1.5rem;
   }
 
   .profile-avatar-wrapper {
@@ -248,22 +262,14 @@ const memberPubs = allPublications.filter((pub: Publication) => {
 
   .profile-name {
     font-size: 1.45rem;
-    margin-bottom: 0.25rem;
-  }
-
-  .profile-role {
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    letter-spacing: 0.05em;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
   }
 
   .profile-contact-list {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 0.6rem;
+    gap: 0.85rem;
     font-size: 0.85rem;
     font-family: var(--font-mono);
     border-top: 1px solid var(--border-color);
@@ -275,22 +281,30 @@ const memberPubs = allPublications.filter((pub: Publication) => {
 
   .contact-item {
     display: flex;
-    justify-content: space-between;
-    gap: 0.5rem;
+    flex-direction: column;
+    gap: 0.15rem;
   }
 
   .contact-label {
     color: var(--text-muted);
-    flex-shrink: 0;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
 
   .contact-val {
     color: var(--text-secondary);
-    word-break: break-all;
+    word-break: break-word;
+    line-height: 1.35;
   }
 
   .contact-val.email {
     color: var(--accent-cyan);
+    text-decoration: none;
+  }
+
+  .contact-val.email:hover {
+    text-decoration: underline;
   }
 
   .profile-links {
@@ -335,9 +349,19 @@ const memberPubs = allPublications.filter((pub: Publication) => {
     padding: 0.35rem 0.8rem;
   }
 
-  .bio-text p {
+  .bio-text {
     font-size: 1rem;
     line-height: 1.7;
+    color: var(--text-secondary);
+  }
+
+  .bio-text :global(p) {
+    margin-bottom: 1rem;
+  }
+
+  .bio-text :global(a) {
+    color: var(--accent-cyan);
+    text-decoration: underline;
   }
 
   /* Timeline */
@@ -412,4 +436,35 @@ const memberPubs = allPublications.filter((pub: Publication) => {
       grid-template-columns: 1fr;
     }
   }
+
+  @media (max-width: 600px) {
+    .profile-card {
+      padding: 1.5rem 1rem;
+    }
+    .profile-avatar-wrapper {
+      width: 110px;
+      height: 110px;
+    }
+    .content-block {
+      padding: 1.25rem;
+    }
+    .timeline {
+      padding-left: 1.25rem;
+    }
+  }
 </style>
+
+<script>
+  // Client-side hydration for spam-safe emails
+  document.querySelectorAll<HTMLAnchorElement>('.spam-safe-email').forEach((el) => {
+    try {
+      const u = atob(el.getAttribute('data-u') || '');
+      const d = atob(el.getAttribute('data-d') || '');
+      if (u && d) {
+        const fullEmail = `${u}@${d}`;
+        el.setAttribute('href', `mailto:${fullEmail}`);
+        el.textContent = fullEmail;
+      }
+    } catch (e) {}
+  });
+</script>

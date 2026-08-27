@@ -1,90 +1,90 @@
 [
   {
     "id": 1,
-    "title": "SS26 PS OS",
+    "title": "PS Operating Systems",
     "course_type": "PS",
     "degree": "ba-cs",
     "semester": "Summer 26",
     "room": "HS A",
-    "instructors": "Radu Prodan",
-    "redirect_to": "https://lfuonline.uibk.ac.at/",
-    "description": "---\ntitle: \"PS Operating Systems\"\ncollection: teaching\ndegree: \"ba-cs\"\ninstructor: \"Sareh Maleki, Radu-Aurel Prodan, Marvin Raaijmakers, Seyedehhaleh Seyeddizaji\"\npermalink:\nroom: \"HS A\"\nredirect_to: https://lfuonline.uibk.ac.at/public/lfuonline_lv.details?sem_id_in=26S&lvnr_id_in=703013&sprache_in=en\nsemester: Summer 26\n---"
+    "instructors": "Sareh Maleki, Radu-Aurel Prodan, Marvin Raaijmakers, Seyedehhaleh Seyeddizaji",
+    "redirect_to": "https://lfuonline.uibk.ac.at/public/lfuonline_lv.details?sem_id_in=26S&lvnr_id_in=703013&sprache_in=en",
+    "description": "PS Operating Systems offered in Summer 26 at the University of Innsbruck."
   },
   {
     "id": 2,
-    "title": "SS26 VO OS",
+    "title": "VO Operating Systems",
     "course_type": "VO",
     "degree": "ba-cs",
     "semester": "Summer 26",
     "room": "HS A",
-    "instructors": "Radu Prodan",
-    "redirect_to": "https://lfuonline.uibk.ac.at/",
-    "description": "---\ntitle: \"VO Operating Systems\"\ncollection: teaching\ndegree: \"ba-cs\"\ninstructor: \"Radu-Aurel Prodan\"\npermalink:\nroom: \"HS A\"\nredirect_to: https://lfuonline.uibk.ac.at/public/lfuonline_lv.details?sem_id_in=26S&lvnr_id_in=703012&sprache_in=en\nsemester: Summer 26\n---"
+    "instructors": "Radu-Aurel Prodan",
+    "redirect_to": "https://lfuonline.uibk.ac.at/public/lfuonline_lv.details?sem_id_in=26S&lvnr_id_in=703012&sprache_in=en",
+    "description": "VO Operating Systems offered in Summer 26 at the University of Innsbruck."
   },
   {
     "id": 3,
-    "title": "SS26 VU Computer Vision",
+    "title": "VU Computer Vision",
     "course_type": "VU",
     "degree": "ba-cs",
     "semester": "Summer 26",
-    "room": "HS A",
-    "instructors": "Radu Prodan",
-    "redirect_to": "https://lfuonline.uibk.ac.at/",
-    "description": "---\ntitle: \"VU Computer Vision\"\ncollection: teaching\ndegree: \"ba-cs\"\ninstructor: \"Marvin Raaijmakers, Turgud Valiyev\"\npermalink:\nroom: \"HS 10, rr 25\"\nredirect_to: https://lfuonline.uibk.ac.at/public/lfuonline_lv.details?sem_id_in=26S&lvnr_id_in=703142&sprache_in=en\nsemester: Summer 26\n---"
+    "room": "HS 10, rr 25",
+    "instructors": "Marvin Raaijmakers, Turgud Valiyev",
+    "redirect_to": "https://lfuonline.uibk.ac.at/public/lfuonline_lv.details?sem_id_in=26S&lvnr_id_in=703142&sprache_in=en",
+    "description": "VU Computer Vision offered in Summer 26 at the University of Innsbruck."
   },
   {
     "id": 4,
-    "title": "WS25 26 PS compiler construction",
+    "title": "PS Compiler Construction ",
     "course_type": "PS",
-    "degree": "ba-cs",
-    "semester": "Summer 26",
-    "room": "HS A",
+    "degree": "ba-cs, ma-cs",
+    "semester": "Winter 25-26",
+    "room": "RR 25",
     "instructors": "Radu Prodan",
-    "redirect_to": "https://lfuonline.uibk.ac.at/",
-    "description": "---\ntitle: \"PS Compiler Construction \"\ncollection: teaching\ndegree: \"ba-cs, ma-cs\"\ninstructor: \"Radu Prodan\"\npermalink:\nroom: \"RR 25\"\nredirect_to: https://lfuonline.uibk.ac.at/public/lfuonline_lv.details?sem_id_in=25W&lvnr_id_in=703156&sprache_in=en\nsemester: Winter 25-26\n---"
+    "redirect_to": "https://lfuonline.uibk.ac.at/public/lfuonline_lv.details?sem_id_in=25W&lvnr_id_in=703156&sprache_in=en",
+    "description": "PS Compiler Construction  offered in Winter 25-26 at the University of Innsbruck."
   },
   {
     "id": 5,
-    "title": "WS25 26 VO compiler construction",
+    "title": "VO Compiler Construction ",
     "course_type": "VO",
     "degree": "ba-cs",
-    "semester": "Summer 26",
-    "room": "HS A",
+    "semester": "Winter 25-26",
+    "room": "HSB 7",
     "instructors": "Radu Prodan",
-    "redirect_to": "https://lfuonline.uibk.ac.at/",
-    "description": "---\ntitle: \"VO Compiler Construction \"\ncollection: teaching\ndegree: \"ba-cs\"\ninstructor: \"Radu Prodan\"\npermalink:\nroom: \"HSB 7\"\nredirect_to: https://lfuonline.uibk.ac.at/public/lfuonline_lv.details?sem_id_in=25W&lvnr_id_in=703155&sprache_in=en\nsemester: Winter 25-26\n---"
+    "redirect_to": "https://lfuonline.uibk.ac.at/public/lfuonline_lv.details?sem_id_in=25W&lvnr_id_in=703155&sprache_in=en",
+    "description": "VO Compiler Construction  offered in Winter 25-26 at the University of Innsbruck."
   },
   {
     "id": 6,
-    "title": "WS25 26 VU Introduction to Programming  haleh",
+    "title": "VU Introduction to Programming ",
     "course_type": "VU",
-    "degree": "ba-cs",
-    "semester": "Summer 26",
-    "room": "HS A",
-    "instructors": "Radu Prodan",
-    "redirect_to": "https://lfuonline.uibk.ac.at/",
-    "description": "---\ntitle: \"VU Introduction to Programming \"\ncollection: teaching\ndegree: \"ma-informatics\"\ninstructor: \"Haleh Dizaji\"\npermalink:\nroom: \"RR 22\"\nredirect_to: https://lfuonline.uibk.ac.at/public/lfuonline_lv.details?sem_id_in=25W&lvnr_id_in=437262&sprache_in=en\nsemester: Winter 25-26\n---"
+    "degree": "ma-informatics",
+    "semester": "Winter 25-26",
+    "room": "RR 22",
+    "instructors": "Haleh Dizaji",
+    "redirect_to": "https://lfuonline.uibk.ac.at/public/lfuonline_lv.details?sem_id_in=25W&lvnr_id_in=437262&sprache_in=en",
+    "description": "VU Introduction to Programming  offered in Winter 25-26 at the University of Innsbruck."
   },
   {
     "id": 7,
-    "title": "WS25 26 VU Introduction to Programming",
+    "title": "VU Introduction to Programming ",
     "course_type": "VU",
-    "degree": "ba-cs",
-    "semester": "Summer 26",
-    "room": "HS A",
-    "instructors": "Radu Prodan",
-    "redirect_to": "https://lfuonline.uibk.ac.at/",
-    "description": "---\ntitle: \"VU Introduction to Programming \"\ncollection: teaching\ndegree: \"ma-informatics\"\ninstructor: \"Turgud Valiyev\"\npermalink:\nroom: \"RR 22\"\nredirect_to: https://lfuonline.uibk.ac.at/public/lfuonline_lv.details?sem_id_in=25W&lvnr_id_in=437261&sprache_in=en\nsemester: Winter 25-26\n---"
+    "degree": "ma-informatics",
+    "semester": "Winter 25-26",
+    "room": "RR 22",
+    "instructors": "Turgud Valiyev",
+    "redirect_to": "https://lfuonline.uibk.ac.at/public/lfuonline_lv.details?sem_id_in=25W&lvnr_id_in=437261&sprache_in=en",
+    "description": "VU Introduction to Programming  offered in Winter 25-26 at the University of Innsbruck."
   },
   {
     "id": 8,
-    "title": "WS25 26 intro graph ai",
-    "course_type": "VO",
-    "degree": "ba-cs",
-    "semester": "Summer 26",
-    "room": "HS A",
-    "instructors": "Radu Prodan",
-    "redirect_to": "https://lfuonline.uibk.ac.at/",
-    "description": "---\ntitle: \"VU Introduction to Graph AI\"\ncollection: teaching\ndegree: \"ma-cs\"\ninstructor: \"Haleh Dizaji, Sareh Maleki\"\npermalink:\nroom: \"RR 22\"\nredirect_to: https://lfuonline.uibk.ac.at/public/lfuonline_lv.details?sem_id_in=25W&lvnr_id_in=703158&sprache_in=en\nsemester: Winter 25-26\n---"
+    "title": "VU Introduction to Graph AI",
+    "course_type": "VU",
+    "degree": "ma-cs",
+    "semester": "Winter 25-26",
+    "room": "RR 22",
+    "instructors": "Haleh Dizaji, Sareh Maleki",
+    "redirect_to": "https://lfuonline.uibk.ac.at/public/lfuonline_lv.details?sem_id_in=25W&lvnr_id_in=703158&sprache_in=en",
+    "description": "VU Introduction to Graph AI offered in Winter 25-26 at the University of Innsbruck."
   }
 ]

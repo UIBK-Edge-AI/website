@@ -3,20 +3,43 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import MemberCard from '../../components/MemberCard.astro';
 import { getMembers } from '../../lib/directus';
 
-const members = await getMembers();
+const allMembers = await getMembers();
+
+// Exact hierarchy ordering specified by user:
+// PROFESSOR -> PhD STUDENTS -> UNDERGRADUATE STUDENTS -> POSTDOCTORAL RESEARCHERS -> SYSTEMS ENGINEER -> SECRETARY -> Alumni
+const hierarchyOrder = [
+  'PROFESSOR',
+  'PHD STUDENTS',
+  'UNDERGRADUATE STUDENTS',
+  'POSTDOCTORAL RESEARCHERS',
+  'SYSTEMS ENGINEER',
+  'SECRETARY',
+  'ALUMNI'
+];
+
+const sortedMembers = [...allMembers].sort((a, b) => {
+  const catA = a.member_status === 'alumni' ? 'ALUMNI' : a.category;
+  const catB = b.member_status === 'alumni' ? 'ALUMNI' : b.category;
+  const rankA = hierarchyOrder.indexOf(catA) !== -1 ? hierarchyOrder.indexOf(catA) : 99;
+  const rankB = hierarchyOrder.indexOf(catB) !== -1 ? hierarchyOrder.indexOf(catB) : 99;
+  if (rankA !== rankB) return rankA - rankB;
+  return a.lastname.localeCompare(b.lastname);
+});
 
 const categories = [
   { label: 'All Members', value: 'all' },
   { label: 'Professors', value: 'PROFESSOR' },
-  { label: 'Postdoctoral Researchers', value: 'POSTDOCTORAL RESEARCHERS' },
   { label: 'PhD Students', value: 'PHD STUDENTS' },
+  { label: 'Undergraduate Students', value: 'UNDERGRADUATE STUDENTS' },
+  { label: 'Postdoctoral Researchers', value: 'POSTDOCTORAL RESEARCHERS' },
   { label: 'Systems Engineering', value: 'SYSTEMS ENGINEER' },
+  { label: 'Secretary', value: 'SECRETARY' },
   { label: 'Alumni', value: 'ALUMNI' }
 ];
 ---
 
 <BaseLayout 
-  title="Research Team | Edge AI Research Group" 
+  title="Research Team" 
   description="Faculty, postdoctoral researchers, PhD students, and systems engineers in the Edge AI group at the University of Innsbruck."
 >
   <div class="page-header">
@@ -24,7 +47,7 @@ const categories = [
       <span class="badge badge-cyan">People</span>
       <h1 class="page-title">Research Team</h1>
       <p class="page-subtitle">
-        Meet our interdisciplinary group of professors, researchers, and systems engineers advancing edge intelligence.
+        Meet our interdisciplinary group of professor, researchers, and systems engineers advancing edge intelligence.
       </p>
     </div>
   </div>
@@ -44,7 +67,7 @@ const categories = [
 
     <!-- Members Grid -->
     <div class="grid-3" id="members-grid">
-      {members.map((member) => (
+      {sortedMembers.map((member) => (
         <div class="member-item-wrapper" data-category={member.category} data-status={member.member_status}>
           <MemberCard member={member} />
         </div>
@@ -52,6 +75,13 @@ const categories = [
     </div>
   </div>
 </BaseLayout>
+
+<style>
+  .member-item-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+</style>
 
 <script>
   const filterBtns = document.querySelectorAll<HTMLButtonElement>('#team-filter-nav .filter-btn');
@@ -69,11 +99,11 @@ const categories = [
         const itemStatus = item.getAttribute('data-status');
 
         if (filterVal === 'all') {
-          item.style.display = 'block';
+          item.style.display = 'flex';
         } else if (filterVal === 'ALUMNI') {
-          item.style.display = (itemStatus === 'alumni' || itemCat === 'ALUMNI') ? 'block' : 'none';
+          item.style.display = (itemStatus === 'alumni' || itemCat === 'ALUMNI') ? 'flex' : 'none';
         } else {
-          item.style.display = (itemCat === filterVal) ? 'block' : 'none';
+          item.style.display = (itemCat === filterVal) ? 'flex' : 'none';
         }
       });
     });

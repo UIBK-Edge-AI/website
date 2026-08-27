@@ -1,0 +1,17 @@
+[Unit]
+Description=Edge AI Directus Webhook Build Listener
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/home/tm/Desktop/work/Research Groups/edgeAI/website/deploy/webhook-builder
+Environment=NODE_ENV=production
+Environment=WEBHOOK_PORT=9000
+Environment=WEBHOOK_SECRET=super_secret_build_trigger_token_2026
+ExecStart=/usr/bin/node server.js
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

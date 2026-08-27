@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getProjects } from '../../lib/directus';
 import type { Project } from '../../lib/types';
+import { marked } from 'marked';
 
 export async function getStaticPaths() {
   const projects = await getProjects();
@@ -16,6 +17,21 @@ interface Props {
 }
 
 const { project } = Astro.props;
+
+// Strip leading redundant heading from markdown body content
+let rawContent = (project.content || project.summary || '').trim();
+let leadingHeading = '';
+
+const headingMatch = rawContent.match(/^##?\s+([^\n]+)\n*/);
+if (headingMatch) {
+  leadingHeading = headingMatch[1].trim();
+  rawContent = rawContent.replace(/^##?\s+[^\n]+\n*/, '').trim();
+}
+
+const renderedContent = marked.parse(rawContent);
+
+// Construct clean 2nd line title
+const secondLineTitle = project.title || leadingHeading;
 ---
 
 <BaseLayout 
@@ -40,67 +56,36 @@ const { project } = Astro.props;
           </div>
 
           <h1 class="project-main-title">{project.name}</h1>
-          <p class="project-main-sub">{project.title}</p>
+          <p class="project-main-sub">{secondLineTitle}</p>
         </div>
 
         <div class="card-glass project-content-card">
-          <h2 class="section-heading">Project Overview & Objectives</h2>
-          <div class="markdown-body">
-            {project.content ? (
-              <div class="content-text" set:html={project.content.replace(/\n\n/g, '<br/><br/>').replace(/## (.*?)\n/g, '<h3>$1</h3>').replace(/### (.*?)\n/g, '<h4>$1</h4>')} />
-            ) : (
-              <p>{project.summary}</p>
-            )}
-          </div>
+          <div class="content-text" set:html={renderedContent} />
         </div>
       </div>
 
-      <!-- Sidebar -->
+      <!-- Single Unified Sidebar Card (No inside nested rectangle) -->
       <div class="project-sidebar-col">
         <div class="card-glass info-card">
           {project.cover_image_path && (
-            <div class="project-img-box">
-              <img src={project.cover_image_path} alt={project.name} class="project-cover" />
+            <div class="project-logo-showcase">
+              <img 
+                src={project.cover_image_path} 
+                alt={project.name} 
+                class="project-cover-img"
+                onerror="this.src='/images/logo/winter1.png'"
+              />
             </div>
           )}
 
-          <div class="info-list">
-            <div class="info-item">
-              <span class="info-label">Sponsor</span>
-              <span class="info-val">{project.sponsor}</span>
-            </div>
-            <div class="info-item">
-              <span class="info-label">Duration</span>
-              <span class="info-val">{project.duration}</span>
-            </div>
-            {project.identifier && (
-              <div class="info-item">
-                <span class="info-label">Identifier</span>
-                <span class="info-val">{project.identifier}</span>
-              </div>
-            )}
-          </div>
-
           {project.website && (
             <div class="sidebar-action">
-              <a href={project.website} target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm btn-block">
+              <a href={project.website} target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-block">
                 Official Project Site &rarr;
               </a>
             </div>
           )}
         </div>
-
-        <!-- Tags -->
-        {project.tags && project.tags.length > 0 && (
-          <div class="card-glass info-card">
-            <h3 class="info-card-title">Research Tags</h3>
-            <div class="tags-cloud">
-              {project.tags.map((tag) => (
-                <span class="tag-pill">{tag}</span>
-              ))}
-            </div>
-          </div>
-        )}
       </div>
     </div>
   </div>
@@ -141,40 +126,76 @@ const { project } = Astro.props;
   }
 
   .project-main-sub {
-    font-size: 1.2rem;
+    font-size: 1.15rem;
     color: var(--accent-cyan);
     font-weight: 500;
+    line-height: 1.45;
   }
 
   .project-content-card {
     padding: 2.5rem;
   }
 
-  .section-heading {
-    font-size: 1.4rem;
-    margin-bottom: 1.5rem;
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 0.5rem;
-  }
-
   .content-text {
     font-size: 1.02rem;
-    line-height: 1.7;
+    line-height: 1.75;
     color: var(--text-secondary);
   }
 
-  .content-text h3 {
-    font-size: 1.3rem;
+  .content-text :global(h2) {
+    font-size: 1.45rem;
+    color: var(--text-primary);
     margin-top: 2rem;
     margin-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.4rem;
+  }
+
+  .content-text :global(h3) {
+    font-size: 1.25rem;
+    color: var(--accent-cyan);
+    margin-top: 1.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .content-text :global(h4) {
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    margin-top: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .content-text :global(p) {
+    margin-bottom: 1.25rem;
+  }
+
+  .content-text :global(strong) {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  .content-text :global(ul), .content-text :global(ol) {
+    margin-left: 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .content-text :global(li) {
+    margin-bottom: 0.5rem;
+  }
+
+  .content-text :global(blockquote) {
+    border-left: 3px solid var(--accent-cyan);
+    background: rgba(0, 240, 255, 0.05);
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0;
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    font-style: italic;
     color: var(--text-primary);
   }
 
-  .content-text h4 {
-    font-size: 1.15rem;
-    margin-top: 1.5rem;
-    margin-bottom: 0.75rem;
+  .content-text :global(a) {
     color: var(--accent-cyan);
+    text-decoration: underline;
   }
 
   .project-sidebar-col {
@@ -183,70 +204,66 @@ const { project } = Astro.props;
     gap: 1.5rem;
   }
 
+  /* Single Unified Sidebar Card */
   .info-card {
-    padding: 1.75rem;
+    padding: 2.25rem 1.75rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
   }
 
-  .project-img-box {
-    margin-bottom: 1.5rem;
-    background: rgba(0, 0, 0, 0.4);
-    border-radius: var(--radius-md);
-    padding: 1.5rem;
+  /* Seamless Project Logo Display (No nested box, adapts to dark/light theme) */
+  .project-logo-showcase {
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid var(--border-color);
+    min-height: 140px;
+    padding: 0.5rem;
   }
 
-  .project-cover {
-    max-height: 80px;
+  .project-cover-img {
+    max-height: 130px;
     max-width: 100%;
+    width: auto;
     object-fit: contain;
+    filter: drop-shadow(0 4px 16px rgba(0, 240, 255, 0.2));
+    transition: transform 0.3s ease, filter 0.3s ease;
   }
 
-  .info-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.85rem;
-    margin-bottom: 1.5rem;
-    font-family: var(--font-mono);
+  :global([data-theme="light"]) .project-cover-img {
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.08));
   }
 
-  .info-item {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.85rem;
-    border-bottom: 1px solid var(--border-subtle);
-    padding-bottom: 0.4rem;
+  .project-cover-img:hover {
+    transform: scale(1.05);
   }
 
-  .info-label {
-    color: var(--text-muted);
-  }
-
-  .info-val {
-    color: var(--text-primary);
-    font-weight: 500;
+  .sidebar-action {
+    width: 100%;
   }
 
   .btn-block {
     width: 100%;
   }
 
-  .info-card-title {
-    font-size: 1.05rem;
-    margin-bottom: 1rem;
-  }
-
-  .tags-cloud {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-  }
-
   @media (max-width: 900px) {
     .project-detail-layout {
       grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .project-header-card, .project-content-card {
+      padding: 1.35rem;
+    }
+    .info-card {
+      padding: 1.5rem 1.25rem;
+      gap: 1.5rem;
+    }
+    .project-cover-img {
+      max-height: 100px;
     }
   }
 </style>

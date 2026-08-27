@@ -1,71 +1,66 @@
 ---
 const currentYear = new Date().getFullYear();
+
+// Spam-proof email encoding
+const groupEmail = 'edgeai-informatik@uibk.ac.at';
+const emailParts = groupEmail.split('@');
+const emailUserB64 = Buffer.from(emailParts[0]).toString('base64');
+const emailDomainB64 = Buffer.from(emailParts[1]).toString('base64');
 ---
 
 <footer class="site-footer">
-  <div class="container footer-grid">
-    <!-- Col 1: Group info -->
-    <div class="footer-col">
-      <div class="footer-brand">
-        <img src="/images/logo/winter1.png" alt="Edge AI" class="footer-logo" />
-        <span class="footer-title">EDGE AI RESEARCH GROUP</span>
-      </div>
-      <p class="footer-desc">
-        Advancing scalable, sustainable, and secure Artificial Intelligence at the network's edge.
-      </p>
-      <div class="affiliation-badge">
-        <span class="pulse-dot"></span>
-        <span>Department of Computer Science & DiSC</span>
-      </div>
-    </div>
-
-    <!-- Col 2: Navigation Links -->
-    <div class="footer-col">
-      <h4 class="col-title">Navigation</h4>
-      <ul class="footer-links">
-        <li><a href="/team">Research Team</a></li>
-        <li><a href="/projects">Research Projects</a></li>
-        <li><a href="/publications">Publications</a></li>
-        <li><a href="/teaching">Courses & Theses</a></li>
-        <li><a href="/vacancies">Open Positions</a></li>
-        <li><a href="/news">News & Events</a></li>
-      </ul>
-    </div>
-
-    <!-- Col 3: Contact & Location -->
+  <div class="container footer-grid-2">
+    <!-- Col 1: Contact & Location -->
     <div class="footer-col">
       <h4 class="col-title">Contact & Location</h4>
-      <p class="contact-line"><strong>Institution:</strong> Universität Innsbruck</p>
-      <p class="contact-line"><strong>Address:</strong> Technikerstraße 21a, 6020 Innsbruck, Austria</p>
-      <p class="contact-line"><strong>Email:</strong> <a href="mailto:edgeai-informatik@uibk.ac.at">edgeai-informatik@uibk.ac.at</a></p>
-      <p class="contact-line"><strong>Phone:</strong> +43 512 507-53494</p>
-      <div class="location-link-wrapper">
-        <a href="https://www.uibk.ac.at/de/informatik/kontakt/anfahrt/" target="_blank" rel="noopener noreferrer" class="map-link">
-          &rarr; Campus Map & Directions
-        </a>
+      <div class="contact-details">
+        <p class="contact-line"><strong>Institution:</strong> Universität Innsbruck</p>
+        <p class="contact-line"><strong>Address:</strong> Technikerstraße 21a, 6020 Innsbruck, Austria</p>
+        <p class="contact-line">
+          <strong>Email:</strong> 
+          <a 
+            href="#" 
+            class="email-link spam-safe-email" 
+            data-u={emailUserB64} 
+            data-d={emailDomainB64}
+            title="Contact Edge AI Group"
+          >
+            {emailParts[0]} [at] {emailParts[1]}
+          </a>
+        </p>
+        <p class="contact-line"><strong>Phone:</strong> +43 512 507-53494</p>
+        <div class="location-link-wrapper">
+          <a href="https://www.uibk.ac.at/de/informatik/kontakt/anfahrt/" target="_blank" rel="noopener noreferrer" class="map-link">
+            &rarr; Campus Map & Directions
+          </a>
+        </div>
       </div>
     </div>
 
-    <!-- Col 4: Sponsorships & CMS -->
+    <!-- Col 2: Funding & Partners -->
     <div class="footer-col">
       <h4 class="col-title">Funding & Partners</h4>
-      <div class="sponsor-logos">
-        <img src="/images/logo/stiftung_edgeai.svg" alt="AIM AT Stiftungsprofessur" class="partner-logo" />
-        <img src="/images/logo/uibk_light.svg" alt="Universität Innsbruck" class="partner-logo uibk-logo" />
-      </div>
-      <div class="cms-admin-link">
-        <a href="http://localhost:8055" target="_blank" rel="noopener noreferrer" class="tag-pill">
-          Directus Admin &rarr;
-        </a>
+      <div class="partner-showcase-box">
+        <!-- Partners Consortium Logo (+150% bigger) -->
+        <div class="partner-logo-plate">
+          <img src="/images/logo/stiftung_edgeai.svg" alt="AIM AT Stiftungsprofessur Sponsors" class="partner-consortium-logo" />
+        </div>
+        <!-- UIBK Logo (Bigger) -->
+        <div class="partner-uibk-wrap">
+          <a href="https://www.uibk.ac.at/informatik/" target="_blank" rel="noopener noreferrer" title="University of Innsbruck Department of Computer Science">
+            <img src="/images/logo/uibk_black.svg" alt="Universität Innsbruck" class="uibk-footer-logo uibk-dark-mode" />
+            <img src="/images/logo/uibk_light.svg" alt="Universität Innsbruck" class="uibk-footer-logo uibk-light-mode" />
+          </a>
+        </div>
       </div>
     </div>
   </div>
 
   <div class="container footer-bottom">
-    <p>&copy; {currentYear} Edge AI Research Group, University of Innsbruck. All rights reserved.</p>
-    <div class="footer-meta">
-      <span>High-Tech Minimalist Static Architecture</span>
-      <span>Powered by Directus + Astro</span>
+    <p class="copyright-text">&copy; {currentYear} Edge AI Research Group, University of Innsbruck. All rights reserved.</p>
+    <div class="engineer-credit">
+      <span>Developed by: </span>
+      <a href="/team/tanim_gias" class="engineer-link">Tanim M. Rayhan Gias</a>
     </div>
   </div>
 </footer>
@@ -76,158 +71,194 @@ const currentYear = new Date().getFullYear();
     border-top: 1px solid var(--border-color);
     margin-top: auto;
     padding-top: 4rem;
-    padding-bottom: 2rem;
+    padding-bottom: 2.5rem;
   }
 
-  .footer-grid {
+  /* Exactly 2 Columns Grid */
+  .footer-grid-2 {
     display: grid;
-    grid-template-columns: 1.4fr 1fr 1.3fr 1.3fr;
-    gap: 2.5rem;
-    margin-bottom: 3rem;
-  }
-
-  .footer-brand {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 1rem;
-  }
-
-  .footer-logo {
-    height: 32px;
-    width: auto;
-  }
-
-  .footer-title {
-    font-family: var(--font-heading);
-    font-size: 0.95rem;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    color: var(--text-primary);
-  }
-
-  .footer-desc {
-    font-size: 0.88rem;
-    color: var(--text-secondary);
-    line-height: 1.5;
-    margin-bottom: 1.25rem;
-  }
-
-  .affiliation-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.75rem;
-    font-family: var(--font-mono);
-    color: var(--text-secondary);
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid var(--border-color);
-    padding: 0.35rem 0.75rem;
-    border-radius: var(--radius-full);
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 3.5rem;
   }
 
   .col-title {
-    font-size: 0.95rem;
+    font-size: 1.1rem;
     font-family: var(--font-heading);
     color: var(--text-primary);
-    margin-bottom: 1.25rem;
+    margin-bottom: 1.35rem;
     letter-spacing: 0.02em;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
   }
 
-  .footer-links {
-    list-style: none;
+  .contact-details {
     display: flex;
     flex-direction: column;
-    gap: 0.6rem;
-  }
-
-  .footer-links a {
-    font-size: 0.88rem;
-    color: var(--text-secondary);
-    text-decoration: none;
-    transition: color 0.2s ease, transform 0.2s ease;
-    display: inline-block;
-  }
-
-  .footer-links a:hover {
-    color: var(--accent-cyan);
-    transform: translateX(3px);
+    gap: 0.55rem;
   }
 
   .contact-line {
-    font-size: 0.85rem;
+    font-size: 0.92rem;
     color: var(--text-secondary);
-    margin-bottom: 0.4rem;
-    line-height: 1.4;
+    line-height: 1.5;
   }
 
   .contact-line strong {
     color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  .email-link {
+    color: var(--accent-cyan);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .email-link:hover {
+    text-decoration: underline;
   }
 
   .location-link-wrapper {
-    margin-top: 0.75rem;
+    margin-top: 0.85rem;
   }
 
   .map-link {
-    font-size: 0.82rem;
+    font-size: 0.85rem;
     font-family: var(--font-mono);
     color: var(--accent-cyan);
+    font-weight: 500;
+    transition: transform 0.2s ease;
+    display: inline-block;
   }
 
-  .sponsor-logos {
+  .map-link:hover {
+    transform: translateX(3px);
+  }
+
+  /* Funding & Partners Box */
+  .partner-showcase-box {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
-    margin-bottom: 1.25rem;
+    gap: 1.25rem;
   }
 
-  .partner-logo {
-    max-height: 36px;
-    max-width: 180px;
+  .partner-logo-plate {
+    background: #ffffff;
+    border-radius: var(--radius-md);
+    padding: 1.15rem 1.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(245, 158, 11, 0.4);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35), 0 0 15px rgba(245, 158, 11, 0.15);
+    max-width: 420px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .partner-logo-plate:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.45), 0 0 25px rgba(245, 158, 11, 0.25);
+  }
+
+  /* Partners Logo 150% Bigger */
+  .partner-consortium-logo {
+    max-height: 85px;
+    width: 100%;
     object-fit: contain;
-    filter: brightness(0.9) contrast(1.1);
   }
 
-  .uibk-logo {
-    max-height: 28px;
+  .partner-uibk-wrap {
+    display: flex;
+    align-items: center;
+    margin-top: 0.25rem;
   }
 
+  /* Bigger UIBK Logo */
+  .uibk-footer-logo {
+    height: 42px;
+    width: auto;
+    max-width: 220px;
+    object-fit: contain;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .uibk-footer-logo:hover {
+    opacity: 0.9;
+    transform: scale(1.02);
+  }
+
+  .uibk-light-mode {
+    display: none;
+  }
+
+  :global([data-theme="light"]) .uibk-dark-mode {
+    display: none !important;
+  }
+
+  :global([data-theme="light"]) .uibk-light-mode {
+    display: block !important;
+  }
+
+  /* Footer Bottom */
   .footer-bottom {
     border-top: 1px solid var(--border-color);
-    padding-top: 1.5rem;
+    padding-top: 1.75rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-size: 0.8rem;
+    font-size: 0.82rem;
     color: var(--text-muted);
     font-family: var(--font-mono);
   }
 
-  .footer-meta {
-    display: flex;
-    gap: 1.5rem;
+  .copyright-text {
+    font-size: 0.82rem;
   }
 
-  @media (max-width: 992px) {
-    .footer-grid {
-      grid-template-columns: 1fr 1fr;
-    }
+  .engineer-credit {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.82rem;
   }
 
-  @media (max-width: 640px) {
-    .footer-grid {
+  .engineer-link {
+    color: var(--accent-cyan);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s ease;
+  }
+
+  .engineer-link:hover {
+    color: #ffffff;
+    text-decoration: underline;
+  }
+
+  @media (max-width: 850px) {
+    .footer-grid-2 {
       grid-template-columns: 1fr;
-      gap: 2rem;
+      gap: 2.5rem;
     }
     .footer-bottom {
       flex-direction: column;
       gap: 0.75rem;
       text-align: center;
     }
-    .footer-meta {
-      flex-direction: column;
-      gap: 0.3rem;
-    }
   }
 </style>
+
+<script>
+  // Client-side hydration for spam-safe emails
+  document.querySelectorAll<HTMLAnchorElement>('.spam-safe-email').forEach((el) => {
+    try {
+      const u = atob(el.getAttribute('data-u') || '');
+      const d = atob(el.getAttribute('data-d') || '');
+      if (u && d) {
+        const fullEmail = `${u}@${d}`;
+        el.setAttribute('href', `mailto:${fullEmail}`);
+        el.textContent = fullEmail;
+      }
+    } catch (e) {}
+  });
+</script>

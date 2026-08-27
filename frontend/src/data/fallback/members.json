@@ -6,7 +6,7 @@
     "title": "Univ.-Prof. Dr. Radu Prodan",
     "name": "Radu Prodan",
     "lastname": "Prodan",
-    "slug": "radu_prodan",
+    "slug": "raduprodan",
     "category": "PROFESSOR",
     "position": "professor",
     "sort_order": 1,
@@ -102,13 +102,53 @@
     "publications": []
   },
   {
+    "id": 11,
+    "status": "published",
+    "member_status": "active",
+    "title": "Rajashekar Kolichala",
+    "name": "Rajashekar Kolichala",
+    "lastname": "Kolichala",
+    "slug": "rajashekar",
+    "category": "POSTDOCTORAL RESEARCHERS",
+    "position": "postdoc",
+    "sort_order": 1,
+    "office": "ICT 2M05C",
+    "phone": "+43 512 507-53247",
+    "email": "rajashekar.kolichala@uibk.ac.at",
+    "address": "Technikerstraße 21A, 6020 Innsbruck, Austria",
+    "orcid": "",
+    "scholar_id": "wq36gfgAAAAJ",
+    "linkedin": "",
+    "github": "",
+    "avatar_path": "/images/team/P_shekar2.jpeg",
+    "interests": [
+      "Deep Learning",
+      "Reinforcement Learning"
+    ],
+    "positions": [
+      {
+        "from": 2025,
+        "to": "present",
+        "title": "Postdoctoral Researcher",
+        "dep": "Department of Computer Science",
+        "dep_uri": "https://www.uibk.ac.at/informatik/index.html.en",
+        "inst": "University of Innsbruck",
+        "inst_uri": "http://informatik.uibk.ac.at",
+        "where": "Austria"
+      }
+    ],
+    "education": [],
+    "bio": "Rajashekar Kolichala is a researcher in the Edge AI research group at the University of Innsbruck focusing on Deep Learning, Reinforcement Learning.",
+    "publications": []
+  },
+  {
     "id": 5,
     "status": "published",
     "member_status": "active",
     "title": "Haleh Dizaji",
     "name": "Haleh Dizaji",
     "lastname": "Dizaji",
-    "slug": "haleh_dizaji",
+    "slug": "haleh",
     "category": "POSTDOCTORAL RESEARCHERS",
     "position": "postdoc",
     "sort_order": 2,
@@ -182,7 +222,7 @@
         "where": "Tehran, Iran"
       }
     ],
-    "bio": "Researcher in the Edge AI research group at the University of Innsbruck focusing on Deep Learning, Graph Machine Learning, Reinforcement Learning.",
+    "bio": "Haleh Dizaji is a researcher in the Edge AI research group at the University of Innsbruck focusing on Deep Learning, Graph Machine Learning, Reinforcement Learning.",
     "publications": [
       "SFRKSP2025-HiPC",
       "SPM2022-Complexity",
@@ -194,13 +234,123 @@
     ]
   },
   {
+    "id": 9,
+    "status": "published",
+    "member_status": "active",
+    "title": "Nafiseh Sharghivand",
+    "name": "Nafiseh Sharghivand",
+    "lastname": "Sharghivand",
+    "slug": "nafiseh",
+    "category": "POSTDOCTORAL RESEARCHERS",
+    "position": "postdoc",
+    "sort_order": 3,
+    "office": "ICT 2M05D",
+    "phone": "+43 512 507-53248",
+    "email": "nafiseh.sharghivand@uibk.ac.at",
+    "address": "Technikerstraße 21A, 6020 Innsbruck, Austria",
+    "orcid": "0000-0002-2546-0893",
+    "scholar_id": "vdg5a5QAAAAJ",
+    "linkedin": "nafiseh-sharghivand-084b183a",
+    "github": "",
+    "avatar_path": "/images/team/P_Nafiseh_sh.jpg",
+    "interests": [
+      "Edge Computing",
+      "Machine Learning",
+      "Edge-AI",
+      "Game Theory"
+    ],
+    "positions": [
+      {
+        "from": 2025,
+        "to": "present",
+        "title": "Postdoctoral Researcher",
+        "dep": "Department of Computer Science",
+        "dep_uri": "https://www.uibk.ac.at/informatik/index.html.en",
+        "inst": "University of Innsbruck",
+        "inst_uri": "http://informatik.uibk.ac.at",
+        "where": "Austria"
+      },
+      {
+        "from": 2023,
+        "to": 2025,
+        "title": "Postdoctoral Researcher",
+        "inst": "Singapore University of Technology and Design",
+        "inst_uri": "https://www.sutd.edu.sg/",
+        "where": "Singapore"
+      },
+      {
+        "from": 2019,
+        "to": 2023,
+        "title": "Lecturer",
+        "inst": "Azarbaijan Shahid Madani University",
+        "inst_uri": "https://intl.azaruniv.ac.ir/",
+        "where": "Iran"
+      },
+      {
+        "from": 2016,
+        "to": 2021,
+        "title": "Lecturer",
+        "inst": "University of Tabriz",
+        "inst_uri": "https://tabrizu.ac.ir/en",
+        "where": "Iran"
+      },
+      {
+        "from": 2018,
+        "to": 2020,
+        "title": "Remote Visiting Scholar",
+        "inst": "University of Delaware",
+        "inst_uri": "https://www.udel.edu/",
+        "where": "USA"
+      }
+    ],
+    "education": [
+      {
+        "from": 2015,
+        "to": 2020,
+        "title": "Ph.D. in Computer Engineering (AI)",
+        "inst": "University of Tabriz",
+        "inst_uri": "https://tabrizu.ac.ir/en",
+        "where": "Tabriz, Iran"
+      },
+      {
+        "from": 2012,
+        "to": 2015,
+        "title": "M.Sc. in Computer Engineering (AI)",
+        "inst": "University of Tabriz",
+        "inst_uri": "https://tabrizu.ac.ir/en",
+        "where": "Tabriz, Iran"
+      },
+      {
+        "from": 2007,
+        "to": 2011,
+        "title": "B.Sc. in Information Technology Engineering",
+        "inst": "University of Tabriz",
+        "inst_uri": "https://tabrizu.ac.ir/en",
+        "where": "Tabriz, Iran"
+      }
+    ],
+    "bio": "Nafiseh Sharghivand is a researcher in the Edge AI research group at the University of Innsbruck focusing on Edge Computing, Machine Learning, Edge-AI, Game Theory.",
+    "publications": [
+      "Sharghivand2022-TSC",
+      "Sharghivand2021-Access",
+      "Sharghivand2021-Springer1",
+      "Sharghivand2021-Springer2",
+      "Sharghivand2020-TCC",
+      "Sharghivand2018-IPCCC",
+      "Sharghivand2017-DCBDP",
+      "Sharghivand2016-DCBDP",
+      "Sharghivand2016-IJST",
+      "Sharghivand2014-IJTPPE"
+    ]
+  },
+  {
     "id": 7,
     "status": "published",
     "member_status": "active",
     "title": "Marvin Raaijmakers",
     "name": "Marvin Raaijmakers",
     "lastname": "Raaijmakers",
-    "slug": "marvin_raaijmakers",
+    "slug": "marvin",
     "category": "POSTDOCTORAL RESEARCHERS",
     "position": "postdoc",
     "sort_order": 4,
@@ -208,7 +358,7 @@
     "phone": "+43 512 507-53265",
     "email": "marvin.raaijmakers@uibk.ac.at",
     "address": "Technikerstraße 21A, 6020 Innsbruck, Austria",
-    "orcid": null,
+    "orcid": "",
     "scholar_id": "UijBASYAAAAJ",
     "linkedin": "marvinr",
     "github": "",
@@ -269,7 +419,7 @@
         "notes": "Graduated Cum Laude (highest level of distinction at TU Eindhoven). Did a minor in Applied Physics.\n"
       }
     ],
-    "bio": "Researcher in the Edge AI research group at the University of Innsbruck focusing on Deep Learning, Computer Vision, Robotics, Foundation Models, Algorithms.",
+    "bio": "Marvin Raaijmakers is a researcher in the Edge AI research group at the University of Innsbruck focusing on Deep Learning, Computer Vision, Robotics, Foundation Models, Algorithms.",
     "publications": [
       "witte2025epipolar",
       "raaijmakers2016towards",
@@ -359,7 +509,7 @@
         "where": "Dhaka, Bangladesh"
       }
     ],
-    "bio": "Researcher in the Edge AI research group at the University of Innsbruck focusing on Network Security, In-Network Computing, Distributed & Parallel Computing, Middleware Systems.",
+    "bio": "Tanim M. Rayhan Gias is a researcher in the Edge AI research group at the University of Innsbruck focusing on Network Security, In-Network Computing, Distributed & Parallel Computing, Middleware Systems.",
     "publications": [
       "RDGB2025-CCNCa",
       "AWGK2021-ACMICN",
@@ -371,53 +521,168 @@
     "id": 1,
     "status": "published",
     "member_status": "active",
-    "title": "Sarehmaleki",
-    "name": "",
-    "lastname": "Sarehmaleki",
+    "title": "Sareh Maleki",
+    "name": "Sareh Maleki",
+    "lastname": "Maleki",
     "slug": "sarehmaleki",
     "category": "PHD STUDENTS",
     "position": "phd",
     "sort_order": 1,
-    "office": "ICT Innsbruck",
-    "phone": "",
-    "email": "",
+    "office": "ICT 2M05D",
+    "phone": "+43 512 507-53251",
+    "email": "sareh.maleki@uibk.ac.at",
     "address": "Technikerstraße 21A, 6020 Innsbruck, Austria",
-    "orcid": "",
-    "scholar_id": "",
+    "orcid": "0009-0006-3905-9407",
+    "scholar_id": "5nmmzLsAAAAJ",
     "linkedin": "",
     "github": "",
-    "avatar_path": "/images/team/person-placeholder.svg",
-    "interests": [],
-    "positions": [],
-    "education": [],
-    "bio": "---\nlayout: person\ncv_ready: true\nkind: person\ntitle: Sareh Maleki\nlastname: Maleki\nidentifier: 1\npermalink: /team/sarehmaleki\nimg: /assets/img/team/P_Sareh_Maleki.jpg\nphone: +43 512 507-53251\nposition: phd\ncategory: PhD STUDENTS\noffice: ICT 2M05D\nORCID: 0009-0006-3905-9407\nscholar_id: 5nmmzLsAAAAJ    \nemail: sareh.maleki(at)uibk(dot)ac(dot)at\naddress: Technikerstraße 21A, 6020 Innsbruck, Austria\n\ninterests:\n  - Edge Computing\n  - Machine Learning\n  - Graph Machine Learning\n  - Edge-AI\n  - Cyber-Physical Systems\n\npositions:\n  - from: 2025\n    title: PhD Student\n    dep: Department of Computer Science\n    dep_uri: https://www.uibk.ac.at/informatik/index.html.en\n    inst: University of Innsbruck\n    inst_uri: http://informatik.uibk.ac.at\n    where: Austria\n  - from: 2022\n    to: 2024\n    title: Teaching Assistant\n    inst: Sharif University of Technology\n    inst_uri: https://www.sharif.edu\n    where: Tehran, Iran\n    notes: |\n      Assisted in multiple courses:\n      - Advanced VLSI Design (June 2024)\n      - Logic Circuits Lab\n      - Real-Time Systems\n      - Logic Design\n\n  - from: 2022\n    title: Teaching Assistant\n    inst: Arak University\n    inst_uri: https://www.araku.ac.ir\n    where: Arak, Iran\n    notes: |\n      - Data Structures course for undergraduate students\n\neducation:\n  - from: 2025\n    to: present\n    title: Ph.D. in Computer Engineering\n    inst: University of Innsbruck\n    inst_uri: https://www.uibk.ac.at\n    where: Innsbruck, Austria\n\n  - from: 2022\n    to: 2025\n    title: M.Sc. in Computer Engineering\n    inst: Sharif University of Technology\n    inst_uri: https://www.sharif.edu\n    where: Tehran, Iran\n\n  - from: 2018\n    to: 2022\n    title: B.Sc. in Computer Engineering\n    inst: Arak University\n    inst_uri: https://www.araku.ac.ir\n    where: Arak, Iran\n\npublications:\n  - TMSYH2025-CSICC\n---",
-    "publications": []
+    "avatar_path": "/images/team/P_Sareh_Maleki.jpg",
+    "interests": [
+      "Edge Computing",
+      "Machine Learning",
+      "Graph Machine Learning",
+      "Edge-AI",
+      "Cyber-Physical Systems"
+    ],
+    "positions": [
+      {
+        "from": 2025,
+        "title": "PhD Student",
+        "dep": "Department of Computer Science",
+        "dep_uri": "https://www.uibk.ac.at/informatik/index.html.en",
+        "inst": "University of Innsbruck",
+        "inst_uri": "http://informatik.uibk.ac.at",
+        "where": "Austria"
+      },
+      {
+        "from": 2022,
+        "to": 2024,
+        "title": "Teaching Assistant",
+        "inst": "Sharif University of Technology",
+        "inst_uri": "https://www.sharif.edu",
+        "where": "Tehran, Iran",
+        "notes": "Assisted in multiple courses:\n- Advanced VLSI Design (June 2024)\n- Logic Circuits Lab\n- Real-Time Systems\n- Logic Design\n"
+      },
+      {
+        "from": 2022,
+        "title": "Teaching Assistant",
+        "inst": "Arak University",
+        "inst_uri": "https://www.araku.ac.ir",
+        "where": "Arak, Iran",
+        "notes": "- Data Structures course for undergraduate students\n"
+      }
+    ],
+    "education": [
+      {
+        "from": 2025,
+        "to": "present",
+        "title": "Ph.D. in Computer Engineering",
+        "inst": "University of Innsbruck",
+        "inst_uri": "https://www.uibk.ac.at",
+        "where": "Innsbruck, Austria"
+      },
+      {
+        "from": 2022,
+        "to": 2025,
+        "title": "M.Sc. in Computer Engineering",
+        "inst": "Sharif University of Technology",
+        "inst_uri": "https://www.sharif.edu",
+        "where": "Tehran, Iran"
+      },
+      {
+        "from": 2018,
+        "to": 2022,
+        "title": "B.Sc. in Computer Engineering",
+        "inst": "Arak University",
+        "inst_uri": "https://www.araku.ac.ir",
+        "where": "Arak, Iran"
+      }
+    ],
+    "bio": "Sareh Maleki is a researcher in the Edge AI research group at the University of Innsbruck focusing on Edge Computing, Machine Learning, Graph Machine Learning, Edge-AI, Cyber-Physical Systems.",
+    "publications": [
+      "TMSYH2025-CSICC"
+    ]
   },
   {
     "id": 2,
     "status": "published",
     "member_status": "active",
-    "title": "Turgutbaliyev",
-    "name": "",
-    "lastname": "Turgutbaliyev",
-    "slug": "turgutbaliyev",
+    "title": "Turgud Valiyev",
+    "name": "Turgud Valiyev",
+    "lastname": "Valiyev",
+    "slug": "turgudvaliyev",
     "category": "PHD STUDENTS",
     "position": "phd",
     "sort_order": 2,
-    "office": "ICT Innsbruck",
-    "phone": "",
-    "email": "",
+    "office": "ICT 2M05B",
+    "phone": "+43 512 507-53259",
+    "email": "turgud.valiyev@student.uibk.ac.at",
     "address": "Technikerstraße 21A, 6020 Innsbruck, Austria",
-    "orcid": "",
-    "scholar_id": "",
+    "orcid": "0009-0000-3261-8970",
+    "scholar_id": "qHmwI_QAAAAJ",
     "linkedin": "",
     "github": "",
-    "avatar_path": "/images/team/person-placeholder.svg",
-    "interests": [],
-    "positions": [],
-    "education": [],
-    "bio": "---\nlayout: person\ncv_ready: true\nkind: person\ntitle: Turgud Valiyev\nlastname: Valiyev\nidentifier: 2\npermalink: /team/turgudvaliyev\nimg: assets/img/team/P_Turgud_Baliyev.jpg\nphone: +43 512 507-53259\nposition: phd\ncategory: PhD STUDENTS\noffice: ICT 2M05B\nORCID: 0009-0000-3261-8970\nscholar_id: qHmwI_QAAAAJ        \nemail: turgud.valiyev(at)student.uibk(dot)ac(dot)at\naddress: Technikerstraße 21A, 6020 Innsbruck, Austria\n\ninterests:\n  - Edge Computing\n  - Data Science\n  - Machine Learning\n  - Federated Learning\n  - Edge-AI\n  - Econometrics\n\npositions:\n  - from: 2025\n    title: PhD Student\n    dep: Department of Computer Science\n    dep_uri: https://www.uibk.ac.at/informatik/index.html.en\n    inst: University of Innsbruck\n    inst_uri: http://informatik.uibk.ac.at\n    where: Innsbruck, Austria\n\n  - from: 2024\n    to:   2025\n    title: Business Finance Analyst Intern\n    dep_uri: https://www.uibk.ac.at/informatik/index.html.en\n    inst: Schneider Electric\n    inst_uri: https://www.se.com/pl/pl/\n    where: Warsaw, Poland\n\neducation:\n  - from: 2025\n    to: present\n    title: Ph.D. in Computer Science\n    inst: University of Innsbruck\n    inst_uri: https://www.uibk.ac.at\n    where: Innsbruck, Austria\n\n  - from: 2023\n    to: 2025\n    title: M.Sc. in Data Science and Business Analytics\n    inst: University of Warsaw\n    inst_uri: https://en.uw.edu.pl/\n    where: Warsaw, Poland\n\n  - from: 2019\n    to: 2023\n    title: BBA in Managerial Science\n    inst: Azerbaijan State Oil and Industry University\n    inst_uri: https://asoiu.edu.az/\n    where: Baku, Azerbaijan\n\npublications:\n  - TVNA2025-JEMA       # Macroeconomic Impact on Stock Indices: Turkey & Russia\n  - TVAC2024-AGORA      # Doctor Migration: Unpacking Economic and Social Impacts\n  - TLTU2025NAR\n---",
-    "publications": []
+    "avatar_path": "/images/team/P_Turgud_Baliyev.jpg",
+    "interests": [
+      "Edge Computing",
+      "Data Science",
+      "Machine Learning",
+      "Federated Learning",
+      "Edge-AI",
+      "Econometrics"
+    ],
+    "positions": [
+      {
+        "from": 2025,
+        "title": "PhD Student",
+        "dep": "Department of Computer Science",
+        "dep_uri": "https://www.uibk.ac.at/informatik/index.html.en",
+        "inst": "University of Innsbruck",
+        "inst_uri": "http://informatik.uibk.ac.at",
+        "where": "Innsbruck, Austria"
+      },
+      {
+        "from": 2024,
+        "to": 2025,
+        "title": "Business Finance Analyst Intern",
+        "dep_uri": "https://www.uibk.ac.at/informatik/index.html.en",
+        "inst": "Schneider Electric",
+        "inst_uri": "https://www.se.com/pl/pl/",
+        "where": "Warsaw, Poland"
+      }
+    ],
+    "education": [
+      {
+        "from": 2025,
+        "to": "present",
+        "title": "Ph.D. in Computer Science",
+        "inst": "University of Innsbruck",
+        "inst_uri": "https://www.uibk.ac.at",
+        "where": "Innsbruck, Austria"
+      },
+      {
+        "from": 2023,
+        "to": 2025,
+        "title": "M.Sc. in Data Science and Business Analytics",
+        "inst": "University of Warsaw",
+        "inst_uri": "https://en.uw.edu.pl/",
+        "where": "Warsaw, Poland"
+      },
+      {
+        "from": 2019,
+        "to": 2023,
+        "title": "BBA in Managerial Science",
+        "inst": "Azerbaijan State Oil and Industry University",
+        "inst_uri": "https://asoiu.edu.az/",
+        "where": "Baku, Azerbaijan"
+      }
+    ],
+    "bio": "Turgud Valiyev is a researcher in the Edge AI research group at the University of Innsbruck focusing on Edge Computing, Data Science, Machine Learning, Federated Learning, Edge-AI, Econometrics.",
+    "publications": [
+      "TVNA2025-JEMA",
+      "TVAC2024-AGORA",
+      "TLTU2025NAR"
+    ]
   },
   {
     "id": 6,
@@ -426,7 +691,7 @@
     "title": "Harshani Wickramarathna",
     "name": "Harshani Wickramarathna",
     "lastname": "Wickramarathna",
-    "slug": "harshani",
+    "slug": "harshaniwickramarathna",
     "category": "PHD STUDENTS",
     "position": "phd",
     "sort_order": 2,
@@ -434,7 +699,7 @@
     "phone": "+43 677 629 290 83",
     "email": "Sedillage.Wickramarathna@student.uibk.ac.at",
     "address": "Technikerstraße 21A, 6020 Innsbruck, Austria",
-    "orcid": null,
+    "orcid": "",
     "scholar_id": "k3h95RwAAAAJ",
     "linkedin": "",
     "github": "",
@@ -498,7 +763,7 @@
         "where": "Moratuwa, Sri Lanka"
       }
     ],
-    "bio": "Researcher in the Edge AI research group at the University of Innsbruck focusing on Ontological Engineering, Machine Learning, Edge Computing, Edge-AI.",
+    "bio": "Harshani Wickramarathna is a researcher in the Edge AI research group at the University of Innsbruck focusing on Ontological Engineering, Machine Learning, Edge Computing, Edge-AI.",
     "publications": [
       "JWBYST2024-ICARC",
       "JWARFS2024-ICARC",
@@ -511,103 +776,29 @@
     "status": "published",
     "member_status": "active",
     "title": "Ahmed Mujtaba",
-    "name": "",
+    "name": "Ahmed Mujtaba",
     "lastname": "Mujtaba",
-    "slug": "ahmed_mujtaba",
+    "slug": "ahmedmujtaba",
     "category": "PHD STUDENTS",
     "position": "phd",
     "sort_order": 3,
-    "office": "ICT Innsbruck",
-    "phone": "",
-    "email": "",
-    "address": "Technikerstraße 21A, 6020 Innsbruck, Austria",
+    "office": "SAL-Doctoral College",
+    "phone": null,
+    "email": "ahmed.mujtaba@silicon-austria.com",
+    "address": "Silicon Austria Labs GmbH, Sandgasse 34, 8010 Graz, Austria",
     "orcid": "",
     "scholar_id": "",
     "linkedin": "",
     "github": "",
-    "avatar_path": "/images/team/person-placeholder.svg",
-    "interests": [],
+    "avatar_path": "/images/team/P_ahmed.png",
+    "interests": [
+      "TinyML",
+      "Deep Learning",
+      "Embedded AI"
+    ],
     "positions": [],
     "education": [],
-    "bio": "---\nlayout: person\ncv_ready: true\nkind: person\ntitle: Ahmed Mujtaba\nlastname: Mujtaba\nidentifier: 3\npermalink: /team/ahmedMujtaba\nredirect_to: https://silicon-austria-labs.elsevierpure.com/de/persons/ahmed-mujtaba\nimg: /assets/img/team/P_ahmed.png\nphone: \nposition: phd\ncategory: PhD STUDENTS\noffice: SAL-Doctoral College\nemail: ahmed.mujtaba(at)silicon-austria(dot)com\nscholar_id:          \naddress:  Silicon Austria Labs GmbH, Sandgasse 34, 8010 Graz, Austria\n\ninterests:\n  - TinyML\n  - Deep Learning\n  - Embedded AI\n---",
-    "publications": []
-  },
-  {
-    "id": 8,
-    "status": "published",
-    "member_status": "active",
-    "title": "Mitra",
-    "name": "",
-    "lastname": "Mitra",
-    "slug": "mitra",
-    "category": "PHD STUDENTS",
-    "position": "phd",
-    "sort_order": 8,
-    "office": "ICT Innsbruck",
-    "phone": "",
-    "email": "",
-    "address": "Technikerstraße 21A, 6020 Innsbruck, Austria",
-    "orcid": "",
-    "scholar_id": "",
-    "linkedin": "",
-    "github": "",
-    "avatar_path": "/images/team/person-placeholder.svg",
-    "interests": [],
-    "positions": [],
-    "education": [],
-    "bio": "---\nlayout: person\ncv_ready: true\nkind: person\ntitle: Mitra-Yolanda Naderi\nlastname: Naderi\nidentifier: 1\npermalink: /team/mitra\nimg: /assets/img/team/P_mitra.jpg\nphone: +43 512 507-53494\nposition: sect\ncategory: SECRETARY\noffice: ICT 3S11\nemail: mitra.naderi(at)uibk(dot)ac(dot)at\nscholar_id:          \naddress: Technikerstraße 21A, 6020 Innsbruck, Austria\nofficehours:\n  monday: \"08:00 — 16:00\"\n  tuesday: \"09:00 — 16:00\"\n  wednesday: \"08:00 — 16:00\"\n  thursday: \"08:00 — 16:00\"\n  friday:  \"08:00 — 16:00\"\n\n\npositions:\n  - from: 08/2024\n    title: Secretary\n    dep: Edge AI\n    dep_uri:\n    inst: University of Innsbruck\n    inst_uri: http://informatik.uibk.ac.at\n    where: Innsbruck, Austria\n\n  - from: 2020\n    to: 2021\n    title: Customer service agent\n    inst: Smart Energy Services GmbH\n    inst_uri: https://smart-es.at\n    where: Wien, Austria\n\n  - from: 2019\n    to: 2020\n    title: Customer service agent\n    inst: Intelia GmbH\n    inst_uri: https://www.intelia.at\n    where: Wien, Austria\n\neducation:\n  - from: 08/2024\n    title: Certified Administrative Assistant, AW+T\n    where: Innsbruck, Austria\n\n---",
-    "publications": []
-  },
-  {
-    "id": 9,
-    "status": "published",
-    "member_status": "active",
-    "title": "Nafiseh Sharghivand",
-    "name": "",
-    "lastname": "Sharghivand",
-    "slug": "nafiseh_sharghivand",
-    "category": "PHD STUDENTS",
-    "position": "phd",
-    "sort_order": 9,
-    "office": "ICT Innsbruck",
-    "phone": "",
-    "email": "",
-    "address": "Technikerstraße 21A, 6020 Innsbruck, Austria",
-    "orcid": "",
-    "scholar_id": "",
-    "linkedin": "",
-    "github": "",
-    "avatar_path": "/images/team/person-placeholder.svg",
-    "interests": [],
-    "positions": [],
-    "education": [],
-    "bio": "---\nlayout: person\ncv_ready: true\nkind: person\ntitle: Nafiseh Sharghivand\nlastname: Sharghivand\nidentifier: 3\npermalink: /team/nafiseh\nimg: /assets/img/team/P_Nafiseh_sh.jpg\nphone: +43 512 507-53248\nposition: postdoc\ncategory: POSTDOCTORAL RESEARCHERS\noffice: ICT 2M05D\nORCID: 0000-0002-2546-0893\nscholar_id: vdg5a5QAAAAJ       \nLinkedIn: nafiseh-sharghivand-084b183a\nemail: nafiseh.sharghivand(at)uibk(dot)ac(dot)at\naddress: Technikerstraße 21A, 6020 Innsbruck, Austria\n\ninterests:\n  - Edge Computing\n  - Machine Learning\n  - Edge-AI\n  - Game Theory\n  \npositions:\n  - from: 2025\n    to: present\n    title: Postdoctoral Researcher\n    dep: Department of Computer Science\n    dep_uri: https://www.uibk.ac.at/informatik/index.html.en\n    inst: University of Innsbruck\n    inst_uri: http://informatik.uibk.ac.at\n    where: Austria\n\n  - from: 2023\n    to: 2025\n    title: Postdoctoral Researcher\n    inst: Singapore University of Technology and Design\n    inst_uri: https://www.sutd.edu.sg/\n    where: Singapore\n\n  - from: 2019\n    to: 2023\n    title: Lecturer\n    inst: Azarbaijan Shahid Madani University\n    inst_uri: https://intl.azaruniv.ac.ir/\n    where: Iran\n\n  - from: 2016\n    to: 2021\n    title: Lecturer\n    inst: University of Tabriz\n    inst_uri: https://tabrizu.ac.ir/en\n    where: Iran\n\n  - from: 2018\n    to: 2020\n    title: Remote Visiting Scholar\n    inst: University of Delaware\n    inst_uri: https://www.udel.edu/\n    where: USA\n\neducation:\n  - from: 2015\n    to: 2020\n    title: Ph.D. in Computer Engineering (AI)\n    inst: University of Tabriz\n    inst_uri: https://tabrizu.ac.ir/en\n    where: Tabriz, Iran\n\n  - from: 2012\n    to: 2015\n    title: M.Sc. in Computer Engineering (AI)\n    inst: University of Tabriz\n    inst_uri: https://tabrizu.ac.ir/en\n    where: Tabriz, Iran\n\n  - from: 2007\n    to: 2011\n    title: B.Sc. in Information Technology Engineering\n    inst: University of Tabriz\n    inst_uri: https://tabrizu.ac.ir/en\n    where: Tabriz, Iran\n\n\npublications:\n  - Sharghivand2022-TSC\n  - Sharghivand2021-Access\n  - Sharghivand2021-Springer1\n  - Sharghivand2021-Springer2\n  - Sharghivand2020-TCC\n  - Sharghivand2018-IPCCC\n  - Sharghivand2017-DCBDP\n  - Sharghivand2016-DCBDP\n  - Sharghivand2016-IJST\n  - Sharghivand2014-IJTPPE\n\n---",
-    "publications": []
-  },
-  {
-    "id": 11,
-    "status": "published",
-    "member_status": "active",
-    "title": "Rajashekhar Kolichala",
-    "name": "",
-    "lastname": "Kolichala",
-    "slug": "rajashekhar_kolichala",
-    "category": "PHD STUDENTS",
-    "position": "phd",
-    "sort_order": 11,
-    "office": "ICT Innsbruck",
-    "phone": "",
-    "email": "",
-    "address": "Technikerstraße 21A, 6020 Innsbruck, Austria",
-    "orcid": "",
-    "scholar_id": "",
-    "linkedin": "",
-    "github": "",
-    "avatar_path": "/images/team/person-placeholder.svg",
-    "interests": [],
-    "positions": [],
-    "education": [],
-    "bio": "---\nlayout: person\ncv_ready: true\nkind: person\ntitle: Rajashekar Kolichala\nlastname: Kolichala\nidentifier: 1\npermalink: /team/rajashekar\nredirect_to: https://sites.google.com/view/kolichala-rajashekar/\nimg: /assets/img/team/P_shekar2.jpeg\nphone: +43 512 507-53247\nposition: postdoc\ncategory: POSTDOCTORAL RESEARCHERS\noffice: ICT 2M05C\nemail: rajashekar.kolichala(at)uibk(dot)ac(dot)at\nscholar_id: wq36gfgAAAAJ     \naddress: Technikerstraße 21A, 6020 Innsbruck, Austria\n\ninterests:\n  - Deep Learning\n  - Reinforcement Learning\n\npositions:\n  - from: 2025\n    to: present\n    title: Postdoctoral Researcher\n    dep: Department of Computer Science\n    dep_uri: https://www.uibk.ac.at/informatik/index.html.en\n    inst: University of Innsbruck\n    inst_uri: http://informatik.uibk.ac.at\n    where: Austria\n---",
+    "bio": "Ahmed Mujtaba is a researcher in the Edge AI research group at the University of Innsbruck focusing on TinyML, Deep Learning, Embedded AI.",
     "publications": []
   },
   {
@@ -617,7 +808,7 @@
     "title": "Emma Danko",
     "name": "Emma Danko",
     "lastname": "Danko",
-    "slug": "danko_emma",
+    "slug": "emma_danko",
     "category": "UNDERGRADUATE STUDENTS",
     "position": "undergrad",
     "sort_order": 1,
@@ -625,8 +816,8 @@
     "phone": "+43 660 1539525",
     "email": "emma.danko@student.uibk.ac.at",
     "address": "Technikerstraße 21A, 6020 Innsbruck, Austria",
-    "orcid": null,
-    "scholar_id": null,
+    "orcid": "",
+    "scholar_id": "",
     "linkedin": "",
     "github": "",
     "avatar_path": "/images/team/P_Emma_Danko.png",
@@ -672,7 +863,65 @@
         "where": "The Hague, The Netherlands"
       }
     ],
-    "bio": "Researcher in the Edge AI research group at the University of Innsbruck focusing on Network Engineering, Operating Systems.",
-    "publications": null
+    "bio": "Emma Danko is a researcher in the Edge AI research group at the University of Innsbruck focusing on Network Engineering, Operating Systems.",
+    "publications": []
+  },
+  {
+    "id": 8,
+    "status": "published",
+    "member_status": "active",
+    "title": "Mitra-Yolanda Naderi",
+    "name": "Mitra-Yolanda Naderi",
+    "lastname": "Naderi",
+    "slug": "mitra",
+    "category": "SECRETARY",
+    "position": "sect",
+    "sort_order": 1,
+    "office": "ICT 3S11",
+    "phone": "+43 512 507-53494",
+    "email": "mitra.naderi@uibk.ac.at",
+    "address": "Technikerstraße 21A, 6020 Innsbruck, Austria",
+    "orcid": "",
+    "scholar_id": "",
+    "linkedin": "",
+    "github": "",
+    "avatar_path": "/images/team/P_mitra.jpg",
+    "interests": [],
+    "positions": [
+      {
+        "from": "08/2024",
+        "title": "Secretary",
+        "dep": "Edge AI",
+        "dep_uri": null,
+        "inst": "University of Innsbruck",
+        "inst_uri": "http://informatik.uibk.ac.at",
+        "where": "Innsbruck, Austria"
+      },
+      {
+        "from": 2020,
+        "to": 2021,
+        "title": "Customer service agent",
+        "inst": "Smart Energy Services GmbH",
+        "inst_uri": "https://smart-es.at",
+        "where": "Wien, Austria"
+      },
+      {
+        "from": 2019,
+        "to": 2020,
+        "title": "Customer service agent",
+        "inst": "Intelia GmbH",
+        "inst_uri": "https://www.intelia.at",
+        "where": "Wien, Austria"
+      }
+    ],
+    "education": [
+      {
+        "from": "08/2024",
+        "title": "Certified Administrative Assistant, AW+T",
+        "where": "Innsbruck, Austria"
+      }
+    ],
+    "bio": "Mitra-Yolanda Naderi is a researcher in the Edge AI research group at the University of Innsbruck focusing on Edge Computing and Distributed Artificial Intelligence.",
+    "publications": []
   }
 ]

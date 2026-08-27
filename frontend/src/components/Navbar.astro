@@ -1,5 +1,6 @@
 ---
 const currentPath = Astro.url.pathname;
+const cmsUrl = import.meta.env.PUBLIC_DIRECTUS_URL || 'http://localhost:8055';
 
 const navLinks = [
   { name: 'Home', href: '/' },
@@ -21,13 +22,21 @@ const navLinks = [
 
 <header class="site-header">
   <div class="container header-container">
-    <a href="/" class="brand-logo">
-      <img src="/images/logo/winter1.png" alt="Edge AI Logo" class="logo-img" />
-      <div class="brand-text">
-        <span class="brand-title">EDGE AI</span>
-        <span class="brand-sub">Univ. Innsbruck</span>
-      </div>
-    </a>
+    <!-- Top Left: University of Innsbruck Logo linking to CS Department -->
+    <div class="brand-group">
+      <a 
+        href="https://www.uibk.ac.at/informatik/" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        class="uibk-nav-link" 
+        title="Department of Computer Science, University of Innsbruck"
+      >
+        <!-- Dark Mode: uibk_black.svg (white text on dark) -->
+        <img src="/images/logo/uibk_black.svg" alt="Universität Innsbruck" class="uibk-logo uibk-logo-dark" />
+        <!-- Light Mode: uibk_light.svg (dark text on light) -->
+        <img src="/images/logo/uibk_light.svg" alt="Universität Innsbruck" class="uibk-logo uibk-logo-light" />
+      </a>
+    </div>
 
     <!-- Desktop Navigation -->
     <nav class="desktop-nav">
@@ -85,10 +94,14 @@ const navLinks = [
         </svg>
       </button>
 
-      <!-- Directus CMS Link -->
-      <a href="http://localhost:8055" target="_blank" rel="noopener noreferrer" class="cms-portal-btn" title="Open Directus CMS Portal">
-        <span class="cms-dot"></span>
-        <span>CMS Portal</span>
+      <!-- CMS Login Button -->
+      <a href={cmsUrl} target="_blank" rel="noopener noreferrer" class="login-btn" title="Login to CMS Portal">
+        <svg class="login-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+          <polyline points="10 17 15 12 10 7"></polyline>
+          <line x1="15" y1="12" x2="3" y2="12"></line>
+        </svg>
+        <span>Login</span>
       </a>
 
       <!-- Mobile Menu Toggle -->
@@ -105,6 +118,9 @@ const navLinks = [
   <!-- Mobile Drawer -->
   <div id="mobile-drawer" class="mobile-drawer">
     <div class="mobile-nav-links">
+      <a href="https://www.uibk.ac.at/informatik/" target="_blank" class="mobile-nav-link" style="color: var(--accent-cyan); font-weight: 600;">
+        &rarr; Dept. of Computer Science (UIBK)
+      </a>
       {navLinks.map((link) => (
         link.dropdown ? (
           <div class="mobile-dropdown-group">
@@ -121,8 +137,13 @@ const navLinks = [
           </a>
         )
       ))}
-      <a href="http://localhost:8055" target="_blank" class="mobile-nav-link cms-link">
-        Directus CMS Login &rarr;
+      <a href={cmsUrl} target="_blank" rel="noopener noreferrer" class="mobile-nav-link login-mobile-link">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+          <polyline points="10 17 15 12 10 7"></polyline>
+          <line x1="15" y1="12" x2="3" y2="12"></line>
+        </svg>
+        <span>CMS Login &rarr;</span>
       </a>
     </div>
   </div>
@@ -147,39 +168,45 @@ const navLinks = [
     height: 70px;
   }
 
-  .brand-logo {
+  /* Top Left Brand Group */
+  .brand-group {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+  }
+
+  .uibk-nav-link {
+    display: flex;
+    align-items: center;
+    transition: transform 0.2s ease, opacity 0.2s ease;
     text-decoration: none;
   }
 
-  .logo-img {
+  .uibk-nav-link:hover {
+    transform: scale(1.03);
+    opacity: 0.9;
+  }
+
+  .uibk-logo {
     height: 38px;
     width: auto;
+    max-width: 170px;
     object-fit: contain;
-    border-radius: var(--radius-sm);
   }
 
-  .brand-text {
-    display: flex;
-    flex-direction: column;
+  /* Dark mode default: show uibk_black.svg (white letters) */
+  .uibk-logo-dark {
+    display: block;
+  }
+  .uibk-logo-light {
+    display: none;
   }
 
-  .brand-title {
-    font-family: var(--font-heading);
-    font-weight: 800;
-    font-size: 1.15rem;
-    letter-spacing: 0.08em;
-    color: var(--text-primary);
+  /* Light mode: show uibk_light.svg (dark blue letters) */
+  :global([data-theme="light"]) .uibk-logo-dark {
+    display: none !important;
   }
-
-  .brand-sub {
-    font-size: 0.7rem;
-    font-family: var(--font-mono);
-    color: var(--accent-cyan);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+  :global([data-theme="light"]) .uibk-logo-light {
+    display: block !important;
   }
 
   .desktop-nav {
@@ -280,34 +307,31 @@ const navLinks = [
     border-color: var(--border-highlight);
   }
 
-  .cms-portal-btn {
+  .login-btn {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.45rem;
     font-family: var(--font-mono);
-    font-size: 0.8rem;
+    font-size: 0.82rem;
     font-weight: 600;
     color: var(--text-primary);
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid var(--border-color);
-    padding: 0.4rem 0.85rem;
+    background: rgba(0, 240, 255, 0.08);
+    border: 1px solid rgba(0, 240, 255, 0.25);
+    padding: 0.45rem 0.95rem;
     border-radius: var(--radius-full);
     text-decoration: none;
     transition: all 0.2s ease;
   }
 
-  .cms-portal-btn:hover {
-    border-color: var(--border-highlight);
-    background: rgba(0, 240, 255, 0.1);
+  .login-btn:hover {
+    border-color: var(--accent-cyan);
+    background: rgba(0, 240, 255, 0.18);
     color: var(--accent-cyan);
+    box-shadow: 0 0 12px rgba(0, 240, 255, 0.25);
   }
 
-  .cms-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--accent-emerald);
-    box-shadow: 0 0 6px var(--accent-emerald);
+  .login-icon {
+    color: var(--accent-cyan);
   }
 
   .mobile-only {
@@ -357,7 +381,10 @@ const navLinks = [
     font-size: 0.95rem;
   }
 
-  .mobile-nav-link.cms-link {
+  .login-mobile-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     color: var(--accent-cyan);
     font-family: var(--font-mono);
     font-size: 0.9rem;
@@ -367,7 +394,7 @@ const navLinks = [
   }
 
   @media (max-width: 880px) {
-    .desktop-nav, .cms-portal-btn {
+    .desktop-nav, .login-btn {
       display: none;
     }
     .mobile-only {
@@ -377,7 +404,6 @@ const navLinks = [
 </style>
 
 <script>
-  // Dark / Light Mode Toggle logic
   const themeToggle = document.getElementById('theme-toggle');
   const moonIcon = document.getElementById('moon-icon');
   const sunIcon = document.getElementById('sun-icon');
@@ -408,11 +434,17 @@ const navLinks = [
     updateThemeUI(newTheme);
   });
 
-  // Mobile menu toggle
   const mobileToggle = document.getElementById('mobile-toggle');
   const mobileDrawer = document.getElementById('mobile-drawer');
 
   mobileToggle?.addEventListener('click', () => {
     mobileDrawer?.classList.toggle('open');
+  });
+
+  // Automatically close drawer when a navigation link is clicked
+  mobileDrawer?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      mobileDrawer?.classList.remove('open');
+    });
   });
 </script>
