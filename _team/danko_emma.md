@@ -7,7 +7,7 @@ lastname: Danko
 identifier: 1
 permalink: /team/emma_danko
 img: /assets/img/team/P_Emma_Danko.png
-phone: +43 660 1539525
+phone: 
 position: undergrad
 category: UNDERGRADUATE STUDENTS
 office:

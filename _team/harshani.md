@@ -7,7 +7,7 @@ lastname: Wickramarathna
 identifier: 2
 permalink: /team/harshaniwickramarathna
 img: /assets/img/team/P_Harshani_Wickramarathna.jpg
-phone: +43 677 629 290 83
+phone: 
 position: phd
 category: PhD STUDENTS
 office: ICT 2M05D
