@@ -9,12 +9,12 @@
 # Basic Site Settings
 locale                   : "en-US"
 site_theme               : "default"
-title                    : ""
+title                    : "Edge AI"
 title_separator          : "-"
 site_creator             : "T M Rayhan Gias"
 site_creator_url         : "/team/tanim_gias"
-description              : &description "personal description"
-# url                      : "https://edgeai-informatik.uibk.ac.at"
+description              : &description "Edge AI research group at the University of Innsbruck, developing scalable, sustainable and secure Artificial Intelligence for edge computing, IoT, and distributed systems."
+url                      : "https://edgeai-informatik.uibk.ac.at"
 baseurl                  : ""
 repository               : "https://github.com/UIBK-Edge-AI/website"
 
@@ -141,13 +141,14 @@ facebook:
   username               :
   app_id                 :
   publisher              :
-og_image                 :  # Open Graph/Twitter default site image
+og_image                 : "favicon-512x512.png"  # Open Graph/Twitter default site image
 # For specifying social profiles
 # - https://developers.google.com/structured-data/customize/social-profiles
 social:
-  type                   : # Person or Organization (defaults to Person)
-  name                   : # If the user or organization name differs from the site's name
+  type                   : "Organization"
+  name                   : "Edge AI"
   links: # An array of links to social media profiles
+    - "https://www.uibk.ac.at/informatik/"
 
 
 # Analytics

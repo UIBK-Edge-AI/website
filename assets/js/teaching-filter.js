@@ -10,6 +10,7 @@ class TeachingFilter {
   init() {
     console.log('🔧 TeachingFilter initializing...');
     this.setupElements();
+    this.sortRowsBySemester();
     this.setupEventListeners();
     this.updateCourseCount();
     this.debugInfo();
@@ -50,6 +51,67 @@ class TeachingFilter {
     // Current state
     this.currentFilter = 'all';
     this.currentSearch = '';
+  }
+
+  /**
+   * Parse semester string to comparable numeric score for sorting.
+   * Supports formats like:
+   * - "Winter 26-27", "Winter 2026", "WS 25/26", "WS26_27", "WS26"
+   * - "Summer 26", "Summer 2026", "SS 26", "SS26"
+   * Returns higher score for more recent semesters.
+   */
+  getSemesterScore(semesterStr) {
+    if (!semesterStr) return 0;
+    const s = semesterStr.trim().toLowerCase();
+
+    // Extract first 2-digit or 4-digit year
+    const yearMatch = s.match(/(?:20)?(\d{2})/);
+    let year = 0;
+    if (yearMatch) {
+      year = parseInt(yearMatch[1], 10);
+      // Normalize two-digit year to full year (e.g. 26 -> 2026)
+      if (year < 100) {
+        year += 2000;
+      }
+    }
+
+    // Determine season weight: Winter is later in the academic year than Summer
+    // Winter (WS / winter / w) -> 2, Summer (SS / summer / s) -> 1
+    let seasonWeight = 0;
+    if (s.includes('winter') || s.includes('ws') || s.startsWith('w')) {
+      seasonWeight = 2;
+    } else if (s.includes('summer') || s.includes('ss') || s.includes('sommer') || s.startsWith('s')) {
+      seasonWeight = 1;
+    }
+
+    return year * 10 + seasonWeight;
+  }
+
+  sortRowsBySemester() {
+    if (!this.tableBody) return;
+    const rows = Array.from(this.courseRows);
+    if (rows.length === 0) return;
+
+    rows.sort((a, b) => {
+      const semA = a.getAttribute('data-semester') || a.querySelector('.semester-cell')?.textContent || '';
+      const semB = b.getAttribute('data-semester') || b.querySelector('.semester-cell')?.textContent || '';
+      const scoreA = this.getSemesterScore(semA);
+      const scoreB = this.getSemesterScore(semB);
+
+      if (scoreA !== scoreB) {
+        return scoreB - scoreA; // Descending: latest first
+      }
+
+      // Secondary sort: title ascending
+      const titleA = a.getAttribute('data-title') || a.querySelector('.title-cell')?.textContent || '';
+      const titleB = b.getAttribute('data-title') || b.querySelector('.title-cell')?.textContent || '';
+      return titleA.localeCompare(titleB);
+    });
+
+    // Re-append sorted rows to table body
+    rows.forEach(row => this.tableBody.appendChild(row));
+    // Update internal reference to course rows
+    this.courseRows = document.querySelectorAll('.course-row');
   }
 
   setupEventListeners() {

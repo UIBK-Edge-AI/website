@@ -1,6 +1,7 @@
 ---
 layout: archive
-title: ""
+title: "Courses"
+description: "Courses taught by the Edge AI research group at the University of Innsbruck, covering edge computing, distributed systems, and Artificial Intelligence."
 permalink: /teaching/courses/
 author_profile: true
 ---
@@ -28,7 +29,7 @@ author_profile: true
       </thead>
       <tbody id="coursesTableBody">
         {% comment %} Get the teaching collection {% endcomment %}
-        {% assign all_courses = site.teaching %}
+        {% assign all_courses = site.teaching | sort: "path" | reverse %}
         
         {% if all_courses and all_courses.size > 0 %}
           {% for course in all_courses %}

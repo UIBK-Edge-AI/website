@@ -5,6 +5,6 @@ degree: "ma-informatics"
 instructor: "Turgud Valiyev"
 permalink:
 room: "RR 22"
-redirect_to: https://lfuonline.uibk.ac.at/public/lfuonline_lv.details?sem_id_in=25W&lvnr_id_in=437261&sprache_in=en
-semester: Winter 25-26
+redirect_to: https://lfuonline.uibk.ac.at/public/lfuonline_lv.details?sem_id_in=26W&lvnr_id_in=437261&sprache_in=en
+semester: Winter 26-27
 ---

@@ -4,9 +4,9 @@ collection: vacancies
 permalink: /vacancies/post-doc-phd-position/
 position_type: phd
 area: "Cloud/Edge Computing & AI"
-start_date: "Immediately"
-duration: "2-3 years"
-status: open
+start_date: "N/A"
+duration: "N/A"
+status: closed
 layout: single
 ---
 

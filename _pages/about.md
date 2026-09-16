@@ -2,6 +2,7 @@
 permalink: /
 layout: home
 title: ""
+description: "Edge AI is a research group at the University of Innsbruck advancing scalable, sustainable, and secure Artificial Intelligence at the network's edge."
 author_profile: true
 redirect_from: 
   - /about/
