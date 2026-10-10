@@ -10,7 +10,7 @@ img: /assets/img/team/P_Harshani_Wickramarathna.jpg
 phone: 
 position: phd
 category: PhD STUDENTS
-office: ICT 2M05D
+office: ICT 2W01
 ORCID: 
 scholar_id: k3h95RwAAAAJ       
 email: Sedillage.Wickramarathna(at)student.uibk(dot)ac(dot)at

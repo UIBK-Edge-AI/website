@@ -10,7 +10,7 @@ img: /assets/img/team/P_Shuhong_Dai.jpeg
 phone: +43 512 507
 position: phd
 category: PhD STUDENTS
-office: ICT 2M05D
+office: ICT 2W01
 ORCID: 0009-0004-4910-182X
 scholar_id: lwCWmPUAAAAJ
 email: shuhong.dai(at)uibk(dot)ac(dot)at
