@@ -4,7 +4,7 @@ collection: _student_projects
 authors: "Julian Weihs, Sebastian Wildervanck"
 supervisor: "Turgud Valiyev"
 permalink:
-status: Ongoing
+status: completed
 degree: 'Bachelor'
 layout: single
 ---
