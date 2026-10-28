@@ -13,7 +13,7 @@ category: PhD STUDENTS
 office: ICT 2W01
 ORCID: 
 scholar_id: 5nmmzLsAAAAJ    
-email: lydie.rosenkrancova@uibk.ac.at
+email: lydie.rosenkrancova(at)uibk(dot)ac(dot)at
 address: Technikerstraße 21A, 6020 Innsbruck, Austria
 
 interests:
