@@ -7,6 +7,7 @@ area: "Cloud/Edge Computing & AI"
 start_date: "N/A"
 duration: "N/A"
 status: closed
+published: false
 layout: single
 ---
 
