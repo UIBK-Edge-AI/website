@@ -62,7 +62,7 @@ author_profile: true
         {% comment %} Get the student_projects collection {% endcomment %}
         {% assign all_projects = site.student_projects %}
         
-        {% comment %} Sort projects by status: ongoing > completed > open {% endcomment %}
+        {% comment %} Sort projects by status: open > ongoing > completed {% endcomment %}
         {% comment %} Use downcase to normalize status values {% endcomment %}
         {% assign ongoing_projects = "" | split: "" %}
         {% assign completed_projects = "" | split: "" %}
@@ -82,7 +82,7 @@ author_profile: true
           {% endif %}
         {% endfor %}
         
-        {% assign sorted_projects = ongoing_projects | concat: completed_projects | concat: open_projects | concat: other_projects %}
+        {% assign sorted_projects = open_projects | concat: ongoing_projects | concat: completed_projects | concat: other_projects %}
         
         {% if sorted_projects and sorted_projects.size > 0 %}
           {% for project in sorted_projects %}
