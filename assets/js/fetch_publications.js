@@ -47,7 +47,8 @@ class BibTeXParser {
       : this.getPublicationType(type.toLowerCase());
     
     // Extract venue based on publication type
-    const venue = this.getVenue(fields, type.toLowerCase());
+    // Prefer the venue name from the Excel sheet (venue field), else derive it
+    const venue = fields.venue || this.getVenue(fields, type.toLowerCase());
     
     // Parse authors
     const authors = this.parseAuthors(fields.author || '');
@@ -354,8 +355,11 @@ function createPublicationCard(pub) {
     titleElement = `<h3 class="publication-title">${pub.title}</h3>`;
   }
   
-  // Show only the authors below the title (type badge is in the header)
-  const metadata = pub.authors ? `<strong>Authors:</strong> ${pub.authors}` : '';
+  // Show authors and venue below the title (type badge is in the header)
+  const metadataLines = [];
+  if (pub.authors) metadataLines.push(`<strong>Authors:</strong> ${pub.authors}`);
+  if (pub.venue)   metadataLines.push(`<strong>Venue:</strong> ${pub.venue}`);
+  const metadata = metadataLines.join('<br>');
   
   card.innerHTML = `
     <div class="publication-header">
