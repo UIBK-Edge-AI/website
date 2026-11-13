@@ -351,22 +351,8 @@ function createPublicationCard(pub) {
     titleElement = `<h3 class="publication-title">${pub.title}</h3>`;
   }
   
-  // Build metadata - only include fields that have values
-  const metadataLines = [];
-  if (pub.authors) metadataLines.push(`<strong>Authors:</strong> ${pub.authors}`);
-  if (pub.year)    metadataLines.push(`<strong>Year:</strong> ${pub.year}`);
-  if (pub.venue)   metadataLines.push(`<strong>Venue:</strong> ${pub.venue}`);
-
-  const details = [];
-  if (pub.volume) details.push(`Vol. ${pub.volume}`);
-  if (pub.number) details.push(`No. ${pub.number}`);
-  if (pub.pages)  details.push(`pp. ${pub.pages}`);
-  if (details.length > 0) metadataLines.push(`<strong>Details:</strong> ${details.join(', ')}`);
-
-  if (pub.publisher && pub.venue && !pub.venue.includes(pub.publisher)) metadataLines.push(`<strong>Publisher:</strong> ${pub.publisher}`);
-  else if (pub.publisher && !pub.venue) metadataLines.push(`<strong>Publisher:</strong> ${pub.publisher}`);
-
-  const metadata = metadataLines.join('<br>');
+  // Show only the authors below the title (type badge is in the header)
+  const metadata = pub.authors ? `<strong>Authors:</strong> ${pub.authors}` : '';
   
   card.innerHTML = `
     <div class="publication-header">
