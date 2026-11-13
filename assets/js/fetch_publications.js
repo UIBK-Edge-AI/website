@@ -41,7 +41,10 @@ class BibTeXParser {
     }
 
     // Determine publication type
-    const pubType = this.getPublicationType(type.toLowerCase());
+    // Tutorials are stored as @inproceedings but tagged with pubtype = {tutorial}
+    const pubType = fields.pubtype === 'tutorial'
+      ? { code: '8', label: 'Tutorial' }
+      : this.getPublicationType(type.toLowerCase());
     
     // Extract venue based on publication type
     const venue = this.getVenue(fields, type.toLowerCase());
@@ -373,7 +376,8 @@ function getTypeClass(typeCode) {
     '4': 'type-book',
     '5': 'type-thesis',
     '6': 'type-report',
-    '7': 'type-other'
+    '7': 'type-other',
+    '8': 'type-tutorial'
   };
   return typeClasses[typeCode] || 'type-other';
 }
