@@ -174,7 +174,7 @@ class ThesesFilter {
     let visibleCount = 0;
     const rows = Array.from(this.projectRows);
 
-    // First, sort rows by status: ongoing > completed > open > others
+    // First, sort rows by status: open > ongoing > completed > others
     const sortedRows = this.sortRowsByStatus(rows);
 
     sortedRows.forEach((row, index) => {
@@ -203,11 +203,11 @@ class ThesesFilter {
   }
 
   sortRowsByStatus(rows) {
-    // Define status priority: ongoing (1) > completed (2) > open (3) > others (4)
+    // Define status priority: open (1) > ongoing (2) > completed (3) > others (4)
     const statusPriority = {
-      'ongoing': 1,
-      'completed': 2,
-      'open': 3
+      'open': 1,
+      'ongoing': 2,
+      'completed': 3
     };
 
     return rows.sort((a, b) => {
